@@ -32,6 +32,8 @@ public class Camera extends Gizmo {
 	protected static float invH2;
 	
 	public static Camera main;
+
+	public boolean fullScreen;
 	
 	public float zoom;
 	

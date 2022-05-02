@@ -48,7 +48,8 @@ import android.view.View;
 public class Game extends Activity implements GLSurfaceView.Renderer, View.OnTouchListener {
 
 	public static Game instance;
-	
+	public static int dispWidth;
+	public static int dispHeight;
 	// Actual size of the screen
 	public static int width;
 	public static int height;

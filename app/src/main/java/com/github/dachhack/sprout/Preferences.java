@@ -30,6 +30,7 @@ enum Preferences {
 	public static final String KEY_IMMERSIVE = "immersive";
 	public static final String KEY_SCALE_UP = "scaleup";
 	public static final String KEY_MUSIC = "music";
+	public static final String KEY_SCALE = "scale";
 	public static final String KEY_SOUND_FX = "soundfx";
 	public static final String KEY_ZOOM = "zoom";
 	public static final String KEY_LAST_CLASS = "last_class";
@@ -38,6 +39,7 @@ enum Preferences {
 	public static final String KEY_INTRO = "intro";
 	public static final String KEY_BRIGHTNESS = "brightness";
 	public static final String KEY_VERSION = "version";
+	public static final String KEY_LANG = "language";
 
 	private SharedPreferences prefs;
 

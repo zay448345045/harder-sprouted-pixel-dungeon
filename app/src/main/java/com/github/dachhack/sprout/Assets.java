@@ -19,6 +19,19 @@ package com.github.dachhack.sprout;
 
 public class Assets {
 
+	//these points to resource bundles, not raw asset files
+	public static class Messages {
+		public static final String ACTORS   = "messages/actors/actors";
+		public static final String ITEMS    = "messages/items/items";
+		public static final String JOURNAL  = "messages/journal/journal";
+		public static final String LEVELS   = "messages/levels/levels";
+		public static final String MISC     = "messages/misc/misc";
+		public static final String PLANTS   = "messages/plants/plants";
+		public static final String SCENES   = "messages/scenes/scenes";
+		public static final String UI       = "messages/ui/ui";
+		public static final String WINDOWS  = "messages/windows/windows";
+	}
+
 	public static final String ARCS_BG = "arcs1.png";
 	public static final String ARCS_FG = "arcs2.png";
 	public static final String DASHBOARD = "dashboard.png";

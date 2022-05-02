@@ -26,6 +26,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 
+import com.github.dachhack.sprout.Messages.Languages;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.scenes.TitleScene;
@@ -34,7 +35,26 @@ import com.watabou.noosa.Game;
 import com.watabou.noosa.audio.Music;
 import com.watabou.noosa.audio.Sample;
 
+import java.util.Locale;
+
 public class ShatteredPixelDungeon extends Game {
+
+	public static void language(Languages lang) {
+		Preferences.INSTANCE.put(Preferences.KEY_LANG, lang.code());
+	}
+
+	public static int scale() {
+		return Preferences.INSTANCE.getInt(Preferences.KEY_SCALE, 0);
+	}
+
+	public static Languages language() {
+		String code = Preferences.INSTANCE.getString(Preferences.KEY_LANG, null);
+		if (code == null){
+			return Languages.matchLocale(Locale.getDefault());
+		} else {
+			return Languages.matchCode(code);
+		}
+	}
 
 	public ShatteredPixelDungeon() {
 		super(TitleScene.class);
