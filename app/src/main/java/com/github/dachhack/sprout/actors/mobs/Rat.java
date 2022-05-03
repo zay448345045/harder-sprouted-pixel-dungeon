@@ -17,9 +17,7 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
-import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.items.food.Meat;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.scenes.GameScene;

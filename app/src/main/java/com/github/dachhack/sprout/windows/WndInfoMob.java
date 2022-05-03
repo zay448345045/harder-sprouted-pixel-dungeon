@@ -23,7 +23,7 @@ import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 import com.github.dachhack.sprout.ui.HealthBar;
 import com.github.dachhack.sprout.utils.Utils;
-import com.watabou.noosa.BitmapText;
+import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.ui.Component;
 
 public class WndInfoMob extends WndTitledMessage {
@@ -48,15 +48,17 @@ public class WndInfoMob extends WndTitledMessage {
 		private static final int GAP = 2;
 
 		private CharSprite image;
-		private BitmapText name;
+		//private BitmapText name;
+		private RenderedText name;
 		private HealthBar health;
 		private BuffIndicator buffs;
 
 		public MobTitle(Mob mob) {
 
-			name = PixelScene.createText(Utils.capitalize(mob.name), 9);
+			//name = PixelScene.createText(Utils.capitalize(mob.name), 9);
+			name = PixelScene.renderText(Utils.capitalize(mob.name), 9);
 			name.hardlight(TITLE_COLOR);
-			name.measure();
+			//name.measure();
 			add(name);
 
 			image = mob.sprite();
