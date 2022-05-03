@@ -1,4 +1,4 @@
-[中文版/中文介绍](README_CN.md)
+[English](README.md)
 
 # HSPD--CN
 >仓库概况
