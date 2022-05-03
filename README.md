@@ -1,5 +1,5 @@
 [Chinese version / 中文介绍](README-CN.md)
-[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?LingASDJ=anuraghazra)](https://github.com/anuraghazra/github-readme-stats)
+
 # HSPD--CN  
 >Warehouse Overview  
 This is the Chinese dungeon build version of Difficult Germination, initiated by JDSALing!  
