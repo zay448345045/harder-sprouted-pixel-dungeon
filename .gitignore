@@ -2959,3 +2959,9 @@ app/build/outputs/apk/debug/output-metadata.json
 app/build/outputs/logs/manifest-merger-debug-report.txt
 app/build/tmp/compileDebugJavaWithJavac/source-classes-mapping.txt
 gradle.properties
+.idea/compiler.xml
+.idea/gradle.xml
+.idea/libraries/Gradle__com_github_RohitSurwase_UCE_Handler_uce_handler_1_4_aar.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
