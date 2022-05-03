@@ -1,4 +1,4 @@
-[Chinese version / 中文介绍](README-CN.md)
+[Chinese version / 中文介绍](README_CN.md)
 
 # HSPD--CN  
 >Warehouse Overview  
