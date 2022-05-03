@@ -4,7 +4,7 @@ import java.util.Locale;
 
 public enum Languages {
     ENGLISH("english", "", Status.REVIEWED, null, null),
-    CHINESE("中文", "zh", Status.INCOMPLETE, new String[]{"JDSALing","Rowberry"},
+    CHINESE("中文", "zh", Status.INCOMPLETE, new String[]{"JDSALing","Rowberry","ALice","Mason369"},
             new String[]{"待定", });
 
     public enum Status {
