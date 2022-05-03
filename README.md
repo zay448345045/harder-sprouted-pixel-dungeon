@@ -1,6 +1,6 @@
 [Chinese version / 中文介绍](README-CN.md)
 
-<img width="120px" src="https://res.cloudinary.com/anuraghazra/image/upload/v1594908242/logo_ccswme.svg" align="center" alt="GitHub Readme Stats" />
+<img width="120px" src=https://lingasdj.github.io/MagicLingPixelDungeon_Sing/progess.html" align="center" alt="GitHub Readme Stats" />
 
 # HSPD--CN  
 >Warehouse Overview  
