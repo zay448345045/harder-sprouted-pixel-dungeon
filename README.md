@@ -5,7 +5,7 @@
 This is the Chinese dungeon build version of Difficult Germination, initiated by JDSALing!  
 
 >Partners  
-Co-coders: Alice, Mason369  
+Co-coders: Alice World, Mason369  
 
 Translation reviewers: Rowberry, Alice, Mason369, JDSALing  
 
