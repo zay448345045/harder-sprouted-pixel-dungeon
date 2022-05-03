@@ -30,7 +30,7 @@ public class Rat extends Mob {
 	private static final float SPAWN_DELAY = 2f;
 
 	{
-		name = "老鼠";
+		name = "marsupial rat";
 		spriteClass = RatSprite.class;
 
 		HP = HT = 16;
