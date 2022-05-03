@@ -11,3 +11,5 @@
 
 >为什么要汉化它?  
 献给困难发芽作者SmuJB和广大玩家  
+
+https://img.shields.io/badge/Java-OneGoLing-%2300ffff
