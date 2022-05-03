@@ -1,10 +1,12 @@
 [Chinese version / 中文介绍](README-CN.md)
+[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?LingASDJ=anuraghazra)](https://github.com/anuraghazra/github-readme-stats)  
 # HSPD--CN  
 >Warehouse Overview  
 This is the Chinese dungeon build version of Difficult Germination, initiated by JDSALing!  
 
 >Partners  
 Co-coders: Alice, Mason369  
+
 Translation reviewers: Rowberry, Alice, Mason369, JDSALing  
 
 >Translators  
@@ -12,3 +14,6 @@ Translation reviewers: Rowberry, Alice, Mason369, JDSALing
 
 >Why sinicize it?  
 Dedicated to Difficult Germination author SmuJB and the majority of players  
+
+>Total progress:  
+Multilingual underlying architecture
