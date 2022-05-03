@@ -5,9 +5,10 @@
 这是由JDSALing发起的困难萌芽中文版副本！
 
 >合作伙伴  
-共同编码者：
-Alice， 
-Mason369  
+
+-共同编码者: 
+- Alice
+- Mason369  
 
 翻译审稿人：  
 - Rowberry  
