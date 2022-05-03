@@ -1,7 +1,5 @@
 [Chinese version / 中文介绍](README-CN.md)
 
-<img width="120px" src=https://lingasdj.github.io/MagicLingPixelDungeon_Sing/progess.html" align="center" alt="GitHub Readme Stats" />
-
 # HSPD--CN  
 >Warehouse Overview  
 This is the Chinese dungeon build version of Difficult Germination, initiated by JDSALing!  
