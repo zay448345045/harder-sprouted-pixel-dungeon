@@ -2,7 +2,7 @@
 
 # HSPD--CN
 >仓库概况  
-这是由JDSALing发起的困难萌芽中文版副本！
+- 这是由JDSALing发起的困难萌芽中文版副本！
 
 >主编码者:  
 - JDSALing  
