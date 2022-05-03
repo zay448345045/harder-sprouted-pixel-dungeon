@@ -17,3 +17,11 @@ Dedicated to Difficult Germination author SmuJB and the majority of players
 
 >Total progress:  
 Multilingual underlying architecture
+- [x] Bottom Build
+- [x] Text Translation
+- [ ] Bug Fixed
+- [ ] Local Active
+- [ ] Text Review
+
+>When the following button is activated, the localization ends
+- [ ] Release Apk
