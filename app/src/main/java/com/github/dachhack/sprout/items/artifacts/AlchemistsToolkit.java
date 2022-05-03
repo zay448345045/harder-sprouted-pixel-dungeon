@@ -1,8 +1,10 @@
 package com.github.dachhack.sprout.items.artifacts;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Item;
@@ -14,9 +16,6 @@ import com.github.dachhack.sprout.windows.WndBag;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
-
-import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Created by debenhame on 24/11/2014.
@@ -154,7 +153,8 @@ public class AlchemistsToolkit extends Artifact {
 
 	@Override
 	public String desc() {
-		String result = Messages.get(this, "desc1");
+		String result = "This toolkit contains a number of regents and herbs used to improve the process of "
+				+ "cooking potions.\n\n";
 
 		if (isEquipped(Dungeon.hero))
 			if (cursed)

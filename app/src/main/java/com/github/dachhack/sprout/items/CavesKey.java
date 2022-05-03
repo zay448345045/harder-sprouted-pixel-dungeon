@@ -17,8 +17,9 @@
  */
 package com.github.dachhack.sprout.items;
 
+import java.util.ArrayList;
+
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -40,11 +41,9 @@ import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Bundle;
 
-import java.util.ArrayList;
-
 public class CavesKey extends Item {
 	
-	private static final String TXT_PREVENTING = Messages.get(CavesKey.class,"prevent");
+	private static final String TXT_PREVENTING = "Strong magic aura of this place prevents you from using the ancient key!";
 		
 	
 	public static final float TIME_TO_USE = 1;

@@ -4034,5 +4034,3 @@ app/build/intermediates/project_dex_archive/debug/out/com/github/dachhack/sprout
 app/build/intermediates/project_dex_archive/debug/out/com/github/dachhack/sprout/windows/WndLangs$2.dex
 app/build/intermediates/project_dex_archive/debug/out/com/github/dachhack/sprout/windows/WndLangs$3.dex
 app/build/intermediates/project_dex_archive/debug/out/com/github/dachhack/sprout/windows/WndLangs.dex
-app/build/intermediates/project_dex_archive/debug/out/com/github/dachhack/sprout/ui/GameLog$Entry.dex
-app/build/intermediates/javac/debug/classes/com/github/dachhack/sprout/ui/GameLog$Entry.class

@@ -17,14 +17,12 @@
  */
 package com.github.dachhack.sprout.items.armor;
 
-import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
 public class ClothArmor extends Armor {
 
 	{
-		//name = "cloth armor";
-		name = Messages.get(this,"name");
+		name = "cloth armor";
 		image = ItemSpriteSheet.ARMOR_CLOTH;
 
 		bones = false; // Finding them in bones would be semi-frequent and
@@ -36,11 +34,7 @@ public class ClothArmor extends Armor {
 	}
 
 	@Override
-	//public String desc() {
-	//	return "This lightweight armor offers basic protection.";
-	//}
-
 	public String desc() {
-		return Messages.get(this, "desc");
+		return "This lightweight armor offers basic protection.";
 	}
 }

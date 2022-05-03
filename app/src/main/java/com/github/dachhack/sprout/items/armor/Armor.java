@@ -17,9 +17,10 @@
  */
 package com.github.dachhack.sprout.items.armor;
 
+import java.util.ArrayList;
+
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -43,15 +44,13 @@ import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
-import java.util.ArrayList;
-
 public class Armor extends EquipableItem {
 
 	private static final int HITS_TO_KNOW = 10;
 	
 	private static final float TIME_TO_EQUIP = 1f;
-//"your %s constricts around you painfully
-	private static final String TXT_EQUIP_CURSED = Messages.get(Armor.class,"equip_cursed");
+
+	private static final String TXT_EQUIP_CURSED = "your %s constricts around you painfully";
 
 	private static final String TXT_IDENTIFY = "you are now familiar enough with your %s to identify it. It is %s.";
 
