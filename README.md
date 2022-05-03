@@ -16,7 +16,10 @@ Translation reviewers: Rowberry, Alice, Mason369, JDSALing
 Dedicated to Difficult Germination author SmuJB and the majority of players  
 
 >Total progress:  
-Multilingual underlying architecture
+Multilingual underlying architecture  
+
+<!DOCTYPE html>
+<html>
 <head>
   <title>'</title>
 </head>
@@ -153,3 +156,4 @@ Dev Progess:
   <span></span>
 </div>
 </body>
+</html>
