@@ -17,9 +17,7 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.actors.Actor;
-import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.items.food.Meat;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.scenes.GameScene;
@@ -32,7 +30,7 @@ public class Rat extends Mob {
 	private static final float SPAWN_DELAY = 2f;
 
 	{
-		name = "marsupial rat";
+		name = "老鼠";
 		spriteClass = RatSprite.class;
 
 		HP = HT = 16;
