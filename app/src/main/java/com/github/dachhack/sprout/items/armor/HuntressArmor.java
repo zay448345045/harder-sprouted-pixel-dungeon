@@ -20,6 +20,7 @@ package com.github.dachhack.sprout.items.armor;
 import java.util.HashMap;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.hero.HeroClass;
 import com.github.dachhack.sprout.actors.mobs.Mob;
@@ -33,13 +34,17 @@ import com.watabou.utils.Callback;
 
 public class HuntressArmor extends ClassArmor {
 
-	private static final String TXT_NO_ENEMIES = "No enemies in sight";
-	private static final String TXT_NOT_HUNTRESS = "Only huntresses can use this armor!";
+//	private static final String TXT_NO_ENEMIES = "No enemies in sight";
+//	private static final String TXT_NOT_HUNTRESS = "Only huntresses can use this armor!";
+//
+//	private static final String AC_SPECIAL = "SPECTRAL BLADES";
+private static final String TXT_NO_ENEMIES = Messages.get(HuntressArmor.class, "no_enemies");
+	private static final String TXT_NOT_HUNTRESS = Messages.get(HuntressArmor.class, "not_huntress");
 
-	private static final String AC_SPECIAL = "SPECTRAL BLADES";
+	private static final String AC_SPECIAL = Messages.get(HuntressArmor.class, "ac_special");
 
 	{
-		name = "huntress cloak";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ARMOR_HUNTRESS;
 	}
 
@@ -100,8 +105,6 @@ public class HuntressArmor extends ClassArmor {
 
 	@Override
 	public String desc() {
-		return "A huntress in such cloak can create a fan of spectral blades. Each of these blades "
-				+ "will target a single enemy in the huntress's field of view, inflicting damage depending "
-				+ "on her currently equipped melee weapon.";
+		return Messages.get(this, "desc");
 	}
 }

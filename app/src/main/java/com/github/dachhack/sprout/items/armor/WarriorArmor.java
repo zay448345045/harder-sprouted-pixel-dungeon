@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items.armor;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -42,12 +43,16 @@ public class WarriorArmor extends ClassArmor {
 	private static int LEAP_TIME = 1;
 	private static int SHOCK_TIME = 3;
 
-	private static final String AC_SPECIAL = "HEROIC LEAP";
+//	private static final String AC_SPECIAL = "HEROIC LEAP";
+private static final String AC_SPECIAL = Messages.get(WarriorArmor.class, "ac_special");
 
-	private static final String TXT_NOT_WARRIOR = "Only warriors can use this armor!";
+//	private static final String TXT_NOT_WARRIOR = "Only warriors can use this armor!";
+private static final String TXT_NOT_WARRIOR = Messages.get(WarriorArmor.class, "not_warrior");
 
 	{
-		name = "warrior suit of armor";
+//		name = "warrior suit of armor";
+//		image = ItemSpriteSheet.ARMOR_WARRIOR;
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ARMOR_WARRIOR;
 	}
 
@@ -71,11 +76,15 @@ public class WarriorArmor extends ClassArmor {
 		}
 	}
 
-	@Override
-	public String desc() {
-		return "While this armor looks heavy, it allows a warrior to perform heroic leap towards "
-				+ "a targeted location, slamming down to stun all neighbouring enemies.";
-	}
+//	@Override
+//	public String desc() {
+//		return "While this armor looks heavy, it allows a warrior to perform heroic leap towards "
+//				+ "a targeted location, slamming down to stun all neighbouring enemies.";
+//	}
+@Override
+public String desc() {
+	return Messages.get(this, "desc");
+}
 
 	protected static CellSelector.Listener leaper = new CellSelector.Listener() {
 
@@ -121,9 +130,13 @@ public class WarriorArmor extends ClassArmor {
 			}
 		}
 
-		@Override
-		public String prompt() {
-			return "Choose direction to leap";
-		}
+//		@Override
+//		public String prompt() {
+//			return "Choose direction to leap";
+//		}
+@Override
+public String prompt() {
+	return Messages.get(WarriorArmor.class, "prompt");
+}
 	};
 }

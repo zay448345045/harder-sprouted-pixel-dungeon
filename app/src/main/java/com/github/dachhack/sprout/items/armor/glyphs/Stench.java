@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.armor.glyphs;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.Blob;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
@@ -32,7 +33,8 @@ import com.watabou.utils.Random;
 
 public class Stench extends Glyph {
 
-	private static final String TXT_STENCH = "%s of stench";
+//	private static final String TXT_STENCH = "%s of stench";
+private static final String TXT_STENCH = Messages.get(Stench.class, "name");
 
 	private static ItemSprite.Glowing GREEN = new ItemSprite.Glowing(0x22CC44);
 

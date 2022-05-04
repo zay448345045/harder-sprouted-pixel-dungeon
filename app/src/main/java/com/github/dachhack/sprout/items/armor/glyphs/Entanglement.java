@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.armor.glyphs;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Roots;
@@ -32,7 +33,8 @@ import com.watabou.utils.Random;
 
 public class Entanglement extends Glyph {
 
-	private static final String TXT_ENTANGLEMENT = "%s of entanglement";
+//	private static final String TXT_ENTANGLEMENT = "%s of entanglement";
+private static final String TXT_ENTANGLEMENT = Messages.get(Entanglement.class, "name");
 
 	private static ItemSprite.Glowing GREEN = new ItemSprite.Glowing(0x448822);
 

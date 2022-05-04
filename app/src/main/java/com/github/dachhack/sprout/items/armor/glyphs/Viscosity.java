@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.armor.glyphs;
 
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -35,7 +36,8 @@ import com.watabou.utils.Random;
 
 public class Viscosity extends Glyph {
 
-	private static final String TXT_VISCOSITY = "%s of viscosity";
+//	private static final String TXT_VISCOSITY = "%s of viscosity";
+private static final String TXT_VISCOSITY = Messages.get(Viscosity.class, "name");
 
 	private static ItemSprite.Glowing PURPLE = new ItemSprite.Glowing(0x8844CC);
 

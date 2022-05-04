@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items.armor.glyphs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.mobs.Mob;
@@ -28,8 +29,10 @@ import com.github.dachhack.sprout.levels.Level;
 import com.watabou.utils.Random;
 
 public class Bounce extends Glyph {
+//
+//	private static final String TXT_BOUNCE = "%s of bounce";
 
-	private static final String TXT_BOUNCE = "%s of bounce";
+	private static final String TXT_BOUNCE = Messages.get(Bounce.class, "name");
 
 	@Override
 	public int proc(Armor armor, Char attacker, Char defender, int damage) {

@@ -147,7 +147,8 @@ public enum HeroClass {
 		if (Dungeon.testing) {
 			playtest(hero);
 		}
-		new CavesKey().quantity(1).identify().collect();
+
+		new ClothArmor().quantity(1).identify().collect();
 		//new Chainsaw().enchantBuzz().identify().collect();
 		//DewVial vial = new DewVial();
 		//vial.collect();

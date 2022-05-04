@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.armor.glyphs;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Charm;
@@ -31,7 +32,7 @@ import com.watabou.utils.Random;
 
 public class Affection extends Glyph {
 
-	private static final String TXT_AFFECTION = "%s of affection";
+	private static final String TXT_AFFECTION = Messages.get(Affection.class, "name");
 
 	private static ItemSprite.Glowing PINK = new ItemSprite.Glowing(0xFF4488);
 

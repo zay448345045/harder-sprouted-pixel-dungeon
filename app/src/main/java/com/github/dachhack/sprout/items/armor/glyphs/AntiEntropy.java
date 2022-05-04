@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.armor.glyphs;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Frost;
@@ -31,7 +32,8 @@ import com.watabou.utils.Random;
 
 public class AntiEntropy extends Glyph {
 
-	private static final String TXT_ANTI_ENTROPY = "%s of anti-entropy";
+//	private static final String TXT_ANTI_ENTROPY = "%s of anti-entropy";
+private static final String TXT_ANTI_ENTROPY = Messages.get(AntiEntropy.class, "name");
 
 	private static ItemSprite.Glowing BLUE = new ItemSprite.Glowing(0x0000FF);
 
