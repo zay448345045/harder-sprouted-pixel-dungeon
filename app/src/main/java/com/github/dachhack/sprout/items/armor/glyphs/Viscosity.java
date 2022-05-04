@@ -59,7 +59,7 @@ private static final String TXT_VISCOSITY = Messages.get(Viscosity.class, "name"
 			}
 			debuff.prolong(damage);
 
-			defender.sprite.showStatus(CharSprite.WARNING, "deferred %d",
+			defender.sprite.showStatus(CharSprite.WARNING, Messages.get(this, "deferred"),
 					damage);
 
 			return 0;
@@ -119,7 +119,7 @@ private static final String TXT_VISCOSITY = Messages.get(Viscosity.class, "name"
 
 		@Override
 		public String toString() {
-			return Utils.format("Defered damage (%d)", damage);
+			return Utils.format(Messages.get(Viscosity.class, "bname"), damage);
 		}
 
 		@Override
@@ -132,7 +132,8 @@ private static final String TXT_VISCOSITY = Messages.get(Viscosity.class, "name"
 					Glyph glyph = new Viscosity();
 					Dungeon.fail(Utils.format(ResultDescriptions.GLYPH,
 							glyph.name()));
-					GLog.n("%s killed you...", glyph.name());
+//					GLog.n("%s killed you...", glyph.name());
+					GLog.n(Messages.get(Viscosity.class, "bkill"), glyph.name());
 
 					Badges.validateDeathFromGlyph();
 				}
