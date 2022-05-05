@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items.food;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.blobs.Blob;
 import com.github.dachhack.sprout.actors.blobs.Fire;
 import com.github.dachhack.sprout.actors.buffs.Hunger;
@@ -31,16 +32,20 @@ import com.watabou.utils.Random;
 public class JackOLantern extends Food {
 
 	{
-		name = "jack o lantern mushroom";
+//		name = "jack o lantern mushroom";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.MUSHROOM_LANTERN;
 		energy = (Hunger.STARVING - Hunger.HUNGRY)/10;
-		message = "Munch munch";
+//		message = "Munch munch";
+		message = Messages.get(BlueMilk.class, "eat");
 		hornValue = 1;
 		bones = false;
 	}
 
-	private static final String TXT_PREVENTING = "Something tells you that wouldn't be a good idea here! ";
-	private static final String TXT_EFFECT = "The shadows are on fire!  ";
+//	private static final String TXT_PREVENTING = "Something tells you that wouldn't be a good idea here! ";
+//	private static final String TXT_EFFECT = "The shadows are on fire!  ";
+private static final String TXT_PREVENTING = Messages.get(BlueMilk.class, "prevent");
+	private static final String TXT_EFFECT = Messages.get(JackOLantern.class, "effect");
 
 	@Override
 	public void execute(Hero hero, String action) {
@@ -79,11 +84,15 @@ public class JackOLantern extends Food {
 	   super.execute(hero, action);
 	}	
 	
-	@Override
-	public String info() {
-		return "A strange heat emminates from this mushroom. "
-				+"Unleashing the fire within could be dangerous. ";
-	}
+//	@Override
+//	public String info() {
+//		return "A strange heat emminates from this mushroom. "
+//				+"Unleashing the fire within could be dangerous. ";
+//	}
+@Override
+public String info() {
+	return Messages.get(this, "desc");
+}
 
 	@Override
 	public int price() {

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.buffs.Hunger;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -37,16 +38,19 @@ public class Food extends Item {
 
 	private static final float TIME_TO_EAT = 3f;
 
-	public static final String AC_EAT = "EAT";
+//	public static final String AC_EAT = "EAT";
+public static final String AC_EAT = Messages.get(Food.class, "ac_eat");
 
 	public float energy = Hunger.HUNGRY;
-	public String message = "That food tasted delicious!";
+//	public String message = "That food tasted delicious!";
+public String message = Messages.get(this, "eat_msg");
 
 	public int hornValue = 3;
 
 	{
 		stackable = true;
-		name = "ration of food";
+//		name = "ration of food";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.RATION;
 
 		bones = true;
@@ -117,11 +121,15 @@ public class Food extends Item {
 		}
 	}
 
-	@Override
-	public String info() {
-		return "Nothing fancy here: dried meat, "
-				+ "some biscuits - things like that.";
-	}
+//	@Override
+//	public String info() {
+//		return "Nothing fancy here: dried meat, "
+//				+ "some biscuits - things like that.";
+//	}
+@Override
+public String info() {
+	return Messages.get(this, "desc");
+}
 
 	@Override
 	public boolean isUpgradable() {

@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.food;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Barkskin;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Hunger;
@@ -28,10 +29,12 @@ import com.watabou.utils.Random;
 public class Nut extends Food {
 
 	{
-		name = "dungeon nut";
+//		name = "dungeon nut";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.SEED_DUNGEONNUT;
 		energy = (Hunger.STARVING - Hunger.HUNGRY)/2;
-		message = "Crunch Crunch.";
+//		message = "Crunch Crunch.";
+		message = Messages.get(this, "eat");
 		hornValue = 1;
 		bones = false;
 	}
@@ -45,7 +48,8 @@ public class Nut extends Food {
 
 			switch (Random.Int(10)) {
 			case 0:
-				GLog.w("You feel the dungeon blessing you.");
+//				GLog.w("You feel the dungeon blessing you.");
+				GLog.w(Messages.get(this, "effect"));
 				Buff.affect(hero, Barkskin.class).level(hero.HT / 4);
 				break;
 			}
@@ -53,8 +57,11 @@ public class Nut extends Food {
 	}	
 	
 	@Override
+//	public String info() {
+//		return "Common dungeon nut.";
+//	}
 	public String info() {
-		return "Common dungeon nut.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

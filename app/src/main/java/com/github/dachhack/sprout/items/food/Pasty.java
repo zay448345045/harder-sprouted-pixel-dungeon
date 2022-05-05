@@ -17,13 +17,15 @@
  */
 package com.github.dachhack.sprout.items.food;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Hunger;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
 public class Pasty extends Food {
 
 	{
-		name = "pasty";
+//		name = "pasty";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.PASTY;
 		energy = Hunger.STARVING;
 		hornValue = 5;
@@ -32,8 +34,12 @@ public class Pasty extends Food {
 	}
 
 	@Override
+//	public String info() {
+//		return "This is authentic Cornish pasty with traditional filling of beef and potato.";
+//	}
+
 	public String info() {
-		return "This is authentic Cornish pasty with traditional filling of beef and potato.";
+		return Messages.get(this, "pasty_desc");
 	}
 
 	@Override

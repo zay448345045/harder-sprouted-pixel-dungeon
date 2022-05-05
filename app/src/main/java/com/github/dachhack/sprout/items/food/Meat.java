@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.food;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Hunger;
 import com.github.dachhack.sprout.actors.buffs.Poison;
@@ -28,10 +29,12 @@ import com.watabou.utils.Random;
 public class Meat extends Food {
 
 	{
-		name = "monster meat";
+//		name = "monster meat";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.MEAT;
 		energy = Hunger.STARVING - Hunger.HUNGRY;
-		message = "You choked down the monster meat.";
+//		message = "You choked down the monster meat.";
+		message = Messages.get(this, "eat");
 		hornValue = 1;
 		bones = false;
 	}
@@ -45,7 +48,8 @@ public class Meat extends Food {
 
 			switch (Random.Int(15)) {
 			case 0:
-				GLog.w("You are not feeling well.");
+//				GLog.w("You are not feeling well.");
+				GLog.w(Messages.get(this, "effect"));
 				Buff.affect(hero, Poison.class).set(
 						Poison.durationFactor(hero) * hero.HT / 5);
 				break;
@@ -54,8 +58,11 @@ public class Meat extends Food {
 	}	
 	
 	@Override
+//	public String info() {
+//		return "Fresh remains of a defeated foe.";
+//	}
 	public String info() {
-		return "Fresh remains of a defeated foe.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

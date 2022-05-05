@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items.food;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.BerryRegeneration;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Drowsy;
@@ -34,16 +35,20 @@ import com.watabou.utils.Random;
 public class PixieParasol extends Food {
 
 	{
-		name = "pixie parasol mushroom";
+//		name = "pixie parasol mushroom";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.MUSHROOM_PIXIEPARASOL;
 		energy = (Hunger.STARVING - Hunger.HUNGRY)/10;
-		message = "Munch munch";
+//		message = "Munch munch";
+		message = Messages.get(BlueMilk.class, "eat");
 		hornValue = 1;
 		bones = false;
 	}
 
-	private static final String TXT_PREVENTING = "Something tells you that wouldn't be a good idea here! ";
-	private static final String TXT_EFFECT = "You are floating in your dream! ";
+//	private static final String TXT_PREVENTING = "Something tells you that wouldn't be a good idea here! ";
+//	private static final String TXT_EFFECT = "You are floating in your dream! ";
+private static final String TXT_PREVENTING = Messages.get(BlueMilk.class, "prevent");
+	private static final String TXT_EFFECT = Messages.get(PixieParasol.class, "effect");
 
 	@Override
 	public void execute(Hero hero, String action) {
@@ -87,11 +92,15 @@ public class PixieParasol extends Food {
 	   super.execute(hero, action);
 	}	
 	
-	@Override
-	public String info() {
-		return "These mushrooms seem to spin in front of your eyes. "
-				+"You hear fleeting laughter. ";
-	}
+//	@Override
+//	public String info() {
+//		return "These mushrooms seem to spin in front of your eyes. "
+//				+"You hear fleeting laughter. ";
+//	}
+@Override
+public String info() {
+	return Messages.get(this, "desc");
+}
 
 	@Override
 	public int price() {

@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items.food;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Barkskin;
 import com.github.dachhack.sprout.actors.buffs.Bleeding;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -38,8 +39,10 @@ import com.watabou.utils.Random;
 public class FrozenCarpaccio extends Food {
 
 	{
-		name = "frozen carpaccio";
+//		name = "frozen carpaccio";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.CARPACCIO;
+
 		energy = Hunger.STARVING - Hunger.HUNGRY;
 		hornValue = 1;
 	}
@@ -54,16 +57,19 @@ public class FrozenCarpaccio extends Food {
 			switch (Random.Int(5)) {
 			case 0:
 				if(Dungeon.depth != 29){
-				GLog.i("You see your hands turn invisible!");
+//				GLog.i("You see your hands turn invisible!");
+					GLog.i(Messages.get(this, "invis"));
 				Buff.affect(hero, Invisibility.class, Invisibility.DURATION);
 				}
 				break;
 			case 1:
-				GLog.i("You feel your skin harden!");
+//				GLog.i("You feel your skin harden!");
+				GLog.i(Messages.get(this, "hard"));
 				Buff.affect(hero, Barkskin.class).level(hero.HT / 4);
 				break;
 			case 2:
-				GLog.i("Refreshing!");
+//				GLog.i("Refreshing!");
+				GLog.i(Messages.get(this, "refresh"));
 				Buff.detach(hero, Poison.class);
 				Buff.detach(hero, Cripple.class);
 				Buff.detach(hero, Weakness.class);
@@ -73,7 +79,8 @@ public class FrozenCarpaccio extends Food {
 				Buff.detach(hero, Vertigo.class);
 				break;
 			case 3:
-				GLog.i("You feel better!");
+//				GLog.i("You feel better!");
+				GLog.i(Messages.get(this, "better"));
 				if (hero.HP < hero.HT) {
 					hero.HP = Math.min(hero.HP + hero.HT / 4, hero.HT);
 					hero.sprite.emitter()
@@ -84,11 +91,15 @@ public class FrozenCarpaccio extends Food {
 		}
 	}
 
-	@Override
-	public String info() {
-		return "It's a piece of frozen raw meat. The only way to eat it is "
-				+ "by cutting thin slices of it. And this way it's suprisingly good.";
-	}
+//	@Override
+//	public String info() {
+//		return "It's a piece of frozen raw meat. The only way to eat it is "
+//				+ "by cutting thin slices of it. And this way it's suprisingly good.";
+//	}
+@Override
+public String info() {
+	return Messages.get(this, "desc");
+}
 
 	@Override
 	public int price() {

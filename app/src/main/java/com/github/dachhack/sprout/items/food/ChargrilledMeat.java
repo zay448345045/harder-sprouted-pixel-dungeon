@@ -17,13 +17,15 @@
  */
 package com.github.dachhack.sprout.items.food;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Hunger;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
 public class ChargrilledMeat extends Food {
 
 	{
-		name = "chargrilled meat";
+//		name = "chargrilled meat";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.STEAK;
 		energy = Hunger.STARVING/2;
 		hornValue = 1;
@@ -31,8 +33,11 @@ public class ChargrilledMeat extends Food {
 	}
 
 	@Override
+//	public String info() {
+//		return "It looks like a decent steak.";
+//	}
 	public String info() {
-		return "It looks like a decent steak.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.food;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Barkskin;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.FullMoonStrength;
@@ -31,10 +32,12 @@ import com.watabou.utils.Random;
 public class FullMoonberry extends Food {
 
 	{
-		name = "dungeon full moon berry";
+//		name = "dungeon full moon berry";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.SEED_FULLMOONBERRY;
 		energy = (Hunger.STARVING - Hunger.HUNGRY)/10;
-		message = "Juicy!";
+//		message = "Juicy!";
+		message = Messages.get(Blackberry.class, "eat");
 		hornValue = 1;
 		bones = false;
 	}
@@ -48,13 +51,15 @@ public class FullMoonberry extends Food {
 
 				switch (Random.Int(2)) {
 				case 0:
-					GLog.w("The moon berry fills your body with fearsome magical strength.");
+//					GLog.w("The moon berry fills your body with fearsome magical strength.");
+					GLog.p(Messages.get(this, "effect"));
 					Buff.affect(hero, Strength.class);
 					Buff.affect(hero, FullMoonStrength.class);
 					Buff.affect(hero, Light.class, Light.DURATION);
 					break;
 				case 1:
-					GLog.w("The moon berry fills your body with fearsome magical strength.");
+//					GLog.w("The moon berry fills your body with fearsome magical strength.");
+					GLog.p(Messages.get(this, "effect"));
 					Buff.affect(hero, Strength.class);
 					Buff.affect(hero, FullMoonStrength.class);
 					Buff.affect(hero, Barkskin.class).level(hero.HT*2);
@@ -64,12 +69,16 @@ public class FullMoonberry extends Food {
 			}
 	}	
 	
-	@Override
-	public String info() {
-		return "In the darkest hours of night a full moon berry grows. "
-				+"The wishes of the dungeon are concentrated into its strong magic. "
-			    +"Just a whiff of it and you feel a magical fury build within you. ";
-	}
+//	@Override
+//	public String info() {
+//		return "In the darkest hours of night a full moon berry grows. "
+//				+"The wishes of the dungeon are concentrated into its strong magic. "
+//			    +"Just a whiff of it and you feel a magical fury build within you. ";
+//	}
+@Override
+public String info() {
+	return Messages.get(this, "desc");
+}
 
 	@Override
 	public int price() {
