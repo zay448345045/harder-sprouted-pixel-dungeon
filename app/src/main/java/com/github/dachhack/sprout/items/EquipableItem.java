@@ -111,7 +111,6 @@ public abstract class EquipableItem extends Item {
 		return doUnequip(hero, collect, true);
 	}
 
-	@Override
 	public void activate(Char ch){
 	}
 }

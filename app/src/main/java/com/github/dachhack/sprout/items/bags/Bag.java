@@ -22,6 +22,7 @@ import java.util.Iterator;
 
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.items.Item;
@@ -32,7 +33,8 @@ import com.watabou.utils.Bundle;
 
 public class Bag extends Item implements Iterable<Item> {
 
-	public static final String AC_OPEN = "OPEN";
+//	public static final String AC_OPEN = "OPEN";
+public static final String AC_OPEN = Messages.get(Bag.class, "ac_open");
 
 	{
 		image = 11;
@@ -102,7 +104,8 @@ public class Bag extends Item implements Iterable<Item> {
 		items.clear();
 	}
 
-	private static final String ITEMS = "inventory";
+//	private static final String ITEMS = "inventory";
+private static final String ITEMS = "inventory";
 
 	@Override
 	public void storeInBundle(Bundle bundle) {

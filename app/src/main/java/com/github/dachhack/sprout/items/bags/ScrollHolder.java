@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.bags;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.items.ActiveMrDestructo;
 import com.github.dachhack.sprout.items.ActiveMrDestructo2;
 import com.github.dachhack.sprout.items.Bomb;
@@ -36,7 +37,8 @@ import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 public class ScrollHolder extends Bag {
 
 	{
-		name = "scroll holder";
+//		name = "scroll holder";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.HOLDER;
 
 		size = 20;
@@ -70,9 +72,12 @@ public class ScrollHolder extends Bag {
 	}
 
 	@Override
+//	public String info() {
+//		return "This tubular container looks like it would hold an astronomer's charts, but your scrolls will fit just as well.\n\n"
+//				+ "The holder doesn't look very flammable, so your scrolls should be safe from fire inside it."
+//				+ "There is a handy little compartment for your bombs and other explosives too. Nice!";
+//	}
 	public String info() {
-		return "This tubular container looks like it would hold an astronomer's charts, but your scrolls will fit just as well.\n\n"
-				+ "The holder doesn't look very flammable, so your scrolls should be safe from fire inside it."
-				+ "There is a handy little compartment for your bombs and other explosives too. Nice!";
+		return Messages.get(this, "desc");
 	}
 }

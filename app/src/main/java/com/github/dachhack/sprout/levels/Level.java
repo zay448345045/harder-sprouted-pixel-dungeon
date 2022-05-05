@@ -285,10 +285,6 @@ public abstract class Level implements Bundlable {
 					// rose.
 					if (rose.droppedPetals < 11) {
 						addItemToSpawn(new DriedRose.Petal() {
-							@Override
-							public void activate(Char ch) {
-
-							}
 						});
 						rose.droppedPetals++;
 					}

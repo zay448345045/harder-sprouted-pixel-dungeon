@@ -1,5 +1,6 @@
 package com.github.dachhack.sprout.items.bags;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.food.BlueMilk;
 import com.github.dachhack.sprout.items.food.DeathCap;
@@ -17,7 +18,8 @@ import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 public class PotionBandolier extends Bag {
 
 	{
-		name = "potion bandolier";
+//		name = "potion bandolier";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.BANDOLIER;
 
 		size = 20;
@@ -41,9 +43,12 @@ public class PotionBandolier extends Bag {
 	}
 
 	@Override
+//	public String info() {
+//		return "This thick bandolier fits around your chest like a sash, it has many small vials to hold your potions.\n\n"
+//				+ "The vials are made of tempered glass, and should be quite resistant to the cold.\n\n"
+//				+ "There's also a big jar attached for holding mushrooms. Very nice!";
+//	}
 	public String info() {
-		return "This thick bandolier fits around your chest like a sash, it has many small vials to hold your potions.\n\n"
-				+ "The vials are made of tempered glass, and should be quite resistant to the cold.\n\n"
-				+ "There's also a big jar attached for holding mushrooms. Very nice!";
+		return Messages.get(this, "desc");
 	}
 }
