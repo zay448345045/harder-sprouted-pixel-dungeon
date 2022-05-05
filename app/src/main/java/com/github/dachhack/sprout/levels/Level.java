@@ -284,7 +284,12 @@ public abstract class Level implements Bundlable {
 					// the player may miss a single petal and still max their
 					// rose.
 					if (rose.droppedPetals < 11) {
-						addItemToSpawn(new DriedRose.Petal());
+						addItemToSpawn(new DriedRose.Petal() {
+							@Override
+							public void activate(Char ch) {
+
+							}
+						});
 						rose.droppedPetals++;
 					}
 				}

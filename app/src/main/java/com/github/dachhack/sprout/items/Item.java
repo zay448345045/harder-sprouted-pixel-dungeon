@@ -48,7 +48,7 @@ import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Callback;
 
-public class Item implements Bundlable {
+public abstract class Item implements Bundlable {
 
 	private static final String TXT_PACK_FULL = "Your pack is too full for the %s";
 
@@ -570,4 +570,6 @@ public class Item implements Bundlable {
 			return "Choose direction of throw";
 		}
 	};
+
+
 }

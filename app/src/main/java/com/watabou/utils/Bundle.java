@@ -17,6 +17,8 @@
 
 package com.watabou.utils;
 
+import static com.github.dachhack.sprout.ShatteredPixelDungeon.reportException;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -35,6 +37,31 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 public class Bundle {
+
+	public Class[] getClassArray(String key) {
+		try {
+			JSONArray array = data.getJSONArray(key);
+			int length = array.length();
+			Class[] result = new Class[length];
+			for (int i = 0; i < length; i++) {
+				String clName = array.getString(i).replace("class ", "");
+				if (aliases.containsKey(clName)) {
+					clName = aliases.get(clName);
+				}
+				try {
+					Class cl = Class.forName(clName);
+					result[i] = cl;
+				} catch (ClassNotFoundException e) {
+					reportException(e);
+					result[i] = null;
+				}
+			}
+			return result;
+		} catch (JSONException e) {
+			reportException(e);
+			return null;
+		}
+	}
 
 	private static final String CLASS_NAME = "__className";
 	

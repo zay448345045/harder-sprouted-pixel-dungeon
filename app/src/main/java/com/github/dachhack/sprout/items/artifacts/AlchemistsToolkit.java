@@ -4,9 +4,12 @@ import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.items.Egg;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.potions.Potion;
+import com.github.dachhack.sprout.items.potions.PotionOfExperience;
+import com.github.dachhack.sprout.items.potions.PotionOfOverHealing;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
@@ -37,9 +40,9 @@ public class AlchemistsToolkit extends Artifact {
 public static final String AC_BREW = Messages.get(AlchemistsToolkit.class, "ac_brew");
 
 	// arrays used in containing potion collections for mix logic.
-	public final ArrayList<String> combination = new ArrayList<String>();
-	public ArrayList<String> curGuess = new ArrayList<String>();
-	public ArrayList<String> bstGuess = new ArrayList<String>();
+	public final ArrayList<Class> combination = new ArrayList<Class>();
+	public ArrayList<Class> curGuess = new ArrayList<Class>();
+	public ArrayList<Class> bstGuess = new ArrayList<Class>();
 
 	public int numWrongPlace = 0;
 	public int numRight = 0;
@@ -55,14 +58,13 @@ protected String inventoryTitle = Messages.get(AlchemistsToolkit.class, "invtitl
 
 		Generator.Category cat = Generator.Category.POTION;
 		for (int i = 1; i <= 3; i++) {
-			String potion;
+			Class potion;
 			do {
-				potion = convertName(cat.classes[Random.chances(cat.probs)]
-						.getSimpleName());
+				potion = cat.classes[Random.chances(cat.probs)];
 				// forcing the player to use experience potions would be
 				// completely unfair.
-			} while (combination.contains(potion)
-					|| potion.equals("Experience"));
+			}
+			while (combination.contains(potion) || potion == PotionOfExperience.class || potion == Egg.class || potion == PotionOfOverHealing.class);
 			combination.add(potion);
 		}
 	}
@@ -91,7 +93,7 @@ protected String inventoryTitle = Messages.get(AlchemistsToolkit.class, "invtitl
 		int numWrongPlace = 0;
 		int numRight = 0;
 
-		for (String potion : curGuess) {
+		for (Class potion : curGuess) {
 			if (combination.contains(potion)) {
 				if (curGuess.indexOf(potion) == combination.indexOf(potion)) {
 					numRight++;
@@ -136,7 +138,7 @@ protected String inventoryTitle = Messages.get(AlchemistsToolkit.class, "invtitl
 					+ brewDesc(numWrongPlace, numRight)
 					+ Messages.get(this, "throw"));
 		}
-		curGuess = new ArrayList<String>();
+		curGuess = new ArrayList<Class>();
 
 	}
 
@@ -233,9 +235,9 @@ protected String inventoryTitle = Messages.get(AlchemistsToolkit.class, "invtitl
 		seedsToPotion = bundle.getInt(SEEDSTOPOTION);
 
 		combination.clear();
-		Collections.addAll(combination, bundle.getStringArray(COMBINATION));
-		Collections.addAll(curGuess, bundle.getStringArray(CURGUESS));
-		Collections.addAll(bstGuess, bundle.getStringArray(BSTGUESS));
+		Collections.addAll(combination, bundle.getClassArray(COMBINATION));
+		Collections.addAll(curGuess, bundle.getClassArray(CURGUESS));
+		Collections.addAll(bstGuess, bundle.getClassArray(BSTGUESS));
 	}
 
 	public class alchemy extends ArtifactBuff {
@@ -281,7 +283,7 @@ protected String inventoryTitle = Messages.get(AlchemistsToolkit.class, "invtitl
 
 					item.detach(hero.belongings.backpack);
 
-					curGuess.add(convertName(item.getClass().getSimpleName()));
+					curGuess.add(item.getClass());
 					if (curGuess.size() == 3) {
 						guessBrew();
 					} else {

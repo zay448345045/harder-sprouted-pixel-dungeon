@@ -36,6 +36,8 @@ import com.watabou.utils.Random;
 public class Belongings implements Iterable<Item> {
 
 	public static final int BACKPACK_SIZE = 23;
+    public KindofMisc misc4;
+	public KindofMisc misc3;
 
 	private Hero owner;
 

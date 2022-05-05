@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Awareness;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -21,7 +22,8 @@ import com.watabou.noosa.audio.Sample;
 public class TalismanOfForesight extends Artifact {
 
 	{
-		name = "Talisman of Foresight";
+//		name = "Talisman of Foresight";
+		name = Messages.get(TalismanOfForesight.class, "name");
 		image = ItemSpriteSheet.ARTIFACT_TALISMAN;
 
 		level = 0;
@@ -35,7 +37,8 @@ public class TalismanOfForesight extends Artifact {
 		defaultAction = AC_SCRY;
 	}
 
-	public static final String AC_SCRY = "SCRY";
+//	public static final String AC_SCRY = "SCRY";
+public static final String AC_SCRY = Messages.get(TalismanOfForesight.class, "ac_scry");
 
 	@Override
 	public ArrayList<String> actions(Hero hero) {
@@ -51,9 +54,11 @@ public class TalismanOfForesight extends Artifact {
 		if (action.equals(AC_SCRY)) {
 
 			if (!isEquipped(hero))
-				GLog.i("You need to equip your talisman to do that.");
+//				GLog.i("You need to equip your talisman to do that.");
+				GLog.i(Messages.get(TalismanOfForesight.class, "equip"));
 			else if (charge != chargeCap)
-				GLog.i("Your talisman isn't full charged yet.");
+//				GLog.i("Your talisman isn't full charged yet.");
+				GLog.i(Messages.get(TalismanOfForesight.class, "no_charge"));
 			else {
 				hero.sprite.operate(hero.pos);
 				hero.busy();
@@ -72,7 +77,9 @@ public class TalismanOfForesight extends Artifact {
 					}
 				}
 
-				GLog.p("The Talisman floods your mind with knowledge about the current floor.");
+//				GLog.p("The Talisman floods your mind with knowledge about the current floor.");
+				GLog.p(Messages.get(TalismanOfForesight.class, "scry"));
+				updateQuickslot();
 
 				Buff.affect(hero, Awareness.class, Awareness.DURATION);
 				Dungeon.observe();
@@ -87,16 +94,20 @@ public class TalismanOfForesight extends Artifact {
 
 	@Override
 	public String desc() {
-		String desc = "A smooth stone, almost too big for your pocket or hand, with strange engravings on it. "
-				+ "You feel like it's watching you, assessing your every move.";
+//		String desc = "A smooth stone, almost too big for your pocket or hand, with strange engravings on it. "
+//				+ "You feel like it's watching you, assessing your every move.";
+		String desc = Messages.get(this, "desc");
 		if (isEquipped(Dungeon.hero)) {
 			if (!cursed) {
-				desc += "\n\nWhen you hold the talisman you feel like your senses are heightened.";
+//				desc += "\n\nWhen you hold the talisman you feel like your senses are heightened.";
+				desc += "\n\n" + Messages.get(this, "desc_worn");
 				if (charge == 100)
-					desc += "\n\nThe talisman is radiating energy, prodding at your mind. You wonder what would "
-							+ "happen if you let it in.";
+//					desc += "\n\nThe talisman is radiating energy, prodding at your mind. You wonder what would "
+//							+ "happen if you let it in.";
+					desc += "\n\n" + Messages.get(this, "full");
 			} else {
-				desc += "\n\nThe cursed talisman is intently staring into you, making it impossible to concentrate.";
+//				desc += "\n\nThe cursed talisman is intently staring into you, making it impossible to concentrate.";
+				desc += "\n\n" + Messages.get(this, "desc_cursed");
 			}
 		}
 
@@ -144,7 +155,8 @@ public class TalismanOfForesight extends Artifact {
 
 			if (smthFound == true && !cursed) {
 				if (warn == 0) {
-					GLog.w("You feel uneasy.");
+//					GLog.w("You feel uneasy.");
+					GLog.w(Messages.get(this, "uneasy"));
 					if (target instanceof Hero) {
 						((Hero) target).interrupt();
 					}
@@ -167,7 +179,8 @@ public class TalismanOfForesight extends Artifact {
 					charge++;
 				} else if (charge >= 100) {
 					partialCharge = 0;
-					GLog.p("Your Talisman is fully charged!");
+//					GLog.p("Your Talisman is fully charged!");
+					GLog.p(Messages.get(this, "full_charge"));
 				}
 			}
 
@@ -179,14 +192,15 @@ public class TalismanOfForesight extends Artifact {
 			exp++;
 			if (exp >= 4 && level < levelCap) {
 				upgrade();
-				GLog.p("Your Talisman grows stronger!");
+//				GLog.p("Your Talisman grows stronger!");
+				GLog.p(Messages.get(this, "levelup"));
 				exp -= 4;
 			}
 		}
 
 		@Override
 		public String toString() {
-			return "Foresight";
+			return Messages.get(this, "name");
 		}
 
 		@Override
@@ -195,6 +209,11 @@ public class TalismanOfForesight extends Artifact {
 				return BuffIndicator.NONE;
 			else
 				return BuffIndicator.FORESIGHT;
+		}
+
+		@Override
+		public String desc() {
+			return Messages.get(this, "desc");
 		}
 	}
 }

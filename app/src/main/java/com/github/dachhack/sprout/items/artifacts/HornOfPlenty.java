@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.buffs.Hunger;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -26,7 +27,8 @@ import com.watabou.noosa.audio.Sample;
 public class HornOfPlenty extends Artifact {
 
 	{
-		name = "Horn of Plenty";
+//		name = "Horn of Plenty";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ARTIFACT_HORN1;
 
 		level = 0;
@@ -43,10 +45,14 @@ public class HornOfPlenty extends Artifact {
 
 	private float energy = 36f;
 
-	public static final String AC_EAT = "EAT";
-	public static final String AC_STORE = "STORE";
+//	public static final String AC_EAT = "EAT";
+//	public static final String AC_STORE = "STORE";
+//
+//	protected String inventoryTitle = "Select a piece of food";
+public static final String AC_EAT = Messages.get(HornOfPlenty.class, "ac_eat");
+	public static final String AC_STORE = Messages.get(HornOfPlenty.class, "ac_store");
+	protected String inventoryTitle = Messages.get(this, "prompt");
 
-	protected String inventoryTitle = "Select a piece of food";
 	protected WndBag.Mode mode = WndBag.Mode.FOOD;
 
 	@Override
@@ -66,9 +72,11 @@ public class HornOfPlenty extends Artifact {
 		if (action.equals(AC_EAT)) {
 
 			if (!isEquipped(hero))
-				GLog.i("You need to equip your horn to do that.");
+//				GLog.i("You need to equip your horn to do that.");
+				GLog.i(Messages.get(this, "equip"));
 			else if (charge == 0)
-				GLog.i("Your horn has no food in it to eat!");
+//				GLog.i("Your horn has no food in it to eat!");
+				GLog.i(Messages.get(this, "no_food"));
 			else {
 				hero.buff(Hunger.class).satisfy(energy * charge);
 
@@ -99,7 +107,8 @@ public class HornOfPlenty extends Artifact {
 				hero.busy();
 				SpellSprite.show(hero, SpellSprite.FOOD);
 				Sample.INSTANCE.play(Assets.SND_EAT);
-				GLog.i("You eat from the horn.");
+//				GLog.i("You eat from the horn.");
+				GLog.i(Messages.get(this, "eat"));
 
 				hero.spend(TIME_TO_EAT);
 
@@ -123,28 +132,39 @@ public class HornOfPlenty extends Artifact {
 
 	@Override
 	public String desc() {
-		String desc = "This horn can't be blown into, but instead seems to fill up with food over time.\n\n";
+//		String desc = "This horn can't be blown into, but instead seems to fill up with food over time.\n\n";
+		String desc = Messages.get(this, "desc");
 
 		if (charge == 0)
-			desc += "The horn is completely empty.";
+//			desc += "The horn is completely empty.";
+			desc += Messages.get(this, "1");
 		else if (charge < 3)
-			desc += "The horn is almost empty, a few small fruits and berries sit in the back.";
+//			desc += "The horn is almost empty, a few small fruits and berries sit in the back.";
+			desc += Messages.get(this, "2");
 		else if (charge < 7)
-			desc += "The horn is partially filled, you can see several fruits & vegetables inside.";
+//			desc += "The horn is partially filled, you can see several fruits & vegetables inside.";
+
+			desc += Messages.get(this, "3");
 		else if (charge < 10)
-			desc += "The horn is getting quite full, several pieces of fresh produce are poking up towards the front.";
+//			desc += "The horn is getting quite full, several pieces of fresh produce are poking up towards the front.";
+			desc += Messages.get(this, "4");
+
 		else
-			desc += "The horn is overflowing! A delicious array of fruit and veg is filling the horn up to its brim.";
+//			desc += "The horn is overflowing! A delicious array of fruit and veg is filling the horn up to its brim.";
+			desc += Messages.get(this, "5");
 
 		if (isEquipped(Dungeon.hero)) {
 			if (!cursed) {
-				desc += "\n\nThe horn rests at your side and is surprisingly lightweight, even with food in it.";
+//				desc += "\n\nThe horn rests at your side and is surprisingly lightweight, even with food in it.";
+				desc += Messages.get(this, "6");
 
 				if (level < 15)
-					desc += " Perhaps there is a way to increase the horn's power by giving it food energy.";
+//					desc += " Perhaps there is a way to increase the horn's power by giving it food energy.";
+					desc += Messages.get(this, "desc_hint");
 			} else {
-				desc += "\n\nThe cursed horn has bound itself to your side, "
-						+ "it seems to be eager to take food rather than produce it.";
+//				desc += "\n\nThe cursed horn has bound itself to your side, "
+//						+ "it seems to be eager to take food rather than produce it.";
+				desc += Messages.get(this, "desc_cursed");
 			}
 		}
 
@@ -176,7 +196,8 @@ public class HornOfPlenty extends Artifact {
 						image = ItemSpriteSheet.ARTIFACT_HORN1;
 
 					if (charge == chargeCap) {
-						GLog.p("Your horn is full of food!");
+//						GLog.p("Your horn is full of food!");
+						GLog.p(Messages.get(HornOfPlenty.class, "full"));
 						partialCharge = 0;
 					}
 
@@ -198,7 +219,8 @@ public class HornOfPlenty extends Artifact {
 			if (item != null && item instanceof Food) {
 				if (item instanceof Blandfruit
 						&& ((Blandfruit) item).potionAttrib == null) {
-					GLog.w("your horn rejects the unprepared blandfruit.");
+//					GLog.w("your horn rejects the unprepared blandfruit.");
+					GLog.w(Messages.get(HornOfPlenty.class, "reject"));
 				} else {
 					Hero hero = Dungeon.hero;
 					hero.sprite.operate(hero.pos);
@@ -208,9 +230,11 @@ public class HornOfPlenty extends Artifact {
 					curItem.upgrade(((Food) item).hornValue);
 					if (curItem.level >= 30) {
 						curItem.level = 30;
-						GLog.p("your horn has consumed all the food it can!");
+//						GLog.p("your horn has consumed all the food it can!");
+						GLog.p(Messages.get(HornOfPlenty.class, "maxlevel"));
 					} else
-						GLog.p("the horn consumes your food offering and grows in strength!");
+//						GLog.p("the horn consumes your food offering and grows in strength!");
+						GLog.p(Messages.get(HornOfPlenty.class, "levelup"));
 					item.detach(hero.belongings.backpack);
 				}
 

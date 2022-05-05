@@ -19,10 +19,12 @@ package com.github.dachhack.sprout.items;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.particles.ShadowParticle;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.audio.Sample;
+import com.watabou.utils.Bundle;
 
 public abstract class EquipableItem extends Item {
 
@@ -107,5 +109,9 @@ public abstract class EquipableItem extends Item {
 
 	final public boolean doUnequip(Hero hero, boolean collect) {
 		return doUnequip(hero, collect, true);
+	}
+
+	@Override
+	public void activate(Char ch){
 	}
 }

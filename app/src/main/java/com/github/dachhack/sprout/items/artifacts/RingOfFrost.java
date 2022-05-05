@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -37,7 +38,8 @@ import com.watabou.utils.Random;
 public class RingOfFrost extends Artifact {
 
 	{
-		name = "Ring of Frost";
+//		name = "Ring of Frost";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.RING_FROST;
 
 		level = 0;
@@ -52,13 +54,16 @@ public class RingOfFrost extends Artifact {
 		defaultAction = AC_BLAST;
 	}
 
-	protected String inventoryTitle = "Select a scroll";
+//	protected String inventoryTitle = "Select a scroll";
+protected String inventoryTitle = Messages.get(RingOfFrost.class, "invtitle");
 	protected WndBag.Mode mode = WndBag.Mode.SCROLL;
 	
 	public static int consumedpts = 0;
 	
-	public static final String AC_BLAST = "BLAST";
-	public static final String AC_ADD = "ADD";
+//	public static final String AC_BLAST = "BLAST";
+//	public static final String AC_ADD = "ADD";
+public static final String AC_BLAST = Messages.get(RingOfFrost.class, "ac_blast");
+	public static final String AC_ADD = Messages.get(RingOfFrost.class, "ac_add");
 
 
 	@Override
@@ -77,15 +82,17 @@ public class RingOfFrost extends Artifact {
 		if (action.equals(AC_BLAST)) {
    
 			if (!isEquipped(hero))
-				GLog.i("You need to equip your ring to do that.");
+//				GLog.i("You need to equip your ring to do that.");
+				GLog.i(Messages.get(RingOfFrost.class, "equip"));
 			else if (charge != chargeCap)
-				GLog.i("Your ring isn't fully charged yet.");
+//				GLog.i("Your ring isn't fully charged yet.");
+				GLog.i(Messages.get(RingOfFrost.class, "no_charge"));
 			else {
 				
 				blast(hero.pos);
 				charge = 0;
 				updateQuickslot();
-				GLog.p("Blast!");
+//				GLog.p("Blast!");
 				CellEmitter.get(hero.pos).start(SnowParticle.FACTORY, 0.2f, 6);
 				
 			}
@@ -133,13 +140,21 @@ public class RingOfFrost extends Artifact {
 
 	@Override
 	public String desc() {
-		String desc = "The ring of frost chills the air with icy power. ";
+//		String desc = "The ring of frost chills the air with icy power. ";
+//		if (isEquipped(Dungeon.hero)) {
+//			desc += "\n\n";
+//			if (charge < 100)
+//				desc += "Its power is restrained for now. ";
+//			else
+//				desc += "It's power is at the brink of being unleashed! ";
+//		}
+		String desc = Messages.get(RingOfFrost.class, "desc");
 		if (isEquipped(Dungeon.hero)) {
 			desc += "\n\n";
 			if (charge < 100)
-				desc += "Its power is restrained for now. ";
+				desc += Messages.get(RingOfFrost.class, "desc_2");
 			else
-				desc += "It's power is at the brink of being unleashed! ";
+				desc += Messages.get(RingOfFrost.class, "desc_3");
 		}
 
 		return desc;
@@ -208,7 +223,7 @@ public class RingOfFrost extends Artifact {
 				hero.sprite.emitter().burst(ElmoParticle.FACTORY, 12);
 
 				item.detach(hero.belongings.backpack);
-				GLog.h("Your ring consumes the power from the scroll! It is at %s points!", consumedpts);
+				GLog.i(Messages.get(RingOfFrost.class, "points", consumedpts));
 				
 				int levelChk = ((level()*level()/2)+1)*10;
 								
@@ -219,10 +234,13 @@ public class RingOfFrost extends Artifact {
 				
 			
 			} else if (item instanceof Scroll && !item.isIdentified()){
-				GLog.w("You're not sure what type of scroll this is yet.");
+//				GLog.w("You're not sure what type of scroll this is yet.");
+				GLog.w(Messages.get(RingOfFrost.class, "notsure"));
 		   } else if (item != null){
-			GLog.w("You are unable to add this scroll to the book.");
-		}
+//			GLog.w("You are unable to add this scroll to the book.");
+				GLog.w(Messages.get(RingOfFrost.class, "unable"));
+
+			}
 	 }
 	};
 	

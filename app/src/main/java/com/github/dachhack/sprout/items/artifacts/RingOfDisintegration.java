@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -34,7 +35,8 @@ import com.watabou.utils.Random;
 public class RingOfDisintegration extends Artifact {
 
 	{
-		name = "Ring of Disintegration";
+//		name = "Ring of Disintegration";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.RING_DISINTEGRATION;
 
 		level = 0;
@@ -49,13 +51,16 @@ public class RingOfDisintegration extends Artifact {
 		defaultAction = AC_BLAST;
 	}
 
-	protected String inventoryTitle = "Select a scroll";
+//	protected String inventoryTitle = "Select a scroll";
+protected String inventoryTitle = Messages.get(RingOfDisintegration.class, "invtitle");
 	protected WndBag.Mode mode = WndBag.Mode.SCROLL;
 	
 	public static int consumedpts = 0;
 	
-	public static final String AC_BLAST = "BLAST";
-	public static final String AC_ADD = "ADD";
+//	public static final String AC_BLAST = "BLAST";
+//	public static final String AC_ADD = "ADD";
+public static final String AC_BLAST = Messages.get(RingOfDisintegration.class, "ac_blast");
+	public static final String AC_ADD = Messages.get(RingOfDisintegration.class, "ac_add");
 
 
 	@Override
@@ -73,16 +78,20 @@ public class RingOfDisintegration extends Artifact {
 		super.execute(hero, action);
 		if (action.equals(AC_BLAST)) {
    
+//			if (!isEquipped(hero))
+//				GLog.i("You need to equip your ring to do that.");
+//			else if (charge != chargeCap)
+//				GLog.i("Your ring isn't fully charged yet.");
 			if (!isEquipped(hero))
-				GLog.i("You need to equip your ring to do that.");
+				GLog.i(Messages.get(this, "equip"));
 			else if (charge != chargeCap)
-				GLog.i("Your ring isn't fully charged yet.");
+				GLog.i(Messages.get(this, "no_charge"));
 			else {
 				
 				blast(hero.pos);
 				charge = 0;
 				updateQuickslot();
-				GLog.p("Blast!");
+
 				
 			}
 			
@@ -206,13 +215,16 @@ public class RingOfDisintegration extends Artifact {
 
 	@Override
 	public String desc() {
-		String desc = "The ring of disintegration vibrates with power. ";
+//		String desc = "The ring of disintegration vibrates with power. ";
+		String desc = Messages.get(this, "desc1");
 		if (isEquipped(Dungeon.hero)) {
 			desc += "\n\n";
 			if (charge < 100)
-				desc += "Its power is restrained for now. ";
+//				desc += "Its power is restrained for now. ";
+				desc += Messages.get(this, "desc2");
 			else
-				desc += "It is glowing with power at the brink of being unleashed! ";
+//				desc += "It is glowing with power at the brink of being unleashed! ";
+				desc += Messages.get(this, "desc3");
 		}
 
 		return desc;
@@ -281,20 +293,24 @@ public class RingOfDisintegration extends Artifact {
 				hero.sprite.emitter().burst(ElmoParticle.FACTORY, 12);
 
 				item.detach(hero.belongings.backpack);
-				GLog.h("Your ring consumes the power from the scroll! It is at %s points!", consumedpts);
+//				GLog.h("Your ring consumes the power from the scroll! It is at %s points!", consumedpts);
+				GLog.i(Messages.get(RingOfDisintegration.class, "points", consumedpts));
 				
 				int levelChk = ((level()*level()/2)+1)*10;
 								
 				if (consumedpts > levelChk && level()<10) {
 					upgrade();
-					GLog.p("Your ring certainly looks better!");
+//					GLog.p("Your ring certainly looks better!");
+					GLog.p(Messages.get(RingOfDisintegration.class, "better"));
 					}
 				
 			
 			} else if (item instanceof Scroll && !item.isIdentified()){
-				GLog.w("You're not sure what type of scroll this is yet.");
+//				GLog.w("You're not sure what type of scroll this is yet.");
+				GLog.w(Messages.get(RingOfDisintegration.class, "notsure"));
 		   } else if (item != null){
-			GLog.w("You are unable to add this item to the ring.");
+//			GLog.w("You are unable to add this item to the ring.");
+				GLog.w(Messages.get(RingOfDisintegration.class, "unable"));
 		}
 	 }
 	};
