@@ -24,14 +24,17 @@ import java.util.Collections;
 public class AlchemistsToolkit extends Artifact {
 
 	{
-		name = "Alchemists Toolkit";
+//		name = "Alchemists Toolkit";
+		name = Messages.get(this, "name");
+
 		image = ItemSpriteSheet.ARTIFACT_TOOLKIT;
 
 		level = 0;
 		levelCap = 10;
 	}
 
-	public static final String AC_BREW = "BREW";
+//	public static final String AC_BREW = "BREW";
+public static final String AC_BREW = Messages.get(AlchemistsToolkit.class, "ac_brew");
 
 	// arrays used in containing potion collections for mix logic.
 	public final ArrayList<String> combination = new ArrayList<String>();
@@ -43,7 +46,8 @@ public class AlchemistsToolkit extends Artifact {
 
 	private int seedsToPotion = 0;
 
-	protected String inventoryTitle = "Select a potion";
+//	protected String inventoryTitle = "Select a potion";
+protected String inventoryTitle = Messages.get(AlchemistsToolkit.class, "invtitle");
 	protected WndBag.Mode mode = WndBag.Mode.POTION;
 
 	public AlchemistsToolkit() {
@@ -104,8 +108,7 @@ public class AlchemistsToolkit extends Artifact {
 
 		if (score == 0) {
 
-			GLog.i("Your mixture is complete, but none of the potions you used seem to react well. "
-					+ "The brew is useless, you throw it away.");
+			GLog.i(Messages.get(this, "0"));
 
 		} else if (score > level) {
 
@@ -116,19 +119,22 @@ public class AlchemistsToolkit extends Artifact {
 			this.numWrongPlace = numWrongPlace;
 
 			if (level == 10) {
-				bstGuess = new ArrayList<String>();
-				GLog.p("The mixture you've created seems perfect, you don't think there is any way to improve it!");
+				bstGuess = new ArrayList<>();
+				GLog.p(Messages.get(this, "10"));
 			} else {
-				GLog.w("you finish mixing potions, "
+				GLog.w(Messages.get(this, "finish")
 						+ brewDesc(numWrongPlace, numRight)
-						+ ". This is your best brew yet!");
+						+ Messages.get(this, "bestbrew"));
 			}
 
 		} else {
 
-			GLog.w("you finish mixing potions, "
+//			GLog.w("you finish mixing potions, "
+//					+ brewDesc(numWrongPlace, numRight)
+//					+ ". This brew isn't as good as the current one, you throw it away.");
+			GLog.w(Messages.get(this, "finish")
 					+ brewDesc(numWrongPlace, numRight)
-					+ ". This brew isn't as good as the current one, you throw it away.");
+					+ Messages.get(this, "throw"));
 		}
 		curGuess = new ArrayList<String>();
 
@@ -137,12 +143,14 @@ public class AlchemistsToolkit extends Artifact {
 	private String brewDesc(int numWrongPlace, int numRight) {
 		String result = "";
 		if (numWrongPlace > 0) {
-			result += numWrongPlace + " reacted well, but in the wrong order";
+//			result += numWrongPlace + " reacted well, but in the wrong order";
+			result += numWrongPlace + Messages.get(this, "bdorder");
 			if (numRight > 0)
-				result += " and ";
+				result += Messages.get(this, "and");
 		}
 		if (numRight > 0) {
-			result += numRight + " reacted perfectly";
+//			result += numRight + " reacted perfectly";
+			result += numRight + Messages.get(this, "perfect");
 		}
 		return result;
 	}
@@ -158,27 +166,37 @@ public class AlchemistsToolkit extends Artifact {
 
 		if (isEquipped(Dungeon.hero))
 			if (cursed)
-				result += "The cursed toolkit has bound itself to your side, and refuses to let you use alchemy.\n\n";
+//				result += "The cursed toolkit has bound itself to your side, and refuses to let you use alchemy.\n\n";
+				result += Messages.get(this, "desc2");
 			else
-				result += "The toolkit rests on your hip, the various tools inside make a light jingling sound as you move.\n\n";
+//				result += "The toolkit rests on your hip, the various tools inside make a light jingling sound as you move.\n\n";
+				result += Messages.get(this, "desc3");
 
 		if (level == 0) {
-			result += "The toolkit seems to be missing a key tool, a catalyst mixture. You'll have to make your own "
-					+ "out of three common potions to get the most out of the toolkit.";
+//			result += "The toolkit seems to be missing a key tool, a catalyst mixture. You'll have to make your own "
+//					+ "out of three common potions to get the most out of the toolkit.";
+			result += Messages.get(this, "desc4");
 		} else if (level == 10) {
-			result += "The mixture you have created seems perfect, and the toolkit is working at maximum efficiency.";
+//			result += "The mixture you have created seems perfect, and the toolkit is working at maximum efficiency.";
+			result += Messages.get(this, "desc5");
 		} else if (!bstGuess.isEmpty()) {
-			result += "Your current best mixture is made from: "
-					+ bstGuess.get(0) + ", " + bstGuess.get(1) + ", "
-					+ bstGuess.get(2) + ", in that order.\n\n";
-			result += "Of the potions in that mix, "
-					+ brewDesc(numWrongPlace, numRight) + ".";
+//			result += "Your current best mixture is made from: "
+//					+ bstGuess.get(0) + ", " + bstGuess.get(1) + ", "
+//					+ bstGuess.get(2) + ", in that order.\n\n";
+//			result += "Of the potions in that mix, "
+//					+ brewDesc(numWrongPlace, numRight) + ".";
+			result += Messages.get(this, "desc6")
+					+ Messages.get(bstGuess.get(0), "name") + ", " + Messages.get(bstGuess.get(1), "name") + ", "
+					+ Messages.get(bstGuess.get(2), "name") + Messages.get(this, "desc7");
+			result += Messages.get(this, "desc8")
+					+ brewDesc(numWrongPlace, numRight) + Messages.get(this, "desc9");
 
 			// would only trigger if an upgraded toolkit was gained through
-			// transmutation or bones.
+			// transmutation or bones.z
 		} else {
-			result += "The toolkit seems to have a catalyst mixture already in it, but it isn't ideal. Unfortunately "
-					+ "you have no idea what's in the mixture.";
+//			result += "The toolkit seems to have a catalyst mixture already in it, but it isn't ideal. Unfortunately "
+//					+ "you have no idea what's in the mixture.";
+			result += Messages.get(this, "desc10");
 		}
 		return result;
 	}
@@ -267,14 +285,18 @@ public class AlchemistsToolkit extends Artifact {
 					if (curGuess.size() == 3) {
 						guessBrew();
 					} else {
-						GLog.i("You mix the " + item.name()
-								+ " into your current brew.");
+//						GLog.i("You mix the " + item.name()
+//								+ " into your current brew.");
+						GLog.i(Messages.get(AlchemistsToolkit.class, "mix1") + item.name()
+								+ Messages.get(AlchemistsToolkit.class, "mix2"));
 					}
 				} else {
-					GLog.w("Your current brew already contains that potion.");
+//					GLog.w("Your current brew already contains that potion.");
+					GLog.w(Messages.get(AlchemistsToolkit.class, "mix3"));
 				}
 			} else if (item != null) {
-				GLog.w("You need to select an identified potion.");
+//				GLog.w("You need to select an identified potion.");
+				GLog.w(Messages.get(AlchemistsToolkit.class, "mix4"));
 			}
 		}
 	};
