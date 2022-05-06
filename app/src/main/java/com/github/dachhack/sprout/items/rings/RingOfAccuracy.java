@@ -17,10 +17,13 @@
  */
 package com.github.dachhack.sprout.items.rings;
 
+import com.github.dachhack.sprout.Messages.Messages;
+
 public class RingOfAccuracy extends Ring {
 
 	{
-		name = "Ring of Accuracy";
+//		name = "Ring of Accuracy";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -29,11 +32,15 @@ public class RingOfAccuracy extends Ring {
 	}
 
 	@Override
-	public String desc() {
-		return isKnown() ? "This ring increases your focus, reducing your enemy's ability to dodge your attacks. "
-				+ "A degraded ring will instead make you easier to evade."
-				: super.desc();
+//	public String desc() {
+//		return isKnown() ? "This ring increases your focus, reducing your enemy's ability to dodge your attacks. "
+//				+ "A degraded ring will instead make you easier to evade."
+//				: super.desc();
+//	}
+public String desc() {
+		return isKnown() ? Messages.get(this, "desc") : super.desc();
 	}
+
 
 	public class Accuracy extends RingBuff {
 	}
