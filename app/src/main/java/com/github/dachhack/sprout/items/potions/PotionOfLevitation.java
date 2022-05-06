@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.potions;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.blobs.Blob;
 import com.github.dachhack.sprout.actors.blobs.ConfusionGas;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -31,10 +32,14 @@ import com.watabou.noosa.audio.Sample;
 public class PotionOfLevitation extends Potion {
 
 	{
-		name = "Potion of Levitation";
+//		name = "Potion of Levitation";
+		name = Messages.get(this, "name");
 	}
 
-	private static final String TXT_PREVENTING = "Strog magic on this level prevents you from levitating.";
+//	private static final String TXT_PREVENTING = "Strog magic on this level prevents you from levitating.";
+private static final String TXT_PREVENTING = Messages.get(PotionOfLevitation.class, "prevent");
+	private static final String TXT_PREVENTING2 = Messages.get(PotionOfLevitation.class, "prevent2");
+
 	
 	@Override
 	public void shatter(int cell) {
@@ -53,14 +58,18 @@ public class PotionOfLevitation extends Potion {
 	public void apply(Hero hero) {
 		setKnown();
 		Buff.affect(hero, Levitation.class, Levitation.DURATION);
-		GLog.i("You float into the air!");
+//		GLog.i("You float into the air!");
+		GLog.i(Messages.get(this, "float"));
 	}
 
 	@Override
+//	public String desc() {
+//		return "Drinking this curious liquid will cause you to hover in the air, "
+//				+ "able to drift effortlessly over traps and pits. Throwing this potion "
+//				+ "will create a cloud of unrefined gas, disorienting anything caught in it.";
+//	}
 	public String desc() {
-		return "Drinking this curious liquid will cause you to hover in the air, "
-				+ "able to drift effortlessly over traps and pits. Throwing this potion "
-				+ "will create a cloud of unrefined gas, disorienting anything caught in it.";
+		return Messages.get(this, "desc");
 	}
 	
 	@Override

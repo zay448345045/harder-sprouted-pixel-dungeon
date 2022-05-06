@@ -17,12 +17,14 @@
  */
 package com.github.dachhack.sprout.items.potions;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.hero.Hero;
 
 public class PotionOfExperience extends Potion {
 
 	{
-		name = "Potion of Experience";
+//		name = "Potion of Experience";
+		name = Messages.get(this, "name");
 
 		bones = true;
 	}
@@ -34,9 +36,12 @@ public class PotionOfExperience extends Potion {
 	}
 
 	@Override
+//	public String desc() {
+//		return "The storied experiences of multitudes of battles reduced to liquid form, "
+//				+ "this draught will instantly raise your experience level.";
+//	}
 	public String desc() {
-		return "The storied experiences of multitudes of battles reduced to liquid form, "
-				+ "this draught will instantly raise your experience level.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

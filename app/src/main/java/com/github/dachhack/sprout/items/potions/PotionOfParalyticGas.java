@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.potions;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.blobs.Blob;
 import com.github.dachhack.sprout.actors.blobs.ParalyticGas;
 import com.github.dachhack.sprout.scenes.GameScene;
@@ -27,7 +28,8 @@ import com.watabou.noosa.audio.Sample;
 public class PotionOfParalyticGas extends Potion {
 
 	{
-		name = "Potion of Paralytic Gas";
+//		name = "Potion of Paralytic Gas";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -42,14 +44,18 @@ public class PotionOfParalyticGas extends Potion {
 
 		GameScene.add(Blob.seed(cell, 1000, ParalyticGas.class));
 	}
-
-	@Override
-	public String desc() {
-		return "Upon exposure to open air, the liquid in this flask will vaporize "
-				+ "into a numbing yellow haze. Anyone who inhales the cloud will be paralyzed "
-				+ "instantly, unable to move for some time after the cloud dissipates. This "
-				+ "item can be thrown at distant enemies to catch them within the effect of the gas.";
-	}
+//
+//	@Override
+//	public String desc() {
+//		return "Upon exposure to open air, the liquid in this flask will vaporize "
+//				+ "into a numbing yellow haze. Anyone who inhales the cloud will be paralyzed "
+//				+ "instantly, unable to move for some time after the cloud dissipates. This "
+//				+ "item can be thrown at distant enemies to catch them within the effect of the gas.";
+//	}
+@Override
+public String desc() {
+	return Messages.get(this, "desc");
+}
 
 	@Override
 	public int price() {

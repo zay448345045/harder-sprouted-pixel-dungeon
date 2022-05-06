@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.potions;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.blobs.Blob;
 import com.github.dachhack.sprout.actors.blobs.ConfusionGas;
 import com.github.dachhack.sprout.actors.blobs.ParalyticGas;
@@ -37,13 +38,16 @@ import com.watabou.utils.PathFinder;
 
 public class PotionOfPurity extends Potion {
 
-	private static final String TXT_FRESHNESS = "You feel uncommon freshness in the air.";
-	private static final String TXT_NO_SMELL = "You've stopped sensing any smells!";
+//	private static final String TXT_FRESHNESS = "You feel uncommon freshness in the air.";
+//	private static final String TXT_NO_SMELL = "You've stopped sensing any smells!";
+private static final String TXT_FRESHNESS = Messages.get(PotionOfPurity.class, "freshness");
+	private static final String TXT_NO_SMELL = Messages.get(PotionOfPurity.class, "no_smell");
 
 	private static final int DISTANCE = 5;
 
 	{
-		name = "Potion of Purification";
+//		name = "Potion of Purification";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -120,11 +124,15 @@ public class PotionOfPurity extends Potion {
 		setKnown();
 	}
 
-	@Override
-	public String desc() {
-		return "This reagent will quickly neutralize all harmful gases in the area of effect. "
-				+ "Drinking it will give you a temporary immunity to such gases.";
-	}
+//	@Override
+//	public String desc() {
+//		return "This reagent will quickly neutralize all harmful gases in the area of effect. "
+//				+ "Drinking it will give you a temporary immunity to such gases.";
+//	}
+@Override
+public String desc() {
+	return Messages.get(this, "desc");
+}
 
 	@Override
 	public int price() {

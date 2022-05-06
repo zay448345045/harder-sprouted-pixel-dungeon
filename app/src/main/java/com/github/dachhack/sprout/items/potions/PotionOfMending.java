@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items.potions;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Bleeding;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Cripple;
@@ -30,7 +31,8 @@ import com.github.dachhack.sprout.utils.GLog;
 public class PotionOfMending extends Potion {
 
 	{
-		name = "Potion of Mending";
+//		name = "Potion of Mending";
+		name = Messages.get(this, "name");
 
 		bones = true;
 	}
@@ -39,7 +41,8 @@ public class PotionOfMending extends Potion {
 	public void apply(Hero hero) {
 		setKnown();
 		heal(Dungeon.hero);
-		GLog.p("Your wounds heal some.");
+//		GLog.p("Your wounds heal some.");
+		GLog.p(Messages.get(this, "effect"));
 	}
 
 	public static void heal(Hero hero) {
@@ -54,8 +57,11 @@ public class PotionOfMending extends Potion {
 	}
 
 	@Override
+//	public String desc() {
+//		return "An elixir that will mend some wounds and cure ailments.";
+//	}
 	public String desc() {
-		return "An elixir that will mend some wounds and cure ailments.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

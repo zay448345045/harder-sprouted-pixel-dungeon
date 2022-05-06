@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.potions;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.blobs.Blob;
 import com.github.dachhack.sprout.actors.blobs.Fire;
@@ -31,7 +32,8 @@ import com.watabou.noosa.audio.Sample;
 public class PotionOfLiquidFlame extends Potion {
 
 	{
-		name = "Potion of Liquid Flame";
+//		name = "Potion of Liquid Flame";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -60,9 +62,12 @@ public class PotionOfLiquidFlame extends Potion {
 	}
 
 	@Override
+//	public String desc() {
+//		return "This flask contains an unstable compound which will burst "
+//				+ "violently into flame upon exposure to open air.";
+//	}
 	public String desc() {
-		return "This flask contains an unstable compound which will burst "
-				+ "violently into flame upon exposure to open air.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override
