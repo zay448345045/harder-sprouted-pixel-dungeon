@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -38,7 +39,8 @@ import com.watabou.utils.Random;
 public class AutoPotion extends MiscEquippable {
 
 	{
-		name = "auto potion";
+//		name = "auto potion";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ARTIFACT;
 
 		unique = true;
@@ -53,8 +55,11 @@ public class AutoPotion extends MiscEquippable {
 	}
 	
     @Override
-	public String cursedDesc(){
-		return "your " + this  + " is cursed";		
+//	public String cursedDesc(){
+//		return "your " + this  + " is cursed";
+//	}
+	public String cursedDesc() {
+		return Messages.get(this, "cursed", this);
 	}
 	
 	@Override
@@ -68,8 +73,11 @@ public class AutoPotion extends MiscEquippable {
 	}
 	
 	@Override
+//	public String desc() {
+//		return "Wearing this charm will automatically use a potion when your life gets low.";
+//	}
 	public String desc() {
-		return "Wearing this charm will automatically use a potion when your life gets low.";
+		return Messages.get(this, "desc");
 	}
 
 

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -38,8 +39,9 @@ import com.watabou.utils.Random;
 public class Spectacles extends MiscEquippable {
 
 	{
-		name = "spectacles";
-		image = ItemSpriteSheet.OTILUKES_SPECS;
+//		name = "spectacles";
+
+		name = Messages.get(this, "name");		image = ItemSpriteSheet.OTILUKES_SPECS;
 
 		unique = true;
 	}
@@ -53,10 +55,14 @@ public class Spectacles extends MiscEquippable {
 	}
 	
     @Override
-	public String cursedDesc(){
-		return "your " + this  + " are cursed";		
+//	public String cursedDesc(){
+//		return "your " + this  + " are cursed";
+//	}
+//
+	public String cursedDesc() {
+		return Messages.get(this, "cursed", this);
 	}
-	
+
 	@Override
 	public boolean isIdentified() {
 		return true;
@@ -68,8 +74,11 @@ public class Spectacles extends MiscEquippable {
 	}
 	
 	@Override
+//	public String desc() {
+//		return "I wonder what these do??? ";
+//	}
 	public String desc() {
-		return "I wonder what these do??? ";
+		return Messages.get(this, "desc");
 	}
 
 
