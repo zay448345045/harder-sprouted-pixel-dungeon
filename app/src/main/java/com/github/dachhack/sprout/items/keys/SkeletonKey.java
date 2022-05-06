@@ -17,13 +17,15 @@
  */
 package com.github.dachhack.sprout.items.keys;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
 public class SkeletonKey extends Key {
 
 	{
-		name = "skeleton key";
+//		name = "skeleton key";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.SKELETON_KEY;
 		stackable = false;
 	}
@@ -43,7 +45,10 @@ public class SkeletonKey extends Key {
 	}
 
 	@Override
+//	public String info() {
+//		return "This key looks serious: its head is shaped like a skull. Probably it can open some serious door.";
+//	}
 	public String info() {
-		return "This key looks serious: its head is shaped like a skull. Probably it can open some serious door.";
+		return Messages.get(this, "desc");
 	}
 }
