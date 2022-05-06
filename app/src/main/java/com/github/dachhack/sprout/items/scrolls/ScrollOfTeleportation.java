@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.scrolls;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
@@ -38,14 +39,21 @@ import com.watabou.noosa.audio.Sample;
 
 public class ScrollOfTeleportation extends Scroll {
 
-	public static final String TXT_TELEPORTED = "In a blink of an eye you were teleported to another location of the level.";
+//	public static final String TXT_TELEPORTED = "In a blink of an eye you were teleported to another location of the level.";
+//
+//	public static final String TXT_NO_TELEPORT = "Strong magic aura of this place prevents you from teleporting!";
+//
+//	public static final String TXT_DEACTIVATE = "This portal appears to be deactivated right now...";
+public static final String TXT_TELEPORTED = Messages.get(ScrollOfTeleportation.class, "tele");
 
-	public static final String TXT_NO_TELEPORT = "Strong magic aura of this place prevents you from teleporting!";
-	
-	public static final String TXT_DEACTIVATE = "This portal appears to be deactivated right now...";
+	public static final String TXT_NO_TELEPORT = Messages.get(ScrollOfTeleportation.class, "no_tele");
+
+	public static final String TXT_DEACTIVATE = Messages.get(ScrollOfTeleportation.class, "deact");
+
 
 	{
-		name = "Scroll of Teleportation";
+//		name = "Scroll of Teleportation";
+		name = Messages.get(this, "name");
 		consumedValue = 10;
 	}
 
@@ -145,11 +153,14 @@ public class ScrollOfTeleportation extends Scroll {
 	}
 
 	@Override
+//	public String desc() {
+//		return "The spell on this parchment instantly transports the reader "
+//				+ "to a random location on the dungeon level. It can be used "
+//				+ "to escape a dangerous situation, but the unlucky reader might "
+//				+ "find himself in an even more dangerous place.";
+//	}
 	public String desc() {
-		return "The spell on this parchment instantly transports the reader "
-				+ "to a random location on the dungeon level. It can be used "
-				+ "to escape a dangerous situation, but the unlucky reader might "
-				+ "find himself in an even more dangerous place.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

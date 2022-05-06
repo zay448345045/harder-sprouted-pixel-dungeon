@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.scrolls;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.blobs.Blob;
 import com.github.dachhack.sprout.actors.blobs.Water;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
@@ -33,10 +34,12 @@ import com.watabou.noosa.audio.Sample;
 
 public class ScrollOfRegrowth extends Scroll {
 
-	private static final String TXT_LAYOUT = "Your senses extend as the vegetation grows around you.";
+//	private static final String TXT_LAYOUT = "Your senses extend as the vegetation grows around you.";
+private static final String TXT_LAYOUT = Messages.get(ScrollOfRegrowth.class, "layout");
 
 	{
-		name = "Scroll of Regrowth";
+//		name = "Scroll of Regrowth";
+		name = Messages.get(this, "name");
 		consumedValue = 15;
 	}
 
@@ -90,9 +93,12 @@ public class ScrollOfRegrowth extends Scroll {
 	}
 
 	@Override
+//	public String desc() {
+//		return "The magic in the scroll feels powerful and inviting."
+//				+ "The dungeon cries out for you to read it. ";
+//	}
 	public String desc() {
-		return "The magic in the scroll feels powerful and inviting."
-				+ "The dungeon cries out for you to read it. ";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items.scrolls;
 
 import com.github.dachhack.sprout.Assets;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.actors.buffs.Weakness;
@@ -31,11 +32,15 @@ import com.watabou.noosa.audio.Sample;
 
 public class ScrollOfRemoveCurse extends Scroll {
 
-	private static final String TXT_PROCCED = "Your pack glows with a cleansing light, and a malevolent energy disperses.";
-	private static final String TXT_NOT_PROCCED = "Your pack glows with a cleansing light, but nothing happens.";
+//	private static final String TXT_PROCCED = "Your pack glows with a cleansing light, and a malevolent energy disperses.";
+//	private static final String TXT_NOT_PROCCED = "Your pack glows with a cleansing light, but nothing happens.";
+private static final String TXT_PROCCED = Messages.get(ScrollOfRemoveCurse.class, "cleansed");
+	private static final String TXT_NOT_PROCCED = Messages.get(ScrollOfRemoveCurse.class, "not_cleansed");
+
 
 	{
-		name = "Scroll of Remove Curse";
+//		name = "Scroll of Remove Curse";
+		name = Messages.get(this, "name");
 		consumedValue = 15;
 	}
 
@@ -67,11 +72,14 @@ public class ScrollOfRemoveCurse extends Scroll {
 	}
 
 	@Override
+//	public String desc() {
+//		return "The incantation on this scroll will instantly strip from "
+//				+ "the reader's weapon, armor, rings and carried items any evil "
+//				+ "enchantments that might prevent the wearer from removing them."
+//				+ "The powerful magic in this scroll also upgrades cursed items.";
+//	}
 	public String desc() {
-		return "The incantation on this scroll will instantly strip from "
-				+ "the reader's weapon, armor, rings and carried items any evil "
-				+ "enchantments that might prevent the wearer from removing them."
-				+ "The powerful magic in this scroll also upgrades cursed items.";
+		return Messages.get(this, "desc");
 	}
 
 	public static boolean uncurse(Hero hero, Item... items) {

@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items.scrolls;
 
 import com.github.dachhack.sprout.Assets;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.SpellSprite;
@@ -28,7 +29,8 @@ import com.watabou.noosa.audio.Sample;
 public class ScrollOfRecharging extends Scroll {
 
 	{
-		name = "Scroll of Recharging";
+//		name = "Scroll of Recharging";
+		name = Messages.get(this, "name");
 		consumedValue = 10;
 	}
 
@@ -42,11 +44,13 @@ public class ScrollOfRecharging extends Scroll {
 		Invisibility.dispel();
 
 		if (count > 0) {
-			GLog.i("a surge of energy courses through your pack, recharging your wand"
-					+ (count > 1 ? "s" : ""));
+//			GLog.i("a surge of energy courses through your pack, recharging your wand"
+//					+ (count > 1 ? "s" : ""));
+			GLog.i(Messages.get(this, "surge"));
 			SpellSprite.show(curUser, SpellSprite.CHARGE);
 		} else {
-			GLog.i("a surge of energy courses through your pack, but nothing happens");
+//			GLog.i("a surge of energy courses through your pack, but nothing happens");
+			GLog.i(Messages.get(this, "surge"));
 		}
 		setKnown();
 
@@ -54,9 +58,12 @@ public class ScrollOfRecharging extends Scroll {
 	}
 
 	@Override
+//	public String desc() {
+//		return "The raw magical power bound up in this parchment will, when released, "
+//				+ "recharge all of the reader's wands to full power.";
+//	}
 	public String desc() {
-		return "The raw magical power bound up in this parchment will, when released, "
-				+ "recharge all of the reader's wands to full power.";
+		return Messages.get(this, "desc");
 	}
 
 	public static void charge(Hero hero) {
