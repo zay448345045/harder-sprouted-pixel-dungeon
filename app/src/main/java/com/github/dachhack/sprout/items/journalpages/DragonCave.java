@@ -18,16 +18,18 @@
 package com.github.dachhack.sprout.items.journalpages;
 
 import com.github.dachhack.sprout.Assets;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
 
 public class DragonCave extends JournalPage {
 
-	private static final String TXT_VALUE = "Dragon Cave";
+
 
 	{
-		name = "journal page dragon cave";
+//		name = "journal page dragon cave";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.JOURNAL_PAGE;
 		room=7;
 
@@ -35,16 +37,11 @@ public class DragonCave extends JournalPage {
 	}
 
 	@Override
-	public boolean doPickUp(Hero hero) {
-         
-		GLog.p("You found a page to Otiluke's Journal!", TXT_VALUE);
-		return super.doPickUp(hero);
-	
-	}
-
-	@Override
+//	public String info() {
+//		return "A loose journal page";
+//	}
 	public String info() {
-		return "A loose journal page";
+		return Messages.get(this, "desc");
 	}
 
 }

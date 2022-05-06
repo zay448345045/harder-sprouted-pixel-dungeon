@@ -17,39 +17,44 @@
  */
 package com.github.dachhack.sprout.items.journalpages;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
 
 public class Sokoban4 extends JournalPage {
 
-	private static final String TXT_VALUE = "Sokoban Puzzles";
+//	private static final String TXT_VALUE = "Sokoban Puzzles";
 
 	{
-		name = "journal page sokoban puzzles";
+//		name = "journal page sokoban puzzles";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.JOURNAL_PAGE;
 		room=4;
 
 		stackable = false;
 	}
 
-	@Override
-	public boolean doPickUp(Hero hero) {
-         
-		GLog.p("You found a page to Otiluke's Journal!", TXT_VALUE);
-		return super.doPickUp(hero);
-	
-	}
+//	@Override
+//	public boolean doPickUp(Hero hero) {
+//
+//		GLog.p("You found a page to Otiluke's Journal!", TXT_VALUE);
+//		return super.doPickUp(hero);
+//
+//	}
 
 	@Override
+//	public String info() {
+//		return "A loose journal page labled Sokoban Puzzles. \n\n"
+//				+"My efforts to stop my pursuers have only slowed their progress.\n\n "
+//				+"I am now remembering the strange spaces where I hid some of my valuables centuries ago. \n\n"
+//				+"The items themselves are no longer of importance to me, "
+//				+"but the source of the odd power generating the sheep eluded me for years. \n\n"
+//				+"Perhaps this power, once illuminated, will be a source of succor. "
+//				+"I fear I have little options left. \n\n"
+//				+"-Otiluke, 1617 LP. ";
+//	}
 	public String info() {
-		return "A loose journal page labled Sokoban Puzzles. \n\n"
-				+"My efforts to stop my pursuers have only slowed their progress.\n\n "
-				+"I am now remembering the strange spaces where I hid some of my valuables centuries ago. \n\n"
-				+"The items themselves are no longer of importance to me, "
-				+"but the source of the odd power generating the sheep eluded me for years. \n\n"
-				+"Perhaps this power, once illuminated, will be a source of succor. "
-				+"I fear I have little options left. \n\n"
-				+"-Otiluke, 1617 LP. ";
+		return Messages.get(this, "desc");
 	}
 }

@@ -17,41 +17,46 @@
  */
 package com.github.dachhack.sprout.items.journalpages;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
 
 public class Town extends JournalPage {
 
-	private static final String TXT_VALUE = "Dolyahaven";
+//	private static final String TXT_VALUE = "Dolyahaven";
 
 	{
-		name = "journal page Dolyahaven";
+//		name = "journal page Dolyahaven";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.JOURNAL_PAGE;
 		room=5;
 
 		stackable = false;
 	}
 
-	@Override
-	public boolean doPickUp(Hero hero) {
-         
-		GLog.p("You found a page to Otiluke's Journal! It reads, %s.", TXT_VALUE);
-		return super.doPickUp(hero);
-	
-	}
+//	@Override
+//	public boolean doPickUp(Hero hero) {
+//
+//		GLog.p("You found a page to Otiluke's Journal! It reads, %s.", TXT_VALUE);
+//		return super.doPickUp(hero);
+//
+//	}
 
 	@Override
+//	public String info() {
+//		return "A loose journal page labled Dolyahaven. \n\n"
+//				+"With what little power I have left I have "
+//				+"momentarily bested Zot and obtained his orb of power. \n\n"
+//				+"Although its power is warded against me, I can transpose "
+//				+"objects from this world into the heart of the orb. \n\n"
+//				+"I hear a rushing of power in the distance... Zot approaches! \n\n"
+//				+"My last act will be to return to Dolyahaven, my birthplace "
+//				+"and seal this script into the orb.\n\n Zot will need to break "
+//				+"the orb and source of his power to follow me. \n\n"
+//				+"-Otiluke, 1999 LP. ";
+//	}
 	public String info() {
-		return "A loose journal page labled Dolyahaven. \n\n"
-				+"With what little power I have left I have "
-				+"momentarily bested Zot and obtained his orb of power. \n\n"
-				+"Although its power is warded against me, I can transpose "
-				+"objects from this world into the heart of the orb. \n\n"
-				+"I hear a rushing of power in the distance... Zot approaches! \n\n"
-				+"My last act will be to return to Dolyahaven, my birthplace "
-				+"and seal this script into the orb.\n\n Zot will need to break "
-				+"the orb and source of his power to follow me. \n\n"
-				+"-Otiluke, 1999 LP. ";
+		return Messages.get(this, "desc");
 	}
 }

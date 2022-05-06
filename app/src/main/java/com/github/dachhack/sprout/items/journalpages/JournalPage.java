@@ -17,31 +17,33 @@
  */
 package com.github.dachhack.sprout.items.journalpages;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
 
 public class JournalPage extends Item {
-
-	private static final String TXT_VALUE = "Journal Page";
+//
+//	private static final String TXT_VALUE = "Journal Page";
 	public int room;
 
 	{
-		name = "journal page";
+//		name = "journal page";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.JOURNAL_PAGE;
 
 		stackable = false;
 		unique = true;
 	}
 		
-	@Override
-	public boolean doPickUp(Hero hero) {
-         
-		GLog.p("You found a page to Otiluke's Journal! It reads, %s.", TXT_VALUE);
-		return super.doPickUp(hero);
-	
-	}
+//	@Override
+//	public boolean doPickUp(Hero hero) {
+//
+//		GLog.p("You found a page to Otiluke's Journal! It reads, %s.", TXT_VALUE);
+//		return super.doPickUp(hero);
+//
+//	}
 
 
 	@Override
@@ -60,7 +62,10 @@ public class JournalPage extends Item {
 	}
 	
 	@Override
+//	public String info() {
+//		return "A loose journal page labled Journal Page.";
+//	}
 	public String info() {
-		return "A loose journal page labled Journal Page.";
+		return Messages.get(this, "desc");
 	}
 }
