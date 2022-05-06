@@ -17,13 +17,16 @@
  */
 package com.github.dachhack.sprout.items.quest;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
 public class DwarfToken extends Item {
 
 	{
-		name = "dwarf token";
+//		name = "dwarf token";
+		name = Messages.get(this, "name");
+
 		image = ItemSpriteSheet.TOKEN;
 
 		stackable = true;
@@ -41,10 +44,14 @@ public class DwarfToken extends Item {
 	}
 
 	@Override
+//	public String info() {
+//		return "Many dwarves and some of their larger creations carry these small pieces of metal of unknown purpose. "
+//				+ "Maybe they are jewelry or maybe some kind of ID. Dwarves are strange folk.";
+//	}
 	public String info() {
-		return "Many dwarves and some of their larger creations carry these small pieces of metal of unknown purpose. "
-				+ "Maybe they are jewelry or maybe some kind of ID. Dwarves are strange folk.";
+		return Messages.get(this, "desc");
 	}
+
 
 	@Override
 	public int price() {

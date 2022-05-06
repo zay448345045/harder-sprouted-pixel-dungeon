@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Hunger;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -43,16 +44,19 @@ import com.watabou.utils.Random;
 
 public class Pickaxe extends Weapon {
 
-	public static final String AC_MINE = "MINE";
+//	public static final String AC_MINE = "MINE";
+public static final String AC_MINE = Messages.get(Pickaxe.class, "ac_mine");
 
 	public static final float TIME_TO_MINE = 2;
 
-	private static final String TXT_NO_VEIN = "There is no dark gold vein near you to mine";
+//	private static final String TXT_NO_VEIN = "There is no dark gold vein near you to mine";
+private static final String TXT_NO_VEIN = Messages.get(Pickaxe.class, "no_vein");
 
 	private static final Glowing BLOODY = new Glowing(0x550000);
 
 	{
-		name = "pickaxe";
+//		name = "pickaxe";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.PICKAXE;
 
 		unique = true;
@@ -153,7 +157,7 @@ public class Pickaxe extends Weapon {
 			updateQuickslot();
 		}
 		if (defender instanceof DwarfKingTomb){
-			
+
 			defender.damage(Random.Int(100,200), this);
 		}
 	}
@@ -179,8 +183,12 @@ public class Pickaxe extends Weapon {
 		return bloodStained ? BLOODY : null;
 	}
 
-	@Override
-	public String info() {
-		return "This is a large and sturdy tool for breaking rocks. Probably it can be used as a weapon.";
-	}
+//	@Override
+//	public String info() {
+//		return "This is a large and sturdy tool for breaking rocks. Probably it can be used as a weapon.";
+//	}
+@Override
+public String info() {
+	return Messages.get(this, "desc");
+}
 }

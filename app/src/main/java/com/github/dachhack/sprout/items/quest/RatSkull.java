@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.quest;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
@@ -25,7 +26,9 @@ import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 public class RatSkull extends Item {
 
 	{
-		name = "giant rat skull";
+//		name = "giant rat skull";
+		name = Messages.get(this, "name");
+
 		image = ItemSpriteSheet.SKULL;
 
 		unique = true;
@@ -41,10 +44,14 @@ public class RatSkull extends Item {
 		return true;
 	}
 
-	@Override
-	public String info() {
-		return "It could be a nice hunting trophy, but it smells too bad to place it on a wall.";
-	}
+//	@Override
+//	public String info() {
+//		return "It could be a nice hunting trophy, but it smells too bad to place it on a wall.";
+//	}
+@Override
+public String info() {
+	return Messages.get(this, "desc");
+}
 
 	@Override
 	public int price() {

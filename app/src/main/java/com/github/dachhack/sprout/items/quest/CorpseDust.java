@@ -17,13 +17,16 @@
  */
 package com.github.dachhack.sprout.items.quest;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
 public class CorpseDust extends Item {
 
 	{
-		name = "corpse dust";
+//		name = "corpse dust";
+		name = Messages.get(this, "name");
+
 		image = ItemSpriteSheet.DUST;
 
 		cursed = true;
@@ -42,9 +45,13 @@ public class CorpseDust extends Item {
 		return true;
 	}
 
-	@Override
-	public String info() {
-		return "The ball of corpse dust doesn't differ outwardly from a regular dust ball. However, "
-				+ "you know somehow that it's better to get rid of it as soon as possible.";
-	}
+//	@Override
+//	public String info() {
+//		return "The ball of corpse dust doesn't differ outwardly from a regular dust ball. However, "
+//				+ "you know somehow that it's better to get rid of it as soon as possible.";
+//	}
+@Override
+public String info() {
+	return Messages.get(this, "desc");
+}
 }
