@@ -29,7 +29,7 @@ import com.github.dachhack.sprout.windows.WndBag;
 public class ScrollOfUpgrade extends InventoryScroll {
 
 	//need fix
-//	private static final String TXT_LOOKS_BETTER = "your %s certainly looks better now";
+	private static final String TXT_LOOKS_BETTER = "your %s certainly looks better now";
 
 	{
 //		name = "Scroll of Upgrade";
