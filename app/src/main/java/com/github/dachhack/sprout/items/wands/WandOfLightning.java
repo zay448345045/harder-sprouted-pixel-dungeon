@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
@@ -46,7 +47,8 @@ import com.watabou.utils.Random;
 public class WandOfLightning extends Wand {
 
 	{
-		name = "Wand of Lightning";
+//		name = "Wand of Lightning";
+		name = Messages.get(this, "name");
 	}
 
 	private ArrayList<Char> affected = new ArrayList<Char>();
@@ -69,7 +71,8 @@ public class WandOfLightning extends Wand {
 		// Everything is processed in fx() method
 		if (!curUser.isAlive()) {
 			Dungeon.fail(Utils.format(ResultDescriptions.ITEM, name));
-			GLog.n("You killed yourself with your own Wand of Lightning...");
+//			GLog.n("You killed yourself with your own Wand of Lightning...");
+			GLog.n(Messages.get(this, "kill"));
 		}
 	}
 
@@ -143,9 +146,12 @@ public class WandOfLightning extends Wand {
 	}
 
 	@Override
+//	public String desc() {
+//		return "This wand conjures forth deadly arcs of electricity, which deal damage "
+//				+ "to several creatures standing close to each other." +
+//				"\n\n" + statsDesc();
+//	}
 	public String desc() {
-		return "This wand conjures forth deadly arcs of electricity, which deal damage "
-				+ "to several creatures standing close to each other." +
-				"\n\n" + statsDesc();
+		return Messages.get(this, "desc", 5 + level(), Math.round(10 + (level() * level() / 4f)));
 	}
 }

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.Blob;
@@ -45,7 +46,8 @@ import com.watabou.utils.Random;
 public class WandOfDisintegration extends Wand {
 
 	{
-		name = "Wand of Disintegration";
+//		name = "Wand of Disintegration";
+		name = Messages.get(this, "name");
 		hitChars = false;
 	}
 
@@ -149,8 +151,9 @@ public class WandOfDisintegration extends Wand {
 
 	@Override
 	public String desc() {
-		return "This wand emits a beam of destructive energy, which pierces all creatures in its way. "
-				+ "The more targets it hits, the more damage it inflicts to each of them." +
-				"\n\n" + statsDesc();
+//		return "This wand emits a beam of destructive energy, which pierces all creatures in its way. "
+//				+ "The more targets it hits, the more damage it inflicts to each of them." +
+//				"\n\n" + statsDesc();
+		return Messages.get(this, "desc") + statsDesc();
 	}
 }

@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.weapon.missiles;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.Blob;
@@ -30,7 +31,8 @@ import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 public class IncendiaryShuriken extends MissileWeapon {
 
 	{
-		name = "incendiary shuriken";
+//		name = "incendiary shuriken";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.SHURIKEN;
 
 		STR = 13;
@@ -69,9 +71,12 @@ public class IncendiaryShuriken extends MissileWeapon {
 	}
 	
 	@Override
+//	public String desc() {
+//		return "Star-shaped pieces of metal with razor-sharp blades do significant damage "
+//				+ "when they hit a target. They can be thrown at very high rate.";
+//	}
 	public String desc() {
-		return "Star-shaped pieces of metal with razor-sharp blades do significant damage "
-				+ "when they hit a target. They can be thrown at very high rate.";
+		return Messages.get(Shuriken.class, "desc");
 	}
 
 	

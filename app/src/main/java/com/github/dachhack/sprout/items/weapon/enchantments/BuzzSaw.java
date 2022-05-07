@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items.weapon.enchantments;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.items.DewVial;
@@ -34,7 +35,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class BuzzSaw extends Weapon.Enchantment {
 
-	private static final String TXT_BUZZ = "Bloodlust %s";
+//	private static final String TXT_BUZZ = "Bloodlust %s";
+private static final String TXT_BUZZ = Messages.get(BuzzSaw.class, "buzz");
 
 
 	private static ItemSprite.Glowing RED = new ItemSprite.Glowing(0x660022);
@@ -88,14 +90,17 @@ public class BuzzSaw extends Weapon.Enchantment {
 				  vial.sip();
 			      dmg = Math.max(1, (attacker.damageRoll()- i)*2);
 			      defender.damage(dmg, this);
-			      GLog.h("Vrrrrrr!");
+//			      GLog.h("Vrrrrrr!");
+				  GLog.h(Messages.get(this, "effect"));
 			  }  else if (vial.checkVol()==0 && saw.turnedOn){
 				  //defender.damage(Random.Int(level), this);
-				  GLog.n("Your chainsaw is out of fuel!");
+//				  GLog.n("Your chainsaw is out of fuel!");
+				  GLog.n(Messages.get(this, "fuel"));
 				  break;
 			  } else if (vial.checkVol()>0 && !saw.turnedOn){
 				  //defender.damage(Random.Int(level), this);
-				  GLog.n("Your chainsaw is not turned on!");
+//				  GLog.n("Your chainsaw is not turned on!");
+				  GLog.n(Messages.get(this, "on"));
 				  break;
 			  } else {
 				  //defender.damage(Random.Int(level), this);

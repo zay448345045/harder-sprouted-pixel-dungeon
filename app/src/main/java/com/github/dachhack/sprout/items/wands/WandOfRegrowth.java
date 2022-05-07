@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.wands;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.Blob;
@@ -39,7 +40,8 @@ import com.watabou.utils.Random;
 public class WandOfRegrowth extends Wand {
 
 	{
-		name = "Wand of Regrowth";
+//		name = "Wand of Regrowth";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -68,7 +70,8 @@ public class WandOfRegrowth extends Wand {
 
 		} else {
 
-			GLog.i("nothing happened");
+//			GLog.i("nothing happened");
+			GLog.i(Messages.get(WandOfPoison.class, "nothing"));
 
 		}
 	}
@@ -98,7 +101,10 @@ public class WandOfRegrowth extends Wand {
 	}
 
 	@Override
+//	public String desc() {
+//		return "\"When life ceases new life always begins to grow... The eternal cycle always remains!\"";
+//	}
 	public String desc() {
-		return "\"When life ceases new life always begins to grow... The eternal cycle always remains!\"";
+		return Messages.get(this, "desc");
 	}
 }

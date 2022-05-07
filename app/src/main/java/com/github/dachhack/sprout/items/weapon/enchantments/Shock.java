@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.effects.Lightning;
@@ -36,7 +37,8 @@ import com.watabou.utils.Random;
 
 public class Shock extends Weapon.Enchantment {
 
-	private static final String TXT_SHOCKING = "Shocking %s";
+//	private static final String TXT_SHOCKING = "Shocking %s";
+private static final String TXT_SHOCKING = Messages.get(Shock.class, "name");
 
 	@Override
 	public boolean proc(RelicMeleeWeapon weapon, Char attacker, Char defender, int damage) {

@@ -17,12 +17,14 @@
  */
 package com.github.dachhack.sprout.items.weapon.melee;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
 public class Mace extends MeleeWeapon {
 
 	{
-		name = "mace";
+//		name = "mace";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.MACE;
 	}
 
@@ -31,7 +33,10 @@ public class Mace extends MeleeWeapon {
 	}
 
 	@Override
+//	public String desc() {
+//		return "The iron head of this weapon inflicts substantial damage.";
+//	}
 	public String desc() {
-		return "The iron head of this weapon inflicts substantial damage.";
+		return Messages.get(this, "desc");
 	}
 }

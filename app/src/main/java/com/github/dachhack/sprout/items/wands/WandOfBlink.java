@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.wands;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Blindness;
@@ -40,9 +41,11 @@ import com.watabou.utils.Random;
 public class WandOfBlink extends Wand {
 
 	{
-		name = "Wand of Blink";
+//		name = "Wand of Blink";
+		name = Messages.get(this, "name");
 	}
-	private static final String TXT_PREVENTING = "Something scrambles the blink magic! ";
+//	private static final String TXT_PREVENTING = "Something scrambles the blink magic! ";
+private static final String TXT_PREVENTING = Messages.get(WandOfBlink.class, "prevent");
 	@Override
 	protected void onZap(int cell) {
 		
@@ -110,8 +113,11 @@ public class WandOfBlink extends Wand {
 	}
 
 	@Override
+//	public String desc() {
+//		return "This wand will allow you to teleport in the chosen direction. "
+//				+ "Creatures and inanimate obstructions will block the teleportation.";
+//	}
 	public String desc() {
-		return "This wand will allow you to teleport in the chosen direction. "
-				+ "Creatures and inanimate obstructions will block the teleportation.";
+		return Messages.get(this, "desc");
 	}
 }

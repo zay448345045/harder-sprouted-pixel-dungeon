@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.weapon.enchantments;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Hunger;
 import com.github.dachhack.sprout.effects.Speck;
@@ -30,7 +31,8 @@ import com.watabou.utils.Random;
 
 public class Nomnom extends Weapon.Enchantment {
 
-	private static final String TXT_NOM = "OMNOM %s";
+//	private static final String TXT_NOM = "OMNOM %s";
+private static final String TXT_NOM = Messages.get(Nomnom.class, "name");
 
 	private static ItemSprite.Glowing RED = new ItemSprite.Glowing(0x660022);
 

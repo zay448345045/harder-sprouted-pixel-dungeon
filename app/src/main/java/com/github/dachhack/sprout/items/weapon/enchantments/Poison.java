@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.weapon.enchantments;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.items.weapon.Weapon;
@@ -27,7 +28,8 @@ import com.watabou.utils.Random;
 
 public class Poison extends Weapon.Enchantment {
 
-	private static final String TXT_VENOMOUS = "Venomous %s";
+//	private static final String TXT_VENOMOUS = "Venomous %s";
+private static final String TXT_VENOMOUS = Messages.get(Poison.class, "name");
 
 	private static ItemSprite.Glowing PURPLE = new ItemSprite.Glowing(0x4400AA);
 

@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items.wands;
 
 import com.github.dachhack.sprout.Assets;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -34,7 +35,8 @@ import com.watabou.utils.Random;
 public class WandOfSlowness extends Wand {
 
 	{
-		name = "Wand of Slowness";
+//		name = "Wand of Slowness";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -48,7 +50,8 @@ public class WandOfSlowness extends Wand {
 
 		} else {
 
-			GLog.i("nothing happened");
+//			GLog.i("nothing happened");
+			GLog.i(Messages.get(WandOfPoison.class, "nothing"));
 
 		}
 	}
@@ -72,8 +75,11 @@ public class WandOfSlowness extends Wand {
 	}
 
 	@Override
+//	public String desc() {
+//		return "This wand will cause a creature to move and attack "
+//				+ "at half its ordinary speed until the effect ends";
+//	}
 	public String desc() {
-		return "This wand will cause a creature to move and attack "
-				+ "at half its ordinary speed until the effect ends";
+		return Messages.get(this, "desc");
 	}
 }

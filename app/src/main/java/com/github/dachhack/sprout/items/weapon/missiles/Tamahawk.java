@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.weapon.missiles;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Bleeding;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -27,7 +28,8 @@ import com.watabou.utils.Random;
 public class Tamahawk extends MissileWeapon {
 
 	{
-		name = "tomahawk";
+//		name = "tomahawk";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.TOMAHAWK;
 
 		STR = 17;
@@ -54,9 +56,12 @@ public class Tamahawk extends MissileWeapon {
 	}
 
 	@Override
+//	public String desc() {
+//		return "This throwing axe is not that heavy, but it still "
+//				+ "requires significant strength to be used effectively.";
+//	}
 	public String desc() {
-		return "This throwing axe is not that heavy, but it still "
-				+ "requires significant strength to be used effectively.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

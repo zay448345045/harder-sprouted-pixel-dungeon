@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.weapon.missiles;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Paralysis;
@@ -29,7 +30,8 @@ public class CurareDart extends MissileWeapon {
 	public static final float DURATION = 3f;
 
 	{
-		name = "curare dart";
+//		name = "curare dart";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.CURARE_DART;
 
 		STR = 14;
@@ -54,9 +56,12 @@ public class CurareDart extends MissileWeapon {
 	}
 
 	@Override
+//	public String desc() {
+//		return "These little evil darts don't do much damage but they can paralyze "
+//				+ "the target leaving it helpless and motionless for some time.";
+//	}
 	public String desc() {
-		return "These little evil darts don't do much damage but they can paralyze "
-				+ "the target leaving it helpless and motionless for some time.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

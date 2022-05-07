@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.weapon.missiles;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.watabou.utils.Random;
@@ -24,7 +25,8 @@ import com.watabou.utils.Random;
 public class Dart extends MissileWeapon {
 
 	{
-		name = "dart";
+//		name = "dart";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.DART;
 
 		MIN = 1;
@@ -46,9 +48,12 @@ public class Dart extends MissileWeapon {
 	}
 
 	@Override
+//	public String desc() {
+//		return "These simple metal spikes are weighted to fly true and "
+//				+ "sting their prey with a flick of the wrist.";
+//	}
 	public String desc() {
-		return "These simple metal spikes are weighted to fly true and "
-				+ "sting their prey with a flick of the wrist.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

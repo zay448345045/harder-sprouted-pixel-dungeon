@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.wands;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -44,7 +45,8 @@ import com.watabou.utils.Random;
 public class WandOfFlock extends Wand {
 
 	{
-		name = "Wand of Flock";
+//		name = "Wand of Flock";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -108,8 +110,10 @@ public class WandOfFlock extends Wand {
 			int spawnCell = Dungeon.level.randomRespawnCellMob();
 			if (spawnCell>0){
 			   FlyingProtector.spawnAt(spawnCell);
-			   GLog.w("How dare you violate the magic of this place! ");
-			   GLog.w("A Protector has spawned to defend the level!");
+//			   GLog.w("How dare you violate the magic of this place! ");
+//			   GLog.w("A Protector has spawned to defend the level!");
+				GLog.w(Messages.get(this, "s1"));
+				GLog.w(Messages.get(this, "s2"));
 			}
 		}
 	}
@@ -121,8 +125,11 @@ public class WandOfFlock extends Wand {
 	}
 
 	@Override
+//	public String desc() {
+//		return "A flick of this wand summons a flock of magic sheep, creating temporary impenetrable obstacle.";
+//	}
 	public String desc() {
-		return "A flick of this wand summons a flock of magic sheep, creating temporary impenetrable obstacle.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override
@@ -133,11 +140,14 @@ public class WandOfFlock extends Wand {
 
 	public static class Sheep extends NPC {
 
-		private static final String[] QUOTES = { "Baa!", "Baa?", "Baa.",
-				"Baa..." };
+//		private static final String[] QUOTES = { "Baa!", "Baa?", "Baa.",
+//				"Baa..." };
+private static final String[] QUOTES = {Messages.get(WandOfFlock.class, "1"), Messages.get(WandOfFlock.class, "2"), Messages.get(WandOfFlock.class, "3"),
+		Messages.get(WandOfFlock.class, "4")};
 
 		{
-			name = "sheep";
+//			name = "sheep";
+			name = Messages.get(WandOfFlock.class, "sname");
 			spriteClass = SheepSprite.class;
 		}
 
@@ -167,9 +177,12 @@ public class WandOfFlock extends Wand {
 
 
 		@Override
+//		public String description() {
+//			return "This is a magic sheep. What's so magical about it? You can't kill it. "
+//					+ "It will stand there until it magcially fades away, all the while chewing cud with a blank stare.";
+//		}
 		public String description() {
-			return "This is a magic sheep. What's so magical about it? You can't kill it. "
-					+ "It will stand there until it magcially fades away, all the while chewing cud with a blank stare.";
+			return Messages.get(WandOfFlock.class, "sdesc");
 		}
 
 		@Override

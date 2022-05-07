@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.wands;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Bleeding;
@@ -55,14 +56,17 @@ import com.watabou.utils.Random;
 
 public class WandOfTelekinesis extends Wand {
 
-	private static final String TXT_YOU_NOW_HAVE = "You have magically transported %s into your backpack";
+//	private static final String TXT_YOU_NOW_HAVE = "You have magically transported %s into your backpack";
+private static final String TXT_YOU_NOW_HAVE = Messages.get(WandOfTelekinesis.class, "have");
 
 	{
-		name = "Wand of Telekinesis";
+//		name = "Wand of Telekinesis";
+		name = Messages.get(this, "name");
 		hitChars = false;
 	}
 	
-	private static final String TXT_PREVENTING = "Something scrambles the telekinesis magic! ";
+//	private static final String TXT_PREVENTING = "Something scrambles the telekinesis magic! ";
+private static final String TXT_PREVENTING = Messages.get(WandOfTelekinesis.class, "prevent");
 
 	@Override
 	public int magicMax(int lvl) {
@@ -241,9 +245,12 @@ public class WandOfTelekinesis extends Wand {
 	}
 
 	@Override
+//	public String desc() {
+//		return "Waves of magic force from this wand will affect all cells on their way triggering traps, trampling high vegetation, "
+//				+ "opening closed doors and closing open ones. They also push back monsters.\n\n"+
+//				statsDesc();
+//	}
 	public String desc() {
-		return "Waves of magic force from this wand will affect all cells on their way triggering traps, trampling high vegetation, "
-				+ "opening closed doors and closing open ones. They also push back monsters.\n\n"+
-				statsDesc();
+		return Messages.get(this, "desc");
 	}
 }

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
@@ -39,6 +40,7 @@ import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.weapon.melee.relic.NeptunusTrident.Flooding;
+import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
 import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon.WeaponBuff;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
@@ -77,7 +79,8 @@ public class JupitersWrath extends MissileWeapon {
 
 
 	{
-		name = "Jupiter's Wrath";
+//		name = "Jupiter's Wrath";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.JUPITERSWRAITH;
 
 		STR = 10;
@@ -161,7 +164,8 @@ public class JupitersWrath extends MissileWeapon {
 		MIN += 2;
 		MAX += 4;
 		if (enchant){
-			GLog.i("Your weapon screams, 'What are you trying to do to me!?' Relic weapons cannot be enchanted.");
+//			GLog.i("Your weapon screams, 'What are you trying to do to me!?' Relic weapons cannot be enchanted.");
+			GLog.i(Messages.get(RelicMeleeWeapon.class, "refuse"));
 		}
 
 		super.upgrade(false);
@@ -220,30 +224,40 @@ public class JupitersWrath extends MissileWeapon {
 
 	@Override
 	public String desc() {
-		String info = "This thrown weapon is the incarnation of Jupiter's wraith.";
+//		String info = "This thrown weapon is the incarnation of Jupiter's wraith.";
+		String info = Messages.get(this, "desc");
 		switch (imbue) {
 		case LIGHT:
-			info += "\n\nIt was balanced to be lighter. ";
+//			info += "\n\nIt was balanced to be lighter. ";
+			info += Messages.get(RelicMeleeWeapon.class, "lighter");
 			break;
 		case HEAVY:
-			info += "\n\nIt was balanced to be heavier. ";
+//			info += "\n\nIt was balanced to be heavier. ";
+			info += Messages.get(RelicMeleeWeapon.class, "heavier");
 			break;
 		case NONE:
 		}
 		if(reinforced){
-			info += "\n\nIt is reinforced. ";
+//			info += "\n\nIt is reinforced. ";
+//		}
+//		if (charge>=chargeCap) {
+//			info  += "\n\nIt is fully charged.";
+//		} else {
+//			info  += "\n\nIt has " +charge+ " out of "+chargeCap+" charges.";
+			info += Messages.get(RelicMeleeWeapon.class, "reinforced");
 		}
-		if (charge>=chargeCap) {
-			info  += "\n\nIt is fully charged.";
+		if (charge >= chargeCap) {
+			info += Messages.get(RelicMeleeWeapon.class, "fullcharge");
 		} else {
-			info  += "\n\nIt has " +charge+ " out of "+chargeCap+" charges.";
+			info += Messages.get(RelicMeleeWeapon.class, "charge",charge, chargeCap);
 		}
 		
 		return info;
 	}
 	
 
-	public static final String AC_EXPLODE = "EXPLODE";
+//	public static final String AC_EXPLODE = "EXPLODE";
+public static final String AC_EXPLODE = Messages.get(JupitersWrath.class, "ac_explode");
 
 	@Override
 	public ArrayList<String> actions(Hero hero) {
@@ -257,7 +271,9 @@ public class JupitersWrath extends MissileWeapon {
 	public void execute(Hero hero, String action) {
 		if (action.equals(AC_EXPLODE)) {
 			int distance=distance();
-			GLog.w("Unleash the wraith!");
+//			GLog.w("Unleash the wraith!");
+			GLog.w(Messages.get(this, "effect"));
+
 			explode(distance, hero);		
 		} else
 			super.execute(hero, action);
@@ -319,7 +335,8 @@ public class JupitersWrath extends MissileWeapon {
 			if (charge < chargeCap) {
 				charge+=1;
 				if (charge >= chargeCap) {
-					GLog.w("Jupiter's Wraith is filled with energy!");
+//					GLog.w("Jupiter's Wraith is filled with energy!");
+					GLog.p(Messages.get(JupitersWrath.class, "ready"));
 				}
 				updateQuickslot();
 			}
@@ -329,8 +346,11 @@ public class JupitersWrath extends MissileWeapon {
 
 
 		@Override
+//		public String toString() {
+//			return "Explode";
+//		}
 		public String toString() {
-			return "Explode";
+			return Messages.get(JupitersWrath.class, "buffname");
 		}
 
 		@Override

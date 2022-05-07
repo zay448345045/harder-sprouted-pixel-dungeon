@@ -18,8 +18,10 @@
 package com.github.dachhack.sprout.items.weapon.melee;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.weapon.Weapon;
+import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.utils.Random;
 
@@ -86,21 +88,29 @@ public class MeleeWeapon extends Weapon {
 
 		StringBuilder info = new StringBuilder(desc());
 
-		String quality = levelKnown && level != 0 ? (level > 0 ? "upgraded"
-				: "degraded") : "";
+//		String quality = levelKnown && level != 0 ? (level > 0 ? "upgraded"
+//				: "degraded") : "";
+		String quality = levelKnown && level != 0 ? (level > 0 ? Messages.get(MeleeWeapon.class, "upgraded")
+				: Messages.get(this, "degraded")) : "";
 		info.append(p);
-		info.append("This " + name + " is " + Utils.indefinite(quality));
-		info.append(" tier-" + tier + " melee weapon. ");
+//		info.append("This " + name + " is " + Utils.indefinite(quality));
+//		info.append(" tier-" + tier + " melee weapon. ");
+		info.append(Messages.get(MeleeWeapon.class, "this", name, quality, tier));
 		float multiplier = (imbue == Imbue.LIGHT ? 0.75f : (imbue == Imbue.HEAVY ? 1.5f : 1));
 		if (levelKnown) {
-			info.append("It will deal " + Math.round(MIN*multiplier) + "-" + Math.round(MAX*multiplier) + " damage per hit and require " + STR + " strength to use. ");
+//			info.append("It will deal " + Math.round(MIN*multiplier) + "-" + Math.round(MAX*multiplier) + " damage per hit and require " + STR + " strength to use. ");
+			info.append(Messages.get(RelicMeleeWeapon.class, "avgdmg",
+					Math.round((MIN) * (imbue == Imbue.LIGHT ? 0.75f : (imbue == Imbue.HEAVY ? 1.5f : 1))), Math.round((MAX) * (imbue == Imbue.LIGHT ? 0.75f : (imbue == Imbue.HEAVY ? 1.5f : 1)))));
 			if (STR > Dungeon.hero.STR()) {
-				info.append("This weapon is too heavy for you. ");
+//				info.append("This weapon is too heavy for you. ");
+				info.append(Messages.get(RelicMeleeWeapon.class, "typicaldmg", min(), max(), typicalSTR()));
 			}
 		} else {
-			info.append("It will typically deal " + Math.round(min()*multiplier) + "-" + Math.round(max()*multiplier) + " damage per hit and usually require " + typicalSTR() + " strength to use.");
+//			info.append("It will typically deal " + Math.round(min()*multiplier) + "-" + Math.round(max()*multiplier) + " damage per hit and usually require " + typicalSTR() + " strength to use.");
+			info.append(Messages.get(RelicMeleeWeapon.class, "pheavy"));
 			if (typicalSTR() > Dungeon.hero.STR()) {
-				info.append("Probably this weapon is too heavy for you. ");
+//				info.append("Probably this weapon is too heavy for you. ");
+				info.append(Messages.get(this,"ptw"));
 			}
 		}
 

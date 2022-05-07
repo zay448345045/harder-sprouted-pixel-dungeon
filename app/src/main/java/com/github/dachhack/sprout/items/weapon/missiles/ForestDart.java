@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.weapon.missiles;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.mobs.Assassin;
 import com.github.dachhack.sprout.actors.mobs.Bat;
@@ -43,7 +44,8 @@ import com.watabou.utils.Random;
 public class ForestDart extends MissileWeapon {
 
 	{
-		name = "forest dart";
+//		name = "forest dart";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.DART;
 
 		MIN = 4;
@@ -91,9 +93,13 @@ public class ForestDart extends MissileWeapon {
 	}
 
 	@Override
+//	public String desc() {
+//		return "These legendary hunting darts are specifically designed  "
+//				+ "to put down beasts that linger in the shadows.";
+//	}
+
 	public String desc() {
-		return "These legendary hunting darts are specifically designed  "
-				+ "to put down beasts that linger in the shadows.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

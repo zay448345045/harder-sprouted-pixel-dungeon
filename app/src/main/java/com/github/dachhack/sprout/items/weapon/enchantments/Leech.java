@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.weapon.enchantments;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.items.weapon.Weapon;
@@ -28,7 +29,8 @@ import com.watabou.utils.Random;
 
 public class Leech extends Weapon.Enchantment {
 
-	private static final String TXT_VAMPIRIC = "Vampiric %s";
+//	private static final String TXT_VAMPIRIC = "Vampiric %s";
+private static final String TXT_VAMPIRIC = Messages.get(Leech.class, "name");
 
 	private static ItemSprite.Glowing RED = new ItemSprite.Glowing(0x660022);
 

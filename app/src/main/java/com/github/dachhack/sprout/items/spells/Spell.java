@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.spells;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
@@ -28,7 +29,8 @@ public class Spell extends Item {
 	public int spellnum;
 
 	{
-		name = "spell page";
+//		name = "spell page";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.JOURNAL_PAGE;
 
 		stackable = false;
@@ -37,8 +39,11 @@ public class Spell extends Item {
 		
 	@Override
 	public boolean doPickUp(Hero hero) {
-         
-		GLog.p("You found a spell page! It reads, %s.", TXT_VALUE);
+//
+//		GLog.p("You found a spell page! It reads, %s.", TXT_VALUE);
+
+		GLog.p(Messages.get(this,"found_page", TXT_VALUE));
+
 		return super.doPickUp(hero);
 	
 	}
@@ -60,7 +65,10 @@ public class Spell extends Item {
 	}
 	
 	@Override
+//	public String info() {
+//		return "A Spell Page.";
+//	}
 	public String info() {
-		return "A Spell Page.";
+		return Messages.get(this,"info");
 	}
 }

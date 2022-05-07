@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.weapon.enchantments;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Burning;
@@ -29,7 +30,8 @@ import com.watabou.utils.Random;
 
 public class Fire extends Weapon.Enchantment {
 
-	private static final String TXT_BLAZING = "Blazing %s";
+//	private static final String TXT_BLAZING = "Blazing %s";
+private static final String TXT_BLAZING = Messages.get(Fire.class, "name");
 
 	private static ItemSprite.Glowing ORANGE = new ItemSprite.Glowing(0xFF4400);
 

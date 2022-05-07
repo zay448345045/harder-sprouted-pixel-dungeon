@@ -17,12 +17,14 @@
  */
 package com.github.dachhack.sprout.items.weapon.melee;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
 public class Glaive extends MeleeWeapon {
 
 	{
-		name = "glaive";
+//		name = "glaive";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.GLAIVE;
 	}
 
@@ -31,7 +33,10 @@ public class Glaive extends MeleeWeapon {
 	}
 
 	@Override
+//	public String desc() {
+//		return "A polearm consisting of a sword blade on the end of a pole.";
+//	}
 	public String desc() {
-		return "A polearm consisting of a sword blade on the end of a pole.";
+		return Messages.get(this, "desc");
 	}
 }

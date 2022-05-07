@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.wands;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Amok;
@@ -36,7 +37,8 @@ import com.watabou.utils.Random;
 public class WandOfAmok extends Wand {
 
 	{
-		name = "Wand of Amok";
+//		name = "Wand of Amok";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -52,7 +54,8 @@ public class WandOfAmok extends Wand {
 
 		} else {
 
-			GLog.i("nothing happened");
+//			GLog.i("nothing happened");
+			GLog.i(Messages.get(this, "effect"));
 
 		}
 	}
@@ -73,8 +76,11 @@ public class WandOfAmok extends Wand {
 	}
 
 	@Override
+//	public String desc() {
+//		return "The purple light from this wand will make the target run amok "
+//				+ "attacking random creatures in its vicinity.";
+//	}
 	public String desc() {
-		return "The purple light from this wand will make the target run amok "
-				+ "attacking random creatures in its vicinity.";
+		return Messages.get(this, "desc");
 	}
 }

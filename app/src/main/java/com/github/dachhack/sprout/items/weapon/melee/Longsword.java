@@ -17,12 +17,14 @@
  */
 package com.github.dachhack.sprout.items.weapon.melee;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
 public class Longsword extends MeleeWeapon {
 
 	{
-		name = "longsword";
+//		name = "longsword";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.LONG_SWORD;
 	}
 
@@ -31,7 +33,10 @@ public class Longsword extends MeleeWeapon {
 	}
 
 	@Override
+//	public String desc() {
+//		return "This towering blade inflicts heavy damage by investing its heft into every cut.";
+//	}
 	public String desc() {
-		return "This towering blade inflicts heavy damage by investing its heft into every cut.";
+		return Messages.get(this, "desc");
 	}
 }

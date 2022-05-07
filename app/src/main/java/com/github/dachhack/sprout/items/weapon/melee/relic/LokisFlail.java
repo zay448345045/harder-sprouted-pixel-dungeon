@@ -22,6 +22,7 @@ import java.util.HashSet;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
@@ -40,6 +41,7 @@ import com.github.dachhack.sprout.actors.mobs.Yog;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.artifacts.Artifact.ArtifactBuff;
 import com.github.dachhack.sprout.items.artifacts.CloakOfShadows.cloakStealth;
+import com.github.dachhack.sprout.items.potions.PotionOfInvisibility;
 import com.github.dachhack.sprout.items.rings.Ring.RingBuff;
 import com.github.dachhack.sprout.items.weapon.Weapon;
 import com.github.dachhack.sprout.levels.Level;
@@ -64,7 +66,8 @@ public class LokisFlail extends RelicMeleeWeapon {
 
 	
 	{
-		name = "Loki's Flail";
+//		name = "Loki's Flail";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.LOKISFLAIL;
 
 		level = 0;
@@ -81,9 +84,12 @@ public class LokisFlail extends RelicMeleeWeapon {
 		
   }
 	
-	private static final String TXT_PREVENTING = "Enemies on this level are all blind. No point using invisibility.";
-		
-	public static final String AC_STEALTH = "STEALTH";
+//	private static final String TXT_PREVENTING = "Enemies on this level are all blind. No point using invisibility.";
+//
+//	public static final String AC_STEALTH = "STEALTH";
+private static final String TXT_PREVENTING = Messages.get(LokisFlail.class, "prevent");
+
+	public static final String AC_STEALTH = Messages.get(LokisFlail.class, "ac_stealth");
 
 	@Override
 	public ArrayList<String> actions(Hero hero) {
@@ -102,10 +108,12 @@ public class LokisFlail extends RelicMeleeWeapon {
 				return;
 
 			}
-			GLog.w("Your sword fills you with restoring energy!");
+//			GLog.w("Your sword fills you with restoring energy!");
+			GLog.p(Messages.get(this, "ready"));
 			charge = 0;
 			Buff.affect(hero, Invisibility.class, Invisibility.DURATION + level);
-			GLog.i("You see your hands turn invisible!");
+//			GLog.i("You see your hands turn invisible!");
+			GLog.i(Messages.get(PotionOfInvisibility.class, "invisible"));
 			Sample.INSTANCE.play(Assets.SND_MELD);
 
 		} else {
@@ -121,7 +129,8 @@ public class LokisFlail extends RelicMeleeWeapon {
 			if (charge < chargeCap) {
 				charge+=1;
 				if (charge >= chargeCap) {
-					GLog.w("Your flail is fully charged.");					
+//					GLog.w("Your flail is fully charged.");
+					GLog.p(Messages.get(LokisFlail.class, "buffdesc"));
 				}
 				updateQuickslot();
 			}
@@ -130,8 +139,11 @@ public class LokisFlail extends RelicMeleeWeapon {
 		}
 		
 		@Override
+//		public String toString() {
+//			return "StealthCounter";
+//		}
 		public String toString() {
-			return "StealthCounter";
+			return Messages.get(LokisFlail.class, "buffname");
 		}
 
 		@Override

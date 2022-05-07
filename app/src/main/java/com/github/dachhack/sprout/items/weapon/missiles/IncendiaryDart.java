@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.weapon.missiles;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.Blob;
@@ -32,7 +33,8 @@ import com.watabou.utils.Random;
 public class IncendiaryDart extends MissileWeapon {
 
 	{
-		name = "incendiary dart";
+//		name = "incendiary dart";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.INCENDIARY_DART;
 
 		STR = 12;
@@ -68,9 +70,12 @@ public class IncendiaryDart extends MissileWeapon {
 	}
 
 	@Override
+//	public String desc() {
+//		return "The spike on each of these darts is designed to pin it to its target "
+//				+ "while the unstable compounds strapped to its length burst into brilliant flames.";
+//	}
 	public String desc() {
-		return "The spike on each of these darts is designed to pin it to its target "
-				+ "while the unstable compounds strapped to its length burst into brilliant flames.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

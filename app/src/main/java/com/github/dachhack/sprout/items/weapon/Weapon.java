@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items.weapon;
 
 import com.github.dachhack.sprout.Badges;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -58,7 +59,8 @@ public class Weapon extends KindOfWeapon {
 
 	private static final int HITS_TO_KNOW = 20;
 
-	private static final String TXT_IDENTIFY = "You are now familiar enough with your %s to identify it. It is %s.";
+//	private static final String TXT_IDENTIFY = "You are now familiar enough with your %s to identify it. It is %s.";
+private static final String TXT_IDENTIFY = Messages.get(Weapon.class, "identify");
 	//private static final String TXT_INCOMPATIBLE = "Interaction of different types of magic has negated the enchantment on this weapon!";
 	private static final String TXT_TO_STRING = "%s :%d";
 

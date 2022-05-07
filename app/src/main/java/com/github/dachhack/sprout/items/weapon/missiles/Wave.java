@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.weapon.missiles;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.watabou.utils.Random;
@@ -24,7 +25,9 @@ import com.watabou.utils.Random;
 public class Wave extends MissileWeapon {
 
 	{
-		name = "wave";
+//		name = "wave";
+		name = Messages.get(this, "name");
+
 		image = ItemSpriteSheet.WAVE;
 
 		MIN = 1;
@@ -46,8 +49,11 @@ public class Wave extends MissileWeapon {
 	}
 
 	@Override
+//	public String desc() {
+//		return "A wave of energy or something";
+//	}
 	public String desc() {
-		return "A wave of energy or something";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

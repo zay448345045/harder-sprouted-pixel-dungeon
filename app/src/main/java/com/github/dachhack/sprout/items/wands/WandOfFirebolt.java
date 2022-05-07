@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.wands;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
@@ -49,7 +50,8 @@ import com.watabou.utils.Random;
 public class WandOfFirebolt extends Wand {
 
 	{
-		name = "Wand of Firebolt";
+//		name = "Wand of Firebolt";
+		name = Messages.get(this, "name");
 	}
 
 	public int magicMin(int lvl){
@@ -97,7 +99,8 @@ public class WandOfFirebolt extends Wand {
 
 			if (ch == curUser && !ch.isAlive()) {
 				Dungeon.fail(Utils.format(ResultDescriptions.ITEM, name));
-				GLog.n("You killed yourself with your own Wand of Firebolt...");
+//				GLog.n("You killed yourself with your own Wand of Firebolt...");
+				GLog.n(Messages.get(this, "kill"));
 			}
 		}
 	}
@@ -105,7 +108,8 @@ public class WandOfFirebolt extends Wand {
 	public void backfire(int damage){
 		wandEmpty();
 		explode(curUser.pos, damage);
-		GLog.n("Your wand of firebolt backfires!");
+//		GLog.n("Your wand of firebolt backfires!");
+		GLog.n(Messages.get(this,"you_wand"));
 	}
 	
 	public void explode(int cell, int damage) {
@@ -203,10 +207,13 @@ public class WandOfFirebolt extends Wand {
 	}
 
 	@Override
+//	public String desc() {
+//		return "This wand unleashes bursts of magical fire. It will ignite "
+//				+ "flammable terrain, and will damage and burn a creature it hits."
+//				+ "It is very unstable at higher levels. Use with caution." +
+//				"\n\n" + statsDesc();
+//	}
 	public String desc() {
-		return "This wand unleashes bursts of magical fire. It will ignite "
-				+ "flammable terrain, and will damage and burn a creature it hits."
-				+ "It is very unstable at higher levels. Use with caution." +
-				"\n\n" + statsDesc();
+		return Messages.get(this, "desc", 1, 8 + level() * level());
 	}
 }

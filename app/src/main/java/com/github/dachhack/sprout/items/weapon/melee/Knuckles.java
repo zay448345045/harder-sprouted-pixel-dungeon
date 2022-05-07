@@ -17,12 +17,14 @@
  */
 package com.github.dachhack.sprout.items.weapon.melee;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
 public class Knuckles extends MeleeWeapon {
 
 	{
-		name = "knuckleduster";
+//		name = "knuckleduster";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.KNUCKLEDUSTER;
 	}
 
@@ -31,7 +33,10 @@ public class Knuckles extends MeleeWeapon {
 	}
 
 	@Override
+//	public String desc() {
+//		return "A piece of iron shaped to fit around the knuckles.";
+//	}
 	public String desc() {
-		return "A piece of iron shaped to fit around the knuckles.";
+		return Messages.get(this, "desc");
 	}
 }
