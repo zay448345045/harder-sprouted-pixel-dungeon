@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.windows;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -32,6 +33,7 @@ import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.ui.RedButton;
+import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
@@ -41,12 +43,16 @@ public class WndPetHaste extends Window {
 	
 	//if people don't get it after this, I quit. I just quit.
 
-	private static final String TXT_MESSAGE = "You can apply a portion of your haste buff to your pet. " +
-			                                  "This will limit your haste level to 10 but your pet will be able to keep up with you while you move. "
-			                                  +"You can unhaste your pet by removing your ring of haste. "; 
-	
-	private static final String TXT_YES = "Haste my Pet";
-	private static final String TXT_NO = "No Thanks";
+//	private static final String TXT_MESSAGE = "You can apply a portion of your haste buff to your pet. " +
+//			                                  "This will limit your haste level to 10 but your pet will be able to keep up with you while you move. "
+//			                                  +"You can unhaste your pet by removing your ring of haste. ";
+//
+//	private static final String TXT_YES = "Haste my Pet";
+//	private static final String TXT_NO = "No Thanks";
+private static final String TXT_MESSAGE = Messages.get(WndPetHaste.class, "msg");
+
+	private static final String TXT_YES = Messages.get(WndPetHaste.class, "yes");
+	private static final String TXT_NO = Messages.get(WndPetHaste.class, "no");
 
 
 	private static final int WIDTH = 120;
@@ -63,22 +69,22 @@ public class WndPetHaste extends Window {
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 
-		BitmapTextMultiline message = PixelScene
-				.createMultiline(TXT_MESSAGE, 6);
-		message.maxWidth = WIDTH;
-		message.measure();
-		message.y = titlebar.bottom() + GAP;
+		RenderedTextMultiline message = PixelScene
+				.renderMultiline(TXT_MESSAGE, 6);
+		message.maxWidth(WIDTH);
+		message.setPos(0, titlebar.bottom() + GAP);
 		add(message);
 
 		RedButton btnBattle = new RedButton(TXT_YES) {
 			@Override
 			protected void onClick() {
 				Dungeon.petHasteLevel=ring.level;
-				GLog.p("Your "+pet.name+" is moving faster!");
+//				GLog.p("Your "+pet.name+" is moving faster!");
+				GLog.p(Messages.get(WndPetHaste.class, "faster", pet.name));
 				hide();
 			}
 		};
-		btnBattle.setRect(0, message.y + message.height() + GAP, WIDTH,
+		btnBattle.setRect(0, message.top() + message.height() + GAP, WIDTH,
 				BTN_HEIGHT);
 		add(btnBattle);
 

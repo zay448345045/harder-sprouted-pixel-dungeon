@@ -20,11 +20,13 @@ package com.github.dachhack.sprout.windows;
 import java.util.ArrayList;
 
 import com.github.dachhack.sprout.Challenges;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.ui.CheckBox;
 import com.github.dachhack.sprout.ui.Window;
 import com.watabou.noosa.BitmapText;
+import com.watabou.noosa.RenderedText;
 
 public class WndChallenges extends Window {
 
@@ -33,7 +35,7 @@ public class WndChallenges extends Window {
 	private static final int BTN_HEIGHT = 18;
 	private static final int GAP = 1;
 
-	private static final String TITLE = "Challenges";
+	private static final String TITLE = Messages.get(WndChallenges.class,"title");
 
 	private boolean editable;
 	private ArrayList<CheckBox> boxes;
@@ -44,11 +46,11 @@ public class WndChallenges extends Window {
 
 		this.editable = editable;
 
-		BitmapText title = PixelScene.createText(TITLE, 9);
+		RenderedText title = PixelScene.renderText(Messages.get(this, "title"), 9);
 		title.hardlight(TITLE_COLOR);
-		title.measure();
 		title.x = PixelScene.align(camera, (WIDTH - title.width()) / 2);
 		title.y = PixelScene.align(camera, (TTL_HEIGHT - title.height()) / 2);
+		PixelScene.align(title);
 		add(title);
 
 		boxes = new ArrayList<CheckBox>();

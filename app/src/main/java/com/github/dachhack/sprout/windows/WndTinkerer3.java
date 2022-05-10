@@ -24,11 +24,13 @@ import com.github.dachhack.sprout.items.Mushroom;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.ui.RedButton;
+import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndTinkerer3 extends Window {
+	//need fix
 
 	private static final String TXT_MESSAGE = "Thanks for the Toadstool Mushroom! "
 			                                  +"I can upgrade your dew vial for you. "
@@ -51,11 +53,10 @@ public class WndTinkerer3 extends Window {
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 
-		BitmapTextMultiline message = PixelScene
-				.createMultiline(TXT_MESSAGE, 6);
-		message.maxWidth = WIDTH;
-		message.measure();
-		message.y = titlebar.bottom() + GAP;
+		RenderedTextMultiline message = PixelScene
+				.renderMultiline("", 6);
+		message.maxWidth(WIDTH);
+		message.setPos(0, titlebar.bottom() + GAP);
 		add(message);
 
 		RedButton btnUpgrade = new RedButton(TXT_UPGRADE) {
@@ -64,7 +65,7 @@ public class WndTinkerer3 extends Window {
 				selectUpgrade(tinkerer);
 			}
 		};
-		btnUpgrade.setRect(0, message.y + message.height() + GAP, WIDTH,
+		btnUpgrade.setRect(0, message.top() + message.height() + GAP, WIDTH,
 				BTN_HEIGHT);
 		add(btnUpgrade);
 

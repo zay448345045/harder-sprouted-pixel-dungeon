@@ -20,6 +20,7 @@ package com.github.dachhack.sprout.items;
 import java.util.ArrayList;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -38,8 +39,8 @@ import com.watabou.utils.Bundle;
 
 public class BookOfDead extends Item {
 
-	private static final String TXT_PREVENTING = "Strong magic aura of this place prevents you from reading the book!";
-	private static final String TXT_PREVENTING2 = "Darkness blurs your eyes as you try to read! You will need to find the exit pedestal with the SanChikarah...";
+	private static final String TXT_PREVENTING = Messages.get(BookOfDead.class,"strong");
+	private static final String TXT_PREVENTING2 = Messages.get(BookOfDead.class,"darkness");;
 	
 	public static final float TIME_TO_USE = 1;
 
@@ -50,7 +51,8 @@ public class BookOfDead extends Item {
 	private int returnPos;
 
 	{
-		name = "book of the dead";
+//		name = "book of the dead";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.BOOKOFDEAD;
 
 		unique = true;
@@ -228,8 +230,11 @@ public class BookOfDead extends Item {
 	}
 	
 	@Override
+//	public String info() {
+//		return "This black book seems to dim the light around it. You feel a horrific presence ";
+//	}
 	public String info() {
-		return "This black book seems to dim the light around it. You feel a horrific presence ";
+		return Messages.get(this, "desc");
 	}
 
 }

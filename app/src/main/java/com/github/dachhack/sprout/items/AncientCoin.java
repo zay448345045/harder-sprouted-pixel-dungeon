@@ -20,6 +20,7 @@ package com.github.dachhack.sprout.items;
 import java.util.ArrayList;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -37,20 +38,25 @@ import com.watabou.utils.Bundle;
 
 public class AncientCoin extends Item {
 	
-	private static final String TXT_PREVENTING = "Strong magic aura of this place prevents you from using the coin!";
-	private static final String TXT_PREVENTING2 = "You need to kill the bandit king first!";
+//	private static final String TXT_PREVENTING = "Strong magic aura of this place prevents you from using the coin!";
+private static final String TXT_PREVENTING = Messages.get(Item.class,"strong");
+//	private static final String TXT_PREVENTING2 = "You need to kill the bandit king first!";
+private static final String TXT_PREVENTING2 = Messages.get(Item.class,"you_kill");
 		
 	
 	public static final float TIME_TO_USE = 1;
 
-	public static final String AC_PORT = "OPEN PORTAL";
+//	public static final String AC_PORT = "OPEN PORTAL";
+public static final String AC_PORT = 	Messages.get(Item.class,"open");
+
 
 	private int specialLevel = 40;
 	private int returnDepth = -1;
 	private int returnPos;
 
 	{
-		name = "ancient coin";
+//		name = "ancient coin";
+		name = Messages.get(this, "coin");
 		image = ItemSpriteSheet.COIN;
 
 		stackable = false;
@@ -229,6 +235,6 @@ public class AncientCoin extends Item {
 
 	@Override
 	public String info() {
-		return "This coin radiates an eerie power. Reading the inscription will take you to the Bandit King. ";
+		return Messages.get(this, "desc");
 	}
 }

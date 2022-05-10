@@ -20,10 +20,12 @@ package com.github.dachhack.sprout.windows;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.effects.BadgeBanner;
 import com.github.dachhack.sprout.scenes.PixelScene;
+import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.BitmapTextMultiline;
 import com.watabou.noosa.Image;
+import com.watabou.noosa.RenderedText;
 
 public class WndBadge extends Window {
 
@@ -38,10 +40,9 @@ public class WndBadge extends Window {
 		icon.scale.set(2);
 		add(icon);
 
-		BitmapTextMultiline info = PixelScene.createMultiline(
+		RenderedTextMultiline info = PixelScene.renderMultiline(
 				badge.description, 8);
 		info.maxWidth = WIDTH - MARGIN * 2;
-		info.measure();
 
 		float w = Math.max(icon.width(), info.width()) + MARGIN * 2;
 
@@ -49,7 +50,7 @@ public class WndBadge extends Window {
 		icon.y = MARGIN;
 
 		float pos = icon.y + icon.height() + MARGIN;
-		for (BitmapText line : info.new LineSplitter().split()) {
+		for (RenderedText line : info.new LineSplitter().split()) {
 			line.measure();
 			line.x = PixelScene.align((w - line.width()) / 2);
 			line.y = PixelScene.align(pos);

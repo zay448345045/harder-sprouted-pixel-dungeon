@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.windows;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Mob;
@@ -29,6 +30,7 @@ import com.github.dachhack.sprout.scenes.InterlevelScene;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.ui.RedButton;
+import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.BitmapTextMultiline;
@@ -52,14 +54,19 @@ public class WndOtiluke extends Window {
 		super();
 		
 		String[] roomNames = new String[PAGES];
-		roomNames[0] = "Safe Room";
-		roomNames[1] = "Sokoban 1";
-		roomNames[2] = "Sokoban 2";
-		roomNames[3] = "Sokoban 3";
-		roomNames[4] = "Sokoban 4";
-		roomNames[5] = "Dolyahaven";
-		roomNames[6] = "Vault";
-		roomNames[7] = "Dragon Cave";
+//		roomNames[0] = "Safe Room";
+//		roomNames[1] = "Sokoban 1";
+//		roomNames[2] = "Sokoban 2";
+//		roomNames[3] = "Sokoban 3";
+//		roomNames[4] = "Sokoban 4";
+		roomNames[0] = Messages.get(WndOtiluke.class, "s0");
+		roomNames[1] = Messages.get(WndOtiluke.class, "s1");
+		roomNames[2] = Messages.get(WndOtiluke.class, "s2");
+		roomNames[3] = Messages.get(WndOtiluke.class, "s3");
+		roomNames[4] = Messages.get(WndOtiluke.class, "s4");
+		roomNames[5] = Messages.get(WndOtiluke.class, "dol");
+		roomNames[6] = Messages.get(WndOtiluke.class, "vau");
+		roomNames[7] = Messages.get(WndOtiluke.class, "dragon");
 	
 		IconTitle titlebar = new IconTitle();
 		titlebar.icon(new ItemSprite(item.image(), null));
@@ -67,10 +74,9 @@ public class WndOtiluke extends Window {
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 
-		BitmapTextMultiline message = PixelScene.createMultiline(TXT_FARAWELL, 6);
-		message.maxWidth = WIDTH;
-		message.measure();
-		message.y = titlebar.bottom() + GAP;
+		RenderedTextMultiline message = PixelScene.renderMultiline(Messages.get(WndOtiluke.class, "where"), 6);
+		message.maxWidth(WIDTH);
+		message.setPos(0, 0);
 		add(message);
 		
 		//add each button
@@ -90,7 +96,7 @@ public class WndOtiluke extends Window {
 				item.charge=0;
 			}
 		};
-		btn1.setRect(0, message.y + message.height() + GAP, WIDTH, BTN_HEIGHT);
+		btn1.setRect(0, message.top() + message.height() + GAP, WIDTH, BTN_HEIGHT);
 		add(btn1);
 		resize(WIDTH, (int) btn1.bottom());
 		}

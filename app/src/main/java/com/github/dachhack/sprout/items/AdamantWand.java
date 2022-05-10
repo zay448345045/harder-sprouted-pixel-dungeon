@@ -17,12 +17,14 @@
  */
 package com.github.dachhack.sprout.items;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
 public class AdamantWand extends Item {
 
 		{
-		name = "adamantite wand";
+//		name = "adamantite wand";
+			name = Messages.get(this, "name");
 		image = ItemSpriteSheet.WAND_ADAMANT;
 
 		unique = true;
@@ -42,8 +44,11 @@ public class AdamantWand extends Item {
 
 	
 	@Override
+//	public String info() {
+//		return "A rod of dull ore in the shape of a wand.";
+//	}
+//
 	public String info() {
-		return "A rod of dull ore in the shape of a wand.";
+		return Messages.get(this, "desc");
 	}
-	
 }

@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.windows;
 
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
 import com.github.dachhack.sprout.scenes.PixelScene;
+import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.watabou.noosa.BitmapTextMultiline;
 
@@ -32,11 +33,9 @@ public class WndMessage extends Window {
 
 		super();
 
-		BitmapTextMultiline info = PixelScene.createMultiline(text, 6);
-		info.maxWidth = (ShatteredPixelDungeon.landscape() ? WIDTH_L : WIDTH_P)
-				- MARGIN * 2;
-		info.measure();
-		info.x = info.y = MARGIN;
+		RenderedTextMultiline info = PixelScene.renderMultiline(text, 6);
+		info.maxWidth((ShatteredPixelDungeon.landscape() ? WIDTH_L : WIDTH_P) - MARGIN * 2);
+		info.setPos(MARGIN, MARGIN);
 		add(info);
 
 		resize((int) info.width() + MARGIN * 2, (int) info.height() + MARGIN

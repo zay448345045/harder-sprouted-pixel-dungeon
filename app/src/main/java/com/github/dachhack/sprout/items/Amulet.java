@@ -22,6 +22,7 @@ import java.util.ArrayList;
 
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.scenes.AmuletScene;
@@ -30,10 +31,12 @@ import com.watabou.noosa.Game;
 
 public class Amulet extends Item {
 
-	private static final String AC_END = "END THE GAME";
+//	private static final String AC_END = "END THE GAME";
+private static final String AC_END = Messages.get(Amulet.class, "ac_end");
 
 	{
-		name = "Amulet of Yendor";
+//		name = "Amulet of Yendor";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.AMULET;
 
 		unique = true;
@@ -99,8 +102,11 @@ public class Amulet extends Item {
 	}
 
 	@Override
+//	public String info() {
+//		return "The Amulet of Yendor is the most powerful known artifact of unknown origin. It is said that the amulet "
+//				+ "is able to fulfil any wish if its owner's will-power is strong enough to \"persuade\" it to do it.";
+//	}
 	public String info() {
-		return "The Amulet of Yendor is the most powerful known artifact of unknown origin. It is said that the amulet "
-				+ "is able to fulfil any wish if its owner's will-power is strong enough to \"persuade\" it to do it.";
+		return Messages.get(this, "desc");
 	}
 }

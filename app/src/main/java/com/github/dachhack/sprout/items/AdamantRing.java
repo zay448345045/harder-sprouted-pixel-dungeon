@@ -17,12 +17,14 @@
  */
 package com.github.dachhack.sprout.items;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
 public class AdamantRing extends Item {
 
 		{
-		name = "adamantite ring";
+//		name = "adamantite ring";
+			name = Messages.get(this, "name");
 		image = ItemSpriteSheet.RING_ADAMANT;
 
 		unique = true;
@@ -42,8 +44,11 @@ public class AdamantRing extends Item {
 
 	
 	@Override
+//	public String info() {
+//		return "An old ring missing its jewel. It's made of a dull grey ore.";
+//	}
+//
 	public String info() {
-		return "An old ring missing its jewel. It's made of a dull grey ore.";
+		return Messages.get(this, "desc");
 	}
-	
 }

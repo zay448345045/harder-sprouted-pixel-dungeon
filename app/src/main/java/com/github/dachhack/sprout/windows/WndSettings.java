@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.windows;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.ui.CheckBox;
@@ -32,24 +33,29 @@ public class WndSettings extends Window {
 
 	private static final String TXT_ZOOM_IN = "+";
 	private static final String TXT_ZOOM_OUT = "-";
-	private static final String TXT_ZOOM_DEFAULT = "Default Zoom";
+	private static final String TXT_ZOOM_DEFAULT = Messages.get(WndSettings.class, "default");
 
-	private static final String TXT_SCALE_UP = "Scale up UI";
-	private static final String TXT_IMMERSIVE = "Immersive mode";
+//	private static final String TXT_SCALE_UP = "Scale up UI";
+private static final String TXT_SCALE_UP = Messages.get(WndSettings.class, "scale_");
+//	private static final String TXT_IMMERSIVE = "Immersive mode";
+private static final String TXT_IMMERSIVE = Messages.get(WndSettings.class, "immersive");
 
-	private static final String TXT_MUSIC = "Music";
+//	private static final String TXT_MUSIC = "Music";
+private static final String TXT_MUSIC = Messages.get(WndSettings.class, "music");
 
-	private static final String TXT_SOUND = "Sound FX";
+//	private static final String TXT_SOUND = "Sound FX";
+private static final String TXT_SOUND = Messages.get(WndSettings.class, "sound");
 
-	private static final String TXT_BRIGHTNESS = "Brightness";
+	private static final String TXT_BRIGHTNESS = Messages.get(WndSettings.class, "brigh");
 
-	private static final String TXT_QUICKSLOT = "Second QuickSlot";
+	private static final String TXT_QUICKSLOT = Messages.get(WndSettings.class, "quickslot");
 
-	private static final String TXT_SWITCH_PORT = "Switch to portrait";
-	private static final String TXT_SWITCH_LAND = "Switch to landscape";
+//	private static final String TXT_SWITCH_PORT = "Switch to portrait";
+//	private static final String TXT_SWITCH_LAND = "Switch to landscape";
+private static final String TXT_SWITCH_PORT = Messages.get(WndSettings.class, "port");
+	private static final String TXT_SWITCH_LAND = Messages.get(WndSettings.class, "land");
 
-	private static final String TXT_TEST_MODE = "Test Mode";
-
+	private static final String TXT_TEST_MODE = Messages.get(WndSettings.class, "test_mode");
 	private static final int WIDTH = 112;
 	private static final int BTN_HEIGHT = 20;
 	private static final int GAP = 2;

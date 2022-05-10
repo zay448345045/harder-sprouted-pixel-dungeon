@@ -20,6 +20,7 @@ package com.github.dachhack.sprout.items;
 import java.util.ArrayList;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -37,20 +38,20 @@ import com.watabou.utils.Bundle;
 
 public class Bone extends Item {
 	
-	private static final String TXT_PREVENTING = "Strong magic aura of this place prevents you from using the bone!";
-	private static final String TXT_PREVENTING2 = "You need to kill the skeleton king first!";
+	private static final String TXT_PREVENTING = Messages.get(Bone.class,"strong");
+	private static final String TXT_PREVENTING2 = Messages.get(Bone.class,"you_need");
 		
 	
 	public static final float TIME_TO_USE = 1;
 
-	public static final String AC_PORT = "OPEN PORTAL";
+	public static final String AC_PORT = Messages.get(Bone.class,"open");
 
 	private int specialLevel = 37;
 	private int returnDepth = -1;
 	private int returnPos;
 
 	{
-		name = "inscribed bone";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.BONE;
 
 		stackable = false;
@@ -227,6 +228,6 @@ public class Bone extends Item {
 
 	@Override
 	public String info() {
-		return "This bone radiates an eerie power. Reading the inscription will open the portal to the Skeleton King. ";
+		return Messages.get(this, "this_bone");
 	}
 }
