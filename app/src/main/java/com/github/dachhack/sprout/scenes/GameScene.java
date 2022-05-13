@@ -17,9 +17,6 @@
  */
 package com.github.dachhack.sprout.scenes;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
@@ -81,6 +78,9 @@ import com.watabou.noosa.audio.Music;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.particles.Emitter;
 import com.watabou.utils.Random;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class GameScene extends PixelScene {
 
@@ -256,23 +256,23 @@ public class GameScene extends PixelScene {
 			GLog.i(TXT_WELCOME, Dungeon.depth);
 		Sample.INSTANCE.play(Assets.SND_DESCEND);
 		switch (Dungeon.level.feeling) {
-		case CHASM:
-			GLog.w(TXT_CHASM);
-			break;
-		case WATER:
-			GLog.w(TXT_WATER);
-			break;
-		case GRASS:
-			GLog.w(TXT_GRASS);
-			break;
-		case DARK:
-			GLog.w(TXT_DARK);
-			break;
-		default:
+			case CHASM:
+				GLog.w(TXT_CHASM);
+				break;
+			case WATER:
+				GLog.w(TXT_WATER);
+				break;
+			case GRASS:
+				GLog.w(TXT_GRASS);
+				break;
+			case DARK:
+				GLog.w(TXT_DARK);
+				break;
+			default:
 		}
 		if (Dungeon.level instanceof RegularLevel
 				&& ((RegularLevel) Dungeon.level).secretDoors > Random
-						.IntRange(3, 4)) {
+				.IntRange(3, 4)) {
 			GLog.w(TXT_SECRETS);
 		}
 
@@ -283,63 +283,64 @@ public class GameScene extends PixelScene {
 		add(busy);
 
 		switch (InterlevelScene.mode) {
-		case RESURRECT:
-			WandOfBlink.appear(Dungeon.hero, Dungeon.level.entrance);
-			new Flare(8, 32).color(0xFFFF66, true).show(hero, 2f);
-			break;
-		case RETURN:
-			WandOfBlink.appear(Dungeon.hero, Dungeon.hero.pos);
-			break;
-		case FALL:
-			Chasm.heroLand();
-			break;
-		case PALANTIR:
-			WndStory.showChapter(WndStory.ID_ZOT);
-			break;
-		case DESCEND:
-			switch (Dungeon.depth) {
-			case 1:
-				WndStory.showChapter(WndStory.ID_SEWERS);
+			case RESURRECT:
+				WandOfBlink.appear(Dungeon.hero, Dungeon.level.entrance);
+				new Flare(8, 32).color(0xFFFF66, true).show(hero, 2f);
 				break;
-			case 6:
-				WndStory.showChapter(WndStory.ID_PRISON);
+			case RETURN:
+				WandOfBlink.appear(Dungeon.hero, Dungeon.hero.pos);
 				break;
-			case 11:
-				WndStory.showChapter(WndStory.ID_CAVES);
+			case FALL:
+				Chasm.heroLand();
 				break;
-			case 16:
-				WndStory.showChapter(WndStory.ID_METROPOLIS);
+			case PALANTIR:
+				WndStory.showChapter(WndStory.ID_ZOT);
 				break;
-			}
-			
-		case JOURNAL:
-			switch (Dungeon.depth) {
-			case 50:
-				WndStory.showChapter(WndStory.ID_SAFELEVEL);
+			case DESCEND:
+				switch (Dungeon.depth) {
+					case 1:
+						WndStory.showChapter(WndStory.ID_SEWERS);
+						break;
+					case 6:
+						WndStory.showChapter(WndStory.ID_PRISON);
+						break;
+					case 11:
+						WndStory.showChapter(WndStory.ID_CAVES);
+						break;
+					case 16:
+						WndStory.showChapter(WndStory.ID_METROPOLIS);
+						break;
+				}
+
+			case JOURNAL:
+				switch (Dungeon.depth) {
+					case 50:
+						WndStory.showChapter(WndStory.ID_SAFELEVEL);
+						break;
+					case 51:
+						WndStory.showChapter(WndStory.ID_SOKOBAN1);
+						break;
+					case 52:
+						WndStory.showChapter(WndStory.ID_SOKOBAN2);
+						break;
+					case 53:
+						WndStory.showChapter(WndStory.ID_SOKOBAN3);
+						break;
+					case 54:
+						WndStory.showChapter(WndStory.ID_SOKOBAN4);
+						break;
+					case 55:
+						WndStory.showChapter(WndStory.ID_TOWN);
+						break;
+				}
+
+				if (Dungeon.hero.isAlive() && Dungeon.depth != 22) {
+					Badges.validateNoKilling();
+				}
 				break;
-			case 51:
-				WndStory.showChapter(WndStory.ID_SOKOBAN1);
-				break;
-			case 52:
-				WndStory.showChapter(WndStory.ID_SOKOBAN2);
-				break;
-			case 53:
-				WndStory.showChapter(WndStory.ID_SOKOBAN3);
-				break;
-			case 54:
-				WndStory.showChapter(WndStory.ID_SOKOBAN4);
-				break;
-			case 55:
-				WndStory.showChapter(WndStory.ID_TOWN);
-				break;
-			}
-			
-			if (Dungeon.hero.isAlive() && Dungeon.depth != 22) {
-				Badges.validateNoKilling();
-			}
-			break;
-		default:
+			default:
 		}
+		//Camera.main.panTo(hero.center(), 2.5f);
 
 		ArrayList<Item> dropped = Dungeon.droppedItems.get(Dungeon.depth);
 		if (dropped != null) {
@@ -606,13 +607,13 @@ public class GameScene extends PixelScene {
 
 	public static void updateMap() {
 		if (scene != null) {
-			scene.tiles.updated.set(0, 0, Level.getWidth(), Level.HEIGHT);
+			scene.tiles.updateMap();
 		}
 	}
 
 	public static void updateMap(int cell) {
 		if (scene != null) {
-			scene.tiles.updated.union(cell % Level.getWidth(), cell / Level.getWidth());
+			scene.tiles.updateMapCell(cell);
 		}
 	}
 
@@ -663,7 +664,7 @@ public class GameScene extends PixelScene {
 			Sample.INSTANCE.play(Assets.SND_BOSS);
 		}
 	}
-	
+
 	public static void levelCleared() {
 		if (Dungeon.hero.isAlive()) {
 			Banner levelCleared = new Banner(
@@ -695,16 +696,16 @@ public class GameScene extends PixelScene {
 	}
 
 	public static WndBag selectItem(WndBag.Listener listener, WndBag.Mode mode,
-			String title) {
+									String title) {
 		cancelCellSelector();
 
 		WndBag wnd = mode == Mode.SEED ? WndBag.getBag(SeedPouch.class,
 				listener, mode, title) : mode == Mode.SCROLL ? WndBag.getBag(
 				ScrollHolder.class, listener, mode, title)
 				: mode == Mode.POTION ? WndBag.getBag(PotionBandolier.class,
-						listener, mode, title) : mode == Mode.WAND ? WndBag
-						.getBag(WandHolster.class, listener, mode, title)
-						: WndBag.lastBag(listener, mode, title);
+				listener, mode, title) : mode == Mode.WAND ? WndBag
+				.getBag(WandHolster.class, listener, mode, title)
+				: WndBag.lastBag(listener, mode, title);
 
 		scene.add(wnd);
 

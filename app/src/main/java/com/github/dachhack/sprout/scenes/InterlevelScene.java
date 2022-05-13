@@ -17,9 +17,6 @@
  */
 package com.github.dachhack.sprout.scenes;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Statistics;
@@ -28,7 +25,6 @@ import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.actors.mobs.pets.PET;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.levels.Level;
-import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.windows.WndError;
 import com.github.dachhack.sprout.windows.WndStory;
 import com.watabou.noosa.BitmapText;
@@ -37,6 +33,9 @@ import com.watabou.noosa.Game;
 import com.watabou.noosa.audio.Music;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class InterlevelScene extends PixelScene {
 
@@ -74,7 +73,7 @@ public class InterlevelScene extends PixelScene {
 	public static enum Mode {
 		DESCEND, ASCEND, CONTINUE, RESURRECT, RETURN, FALL, PORT1, PORT2, PORT3, PORT4,
 		PORTSEWERS, PORTPRISON, PORTCAVES, PORTCITY, PORTHALLS, PORTCRAB, PORTTENGU, PORTCOIN, PORTBONE, RETURNSAVE,
-		JOURNAL, SOKOBANFAIL, PALANTIR
+		JOURNAL, SOKOBANFAIL, PALANTIR,NONE
 	};
 
 	public static Mode mode;

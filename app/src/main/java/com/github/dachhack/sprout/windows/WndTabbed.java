@@ -17,17 +17,17 @@
  */
 package com.github.dachhack.sprout.windows;
 
-import java.util.ArrayList;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Chrome;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.ui.Window;
-import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.NinePatch;
+import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.ui.Button;
+
+import java.util.ArrayList;
 
 public class WndTabbed extends Window {
 
@@ -187,21 +187,21 @@ public class WndTabbed extends Window {
 
 	protected class LabeledTab extends Tab {
 
-		private BitmapText btLabel;
+		private RenderedText btLabel;
 
 		public LabeledTab(String label) {
 
 			super();
 
 			btLabel.text(label);
-			btLabel.measure();
+			//btLabel.measure();
 		}
 
 		@Override
 		protected void createChildren() {
 			super.createChildren();
 
-			btLabel = PixelScene.createText(9);
+			btLabel = PixelScene.renderText(9);
 			add(btLabel);
 		}
 

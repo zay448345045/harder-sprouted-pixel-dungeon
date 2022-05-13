@@ -17,9 +17,6 @@
  */
 package com.github.dachhack.sprout.ui;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import com.github.dachhack.sprout.Chrome;
 import com.github.dachhack.sprout.effects.ShadowBox;
 import com.github.dachhack.sprout.scenes.PixelScene;
@@ -32,6 +29,9 @@ import com.watabou.noosa.Group;
 import com.watabou.noosa.NinePatch;
 import com.watabou.noosa.TouchArea;
 import com.watabou.utils.Signal;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Window extends Group implements Signal.Listener<Key> {
 
@@ -128,7 +128,7 @@ public class Window extends Group implements Signal.Listener<Key> {
 	}
 
 	@Override
-	public void onSignal(Key key) {
+	public boolean onSignal(Key key) {
 		if (key.pressed) {
 			switch (key.code) {
 			case Keys.BACK:
@@ -141,6 +141,7 @@ public class Window extends Group implements Signal.Listener<Key> {
 		}
 
 		Keys.event.cancel();
+		return false;
 	}
 
 	public void onBackPressed() {

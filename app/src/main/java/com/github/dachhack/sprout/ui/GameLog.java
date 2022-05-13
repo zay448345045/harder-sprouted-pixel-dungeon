@@ -30,6 +30,10 @@ public class GameLog extends Component implements Signal.Listener<String> {
 
 	private static final int MAX_MESSAGES = 3;
 
+	public static void wipe() {
+		entries.clear();
+	}
+
 	private static final Pattern PUNCTUATION = Pattern.compile(".*[.,;?! ]$");
 
 	private RenderedTextMultiline lastEntry;
@@ -65,7 +69,7 @@ public class GameLog extends Component implements Signal.Listener<String> {
 	}
 	private static final int MAX_LINES = 3;
 	@Override
-	public synchronized void onSignal(String text) {
+	public synchronized boolean onSignal(String text) {
 
 		if (length != entries.size()) {
 			clear();
@@ -127,6 +131,7 @@ public class GameLog extends Component implements Signal.Listener<String> {
 		}
 
 		layout();
+		return false;
 	}
 
 	@Override

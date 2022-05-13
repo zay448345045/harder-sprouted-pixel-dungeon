@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+;
+
 public class RenderedTextMultiline extends Component {
 
     public int maxWidth = Integer.MAX_VALUE;
@@ -96,7 +98,7 @@ public class RenderedTextMultiline extends Component {
                     } else {
                         word = new RenderedText(str, size);
                     }
-                    if (highlighting) word.hardlight(0xFFFF44);
+                    if (highlighting) word.hardlight(0x00ffff);
                     else if (color != -1) word.hardlight(color);
 
                     if (str.endsWith(UNDERSCORE)) highlighting = !highlighting;

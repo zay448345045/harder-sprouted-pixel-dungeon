@@ -17,8 +17,6 @@
  */
 package com.github.dachhack.sprout.scenes;
 
-import javax.microedition.khronos.opengles.GL10;
-
 import android.opengl.GLES20;
 
 import com.github.dachhack.sprout.Assets;
@@ -38,6 +36,8 @@ import com.watabou.noosa.Scene;
 import com.watabou.noosa.Visual;
 import com.watabou.noosa.ui.Component;
 import com.watabou.utils.BitmapCache;
+
+import javax.microedition.khronos.opengles.GL10;
 
 public class PixelScene extends Scene {
 	//SPD MOVE

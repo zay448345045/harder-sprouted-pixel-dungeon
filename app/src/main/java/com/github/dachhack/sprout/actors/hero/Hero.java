@@ -17,10 +17,6 @@
  */
 package com.github.dachhack.sprout.actors.hero;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Bones;
@@ -99,9 +95,7 @@ import com.github.dachhack.sprout.items.rings.RingOfTenacity;
 import com.github.dachhack.sprout.items.scrolls.Scroll;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicMapping;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicalInfusion;
-import com.github.dachhack.sprout.items.scrolls.ScrollOfRecharging;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
-import com.github.dachhack.sprout.items.wands.Wand;
 import com.github.dachhack.sprout.items.weapon.melee.MeleeWeapon;
 import com.github.dachhack.sprout.items.weapon.missiles.Boomerang;
 import com.github.dachhack.sprout.items.weapon.missiles.JupitersWrath;
@@ -134,8 +128,12 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
-public class Hero extends Char {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 
+public class Hero extends Char {
+	public boolean resting = false;
 	private static final String TXT_LEAVE = "One does not simply leave Pixel Dungeon.";
 	private static final String TXT_OVERFILL = "HP Overfilled by %s";
 

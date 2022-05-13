@@ -17,8 +17,6 @@
  */
 package com.github.dachhack.sprout.scenes;
 
-import javax.microedition.khronos.opengles.GL10;
-
 import android.opengl.GLES20;
 
 import com.github.dachhack.sprout.Assets;
@@ -39,12 +37,14 @@ import com.watabou.noosa.audio.Music;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.ui.Button;
 
+import javax.microedition.khronos.opengles.GL10;
+
 public class TitleScene extends PixelScene {
 
-	//private static final String TXT_PLAY = "Play";
-	//private static final String TXT_HIGHSCORES = "Rankings";
-	//private static final String TXT_BADGES = "Badges";
-	//private static final String TXT_ABOUT = "About";
+	private static final String TXT_PLAY = "进入地牢";
+	private static final String TXT_HIGHSCORES = "排行榜";
+	private static final String TXT_BADGES = "徽章";
+	private static final String TXT_ABOUT = "关于";
 
 	@Override
 	public void create() {
@@ -77,7 +77,7 @@ public class TitleScene extends PixelScene {
 
 		float height = title.height
 				+ (ShatteredPixelDungeon.landscape() ? DashboardItem.SIZE
-						: DashboardItem.SIZE * 2);
+				: DashboardItem.SIZE * 2);
 
 		title.x = (w - title.width()) / 2;
 		title.y = (h - height) / 2;
@@ -173,13 +173,17 @@ public class TitleScene extends PixelScene {
 		btnPrefs.setPos(0, 0);
 		add(btnPrefs);
 
-		ExitButton btnExit = new ExitButton();
-		btnExit.setPos(w - btnExit.width(), 0);
-		add(btnExit);
+		//Button btnReset = new ResetButton();
+		//btnReset.setPos(48, 1);
+		//add(btnReset);
 
 		LanguageButton btnLang = new LanguageButton();
 		btnLang.setPos(16, 1);
 		add(btnLang);
+
+		ExitButton btnExit = new ExitButton();
+		btnExit.setPos(w - btnExit.width(), 0);
+		add(btnExit);
 
 		fadeIn();
 	}
@@ -197,17 +201,13 @@ public class TitleScene extends PixelScene {
 		private static final int IMAGE_SIZE = 32;
 
 		private Image image;
-
 		private RenderedText label;
-		//private BitmapText label;
 
-		public DashboardItem(String text, int index) {
+		DashboardItem(String text, int index) {
 			super();
 
-			image.frame(image.texture.uvRect(index * IMAGE_SIZE, 0, (index + 1)
-					* IMAGE_SIZE, IMAGE_SIZE));
+			image.frame(image.texture.uvRect(index * IMAGE_SIZE, 0, (index + 1) * IMAGE_SIZE, IMAGE_SIZE));
 			this.label.text(text);
-			//this.label.measure();
 
 			setSize(SIZE, SIZE);
 		}
@@ -219,8 +219,6 @@ public class TitleScene extends PixelScene {
 			image = new Image(Assets.DASHBOARD);
 			add(image);
 
-			//label = createText(9);
-
 			label = renderText(9);
 			add(label);
 		}
@@ -229,11 +227,13 @@ public class TitleScene extends PixelScene {
 		protected void layout() {
 			super.layout();
 
-			image.x = align(x + (width - image.width()) / 2);
-			image.y = align(y);
+			image.x = x + (width - image.width()) / 2;
+			image.y = y;
+			align(image);
 
-			label.x = align(x + (width - label.width()) / 2);
-			label.y = align(image.y + image.height() + 2);
+			label.x = x + (width - label.width()) / 2;
+			label.y = image.y + image.height() + 2;
+			align(label);
 		}
 
 		@Override

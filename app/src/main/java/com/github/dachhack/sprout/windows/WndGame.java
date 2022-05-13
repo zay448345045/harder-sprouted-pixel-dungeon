@@ -17,28 +17,26 @@
  */
 package com.github.dachhack.sprout.windows;
 
-import java.io.IOException;
-
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.ShatteredPixelDungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.scenes.GameScene;
-import com.github.dachhack.sprout.scenes.InterlevelScene;
-import com.github.dachhack.sprout.scenes.RankingsScene;
 import com.github.dachhack.sprout.scenes.TitleScene;
-import com.github.dachhack.sprout.ui.Icons;
+import com.github.dachhack.sprout.ui.GameLog;
 import com.github.dachhack.sprout.ui.RedButton;
 import com.github.dachhack.sprout.ui.Window;
 import com.watabou.noosa.Game;
 
+import java.io.IOException;
+
 public class WndGame extends Window {
 
-	private static final String TXT_SETTINGS = "Settings";
-	private static final String TXT_CHALLEGES = "Challenges";
-	private static final String TXT_RANKINGS = "Rankings";
-	private static final String TXT_START = "Start New Game";
-	private static final String TXT_MENU = "Main Menu";
-	private static final String TXT_EXIT = "Exit Game";
-	private static final String TXT_RETURN = "Return to Game";
+	private static final String TXT_SETTINGS = Messages.get(WndGame.class, "settings");
+	private static final String TXT_CHALLEGES = Messages.get(WndGame.class, "challenges");
+	private static final String TXT_RANKINGS = Messages.get(WndGame.class, "rankings");
+	private static final String TXT_START = Messages.get(WndGame.class, "start");
+	private static final String TXT_MENU = Messages.get(WndGame.class, "menu");
+	private static final String TXT_EXIT = Messages.get(WndGame.class, "exit");
+	private static final String TXT_RETURN = Messages.get(WndGame.class, "return");
 
 	private static final int WIDTH = 120;
 	private static final int BTN_HEIGHT = 20;
@@ -54,7 +52,7 @@ public class WndGame extends Window {
 			@Override
 			protected void onClick() {
 				hide();
-				GameScene.show(new WndSettings(true));
+				GameScene.show(new WndSettings());
 			}
 		});
 
@@ -71,35 +69,13 @@ public class WndGame extends Window {
 		}
 
 		// Restart
-		if (!Dungeon.hero.isAlive()) {
-
-			RedButton btnStart;
-			addButton(btnStart = new RedButton(TXT_START) {
-				@Override
-				protected void onClick() {
-					Dungeon.hero = null;
-					ShatteredPixelDungeon.challenges(Dungeon.challenges);
-					InterlevelScene.mode = InterlevelScene.Mode.DESCEND;
-					InterlevelScene.noStory = true;
-					Game.switchScene(InterlevelScene.class);
-				}
-			});
-			btnStart.icon(Icons.get(Dungeon.hero.heroClass));
-
-			addButton(new RedButton(TXT_RANKINGS) {
-				@Override
-				protected void onClick() {
-					InterlevelScene.mode = InterlevelScene.Mode.DESCEND;
-					Game.switchScene(RankingsScene.class);
-				}
-			});
-		}
 
 		addButtons(
-		// Main menu
+				// Main menu
 				new RedButton(TXT_MENU) {
 					@Override
 					protected void onClick() {
+						GameLog.wipe();
 						try {
 							Dungeon.saveAll();
 						} catch (IOException e) {

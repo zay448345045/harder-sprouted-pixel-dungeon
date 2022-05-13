@@ -1,18 +1,22 @@
 package com.github.dachhack.sprout.scenes;
 
+import android.opengl.GLES20;
+
+import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
-import com.github.dachhack.sprout.Chrome;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.Rankings;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
-import com.github.dachhack.sprout.ui.Archs;
+import com.github.dachhack.sprout.effects.BannerSprites;
+import com.github.dachhack.sprout.effects.Fireball;
 import com.github.dachhack.sprout.ui.RedButton;
-import com.github.dachhack.sprout.ui.ScrollPane;
-import com.github.dachhack.sprout.ui.Window;
-import com.watabou.noosa.BitmapTextMultiline;
+import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
-import com.watabou.noosa.NinePatch;
-import com.watabou.noosa.ui.Component;
+import com.watabou.noosa.Image;
+import com.watabou.noosa.audio.Sample;
+
+import javax.microedition.khronos.opengles.GL10;
 
 //TODO: update this class with relevant info as new versions come out.
 public class WelcomeScene extends PixelScene {
@@ -41,12 +45,12 @@ public class WelcomeScene extends PixelScene {
 			+"New levels are accessible at each stage with Four additional levels available at the end of the game.\n\n"
 			+"New levels include unique enemies, items and rewards.\n\n"
 			+"\n\n";
-			
-			
 
-	private static final String TXT_Update = 
-			
-			
+
+
+	private static final String TXT_Update =
+
+
 			"Version 0.4.1\n\n"
 			+"Fix pet follow bugs\n\n"
 			+"Fix sokoban teleport bugs\n\n"
@@ -56,7 +60,7 @@ public class WelcomeScene extends PixelScene {
 			+"\n\n"
 			+"Version 0.4.0 \n\n"
 		    +"Otiluke's Journal available in first shop will take you to Sokoban levels using Journal Pages dropped by bosses. \n\n"
-		    +"You will need to solve puzzles on the Sokoban levels to gather enough gold to purchase the books from the imp shop. \n\n"	
+		    +"You will need to solve puzzles on the Sokoban levels to gather enough gold to purchase the books from the imp shop. \n\n"
 		    +"New Post-Shadow Yog Play using Otiluke's Journal includes: \n\n"
 		    +" * Overworld Town \n\n"
 		    +" * A new mine stage overrun with demons \n\n"
@@ -72,8 +76,8 @@ public class WelcomeScene extends PixelScene {
 		    +" * 0 Dark Gold Drop Fix \n\n"
 		    +" * Other Bug fixes \n\n"
 		    +" * A new Easter Egg \n\n"
-		    
-			+"\n\n"		
+
+			+"\n\n"
 			+"Version 0.3.5a \n\n"
 			+"Nerf Huntress missle bonus.\n\n"
 			+"Buff pets.\n\n"
@@ -82,7 +86,7 @@ public class WelcomeScene extends PixelScene {
 			+"Various bug fixes.\n\n"
 			+"\n\n"
 			+"Version 0.3.5 adds the Dew Charge system and Pets\n\n"
-			+"Please note that saves to previous versions might not work in 0.3.5.\n\n"			
+			+"Please note that saves to previous versions might not work in 0.3.5.\n\n"
 			+"\n\n"
 			+"Egg - How you treat it determines what hatches.\n\n"
 			+"Keep it warm in your pack or absorb energy by dropping it on traps.\n\n"
@@ -105,7 +109,7 @@ public class WelcomeScene extends PixelScene {
 			+"\n\n"
 			+"Version 0.3.0 adds in new mini-boss fights where you can earn adamant ore.\n\n"
 			+"Items max out at 15 upgrades.\n\n"
-			+"You can upgrade items past 15 if they have been reinforced with adamantite ore.\n\n"	
+			+"You can upgrade items past 15 if they have been reinforced with adamantite ore.\n\n"
 			+"There are five pieces of adamantite available in the game obtainable by completing new mini-boss fights.\n\n"
 			+"To reinforce your items, you need to take them to the blacksmiths.\n\n"
 			+"He takes all your black gold when reinforcing so any black gold over 50 is wasted.\n\n"
@@ -129,7 +133,7 @@ public class WelcomeScene extends PixelScene {
 			+"Happy Halloween!\n\n"
 			+"\n\n"
 			+"This new update features many new sprites from Pavel Provotorov. He's done a great job making Sprouted come alive. Many thanks!\n\n"
-			         
+
             +"\n\n"
             +"\n\n"
 			+"Version 0.2.5 adds back optional watering to the dew vial and re-works dew levels.\n\n"
@@ -147,22 +151,22 @@ public class WelcomeScene extends PixelScene {
 			+"Ranking reflect Shadow Yog battle.\n\n"
 			+"Featuring new sprites for Books, Mushrooms, Berries by Pavel Provotorov!"
 			+"\n\n"
-			
-			+"Version 0.2.0a is a bug fix from 0.2.0.\n\n" 
+
+			+"Version 0.2.0a is a bug fix from 0.2.0.\n\n"
 			+"Fixed Overfill mechanic\n\n"
 			+"Buffed Key level mobs and removed meat drop form archers\n\n"
 			+"Fixed Gold Thief gold drop\n\n"
 			+"A couple other fixes to hidden items\n\n"
 			+"\n\n"
-			
-			+"Please note that saves from the previous release (0.1.5) will not open properly on this version.\n\n"			
+
+			+"Please note that saves from the previous release (0.1.5) will not open properly on this version.\n\n"
 			+"\n\n"
 			+"Major Revisions:\n\n"
 			+"Water command has been removed from the dew vial.\n\n"
-			+"Instead of watering you can grind dew on one of four new levels.\n\n"	
-			+"Each stage has a level accessable by finding an ancient key.\n\n"	
-			+"These new levels are populated by new mobs and are rich in dew.\n\n"	
-			+"Each level has an opportunity to earn special rewards by dispatching 100+ mobs before you leave.\n\n"	
+			+"Instead of watering you can grind dew on one of four new levels.\n\n"
+			+"Each stage has a level accessable by finding an ancient key.\n\n"
+			+"These new levels are populated by new mobs and are rich in dew.\n\n"
+			+"Each level has an opportunity to earn special rewards by dispatching 100+ mobs before you leave.\n\n"
 			+"\n\n"
 			+"Each level of the demon halls is sealed and you will need to find a way to unseal to go down.\n\n"
 			+"\n\n"
@@ -179,7 +183,7 @@ public class WelcomeScene extends PixelScene {
 			+"Seeds no longer drop as random loot in the dungeon. (Still get from high grass.)\n\n"
 			+"\n\n"
 			+"\n\n"
-			
+
 			+"Sprouted Pixel Dungeon differences:\n\n"
 			+"Much larger levels creating a different game play and strategy experience.\n\n"
 			+"Mobs drop monster meat to facilitate longer and more in-depth exploration of the larger levels.\n\n"
@@ -191,8 +195,8 @@ public class WelcomeScene extends PixelScene {
 			+"New levels are accessible at each stage with Four additional levels available at the end of the game.\n\n"
 			+"New levels include unique enemies, items and rewards.\n\n"
 			+"\n\n"
-			
-	
+
+
 			;
 
 	private static final String TXT_Future = "It seems that your current saves are from a future version of Sprouted Pixel Dungeon!\n\n"
@@ -201,109 +205,151 @@ public class WelcomeScene extends PixelScene {
 			+ "this could cause some very weird errors to occur.";
 
 	private static final String LNK = "https://play.google.com/store/apps/details?id=com.github.dachhack.sprout";
-
+	private static int LATEST_UPDATE = 90;
 	@Override
 	public void create() {
 		super.create();
 
-		final int gameversion = ShatteredPixelDungeon.version();
+		final int previousVersion = ShatteredPixelDungeon.version();
 
-		BitmapTextMultiline title;
-		BitmapTextMultiline text;
-
-		if (gameversion == 0) {
-
-			text = createMultiline(TXT_Welcome, 8);
-			title = createMultiline(TTL_Welcome, 16);
-
-		} else if (gameversion <= Game.versionCode) {
-
-			text = createMultiline(TXT_Update, 6);
-			title = createMultiline(TTL_Update, 9);
-
-		} else {
-
-			text = createMultiline(TXT_Future, 8);
-			title = createMultiline(TTL_Future, 16);
-
+		if (ShatteredPixelDungeon.versionCode == previousVersion) {
+			ShatteredPixelDungeon.switchNoFade(TitleScene.class);
+			return;
 		}
+
+		uiCamera.visible = false;
 
 		int w = Camera.main.width;
 		int h = Camera.main.height;
 
-		int pw = w - 10;
-		int ph = h - 50;
+		Image title = BannerSprites.get( BannerSprites.Type.PIXEL_DUNGEON );
+		title.brightness(0.6f);
+		add( title );
 
-		title.maxWidth = pw;
-		title.measure();
-		title.hardlight(Window.SHPX_COLOR);
+		float height = title.height +
+				(ShatteredPixelDungeon.landscape() ? 48 : 96);
 
-		title.x = align((w - title.width()) / 2);
-		title.y = align(8);
-		add(title);
+		title.x = (w - title.width()) / 2;
+		title.y = (h - height) / 2;
 
-		NinePatch panel = Chrome.get(Chrome.Type.WINDOW);
-		panel.size(pw, ph);
-		panel.x = (w - pw) / 2;
-		panel.y = (h - ph) / 2;
-		add(panel);
+		placeTorch(title.x + 18, title.y + 20);
+		placeTorch(title.x + title.width - 18, title.y + 20);
 
-		ScrollPane list = new ScrollPane(new Component());
-		add(list);
-		list.setRect(panel.x + panel.marginLeft(), panel.y + panel.marginTop(),
-				panel.innerWidth(), panel.innerHeight());
-		list.scrollTo(0, 0);
+		Image signs = new Image( BannerSprites.get( BannerSprites.Type.PIXEL_DUNGEON_SIGNS ) ) {
+			private float time = 0;
+			@Override
+			public void update() {
+				super.update();
+				am = (float)Math.sin( -(time += Game.elapsed) );
+			}
+			@Override
+			public void draw() {
+				GLES20.glBlendFunc( GL10.GL_SRC_ALPHA, GL10.GL_ONE );
+				super.draw();
+				GLES20.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
+			}
+		};
+		signs.x = title.x;
+		signs.y = title.y;
+		add( signs );
 
-		Component content = list.content();
-		content.clear();
-
-		text.maxWidth = (int) panel.innerWidth();
-		text.measure();
-
-		content.add(text);
-
-		content.setSize(panel.innerWidth(), text.height());
-
-		RedButton okay = new RedButton("Okay!") {
+		DarkRedButton okay = new DarkRedButton(Messages.get(this, "continue")){
 			@Override
 			protected void onClick() {
-
-				if (gameversion <= 32) {
-					// removes all bags bought badge from pre-0.2.4 saves.
-					Badges.disown(Badges.Badge.ALL_BAGS_BOUGHT);
-					Badges.saveGlobal();
-
-					// imports new ranking data for pre-0.2.3 saves.
-					if (gameversion <= 29) {
-						Rankings.INSTANCE.load();
-						Rankings.INSTANCE.save();
-					}
-				}
-
-				ShatteredPixelDungeon.version(Game.versionCode);
-				Game.switchScene(TitleScene.class);
+				super.onClick();
+				updateVersion(previousVersion);
+				ShatteredPixelDungeon.switchScene(TitleScene.class);
 			}
 		};
 
-		/*
-		 * okay.setRect(text.x, text.y + text.height() + 5, 55, 18); add(okay);
-		 * 
-		 * RedButton changes = new RedButton("Changes") {
-		 * 
-		 * @Override protected void onClick() { parent.add(new WndChanges()); }
-		 * };
-		 * 
-		 * changes.setRect(text.x + 65, text.y + text.height() + 5, 55, 18);
-		 * add(changes);
-		 */
+		if (previousVersion != 0){
+			DarkRedButton changes = new DarkRedButton(Messages.get(this, "changelist")){
+				@Override
+				protected void onClick() {
+					super.onClick();
+					updateVersion(previousVersion);
+					ShatteredPixelDungeon.switchScene(TitleScene.class);
+				}
+			};
+			okay.setRect(title.x, h-20, (title.width()/2)-2, 16);
+			okay.textColor(0xBBBB33);
+			add(okay);
 
-		okay.setRect((w - pw) / 2, h - 22, pw, 18);
-		add(okay);
+			changes.setRect(okay.right()+2, h-20, (title.width()/2)-2, 16);
+			changes.textColor(0xBBBB33);
+			add(changes);
+		} else {
+			okay.setRect(title.x, h-20, title.width(), 16);
+			okay.textColor(0xBBBB33);
+			add(okay);
+		}
 
-		Archs archs = new Archs();
-		archs.setSize(Camera.main.width, Camera.main.height);
-		addToBack(archs);
+		RenderedTextMultiline text = PixelScene.renderMultiline(6);
+		String message;
+		if (previousVersion == 0) {
+			message = Messages.get(this, "welcome_msg");
+		} else if (previousVersion <= ShatteredPixelDungeon.versionCode) {
+			if (previousVersion < LATEST_UPDATE){
+				message = Messages.get(this, "update_intro");
+				message += "\n\n" + Messages.get(this, "update_msg");
+			} else {
+				//TODO: change the messages here in accordance with the type of patch.
+				message = Messages.get(this, "patch_intro");
+				message += "\n\n" + Messages.get(this, "patch_bugfixes");
+				message += "\n" + Messages.get(this, "patch_translations");
+				message += "\n\n" + Messages.get(this, "patch_msg");
 
-		fadeIn();
+			}
+		} else {
+			message = Messages.get(this, "what_msg");
+		}
+		text.text(message, w-20);
+		float textSpace = h - title.y - (title.height() - 10) - okay.height() - 2;
+		text.setPos(10, title.y+(title.height() - 10) + ((textSpace - text.height()) / 2));
+		add(text);
+
+	}
+
+	private void updateVersion(int previousVersion){
+		if (previousVersion <= 32){
+			//removes all bags bought badge from pre-0.2.4 saves.
+			Badges.disown(Badges.Badge.ALL_BAGS_BOUGHT);
+			Badges.saveGlobal();
+
+			//imports new ranking data for pre-0.2.3 saves.
+			if (previousVersion <= 29){
+				Rankings.INSTANCE.load();
+				Rankings.INSTANCE.save();
+			}
+		}
+		ShatteredPixelDungeon.version(ShatteredPixelDungeon.versionCode);
+	}
+
+	private void placeTorch( float x, float y ) {
+		Fireball fb = new Fireball();
+		fb.setPos( x, y );
+		add( fb );
+	}
+
+	private class DarkRedButton extends RedButton{
+		{
+			bg.brightness(0.4f);
+		}
+
+		DarkRedButton(String text){
+			super(text);
+		}
+
+		@Override
+		protected void onTouchDown() {
+			bg.brightness(0.5f);
+			Sample.INSTANCE.play( Assets.SND_CLICK );
+		}
+
+		@Override
+		protected void onTouchUp() {
+			super.onTouchUp();
+			bg.brightness(0.4f);
+		}
 	}
 }

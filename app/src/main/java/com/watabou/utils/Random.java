@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2012-2015 Oleg Dolya
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>
- */
 
 package com.watabou.utils;
 
@@ -22,70 +6,89 @@ import java.util.HashMap;
 
 public class Random {
 
-	public static float Float( float min, float max ) {
-		return (float)(min + Math.random() * (max - min)); 
+	private static java.util.Random rand = new java.util.Random();
+
+	public static void seed( ){
+		rand = new java.util.Random();
 	}
-	
-	public static float Float( float max ) {
-		return (float)(Math.random() * max);
+
+	public static void seed( long seed ){
+		rand.setSeed(seed);
 	}
-	
+
+	//returns a uniformly distributed float in the range [0, 1)
 	public static float Float() {
-		return (float)Math.random();
+		return rand.nextFloat();
 	}
-	
+
+	//returns a uniformly distributed float in the range [0, max)
+	public static float Float( float max ) {
+		return Float() * max;
+	}
+
+	//returns a uniformly distributed float in the range [min, max)
+	public static float Float( float min, float max ) {
+		return min + Float(max - min);
+	}
+
+	//returns a uniformly distributed int in the range [0, max)
 	public static int Int( int max ) {
-		return max > 0 ? (int)(Math.random() * max) : 0;
+		return max > 0 ? rand.nextInt(max) : 0;
 	}
 
-	public static int Roll( int cnt, int max) {
-
-		int result = 0;
-
-		for (int i=0; i < cnt; i++) {
-
-			result += Int(max)+1;
-		}
-
-		return result;
-	}
-
+	//returns a uniformly distributed int in the range [min, max)
 	public static int Int( int min, int max ) {
-		return min + (int)(Math.random() * (max - min));
+		return min + Int(max - min);
 	}
-	
+
+	//returns a uniformly distributed int in the range [min, max]
 	public static int IntRange( int min, int max ) {
-		return min + (int)(Math.random() * (max - min + 1));
+		return min + Int(max - min + 1);
 	}
-	
+
+	//returns a triangularly distributed int in the range [min, max]
 	public static int NormalIntRange( int min, int max ) {
-		return min + (int)((Math.random() + Math.random()) * (max - min + 1) / 2f);
+		return min + (int)((Float() + Float()) * (max - min + 1) / 2f);
 	}
-	
+
+	//returns a uniformly distributed long in the range [-2^63, 2^63)
+	public static long Long() {
+		return rand.nextLong();
+	}
+
+	//returns a uniformly distributed long in the range [0, max)
+	public static long Long( long max ) {
+		long result = Long();
+		if (result < 0) result += Long.MAX_VALUE;
+		return result % max;
+	}
+
+	//returns an index from chances, the probability of each index is the weight values in changes
 	public static int chances( float[] chances ) {
-		
+
 		int length = chances.length;
-		
-		float sum = chances[0];
-		for (int i=1; i < length; i++) {
+
+		float sum = 0;
+		for (int i=0; i < length; i++) {
 			sum += chances[i];
 		}
-		
+
 		float value = Float( sum );
-		sum = chances[0];
+		sum = 0;
 		for (int i=0; i < length; i++) {
+			sum += chances[i];
 			if (value < sum) {
 				return i;
 			}
-			sum += chances[i + 1];
 		}
-		
-		return 0;
+
+		return -1;
 	}
-	
+
 	@SuppressWarnings("unchecked")
+	//returns a key element from chances, the probability of each key is the weight value it maps to
 	public static <K> K chances( HashMap<K,Float> chances ) {
-		
+
 		int size = chances.size();
 
 		Object[] values = chances.keySet().toArray();
@@ -95,9 +98,9 @@ public class Random {
 			probs[i] = chances.get( values[i] );
 			sum += probs[i];
 		}
-		
+
 		float value = Float( sum );
-		
+
 		sum = probs[0];
 		for (int i=0; i < size; i++) {
 			if (value < sum) {
@@ -105,35 +108,35 @@ public class Random {
 			}
 			sum += probs[i + 1];
 		}
-		
+
 		return null;
 	}
-	
+
 	public static int index( Collection<?> collection ) {
-		return (int)(Math.random() * collection.size());
+		return Int(collection.size());
 	}
-	
+
 	@SafeVarargs
-	public static<T> T oneOf( T... array ) {
-		return array[(int)(Math.random() * array.length)];
+	public static<T> T oneOf(T... array ) {
+		return array[Int(array.length)];
 	}
-	
+
 	public static<T> T element( T[] array ) {
 		return element( array, array.length );
 	}
-	
+
 	public static<T> T element( T[] array, int max ) {
-		return array[(int)(Math.random() * max)];
+		return array[Int(max)];
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public static<T> T element( Collection<? extends T> collection ) {
 		int size = collection.size();
-		return size > 0 ? 
-			(T)collection.toArray()[Int( size )] : 
-			null;
+		return size > 0 ?
+				(T)collection.toArray()[Int( size )] :
+				null;
 	}
-	
+
 	public static<T> void shuffle( T[] array ) {
 		for (int i=0; i < array.length - 1; i++) {
 			int j = Int( i, array.length );
@@ -144,7 +147,7 @@ public class Random {
 			}
 		}
 	}
-	
+
 	public static<U,V> void shuffle( U[] u, V[]v ) {
 		for (int i=0; i < u.length - 1; i++) {
 			int j = Int( i, u.length );
@@ -152,7 +155,7 @@ public class Random {
 				U ut = u[i];
 				u[i] = u[j];
 				u[j] = ut;
-				
+
 				V vt = v[i];
 				v[i] = v[j];
 				v[j] = vt;

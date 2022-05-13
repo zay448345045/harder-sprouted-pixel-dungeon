@@ -17,8 +17,6 @@
  */
 package com.github.dachhack.sprout.scenes;
 
-import java.util.HashMap;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
@@ -43,10 +41,13 @@ import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Group;
 import com.watabou.noosa.Image;
+import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.particles.Emitter;
 import com.watabou.noosa.ui.Button;
 import com.watabou.utils.Callback;
+
+import java.util.HashMap;
 
 public class StartScene extends PixelScene {
 
@@ -319,7 +320,7 @@ public class StartScene extends PixelScene {
 		private static final int SECONDARY_COLOR_N = 0xCACFC2;
 		private static final int SECONDARY_COLOR_H = 0xFFFF88;
 
-		private BitmapText secondary;
+		private RenderedText secondary;
 
 		public GameButton(String primary) {
 			super(primary);
@@ -331,7 +332,7 @@ public class StartScene extends PixelScene {
 		protected void createChildren() {
 			super.createChildren();
 
-			secondary = createText(6);
+			secondary = renderText(6);
 			add(secondary);
 		}
 
@@ -352,7 +353,7 @@ public class StartScene extends PixelScene {
 
 		public void secondary(String text, boolean highlighted) {
 			secondary.text(text);
-			secondary.measure();
+			//secondary.measure();
 
 			secondary.hardlight(highlighted ? SECONDARY_COLOR_H
 					: SECONDARY_COLOR_N);

@@ -39,8 +39,6 @@ public class Rat extends Mob {
 		lootChance = 0.5f;
 
 	}
-
-
 	
 	@Override
 	public int damageRoll() {
