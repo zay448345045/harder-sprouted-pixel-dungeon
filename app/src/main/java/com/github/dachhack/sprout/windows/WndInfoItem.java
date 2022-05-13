@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.windows;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.items.Heap;
 import com.github.dachhack.sprout.items.Heap.Type;
 import com.github.dachhack.sprout.items.Item;
@@ -24,28 +25,26 @@ import com.github.dachhack.sprout.items.artifacts.Artifact;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.ui.ItemSlot;
+import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndInfoItem extends Window {
 
-	private static final String TTL_CHEST = "Chest";
-	private static final String TTL_LOCKED_CHEST = "Locked chest";
-	private static final String TTL_CRYSTAL_CHEST = "Crystal chest";
-	private static final String TTL_TOMB = "Tomb";
-	private static final String TTL_SKELETON = "Skeletal remains";
-	private static final String TTL_REMAINS = "Heroes remains";
-	private static final String TXT_WONT_KNOW = "You won't know what's inside until you open it!";
+	private static final String TTL_CHEST = Messages.get(WndInfoItem.class,"chest");
+	private static final String TTL_LOCKED_CHEST = Messages.get(WndInfoItem.class,"locked");
+	private static final String TTL_CRYSTAL_CHEST = 	Messages.get(WndInfoItem.class,"crystal");
+	private static final String TTL_TOMB = 	Messages.get(WndInfoItem.class,"tomb");
+	private static final String TTL_SKELETON =	Messages.get(WndInfoItem.class,"skeletal");
+	private static final String TTL_REMAINS = 	Messages.get(WndInfoItem.class,"heroes");
+	private static final String TXT_WONT_KNOW = 	Messages.get(WndInfoItem.class,"you_wont");
 	private static final String TXT_NEED_KEY = TXT_WONT_KNOW
-			+ " But to open it you need a golden key.";
-	private static final String TXT_INSIDE = "You can see %s inside, but to open the chest you need a golden key.";
-	private static final String TXT_OWNER = "This ancient tomb may contain something useful, "
-			+ "but its owner will most certainly object to checking.";
-	private static final String TXT_SKELETON = "This is all that's left of some unfortunate adventurer. "
-			+ "Maybe it's worth checking for any valuables.";
-	private static final String TXT_REMAINS = "This is all that's left from one of your predecessors. "
-			+ "Maybe it's worth checking for any valuables.";
+			+ 	Messages.get(WndInfoItem.class,"but");
+	private static final String TXT_INSIDE = 	Messages.get(WndInfoItem.class,"you_can");
+	private static final String TXT_OWNER = 	Messages.get(WndInfoItem.class,"this");
+	private static final String TXT_SKELETON = 	Messages.get(WndInfoItem.class,"this_is");
+	private static final String TXT_REMAINS = 	Messages.get(WndInfoItem.class,"this_is_all");
 
 	private static final float GAP = 2;
 
@@ -88,7 +87,7 @@ public class WndInfoItem extends Window {
 			} else if (heap.type == Type.CRYSTAL_CHEST) {
 				title = TTL_CRYSTAL_CHEST;
 				if (heap.peek() instanceof Artifact)
-					info = Utils.format(TXT_INSIDE, "an artifact");
+					info = Utils.format(TXT_INSIDE,Messages.get(this,"an"));
 				else
 					info = Utils.format(TXT_INSIDE,
 							Utils.indefinite(heap.peek().name()));
@@ -126,13 +125,11 @@ public class WndInfoItem extends Window {
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 
-		BitmapTextMultiline txtInfo = PixelScene.createMultiline(info, 6);
-		txtInfo.maxWidth = WIDTH;
-		txtInfo.measure();
-		txtInfo.x = titlebar.left();
-		txtInfo.y = titlebar.bottom() + GAP;
+		RenderedTextMultiline txtInfo = PixelScene.renderMultiline(info, 6);
+		txtInfo.maxWidth(WIDTH);
+		txtInfo.setPos(titlebar.left(), titlebar.bottom() + GAP);
 		add(txtInfo);
 
-		resize(WIDTH, (int) (txtInfo.y + txtInfo.height()));
+		resize(WIDTH, (int) (txtInfo.top() + txtInfo.height()));
 	}
 }

@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.windows;
 
 import com.github.dachhack.sprout.Challenges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.npcs.Ghost;
 import com.github.dachhack.sprout.items.Item;
@@ -27,24 +28,31 @@ import com.github.dachhack.sprout.sprites.FetidRatSprite;
 import com.github.dachhack.sprout.sprites.GnollTricksterSprite;
 import com.github.dachhack.sprout.sprites.GreatCrabSprite;
 import com.github.dachhack.sprout.ui.RedButton;
+import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndSadGhost extends Window {
 
-	private static final String TXT_RAT = "Thank you, that horrid rat is slain and I can finally rest..."
-			+ "I wonder what twisted magic created such a foul creature...\n\n";
-	private static final String TXT_GNOLL = "Thank you, that scheming gnoll is slain and I can finally rest..."
-			+ "I wonder what twisted magic made it so smart...\n\n";
-	private static final String TXT_CRAB = "Thank you, that giant crab is slain and I can finally rest..."
-			+ "I wonder what twisted magic allowed it to live so long...\n\n";
-	private static final String TXT_GIVEITEM = "Please take one of these items, they are useless to me now... "
-			+ "Maybe they will help you in your journey...\n\n"
-			+ "Also... There is an item lost in this dungeon that is very dear to me..."
-			+ "If you ever... find my... rose......";
-	private static final String TXT_WEAPON = "Ghost's weapon";
-	private static final String TXT_ARMOR = "Ghost's armor";
+//	private static final String TXT_RAT = "Thank you, that horrid rat is slain and I can finally rest..."
+//			+ "I wonder what twisted magic created such a foul creature...\n\n";
+//	private static final String TXT_GNOLL = "Thank you, that scheming gnoll is slain and I can finally rest..."
+//			+ "I wonder what twisted magic made it so smart...\n\n";
+//	private static final String TXT_CRAB = "Thank you, that giant crab is slain and I can finally rest..."
+//			+ "I wonder what twisted magic allowed it to live so long...\n\n";
+//	private static final String TXT_GIVEITEM = "Please take one of these items, they are useless to me now... "
+//			+ "Maybe they will help you in your journey...\n\n"
+//			+ "Also... There is an item lost in this dungeon that is very dear to me..."
+//			+ "If you ever... find my... rose......";
+//	private static final String TXT_WEAPON = "Ghost's weapon";
+//	private static final String TXT_ARMOR = "Ghost's armor";
+private static final String TXT_RAT = Messages.get(WndSadGhost.class, "rat");
+	private static final String TXT_GNOLL = Messages.get(WndSadGhost.class, "gnoll");
+	private static final String TXT_CRAB = Messages.get(WndSadGhost.class, "crab");
+	private static final String TXT_GIVEITEM = Messages.get(WndSadGhost.class, "giveitem");
+	private static final String TXT_WEAPON = Messages.get(WndSadGhost.class, "weapon");
+	private static final String TXT_ARMOR = Messages.get(WndSadGhost.class, "armor");
 
 	private static final int WIDTH = 120;
 	private static final int BTN_HEIGHT = 20;
@@ -55,33 +63,32 @@ public class WndSadGhost extends Window {
 		super();
 
 		IconTitle titlebar = new IconTitle();
-		BitmapTextMultiline message;
+		RenderedTextMultiline message;
 		switch (type) {
 		case 1:
 		default:
 			titlebar.icon(new FetidRatSprite());
-			titlebar.label("DEFEATED FETID RAT");
-			message = PixelScene.createMultiline(TXT_RAT + TXT_GIVEITEM, 6);
+			titlebar.label(Messages.get(WndSadGhost.class, "dr"));
+			message = PixelScene.renderMultiline(TXT_RAT + TXT_GIVEITEM, 6);
 			break;
-		case 2:
-			titlebar.icon(new GnollTricksterSprite());
-			titlebar.label("DEFEATED GNOLL TRICKSTER");
-			message = PixelScene.createMultiline(TXT_GNOLL + TXT_GIVEITEM, 6);
-			break;
-		case 3:
-			titlebar.icon(new GreatCrabSprite());
-			titlebar.label("DEFEATED GREAT CRAB");
-			message = PixelScene.createMultiline(TXT_CRAB + TXT_GIVEITEM, 6);
-			break;
+			case 2:
+				titlebar.icon(new GnollTricksterSprite());
+				titlebar.label(Messages.get(WndSadGhost.class, "dt"));
+				message = PixelScene.renderMultiline(TXT_GNOLL + TXT_GIVEITEM, 6);
+				break;
+			case 3:
+				titlebar.icon(new GreatCrabSprite());
+				titlebar.label(Messages.get(WndSadGhost.class, "dc"));
+				message = PixelScene.renderMultiline(TXT_CRAB + TXT_GIVEITEM, 6);
+				break;
 
 		}
 
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 
-		message.maxWidth = WIDTH;
-		message.measure();
-		message.y = titlebar.bottom() + GAP;
+		message.maxWidth(WIDTH);
+		message.setPos(0, titlebar.bottom() + GAP);
 		add(message);
 
 		RedButton btnWeapon = new RedButton(TXT_WEAPON) {
@@ -90,7 +97,7 @@ public class WndSadGhost extends Window {
 				selectReward(ghost, Ghost.Quest.weapon);
 			}
 		};
-		btnWeapon.setRect(0, message.y + message.height() + GAP, WIDTH,
+		btnWeapon.setRect(0, message.top() + message.height() + GAP, WIDTH,
 				BTN_HEIGHT);
 		add(btnWeapon);
 
@@ -120,7 +127,8 @@ public class WndSadGhost extends Window {
 			Dungeon.level.drop(reward, ghost.pos).sprite.drop();
 		}
 
-		ghost.yell("Farewell, adventurer!");
+//		ghost.yell("Farewell, adventurer!");
+		ghost.yell(Messages.get(WndSadGhost.class, "farewell"));
 		ghost.die(null);
 
 		Ghost.Quest.complete();

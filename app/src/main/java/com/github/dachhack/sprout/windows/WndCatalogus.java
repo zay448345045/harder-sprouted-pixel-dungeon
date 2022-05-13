@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.windows;
 
 import java.util.ArrayList;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.potions.Potion;
@@ -30,6 +31,7 @@ import com.github.dachhack.sprout.ui.ScrollPane;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.BitmapText;
+import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.ui.Component;
 
 public class WndCatalogus extends WndTabbed {
@@ -44,11 +46,14 @@ public class WndCatalogus extends WndTabbed {
 
 	private static final int TAB_WIDTH = 50;
 
-	private static final String TXT_POTIONS = "Potions";
-	private static final String TXT_SCROLLS = "Scrolls";
-	private static final String TXT_TITLE = "Catalogus";
+//	private static final String TXT_POTIONS = "Potions";
+//	private static final String TXT_SCROLLS = "Scrolls";
+//	private static final String TXT_TITLE = "Catalogus";
+private static final String TXT_POTIONS = Messages.get(WndCatalogus.class, "potions");
+	private static final String TXT_SCROLLS = Messages.get(WndCatalogus.class, "scrolls");
+	private static final String TXT_TITLE = Messages.get(WndCatalogus.class, "title");
 
-	private BitmapText txtTitle;
+	private RenderedText txtTitle;
 	private ScrollPane list;
 
 	private ArrayList<ListItem> items = new ArrayList<WndCatalogus.ListItem>();
@@ -65,9 +70,8 @@ public class WndCatalogus extends WndTabbed {
 			resize(WIDTH_P, HEIGHT_P);
 		}
 
-		txtTitle = PixelScene.createText(TXT_TITLE, 9);
+		txtTitle = PixelScene.renderText(TXT_TITLE, 9);
 		txtTitle.hardlight(Window.TITLE_COLOR);
-		txtTitle.measure();
 		add(txtTitle);
 
 		list = new ScrollPane(new Component()) {
@@ -113,7 +117,6 @@ public class WndCatalogus extends WndTabbed {
 
 		txtTitle.text(Utils.format(TXT_TITLE, showPotions ? TXT_POTIONS
 				: TXT_SCROLLS));
-		txtTitle.measure();
 		txtTitle.x = PixelScene.align(PixelScene.uiCamera,
 				(width - txtTitle.width()) / 2);
 
@@ -153,7 +156,7 @@ public class WndCatalogus extends WndTabbed {
 		private boolean identified;
 
 		private ItemSprite sprite;
-		private BitmapText label;
+		private RenderedText label;
 
 		public ListItem(Class<? extends Item> cl) {
 			super();
@@ -178,7 +181,7 @@ public class WndCatalogus extends WndTabbed {
 			sprite = new ItemSprite();
 			add(sprite);
 
-			label = PixelScene.createText(8);
+			label = PixelScene.renderText(8);
 			add(label);
 		}
 

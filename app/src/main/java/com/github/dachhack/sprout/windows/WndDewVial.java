@@ -17,10 +17,12 @@
  */
 package com.github.dachhack.sprout.windows;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.ui.RedButton;
+import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.BitmapTextMultiline;
@@ -29,12 +31,19 @@ public class WndDewVial extends Window {
 	
 	//if people don't get it after this, I quit. I just quit.
 
-	private static final String TXT_MESSAGE = "The dew vial is much more powerful in this dungeon. "
-			                                  +"Filling it all the way will allow you to bless and upgrade your gear. "
-			                                  +"The deeper you go in the dungeon, the more the dew will upgrade your gear. "
-			                                  +"You can bless your items to +6 or +7 by the time you get to the Goo."; 
-	
-	private static final String TXT_WATER = "Okay! Let's go find 100 dew drops!";
+//	private static final String TXT_MESSAGE = "The dew vial is much more powerful in this dungeon. "
+//			                                  +"Filling it all the way will allow you to bless and upgrade your gear. "
+//			                                  +"The deeper you go in the dungeon, the more the dew will upgrade your gear. "
+//			                                  +"You can bless your items to +6 or +7 by the time you get to the Goo.";
+//
+//	private static final String TXT_WATER = "Okay! Let's go find 100 dew drops!";
+private static final String TXT_MESSAGE = Messages.get(WndDewVial.class, "msg");
+	private static final String TXT_WINDOW = Messages.get(WndDewVial.class, "window");
+	private static final String TXT_DRINK = Messages.get(WndDewVial.class, "drink");
+	private static final String TXT_WATER = Messages.get(WndDewVial.class, "water");
+	private static final String TXT_SPLASH = Messages.get(WndDewVial.class, "splash");
+	private static final String TXT_BLESS = Messages.get(WndDewVial.class, "bless");
+	private static final String TXT_OTHER = Messages.get(WndDewVial.class, "other");
 
 
 	private static final int WIDTH = 120;
@@ -51,11 +60,10 @@ public class WndDewVial extends Window {
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 
-		BitmapTextMultiline message = PixelScene
-				.createMultiline(TXT_MESSAGE, 6);
-		message.maxWidth = WIDTH;
-		message.measure();
-		message.y = titlebar.bottom() + GAP;
+		RenderedTextMultiline message = PixelScene
+				.renderMultiline(TXT_MESSAGE, 6);
+		message.maxWidth(WIDTH);
+		message.setPos(0, titlebar.bottom() + GAP);
 		add(message);
 
 		RedButton btnBattle = new RedButton(TXT_WATER) {
@@ -64,14 +72,14 @@ public class WndDewVial extends Window {
 				hide();
 			}
 		};
-		btnBattle.setRect(0, message.y + message.height() + GAP, WIDTH,
+		btnBattle.setRect(0, message.top() + message.height() + GAP, WIDTH,
 				BTN_HEIGHT);
 		add(btnBattle);
 
-		
+
 
 		resize(WIDTH, (int) btnBattle.bottom());
 	}
 
-	
+
 }

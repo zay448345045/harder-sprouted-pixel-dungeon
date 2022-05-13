@@ -21,6 +21,7 @@ import java.util.Locale;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -55,6 +56,7 @@ import com.github.dachhack.sprout.sprites.HeroSprite;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 import com.github.dachhack.sprout.ui.HealthBar;
 import com.github.dachhack.sprout.ui.RedButton;
+import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
@@ -63,37 +65,66 @@ import com.watabou.gltextures.TextureCache;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Group;
 import com.watabou.noosa.Image;
+import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.TextureFilm;
 
 public class WndHero extends WndTabbed {
 
-	private static final String TXT_STATS = "Stats";
-	private static final String TXT_LEVELSTATS = "Level";
-	private static final String TXT_BUFFS = "Buffs";
-	private static final String TXT_PET = "Pet";
+//	private static final String TXT_STATS = "Stats";
+//	private static final String TXT_LEVELSTATS = "Level";
+//	private static final String TXT_BUFFS = "Buffs";
+//	private static final String TXT_PET = "Pet";
+//
+//	private static final String TXT_HEALS = "%+dHP";
+//
+//	private static final String TXT_EXP = "Experience";
+//	private static final String TXT_STR = "Strength";
+//	private static final String TXT_KILLS = "Kills";
+//	private static final String TXT_BREATH = "Breath Weapon";
+//	private static final String TXT_SPIN = "Spinneretes";
+//	private static final String TXT_STING = "Stinger";
+//	private static final String TXT_FEATHERS = "Feathers";
+//	private static final String TXT_SPARKLE = "Wand Attack";
+//	private static final String TXT_FANGS = "Fangs";
+//	private static final String TXT_ATTACK = "Attack Skill";
+//	private static final String TXT_HEALTH = "Health";
+//	private static final String TXT_GOLD = "Gold Collected";
+//	private static final String TXT_DEPTH = "Maximum Depth";
+//	private static final String TXT_MOVES = "Game Moves";
+//	private static final String TXT_MOVES2 = "Floor Moves";
+//	private static final String TXT_MOVES3 = "Floor Move Goal";
+//	private static final String TXT_MOVES4 = "Prev Under Goal";
+//	private static final String TXT_HUNGER = "Hunger";
+//	private static final String TXT_MOVES_DEW = "Dew Charge Moves";
+//	private static final String TXT_PETS = "Pets Lost";
+private static final String TXT_STATS = Messages.get(WndHero.class, "stats");
+	private static final String TXT_LEVELSTATS = Messages.get(WndHero.class, "levelstats");
+	private static final String TXT_BUFFS = Messages.get(WndHero.class, "buffs");
+	private static final String TXT_PET = Messages.get(WndHero.class, "pet");
 
-	private static final String TXT_HEALS = "%+dHP";
-	
-	private static final String TXT_EXP = "Experience";
-	private static final String TXT_STR = "Strength";
-	private static final String TXT_KILLS = "Kills";
-	private static final String TXT_BREATH = "Breath Weapon";
-	private static final String TXT_SPIN = "Spinneretes";
-	private static final String TXT_STING = "Stinger";
-	private static final String TXT_FEATHERS = "Feathers";
-	private static final String TXT_SPARKLE = "Wand Attack";
-	private static final String TXT_FANGS = "Fangs";
-	private static final String TXT_ATTACK = "Attack Skill";
-	private static final String TXT_HEALTH = "Health";
-	private static final String TXT_GOLD = "Gold Collected";
-	private static final String TXT_DEPTH = "Maximum Depth";
-	private static final String TXT_MOVES = "Game Moves";
-	private static final String TXT_MOVES2 = "Floor Moves";
-	private static final String TXT_MOVES3 = "Floor Move Goal";
-	private static final String TXT_MOVES4 = "Prev Under Goal";
-	private static final String TXT_HUNGER = "Hunger";
-	private static final String TXT_MOVES_DEW = "Dew Charge Moves";
-	private static final String TXT_PETS = "Pets Lost";
+	private static final String TXT_HEALS = Messages.get(WndHero.class, "heals");
+
+	private static final String TXT_EXP = Messages.get(WndHero.class, "exp");
+	private static final String TXT_STR = Messages.get(WndHero.class, "str");
+	private static final String TXT_BREATH = Messages.get(WndHero.class, "breath");
+	private static final String TXT_SPIN = Messages.get(WndHero.class, "spin");
+	private static final String TXT_STING = Messages.get(WndHero.class, "sting");
+	private static final String TXT_FEATHERS = Messages.get(WndHero.class, "feathers");
+	private static final String TXT_SPARKLE = Messages.get(WndHero.class, "sparkle");
+	private static final String TXT_FANGS = Messages.get(WndHero.class, "fangs");
+	private static final String TXT_ATTACK = Messages.get(WndHero.class, "attack");
+	private static final String TXT_HEALTH = Messages.get(WndHero.class, "health");
+	private static final String TXT_MOVES2 = Messages.get(WndHero.class, "moves2");
+	private static final String TXT_MOVES3 = Messages.get(WndHero.class, "moves3");
+	private static final String TXT_MOVES4 = Messages.get(WndHero.class, "moves4");
+	private static final String TXT_HUNGER = Messages.get(WndHero.class, "hunger");
+	private static final String TXT_MOVES_DEW = Messages.get(WndHero.class, "moves_dew");
+	private static final String TXT_ATTACKSKILL = Messages.get(WndHero.class, "attackskill");
+	private static final String TXT_GOLD = Messages.get(WndHero.class, "gold");
+	private static final String TXT_DEPTH = Messages.get(WndHero.class, "max");
+	private static final String TXT_MOVES = Messages.get(WndHero.class, "moves");
+	private static final String TXT_PETS = Messages.get(WndHero.class, "pets");
+	private static final String TXT_KILLS = Messages.get(WndHero.class, "kills");
 
 	private static final int WIDTH = 100;
 	private static final int TAB_WIDTH = 40;
@@ -186,9 +217,12 @@ public class WndHero extends WndTabbed {
 
 	private class StatsTab extends Group {
 
-		private static final String TXT_TITLE = "Level %d %s";
-		private static final String TXT_CATALOGUS = "Catalogus";
-		private static final String TXT_JOURNAL = "Journal";
+//		private static final String TXT_TITLE = "Level %d %s";
+//		private static final String TXT_CATALOGUS = "Catalogus";
+//		private static final String TXT_JOURNAL = "Journal";
+private final String TXT_TITLE = Messages.get(WndHero.class, "title");
+		private final String TXT_CATALOGUS = Messages.get(WndHero.class, "catalogus");
+		private final String TXT_JOURNAL = Messages.get(WndHero.class, "journal");
 
 		private static final int GAP = 5;
 
@@ -265,12 +299,11 @@ public class WndHero extends WndTabbed {
 
 		private void statSlot(String label, String value) {
 
-			BitmapText txt = PixelScene.createText(label, 8);
+			RenderedText txt = PixelScene.renderText(label, 8);
 			txt.y = pos;
 			add(txt);
 
-			txt = PixelScene.createText(value, 8);
-			txt.measure();
+			txt = PixelScene.renderText(value, 8);
 			txt.x = PixelScene.align(WIDTH * 0.65f);
 			txt.y = pos;
 			add(txt);
@@ -289,9 +322,12 @@ public class WndHero extends WndTabbed {
 	
 	private class LevelStatsTab extends Group {
 
-		private static final String TXT_TITLE = "Level %d %s";
-		private static final String TXT_CATALOGUS = "Catalogus";
-		private static final String TXT_JOURNAL = "Journal";
+//		private static final String TXT_TITLE = "Level %d %s";
+//		private static final String TXT_CATALOGUS = "Catalogus";
+//		private static final String TXT_JOURNAL = "Journal";
+private final String TXT_TITLE = Messages.get(WndHero.class, "title");
+		private final String TXT_CATALOGUS = Messages.get(WndHero.class, "catalogus");
+		private final String TXT_JOURNAL = Messages.get(WndHero.class, "journal");
 
 		private static final int GAP = 5;
 
@@ -364,12 +400,11 @@ public class WndHero extends WndTabbed {
 
 		private void statSlot(String label, String value) {
 
-			BitmapText txt = PixelScene.createText(label, 8);
+			RenderedText txt = PixelScene.renderText(label, 8);
 			txt.y = pos;
 			add(txt);
 
-			txt = PixelScene.createText(value, 8);
-			txt.measure();
+			txt = PixelScene.renderText(value, 8);
 			txt.x = PixelScene.align(WIDTH * 0.65f);
 			txt.y = pos;
 			add(txt);
@@ -412,7 +447,7 @@ public class WndHero extends WndTabbed {
 				icon.y = pos;
 				add(icon);
 
-				BitmapText txt = PixelScene.createText(buff.toString(), 8);
+				RenderedText txt = PixelScene.renderText(buff.toString(), 8);
 				txt.x = icon.width + GAP;
 				txt.y = pos + (int) (icon.height - txt.baseLine()) / 2;
 				add(txt);
@@ -428,15 +463,22 @@ public class WndHero extends WndTabbed {
 	
 	private class PetTab extends Group {
 
-		private static final String TXT_TITLE = "Level %d %s";
-		private static final String TXT_FEED = "Feed";
-		private static final String TXT_CALL = "Call";
-		private static final String TXT_STAY = "Stay";
-		private static final String TXT_RELEASE = "Release";
-		private static final String TXT_SELECT = "What do you want to feed your pet?";
+//		private static final String TXT_TITLE = "Level %d %s";
+//		private static final String TXT_FEED = "Feed";
+//		private static final String TXT_CALL = "Call";
+//		private static final String TXT_STAY = "Stay";
+//		private static final String TXT_RELEASE = "Release";
+//		private static final String TXT_SELECT = "What do you want to feed your pet?";
+private final String TXT_TITLE = Messages.get(WndHero.class, "p_title");
+		private final String TXT_FEED = Messages.get(WndHero.class, "p_feed");
+		private final String TXT_CALL = Messages.get(WndHero.class, "p_call");
+		private final String TXT_STAY = Messages.get(WndHero.class, "p_stay");
+		private final String TXT_RELEASE = Messages.get(WndHero.class, "p_release");
+		private final String TXT_SELECT = Messages.get(WndHero.class, "p_select");
+		private final String TXT_SPEED = Messages.get(WndHero.class, "p_speed");
 		
 		private CharSprite image;
-		private BitmapText name;
+		private RenderedText name;
 		private HealthBar health;
 		private BuffIndicator buffs;
 
@@ -445,11 +487,10 @@ public class WndHero extends WndTabbed {
 		private float pos;
 		
 				
-		public PetTab(final PET heropet) {		
-						
-			name = PixelScene.createText(Utils.capitalize(heropet.name), 9);
+		public PetTab(final PET heropet) {
+
+			name = PixelScene.renderText(Utils.capitalize(heropet.name), 9);
 			name.hardlight(TITLE_COLOR);
-			name.measure();
 			//add(name);
 
 			image = heropet.sprite();
@@ -538,12 +579,11 @@ public class WndHero extends WndTabbed {
 
 		private void statSlot(String label, String value) {
 
-			BitmapText txt = PixelScene.createText(label, 8);
+			RenderedText txt = PixelScene.renderText(label, 8);
 			txt.y = pos;
 			add(txt);
 
-			txt = PixelScene.createText(value, 8);
-			txt.measure();
+			txt = PixelScene.renderText(value, 8);
 			txt.x = PixelScene.align(WIDTH * 0.65f);
 			txt.y = pos;
 			add(txt);
@@ -594,11 +634,14 @@ public class WndHero extends WndTabbed {
 		  }
 	      heropet.cooldown=1;  
 		  item.detach(Dungeon.hero.belongings.backpack);
-		  GLog.n("Your pet eats the %s.",item.name());
+//		  GLog.n("Your pet eats the %s.",item.name());
+			GLog.i(Messages.get(WndHero.class, "p_eat", item.name()));
 		}else if (!nearby){
-			GLog.n("Your pet is too far away!");
+//			GLog.n("Your pet is too far away!");
+			GLog.w(Messages.get(WndHero.class, "p_far"));
 		} else {
-		  GLog.n("Your pet rejects the %s.",item.name());
+//		  GLog.n("Your pet rejects the %s.",item.name());
+			GLog.w(Messages.get(WndHero.class, "p_reject", item.name()));
 		  
 		}		
 	}

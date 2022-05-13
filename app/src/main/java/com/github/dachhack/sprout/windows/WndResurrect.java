@@ -25,6 +25,7 @@ import com.github.dachhack.sprout.scenes.InterlevelScene;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.ui.RedButton;
+import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.watabou.noosa.BitmapTextMultiline;
 import com.watabou.noosa.Game;
@@ -54,12 +55,10 @@ public class WndResurrect extends Window {
 		titlebar.label(ankh.name());
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
-
-		BitmapTextMultiline message = PixelScene
-				.createMultiline(TXT_MESSAGE, 6);
-		message.maxWidth = WIDTH;
-		message.measure();
-		message.y = titlebar.bottom() + GAP;
+		RenderedTextMultiline message = PixelScene
+				.renderMultiline(TXT_MESSAGE, 6);
+		message.maxWidth(WIDTH);
+		message.setPos(0, titlebar.bottom() + GAP);
 		add(message);
 
 		RedButton btnYes = new RedButton(TXT_YES) {
@@ -73,7 +72,7 @@ public class WndResurrect extends Window {
 				Game.switchScene(InterlevelScene.class);
 			}
 		};
-		btnYes.setRect(0, message.y + message.height() + GAP, WIDTH, BTN_HEIGHT);
+		btnYes.setRect(0, message.top() + message.height() + GAP, WIDTH, BTN_HEIGHT);
 		add(btnYes);
 
 		RedButton btnNo = new RedButton(TXT_NO) {

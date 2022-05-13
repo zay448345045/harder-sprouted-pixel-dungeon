@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.windows;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.actors.mobs.npcs.Shopkeeper;
@@ -30,6 +31,7 @@ import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.ui.ItemSlot;
 import com.github.dachhack.sprout.ui.RedButton;
+import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
@@ -41,17 +43,28 @@ public class WndTradeItem extends Window {
 	private static final int WIDTH = 120;
 	private static final int BTN_HEIGHT = 16;
 
-	private static final String TXT_SALE = "FOR SALE: %s - %dg";
-	private static final String TXT_BUY = "Buy for %dg";
-	private static final String TXT_STEAL = "Steal with %d%% chance";
-	private static final String TXT_SELL = "Sell for %dg";
-	private static final String TXT_SELL_1 = "Sell 1 for %dg";
-	private static final String TXT_SELL_ALL = "Sell all for %dg";
-	private static final String TXT_CANCEL = "Never mind";
+//	private static final String TXT_SALE = "FOR SALE: %s - %dg";
+//	private static final String TXT_BUY = "Buy for %dg";
+//	private static final String TXT_STEAL = "Steal with %d%% chance";
+//	private static final String TXT_SELL = "Sell for %dg";
+//	private static final String TXT_SELL_1 = "Sell 1 for %dg";
+//	private static final String TXT_SELL_ALL = "Sell all for %dg";
+//	private static final String TXT_CANCEL = "Never mind";
+//
+//	private static final String TXT_SOLD = "You've sold your %s for %dg";
+//	private static final String TXT_BOUGHT = "You've bought %s for %dg";
+//	private static final String TXT_STOLE = "You've stolen the %s";
+private static final String TXT_SALE = Messages.get(WndTradeItem.class, "sale");
+	private static final String TXT_BUY = Messages.get(WndTradeItem.class, "buy");
+	private static final String TXT_STEAL = Messages.get(WndTradeItem.class, "steal");
+	private static final String TXT_SELL = Messages.get(WndTradeItem.class, "sell");
+	private static final String TXT_SELL_1 = Messages.get(WndTradeItem.class, "sell1");
+	private static final String TXT_SELL_ALL = Messages.get(WndTradeItem.class, "sellall");
+	private static final String TXT_CANCEL = Messages.get(WndTradeItem.class, "cancel");
 
-	private static final String TXT_SOLD = "You've sold your %s for %dg";
-	private static final String TXT_BOUGHT = "You've bought %s for %dg";
-	private static final String TXT_STOLE = "You've stolen the %s";
+	private static final String TXT_SOLD = Messages.get(WndTradeItem.class, "sold");
+	private static final String TXT_BOUGHT = Messages.get(WndTradeItem.class, "bought");
+	private static final String TXT_STOLE = Messages.get(WndTradeItem.class, "stole");
 
 	private WndBag owner;
 
@@ -226,14 +239,12 @@ public class WndTradeItem extends Window {
 		}
 
 		// Description
-		BitmapTextMultiline info = PixelScene.createMultiline(item.info(), 6);
-		info.maxWidth = WIDTH;
-		info.measure();
-		info.x = titlebar.left();
-		info.y = titlebar.bottom() + GAP;
+		RenderedTextMultiline info = PixelScene.renderMultiline(item.info(), 6);
+		info.maxWidth(WIDTH);
+		info.setPos(titlebar.left(), titlebar.bottom() + GAP);
 		add(info);
 
-		return info.y + info.height();
+		return info.bottom();
 	}
 
 	private void sell(Item item) {

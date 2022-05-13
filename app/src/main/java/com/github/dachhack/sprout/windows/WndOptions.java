@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.windows;
 
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.ui.RedButton;
+import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.watabou.noosa.BitmapTextMultiline;
 
@@ -31,21 +32,18 @@ public class WndOptions extends Window {
 	public WndOptions(String title, String message, String... options) {
 		super();
 
-		BitmapTextMultiline tfTitle = PixelScene.createMultiline(title, 9);
+		RenderedTextMultiline tfTitle = PixelScene.renderMultiline(title, 9);
 		tfTitle.hardlight(TITLE_COLOR);
-		tfTitle.x = tfTitle.y = MARGIN;
-		tfTitle.maxWidth = WIDTH - MARGIN * 2;
-		tfTitle.measure();
+		tfTitle.setPos(MARGIN, MARGIN);
+		tfTitle.maxWidth(width - MARGIN * 2);
 		add(tfTitle);
 
-		BitmapTextMultiline tfMesage = PixelScene.createMultiline(message, 8);
-		tfMesage.maxWidth = WIDTH - MARGIN * 2;
-		tfMesage.measure();
-		tfMesage.x = MARGIN;
-		tfMesage.y = tfTitle.y + tfTitle.height() + MARGIN;
+		RenderedTextMultiline tfMesage = PixelScene.renderMultiline(6);
+		tfMesage.text(message, width - MARGIN * 2);
+		tfMesage.setPos(MARGIN, tfTitle.top() + tfTitle.height() + MARGIN);
 		add(tfMesage);
 
-		float pos = tfMesage.y + tfMesage.height() + MARGIN;
+		float pos = tfMesage.bottom() + MARGIN;
 
 		for (int i = 0; i < options.length; i++) {
 			final int index = i;
