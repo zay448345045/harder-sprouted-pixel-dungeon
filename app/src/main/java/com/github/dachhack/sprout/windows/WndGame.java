@@ -62,7 +62,7 @@ private static final String TXT_SETTINGS = Messages.get(WndGame.class, "settings
 			@Override
 			protected void onClick() {
 				hide();
-				GameScene.show(new WndSettings(true));
+				GameScene.show(new WndSettings());
 			}
 		});
 

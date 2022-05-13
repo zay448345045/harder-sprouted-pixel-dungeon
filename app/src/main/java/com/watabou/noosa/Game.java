@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.View;
 
+import com.badlogic.gdx.Gdx;
 import com.rohitss.uceh.UCEHandler;
 import com.watabou.glscripts.Script;
 import com.watabou.gltextures.TextureCache;
@@ -26,6 +27,8 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.BitmapCache;
 import com.watabou.utils.SystemTime;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 
 import javax.microedition.khronos.egl.EGLConfig;
@@ -34,12 +37,33 @@ import javax.microedition.khronos.opengles.GL10;
 public class Game extends Activity implements GLSurfaceView.Renderer, View.OnTouchListener {
 
 	public static Game instance;
-
+	public static float timeTotal = 0f;
 	// Actual size of the screen
 	public static int width;
 	public static int height;
 	public static int dispWidth;
 	public static int dispHeight;
+
+	protected void logException( Throwable tr ){
+		StringWriter sw = new StringWriter();
+		PrintWriter pw = new PrintWriter(sw);
+		tr.printStackTrace(pw);
+		pw.flush();
+		Gdx.app.error("GAME", sw.toString());
+	}
+
+	public static void reportException( Throwable tr ) {
+		if (instance != null) {
+			instance.logException(tr);
+		} else {
+			//fallback if error happened in initialization
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			tr.printStackTrace(pw);
+			pw.flush();
+			System.err.println(sw.toString());
+		}
+	}
 
 	protected SceneChangeCallback onChange;
 

@@ -129,7 +129,7 @@ public class StartScene extends PixelScene {
 			@Override
 			protected void onClick() {
 				if (GamesInProgress.check(curClass) != null) {
-					StartScene.this.add(new WndOptions(TXT_REALLY, TXT_WARNING,
+					StartScene.this.add(new WndOptions(TXT_REALLY,TXT_WARNING,
 							TXT_YES, TXT_NO) {
 						@Override
 						protected void onSelect(int index) {

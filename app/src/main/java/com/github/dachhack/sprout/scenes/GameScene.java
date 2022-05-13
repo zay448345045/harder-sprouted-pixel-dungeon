@@ -367,7 +367,7 @@ public class GameScene extends PixelScene {
 	@Override
 	public void destroy() {
 
-		freezeEmitters = false;
+		Emitter.freezeEmitters = false;
 
 		scene = null;
 		Badges.saveGlobal();
@@ -393,7 +393,7 @@ public class GameScene extends PixelScene {
 
 		super.update();
 
-		if (!freezeEmitters)
+		if (!Emitter.freezeEmitters)
 			water.offset(0, -5 * Game.elapsed);
 
 		Actor.process();

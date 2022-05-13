@@ -17,6 +17,7 @@ import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.windows.WndOptions;
 import com.watabou.noosa.Group;
 import com.watabou.noosa.audio.Sample;
+import com.watabou.noosa.particles.Emitter;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
@@ -313,7 +314,7 @@ public static final String AC_ACTIVATE = Messages.get(TimekeepersHourglass.class
 			if (Dungeon.level != null)
 				for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0]))
 					mob.sprite.add(CharSprite.State.PARALYSED);
-			Group.freezeEmitters = true;
+			Emitter.freezeEmitters = true;
 			return super.attachTo(target);
 		}
 
@@ -322,7 +323,7 @@ public static final String AC_ACTIVATE = Messages.get(TimekeepersHourglass.class
 			triggerPresses();
 			for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0]))
 				mob.sprite.remove(CharSprite.State.PARALYSED);
-			Group.freezeEmitters = false;
+			Emitter.freezeEmitters = false;
 
 			charge = 0;
 			updateQuickslot();

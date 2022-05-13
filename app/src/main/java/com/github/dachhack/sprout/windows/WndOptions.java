@@ -22,47 +22,64 @@ import com.github.dachhack.sprout.ui.RedButton;
 import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.watabou.noosa.BitmapTextMultiline;
+import com.watabou.noosa.Image;
 
 public class WndOptions extends Window {
 
-	private static final int WIDTH = 120;
-	private static final int MARGIN = 2;
-	private static final int BUTTON_HEIGHT = 20;
+	private static final int WIDTH_P = 120;
+	private static final int WIDTH_L = 144;
 
-	public WndOptions(String title, String message, String... options) {
+	private static final int MARGIN 		= 2;
+	private static final int BUTTON_HEIGHT	= 20;
+
+	public WndOptions( String title, String message, String... options ) {
 		super();
 
-		RenderedTextMultiline tfTitle = PixelScene.renderMultiline(title, 9);
-		tfTitle.hardlight(TITLE_COLOR);
-		tfTitle.setPos(MARGIN, MARGIN);
-		tfTitle.maxWidth(width - MARGIN * 2);
-		add(tfTitle);
+		int width = PixelScene.landscape() ? WIDTH_L : WIDTH_P;
 
-		RenderedTextMultiline tfMesage = PixelScene.renderMultiline(6);
+		float pos = MARGIN;
+		if (title != null) {
+			RenderedTextMultiline tfTitle = PixelScene.renderMultiline(title, 9);
+			tfTitle.hardlight(TITLE_COLOR);
+			tfTitle.setPos(MARGIN, pos);
+			tfTitle.maxWidth(width - MARGIN * 2);
+			add(tfTitle);
+
+			pos = tfTitle.bottom() + 3*MARGIN;
+		}
+
+		RenderedTextMultiline tfMesage = PixelScene.renderMultiline( 6 );
 		tfMesage.text(message, width - MARGIN * 2);
-		tfMesage.setPos(MARGIN, tfTitle.top() + tfTitle.height() + MARGIN);
-		add(tfMesage);
+		tfMesage.setPos( MARGIN, pos );
+		add( tfMesage );
 
-		float pos = tfMesage.bottom() + MARGIN;
+		pos = tfMesage.bottom() + 2*MARGIN;
 
-		for (int i = 0; i < options.length; i++) {
+		for (int i=0; i < options.length; i++) {
 			final int index = i;
-			RedButton btn = new RedButton(options[i]) {
+			RedButton btn = new RedButton( options[i] ) {
 				@Override
 				protected void onClick() {
 					hide();
-					onSelect(index);
+					onSelect( index );
 				}
 			};
-			btn.setRect(MARGIN, pos, WIDTH - MARGIN * 2, BUTTON_HEIGHT);
-			add(btn);
+			btn.enable(enabled(i));
+			btn.setRect( MARGIN, pos, width - MARGIN * 2, BUTTON_HEIGHT );
+			add( btn );
 
 			pos += BUTTON_HEIGHT + MARGIN;
 		}
 
-		resize(WIDTH, (int) pos);
+		resize( width, (int)pos );
 	}
 
-	protected void onSelect(int index) {
-	};
+	public WndOptions(Image image, String message, String desc, String update, String changes) {
+	}
+
+	protected boolean enabled( int index ){
+		return true;
+	}
+
+	protected void onSelect( int index ) {}
 }

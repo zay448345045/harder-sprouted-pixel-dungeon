@@ -12,8 +12,12 @@ import com.watabou.utils.Random;
 import javax.microedition.khronos.opengles.GL10;
 
 public class Emitter extends Group {
-
+	public static boolean freezeEmitters = false;
+	protected boolean isFrozen(){
+		return Game.timeTotal > 1 && freezeEmitters;
+	}
 	protected boolean lightMode = false;
+
 
 	public float x;
 	public float y;

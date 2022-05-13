@@ -4211,3 +4211,5 @@ app/build/intermediates/project_dex_archive/debug/out/com/watabou/noosa/PointerA
 app/build/intermediates/project_dex_archive/debug/out/com/watabou/utils/FileOperations.dex
 app/build/outputs/apk/debug/PO.apk
 app/build/outputs/bundle/debug/app-debug.aab
+app/build/intermediates/javac/debug/classes/com/watabou/utils/Reflection.class
+app/build/intermediates/project_dex_archive/debug/out/com/watabou/utils/Reflection.dex
