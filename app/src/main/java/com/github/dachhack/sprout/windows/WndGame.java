@@ -17,8 +17,6 @@
  */
 package com.github.dachhack.sprout.windows;
 
-import java.io.IOException;
-
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
@@ -30,6 +28,8 @@ import com.github.dachhack.sprout.ui.Icons;
 import com.github.dachhack.sprout.ui.RedButton;
 import com.github.dachhack.sprout.ui.Window;
 import com.watabou.noosa.Game;
+
+import java.io.IOException;
 
 public class WndGame extends Window {
 
