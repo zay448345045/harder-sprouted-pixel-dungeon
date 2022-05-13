@@ -6456,3 +6456,9 @@ app/build/intermediates/symbol_list_with_package_name/release/package-aware-r.tx
 app/build/outputs/apk/debug/HS.apk
 app/build/outputs/logs/manifest-merger-release-report.txt
 app/build/tmp/compileReleaseJavaWithJavac/source-classes-mapping.txt
+app/build/intermediates/javac/debug/classes/com/github/dachhack/sprout/windows/WndSettings$GameTab$6.class
+app/build/intermediates/javac/debug/classes/com/github/dachhack/sprout/windows/WndSettings$GameTab$7.class
+app/build/intermediates/project_dex_archive/debug/out/com/github/dachhack/sprout/scenes/ChangesScene.dex
+app/build/intermediates/project_dex_archive/debug/out/com/github/dachhack/sprout/ui/ChangesButton.dex
+app/build/intermediates/project_dex_archive/debug/out/com/github/dachhack/sprout/windows/WndSettings$GameTab$6.dex
+app/build/intermediates/project_dex_archive/debug/out/com/github/dachhack/sprout/windows/WndSettings$GameTab$7.dex

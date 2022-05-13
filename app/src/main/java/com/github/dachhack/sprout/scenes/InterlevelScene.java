@@ -25,6 +25,7 @@ import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.actors.mobs.pets.PET;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.levels.Level;
+import com.github.dachhack.sprout.ui.GameLog;
 import com.github.dachhack.sprout.windows.WndError;
 import com.github.dachhack.sprout.windows.WndStory;
 import com.watabou.noosa.BitmapText;
@@ -349,6 +350,7 @@ public class InterlevelScene extends PixelScene {
 			if (noStory) {
 				Dungeon.chapters.add(WndStory.ID_SEWERS);
 				noStory = false;
+				GameLog.wipe();
 			}
 		} else {
 			Dungeon.saveLevel();

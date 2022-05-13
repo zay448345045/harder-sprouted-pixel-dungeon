@@ -25,6 +25,7 @@ import com.github.dachhack.sprout.ShatteredPixelDungeon;
 import com.github.dachhack.sprout.effects.BannerSprites;
 import com.github.dachhack.sprout.effects.Fireball;
 import com.github.dachhack.sprout.ui.Archs;
+import com.github.dachhack.sprout.ui.ChangesButton;
 import com.github.dachhack.sprout.ui.ExitButton;
 import com.github.dachhack.sprout.ui.LanguageButton;
 import com.github.dachhack.sprout.ui.PrefsButton;
@@ -173,9 +174,9 @@ public class TitleScene extends PixelScene {
 		btnPrefs.setPos(0, 0);
 		add(btnPrefs);
 
-		//Button btnReset = new ResetButton();
-		//btnReset.setPos(48, 1);
-		//add(btnReset);
+		Button changes = new ChangesButton();
+		changes.setPos( w-changes.width(), h - source.height()-7 - changes.height());
+		add( changes );
 
 		LanguageButton btnLang = new LanguageButton();
 		btnLang.setPos(16, 1);

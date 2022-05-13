@@ -35,7 +35,7 @@ import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
 public class Game extends Activity implements GLSurfaceView.Renderer, View.OnTouchListener {
-
+	protected static Class<? extends Scene> sceneClass;
 	public static Game instance;
 	public static float timeTotal = 0f;
 	// Actual size of the screen
@@ -80,7 +80,7 @@ public class Game extends Activity implements GLSurfaceView.Renderer, View.OnTou
 	// true if scene switch is requested
 	protected boolean requestedReset = true;
 	// New scene class
-	protected Class<? extends Scene> sceneClass;
+
 
 	// Current time in milliseconds
 	protected long now;

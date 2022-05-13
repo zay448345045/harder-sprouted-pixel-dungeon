@@ -58,7 +58,7 @@ private static final String TXT_ERROR = Messages.get(WndRanking.class, "error");
 	private static final String TXT_BADGES = "bad";
 
 	private static final int WIDTH = 115;
-	private static final int HEIGHT = 144;
+	private static final int HEIGHT = 175;
 
 	private static final int TAB_WIDTH = 40;
 

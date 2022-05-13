@@ -107,7 +107,12 @@ public class ShatteredPixelDungeon extends Game {
 		return Preferences.INSTANCE.getInt(Preferences.KEY_SCALE, 0);
 	}
 
-    @SuppressWarnings("deprecation")
+	public static void scale(int value) {
+		Preferences.INSTANCE.put(Preferences.KEY_SCALE, value);
+		switchScene(TitleScene.class);
+	}
+
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

@@ -32,14 +32,8 @@ import com.watabou.noosa.Game;
 import com.watabou.noosa.Group;
 import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.audio.Sample;
-
+@SuppressWarnings("All")
 public class WndSettings extends WndTabbed {
-
-	private static final String TXT_IMMERSIVE = Messages.get(WndSettings.class, "immersive");
-	private static final String TXT_MUSIC = Messages.get(WndSettings.class, "music");
-	private static final String TXT_SOUND = Messages.get(WndSettings.class, "sound");
-	private static final String TXT_SWITCH_PORT = Messages.get(WndSettings.class, "port");
-	private static final String TXT_SWITCH_LAND = Messages.get(WndSettings.class, "land");
 
 	private static final int WIDTH = 112;
 	private static final int WIDTH_L = 226;
@@ -101,34 +95,7 @@ public class WndSettings extends WndTabbed {
 
 		public GeneralTab() {
 
-			OptionSlider scale = new OptionSlider(Messages.get(WndSettings.class, "scale"),
-					(int) Math.ceil(2 * Game.density) + "X",
-					PixelScene.maxDefaultZoom + "X",
-					(int) Math.ceil(2 * Game.density),
-					PixelScene.maxDefaultZoom) {
-				@Override
-				protected void onChange() {
-					if (getSelectedValue() != ShatteredPixelDungeon.scale()) {
-						ShatteredPixelDungeon.scale();
-						GameLog.wipe();
-						try {
-							Dungeon.saveAll();
-						} catch (Exception e) {
-							// Do nothing
-						}
-						Game.switchScene(TitleScene.class);
-					}
-				}
-			};
-			scale.setSelectedValue(PixelScene.defaultZoom);
-			if ((int) Math.ceil(2 * Game.density) < PixelScene.maxDefaultZoom) {
-				scale.setRect(0, 0, WIDTH, SLIDER_HEIGHT);
-				add(scale);
-			} else {
-				scale.setRect(0, 0, 0, 0);
-			}
-
-			CheckBox musicMute = new CheckBox(TXT_MUSIC) {
+			CheckBox musicMute = new CheckBox(Messages.get(WndSettings.class, "music")) {
 				@Override
 				protected void onClick() {
 					super.onClick();
@@ -136,14 +103,14 @@ public class WndSettings extends WndTabbed {
 				}
 			};
 			if (!ShatteredPixelDungeon.landscape()) {
-				musicMute.setRect(0, scale.bottom() + GAP, WIDTH, BTN_HEIGHT);
+				musicMute.setRect(0, 0, WIDTH, BTN_HEIGHT);
 			} else {
-				musicMute.setRect(0, scale.bottom() + GAP, WIDTH_L / 2 - 1, BTN_HEIGHT);
+				musicMute.setRect(0, 0, WIDTH*2, BTN_HEIGHT);
 			}
 			musicMute.checked(!ShatteredPixelDungeon.music());
 			add(musicMute);
 
-			CheckBox btnSound = new CheckBox(TXT_SOUND) {
+			CheckBox btnSound = new CheckBox(Messages.get(WndSettings.class, "sound")) {
 				@Override
 				protected void onClick() {
 					super.onClick();
@@ -154,7 +121,7 @@ public class WndSettings extends WndTabbed {
 			if (!ShatteredPixelDungeon.landscape()) {
 				btnSound.setRect(0, musicMute.bottom() + GAP_SML, WIDTH, BTN_HEIGHT);
 			} else {
-				btnSound.setRect(WIDTH_L / 2 + 1, scale.bottom() + GAP, WIDTH_L / 2 - 1, BTN_HEIGHT);
+				btnSound.setRect(0, musicMute.bottom() + GAP_SML, WIDTH*2, BTN_HEIGHT);
 			}
 			btnSound.checked(!ShatteredPixelDungeon.soundFx());
 			add(btnSound);
@@ -170,26 +137,10 @@ public class WndSettings extends WndTabbed {
 			if (!ShatteredPixelDungeon.landscape()) {
 				chkFont.setRect(0, btnSound.bottom() + GAP, WIDTH, BTN_HEIGHT);
 			} else {
-				chkFont.setRect(0, btnSound.bottom() + GAP, WIDTH_L / 2 - 1, BTN_HEIGHT);
+				chkFont.setRect(0, btnSound.bottom() + GAP, WIDTH * 2, BTN_HEIGHT);
 			}
 			chkFont.checked(!ShatteredPixelDungeon.classicFont());
 			add(chkFont);
-
-			CheckBox btnImmersive = new CheckBox(TXT_IMMERSIVE) {
-				@Override
-				protected void onClick() {
-					super.onClick();
-					ShatteredPixelDungeon.immerse(checked());
-				}
-			};
-			if (!ShatteredPixelDungeon.landscape()) {
-				btnImmersive.setRect(0, chkFont.bottom() + GAP, WIDTH, BTN_HEIGHT);
-			} else {
-				btnImmersive.setRect(WIDTH_L / 2 + 1, btnSound.bottom() + GAP, WIDTH_L / 2 - 1, BTN_HEIGHT);
-			}
-			btnImmersive.checked(ShatteredPixelDungeon.immersed());
-			btnImmersive.enable(android.os.Build.VERSION.SDK_INT >= 19);
-			add(btnImmersive);
 
 			RedButton btnOrientation = new RedButton(orientationText()) {
 				@Override
@@ -198,9 +149,9 @@ public class WndSettings extends WndTabbed {
 				}
 			};
 			if (!ShatteredPixelDungeon.landscape()) {
-				btnOrientation.setRect(0, btnImmersive.bottom() + GAP, WIDTH, BTN_HEIGHT);
+				btnOrientation.setRect(0, chkFont.bottom() + GAP, WIDTH, BTN_HEIGHT);
 			} else {
-				btnOrientation.setRect(0, btnImmersive.bottom() + GAP, WIDTH_L, BTN_HEIGHT);
+				btnOrientation.setRect(0, chkFont.bottom() + GAP, WIDTH*2, BTN_HEIGHT);
 			}
 			add(btnOrientation);
 		}
@@ -222,7 +173,7 @@ public class WndSettings extends WndTabbed {
 			if (!ShatteredPixelDungeon.landscape()) {
 				slots.setRect(0, 0, WIDTH, SLIDER_HEIGHT);
 			} else {
-				slots.setRect(0, 0, WIDTH_L / 2 - 1, SLIDER_HEIGHT);
+				slots.setRect(0, 0, WIDTH*2, SLIDER_HEIGHT);
 			}
 			add(slots);
 
@@ -273,7 +224,7 @@ public class WndSettings extends WndTabbed {
 			if (!ShatteredPixelDungeon.landscape()) {
 				btnCentered.setRect(btnGrouped.right() + 1, barDesc.y + barDesc.height(), 36, BTN_HEIGHT);
 			} else {
-				btnCentered.setRect(btnGrouped.right() + 1, barDesc.y + barDesc.height(), 74, BTN_HEIGHT);
+				btnCentered.setRect(btnGrouped.right() + 1, barDesc.y + barDesc.height(), 72, BTN_HEIGHT);
 			}
 			add(btnCentered);
 
@@ -286,25 +237,68 @@ public class WndSettings extends WndTabbed {
 				}
 			};
 			if (!ShatteredPixelDungeon.landscape()) {
-				chkFlipToolbar.setRect(0, btnCentered.bottom() + GAP_LRG, WIDTH, BTN_HEIGHT);
+				chkFlipToolbar.setRect(0, btnCentered.bottom() + GAP, WIDTH, BTN_HEIGHT);
 			} else {
-				chkFlipToolbar.setRect(0, btnCentered.bottom() + GAP_LRG, WIDTH_L / 2 - 1, BTN_HEIGHT);
+				chkFlipToolbar.setRect(0, btnCentered.bottom() + GAP, WIDTH*2, BTN_HEIGHT);
 			}
 			chkFlipToolbar.checked(ShatteredPixelDungeon.flipToolbar());
 			add(chkFlipToolbar);
+
+			CheckBox btnBrightness = new CheckBox(Messages.get(WndSettings.class, "brtes")) {
+				@Override
+				protected void onClick() {
+					super.onClick();
+					ShatteredPixelDungeon.brightness(checked());
+				}
+			};
+			if (!ShatteredPixelDungeon.landscape()) {
+				btnBrightness.setRect(0, chkFlipToolbar.bottom() + GAP, WIDTH, BTN_HEIGHT);
+			} else {
+				btnBrightness.setRect(0, chkFlipToolbar.bottom() + GAP, WIDTH*2, SLIDER_HEIGHT);
+			}
+			btnBrightness.checked(ShatteredPixelDungeon.brightness());
+			add(btnBrightness);
+
+			OptionSlider btnScaleUp = new OptionSlider(Messages.get(WndSettings.class, "scale"),
+					(int) Math.ceil(2 * Game.density) + "X",
+					PixelScene.maxDefaultZoom + "X",
+					(int) Math.ceil(2 * Game.density),
+					PixelScene.maxDefaultZoom) {
+				@Override
+				protected void onChange() {
+					if (getSelectedValue() != ShatteredPixelDungeon.scale()) {
+						ShatteredPixelDungeon.scale(getSelectedValue());
+						GameLog.wipe();
+						try {
+							Dungeon.saveAll();
+						} catch (Exception e) {
+							// Do nothing
+						}
+						Game.switchScene(TitleScene.class);
+					}
+				}
+			};
+			if (!ShatteredPixelDungeon.landscape()) {
+				btnScaleUp.setRect(0, btnBrightness.bottom() + GAP, WIDTH, SLIDER_HEIGHT);
+			} else {
+				btnScaleUp.setRect(9000,9000,0,0);
+			}
+			btnScaleUp.setSelectedValue(PixelScene.defaultZoom);
+			add(btnScaleUp);
+
 		}
 	}
 
 	private String orientationText() {
-		return ShatteredPixelDungeon.landscape() ? TXT_SWITCH_PORT
-				: TXT_SWITCH_LAND;
+		return ShatteredPixelDungeon.landscape() ? Messages.get(WndSettings.class, "port")
+				: Messages.get(WndSettings.class, "land");
 	}
 
 	@Override
 	public void hide() {
 		super.hide();
 		if (setScale != PixelScene.defaultZoom) {
-			ShatteredPixelDungeon.scale();
+			ShatteredPixelDungeon.scale(setScale);
 			ShatteredPixelDungeon.switchScene(TitleScene.class);
 		}
 	}

@@ -24,6 +24,7 @@ import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.scenes.InterlevelScene;
 import com.github.dachhack.sprout.scenes.RankingsScene;
 import com.github.dachhack.sprout.scenes.TitleScene;
+import com.github.dachhack.sprout.ui.GameLog;
 import com.github.dachhack.sprout.ui.Icons;
 import com.github.dachhack.sprout.ui.RedButton;
 import com.github.dachhack.sprout.ui.Window;
@@ -103,11 +104,14 @@ private static final String TXT_SETTINGS = Messages.get(WndGame.class, "settings
 			});
 		}
 
+
+
 		addButtons(
 		// Main menu
 				new RedButton(TXT_MENU) {
 					@Override
 					protected void onClick() {
+						GameLog.wipe();
 						try {
 							Dungeon.saveAll();
 						} catch (IOException e) {

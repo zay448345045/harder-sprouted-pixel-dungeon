@@ -21,6 +21,7 @@ import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.GamesInProgress;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
 import com.github.dachhack.sprout.actors.hero.HeroClass;
 import com.github.dachhack.sprout.effects.BannerSprites;
@@ -30,6 +31,7 @@ import com.github.dachhack.sprout.ui.Archs;
 import com.github.dachhack.sprout.ui.ExitButton;
 import com.github.dachhack.sprout.ui.Icons;
 import com.github.dachhack.sprout.ui.RedButton;
+import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.utils.Utils;
 import com.github.dachhack.sprout.windows.WndChallenges;
 import com.github.dachhack.sprout.windows.WndClass;
@@ -198,24 +200,15 @@ public class StartScene extends PixelScene {
 		unlock = new Group();
 		add(unlock);
 
-		if (!(huntressUnlocked = Badges.isUnlocked(Badges.Badge.BOSS_SLAIN_3))) {
+		if (!(huntressUnlocked = Badges.isUnlocked( Badges.Badge.BOSS_SLAIN_3 ))) {
 
-			BitmapTextMultiline text = PixelScene
-					.createMultiline(TXT_UNLOCK, 9);
-			text.maxWidth = (int) width;
-			text.measure();
+			RenderedTextMultiline text = PixelScene.renderMultiline( Messages.get(this, "unlock"), 9 );
+			text.maxWidth((int)width);
+			text.hardlight( 0xFFFF00 );
+			text.setPos(w / 2 - text.width() / 2, (bottom - BUTTON_HEIGHT) + (BUTTON_HEIGHT - text.height()) / 2);
+			align(text);
+			unlock.add(text);
 
-			float pos = (bottom - BUTTON_HEIGHT)
-					+ (BUTTON_HEIGHT - text.height()) / 2;
-			for (BitmapText line : text.new LineSplitter().split()) {
-				line.measure();
-				line.hardlight(0xFFFF00);
-				line.x = PixelScene.align(w / 2 - line.width() / 2);
-				line.y = PixelScene.align(pos);
-				unlock.add(line);
-
-				pos += line.height();
-			}
 		}
 
 		ExitButton btnExit = new ExitButton();
