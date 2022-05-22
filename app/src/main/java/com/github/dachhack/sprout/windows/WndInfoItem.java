@@ -32,20 +32,6 @@ import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndInfoItem extends Window {
 
-	private static final String TTL_CHEST = Messages.get(WndInfoItem.class,"chest");
-	private static final String TTL_LOCKED_CHEST = Messages.get(WndInfoItem.class,"locked");
-	private static final String TTL_CRYSTAL_CHEST = 	Messages.get(WndInfoItem.class,"crystal");
-	private static final String TTL_TOMB = 	Messages.get(WndInfoItem.class,"tomb");
-	private static final String TTL_SKELETON =	Messages.get(WndInfoItem.class,"skeletal");
-	private static final String TTL_REMAINS = 	Messages.get(WndInfoItem.class,"heroes");
-	private static final String TXT_WONT_KNOW = 	Messages.get(WndInfoItem.class,"you_wont");
-	private static final String TXT_NEED_KEY = TXT_WONT_KNOW
-			+ 	Messages.get(WndInfoItem.class,"but");
-	private static final String TXT_INSIDE = 	Messages.get(WndInfoItem.class,"you_can");
-	private static final String TXT_OWNER = 	Messages.get(WndInfoItem.class,"this");
-	private static final String TXT_SKELETON = 	Messages.get(WndInfoItem.class,"this_is");
-	private static final String TXT_REMAINS = 	Messages.get(WndInfoItem.class,"this_is_all");
-
 	private static final float GAP = 2;
 
 	private static final int WIDTH = 120;
@@ -69,34 +55,7 @@ public class WndInfoItem extends Window {
 
 		} else {
 
-			String title;
-			String info;
-
-			if (heap.type == Type.CHEST || heap.type == Type.MIMIC) {
-				title = TTL_CHEST;
-				info = TXT_WONT_KNOW;
-			} else if (heap.type == Type.TOMB) {
-				title = TTL_TOMB;
-				info = TXT_OWNER;
-			} else if (heap.type == Type.SKELETON) {
-				title = TTL_SKELETON;
-				info = TXT_SKELETON;
-			} else if (heap.type == Type.REMAINS) {
-				title = TTL_REMAINS;
-				info = TXT_REMAINS;
-			} else if (heap.type == Type.CRYSTAL_CHEST) {
-				title = TTL_CRYSTAL_CHEST;
-				if (heap.peek() instanceof Artifact)
-					info = Utils.format(TXT_INSIDE,Messages.get(this,"an"));
-				else
-					info = Utils.format(TXT_INSIDE,
-							Utils.indefinite(heap.peek().name()));
-			} else {
-				title = TTL_LOCKED_CHEST;
-				info = TXT_NEED_KEY;
-			}
-
-			fillFields(heap.image(), heap.glowing(), TITLE_COLOR, title, info);
+			fillFields(heap.image(), heap.glowing(), TITLE_COLOR, heap.toString(), heap.info());
 
 		}
 	}
@@ -117,7 +76,7 @@ public class WndInfoItem extends Window {
 	}
 
 	private void fillFields(int image, ItemSprite.Glowing glowing,
-			int titleColor, String title, String info) {
+							int titleColor, String title, String info) {
 
 		IconTitle titlebar = new IconTitle();
 		titlebar.icon(new ItemSprite(image, glowing));

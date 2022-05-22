@@ -40,7 +40,7 @@ public class AboutScene extends PixelScene {
 	private static final String TTL_SmuJB = "Developer:SmuJayB";
 	private static final String TTL_Ling = "Localization Developer: JDSALing";
 
-	private static final String TTL_SHPX = "Hard Sprouted Pixel Dungeon";
+	private static final String TTL_SHPX = "SPRPD";
 
 	private static final String TXT_SHPX = "Modified from Shattered Pixel Dungeon And Sprouted Pixel Dungeon\n\n"
 			+ "Shattered Pixel is here, check it out:";

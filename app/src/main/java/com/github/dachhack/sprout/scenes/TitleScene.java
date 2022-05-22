@@ -42,11 +42,6 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class TitleScene extends PixelScene {
 
-	private static final String TXT_PLAY = "进入地牢";
-	private static final String TXT_HIGHSCORES = "排行榜";
-	private static final String TXT_BADGES = "徽章";
-	private static final String TXT_ABOUT = "关于";
-
 	@Override
 	public void create() {
 

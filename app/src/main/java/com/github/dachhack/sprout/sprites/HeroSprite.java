@@ -81,7 +81,7 @@ public class HeroSprite extends CharSprite {
 	@Override
 	public void place(int p) {
 		super.place(p);
-		Camera.main.target = this;
+		Camera.main.panTo(center(), 5f);
 	}
 
 	@Override

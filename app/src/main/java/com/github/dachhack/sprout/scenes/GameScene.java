@@ -340,7 +340,17 @@ public class GameScene extends PixelScene {
 				break;
 			default:
 		}
-		//Camera.main.panTo(hero.center(), 2.5f);
+		switch (InterlevelScene.mode){
+			case FALL: case DESCEND: case CONTINUE:
+				Camera.main.snapTo(hero.center().x, hero.center().y - DungeonTilemap.SIZE * (defaultZoom/Camera.main.zoom));
+				break;
+			case ASCEND:
+				Camera.main.snapTo(hero.center().x, hero.center().y + DungeonTilemap.SIZE * (defaultZoom/Camera.main.zoom));
+				break;
+			default:
+				Camera.main.snapTo(hero.center().x, hero.center().y);
+		}
+		Camera.main.panTo(hero.center(), 2.5f);
 
 		ArrayList<Item> dropped = Dungeon.droppedItems.get(Dungeon.depth);
 		if (dropped != null) {

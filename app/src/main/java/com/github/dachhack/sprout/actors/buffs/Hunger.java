@@ -56,6 +56,10 @@ public class Hunger extends Buff implements Hero.Doom {
 		level = bundle.getFloat(LEVEL);
 	}
 
+	public int hunger() {
+		return (int)Math.ceil(level);
+	}
+
 	@Override
 	public boolean act() {
 		if (target.isAlive()) {

@@ -20,6 +20,7 @@ package com.github.dachhack.sprout.scenes;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Chrome;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
 import com.github.dachhack.sprout.ui.Archs;
 import com.github.dachhack.sprout.ui.BadgesList;
@@ -30,12 +31,11 @@ import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.NinePatch;
+import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.audio.Music;
 import com.watabou.utils.Callback;
 
 public class BadgesScene extends PixelScene {
-
-	private static final String TXT_TITLE = "Your Badges";
 
 	private static final int MAX_PANE_WIDTH = 160;
 
@@ -65,9 +65,8 @@ public class BadgesScene extends PixelScene {
 		panel.y = (h - ph) / 2;
 		add(panel);
 
-		BitmapText title = PixelScene.createText(TXT_TITLE, 9);
+		RenderedText title = PixelScene.renderText(Messages.get(BadgesScene.class, "title"),9);
 		title.hardlight(Window.TITLE_COLOR);
-		title.measure();
 		title.x = align((w - title.width()) / 2);
 		title.y = align((panel.y - title.baseLine()) / 2);
 		add(title);

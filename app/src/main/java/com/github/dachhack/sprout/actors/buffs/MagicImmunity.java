@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.buffs;
 
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 
 import com.github.dachhack.sprout.actors.blobs.ConfusionGas;
 import com.github.dachhack.sprout.actors.blobs.CorruptGas;

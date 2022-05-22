@@ -21,6 +21,7 @@ import com.github.dachhack.sprout.Chrome;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.NinePatch;
+import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.ui.Component;
 
 public class Toast extends Component {
@@ -30,7 +31,7 @@ public class Toast extends Component {
 
 	protected NinePatch bg;
 	protected SimpleButton close;
-	protected BitmapText text;
+	protected RenderedTextMultiline text;
 
 	public Toast(String text) {
 		super();
@@ -57,7 +58,7 @@ public class Toast extends Component {
 		};
 		add(close);
 
-		text = PixelScene.createText(8);
+		text = PixelScene.renderMultiline(8);
 		add(text);
 	}
 
@@ -69,18 +70,19 @@ public class Toast extends Component {
 		bg.y = y;
 		bg.size(width, height);
 
-		close.setPos(bg.x + bg.width() - bg.marginHor() / 2 - MARGIN_HOR
-				- close.width(), y + (height - close.height()) / 2);
+		close.setPos(
+				bg.x + bg.width() - bg.marginHor() / 2f - MARGIN_HOR - close.width(),
+				y + (height - close.height()) / 2f);
+		PixelScene.align(close);
 
-		text.x = close.left() - MARGIN_HOR - text.width();
-		text.y = y + (height - text.height()) / 2;
+		text.setPos(close.left() - MARGIN_HOR - text.width(), y + (height - text.height()) / 2);
 		PixelScene.align(text);
 	}
 
 	public void text(String txt) {
 		text.text(txt);
-		text.measure();
 	}
+
 
 	protected void onClose() {
 	};

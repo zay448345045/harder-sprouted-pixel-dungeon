@@ -17,6 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.hero;
 
+import static com.github.dachhack.sprout.Dungeon.hero;
+
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Bones;
@@ -198,6 +200,25 @@ public class Hero extends Char {
 	public int exp = 0;
 
 	private ArrayList<Mob> visibleEnemies;
+
+	public boolean canAttack(Char enemy){
+		if (enemy == null || pos == enemy.pos) {
+			return false;
+		}
+
+		//can always attack adjacent enemies
+		if (Dungeon.level.adjacent(pos, enemy.pos)) {
+			return true;
+		}
+
+		KindOfWeapon wep = hero.belongings.weapon;
+
+		if (wep != null){
+			return wep.canReach(this, enemy.pos);
+		} else {
+			return false;
+		}
+	}
 
 	public Hero() {
 		super();
@@ -953,7 +974,7 @@ public class Hero extends Char {
 		if (!Dungeon.level.forcedone && 
 			 Dungeon.dewDraw && (					 
 					 Dungeon.level.checkdew()>0 
-				     || Dungeon.hero.buff(Dewcharge.class) != null)
+				     || hero.buff(Dewcharge.class) != null)
 				    ) {
 			
 			GameScene.show(new WndDescend());
@@ -994,15 +1015,15 @@ public class Hero extends Char {
 			
 			PET pet = checkpet();
 			if(pet!=null && checkpetNear()){
-			  Dungeon.hero.petType=pet.type;
-			  Dungeon.hero.petLevel=pet.level;
-			  Dungeon.hero.petKills=pet.kills;	
-			  Dungeon.hero.petHP=pet.HP;
-			  Dungeon.hero.petExperience=pet.experience;
-			  Dungeon.hero.petCooldown=pet.cooldown;
+			  hero.petType=pet.type;
+			  hero.petLevel=pet.level;
+			  hero.petKills=pet.kills;
+			  hero.petHP=pet.HP;
+			  hero.petExperience=pet.experience;
+			  hero.petCooldown=pet.cooldown;
 			  pet.destroy();
 			  petfollow=true;
-			} else if (Dungeon.hero.haspet && Dungeon.hero.petfollow) {
+			} else if (hero.haspet && hero.petfollow) {
 				petfollow=true;
 			} else {
 				petfollow=false;
@@ -1042,7 +1063,7 @@ public class Hero extends Char {
 							
 				} else if (Dungeon.level.forcedone){
 					Dungeon.win(ResultDescriptions.WIN);
-					Dungeon.deleteGame(Dungeon.hero.heroClass, true);
+					Dungeon.deleteGame(hero.heroClass, true);
 					Game.switchScene(SurfaceScene.class);
 				} else {
 					GameScene.show(new WndAscend());
@@ -1059,15 +1080,15 @@ public class Hero extends Char {
 				
 				PET pet = checkpet();
 				if(pet!=null && checkpetNear()){
-				  Dungeon.hero.petType=pet.type;
-				  Dungeon.hero.petLevel=pet.level;
-				  Dungeon.hero.petKills=pet.kills;	
-				  Dungeon.hero.petHP=pet.HP;
-				  Dungeon.hero.petExperience=pet.experience;
-				  Dungeon.hero.petCooldown=pet.cooldown;
+				  hero.petType=pet.type;
+				  hero.petLevel=pet.level;
+				  hero.petKills=pet.kills;
+				  hero.petHP=pet.HP;
+				  hero.petExperience=pet.experience;
+				  hero.petCooldown=pet.cooldown;
 				  pet.destroy();
 				  petfollow=true;
-				} else if (Dungeon.hero.haspet && Dungeon.hero.petfollow) {
+				} else if (hero.haspet && hero.petfollow) {
 					petfollow=true;
 				} else {
 					petfollow=false;
@@ -1095,15 +1116,15 @@ public class Hero extends Char {
 
 			PET pet = checkpet();
 			if(pet!=null && checkpetNear()){
-			  Dungeon.hero.petType=pet.type;
-			  Dungeon.hero.petLevel=pet.level;
-			  Dungeon.hero.petKills=pet.kills;	
-			  Dungeon.hero.petHP=pet.HP;
-			  Dungeon.hero.petExperience=pet.experience;
-			  Dungeon.hero.petCooldown=pet.cooldown;
+			  hero.petType=pet.type;
+			  hero.petLevel=pet.level;
+			  hero.petKills=pet.kills;
+			  hero.petHP=pet.HP;
+			  hero.petExperience=pet.experience;
+			  hero.petCooldown=pet.cooldown;
 			  pet.destroy();
 			  petfollow=true;
-			} else if (Dungeon.hero.haspet && Dungeon.hero.petfollow) {
+			} else if (hero.haspet && hero.petfollow) {
 				petfollow=true;
 			} else {
 				petfollow=false;
@@ -1137,15 +1158,15 @@ public class Hero extends Char {
 
 				PET pet = checkpet();
 				if(pet!=null && checkpetNear()){
-				  Dungeon.hero.petType=pet.type;
-				  Dungeon.hero.petLevel=pet.level;
-				  Dungeon.hero.petKills=pet.kills;	
-				  Dungeon.hero.petHP=pet.HP;
-				  Dungeon.hero.petExperience=pet.experience;
-				  Dungeon.hero.petCooldown=pet.cooldown;
+				  hero.petType=pet.type;
+				  hero.petLevel=pet.level;
+				  hero.petKills=pet.kills;
+				  hero.petHP=pet.HP;
+				  hero.petExperience=pet.experience;
+				  hero.petCooldown=pet.cooldown;
 				  pet.destroy();
 				  petfollow=true;
-				} else if (Dungeon.hero.haspet && Dungeon.hero.petfollow) {
+				} else if (hero.haspet && hero.petfollow) {
 					petfollow=true;
 				} else {
 					petfollow=false;
@@ -1308,9 +1329,9 @@ public class Hero extends Char {
 		}
 		
 		if (this.buff(AutoHealPotion.class) != null && ((float) HP / HT)<.1) {
-			PotionOfHealing pot = Dungeon.hero.belongings.getItem(PotionOfHealing.class);
+			PotionOfHealing pot = hero.belongings.getItem(PotionOfHealing.class);
 			if (pot != null) {
-				pot.detach(Dungeon.hero.belongings.backpack,1);	
+				pot.detach(hero.belongings.backpack,1);
 				/*
 				if(!(Dungeon.hero.belongings.getItem(PotionOfHealing.class).quantity() > 0)){
 					pot.detachAll(Dungeon.hero.belongings.backpack);
@@ -1683,7 +1704,7 @@ public class Hero extends Char {
 		} else {
 			
 			ankh.detach(belongings.backpack);
-			Dungeon.deleteGame(Dungeon.hero.heroClass, false);
+			Dungeon.deleteGame(hero.heroClass, false);
 			GameScene.show(new WndResurrect(ankh, cause));
 
 		}
@@ -1714,9 +1735,9 @@ public class Hero extends Char {
 
 		Dungeon.observe();
 
-		Dungeon.hero.belongings.identify();
+		hero.belongings.identify();
 
-		int pos = Dungeon.hero.pos;
+		int pos = hero.pos;
 
 		ArrayList<Integer> passable = new ArrayList<Integer>();
 		for (Integer ofs : Level.NEIGHBOURS8) {
@@ -1729,7 +1750,7 @@ public class Hero extends Char {
 		Collections.shuffle(passable);
 
 		ArrayList<Item> items = new ArrayList<Item>(
-				Dungeon.hero.belongings.backpack.items);
+				hero.belongings.backpack.items);
 		for (Integer cell : passable) {
 			if (items.isEmpty()) {
 				break;
@@ -1746,7 +1767,7 @@ public class Hero extends Char {
 			((Hero.Doom) cause).onDeath();
 		}
 
-		Dungeon.deleteGame(Dungeon.hero.heroClass, true);
+		Dungeon.deleteGame(hero.heroClass, true);
 	}
 
 	@Override

@@ -30,7 +30,11 @@ public class Camera extends Gizmo {
 	int screenHeight;
 
 	public float[] matrix;
-
+	Visual followTarget = null;
+	PointF panTarget;
+	//camera moves at a speed such that it will pan to its current target in 1/intensity seconds
+	//keep in mind though that this speed is constantly decreasing, so actual pan time is higher
+	float panIntensity = 0f;
 	public PointF scroll;
 	public Visual target;
 
@@ -68,6 +72,23 @@ public class Camera extends Gizmo {
 	public static Camera remove(Camera camera) {
 		all.remove(camera);
 		return camera;
+	}
+
+	public void snapTo(float x, float y ) {
+		scroll.set( x - width / 2, y - height / 2 );
+		panIntensity = 0f;
+		followTarget = null;
+	}
+
+	public void panTo( PointF dst, float intensity ){
+		panTarget = dst;
+		panIntensity = intensity;
+		followTarget = null;
+	}
+
+	public void panFollow(Visual target, float intensity ){
+		followTarget = target;
+		panIntensity = intensity;
 	}
 
 	public static void updateAll() {
