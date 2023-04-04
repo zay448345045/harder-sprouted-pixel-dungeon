@@ -22,6 +22,7 @@ import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
 import com.github.dachhack.sprout.FogOfWar;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Actor;
@@ -83,15 +84,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class GameScene extends PixelScene {
-
-	private static final String TXT_WELCOME = "Welcome to the level %d of Pixel Dungeon!";
-	private static final String TXT_WELCOME_BACK = "Welcome back to the level %d of Pixel Dungeon!";
-
-	private static final String TXT_CHASM = "Your steps echo across the dungeon.";
-	private static final String TXT_WATER = "You hear water splashing around you.";
-	private static final String TXT_GRASS = "The smell of vegetation is thick in the air.";
-	private static final String TXT_DARK = "You can hear enemies moving in the darkness...";
-	private static final String TXT_SECRETS = "The atmosphere hints that this floor hides many secrets.";
 
 	static GameScene scene;
 
@@ -251,29 +243,29 @@ public class GameScene extends PixelScene {
 		add(log);
 
 		if (Dungeon.depth < Statistics.deepestFloor)
-			GLog.i(TXT_WELCOME_BACK, Dungeon.depth);
+			GLog.i(Messages.get(GameScene.class, "welcome_back"), Dungeon.depth);
 		else
-			GLog.i(TXT_WELCOME, Dungeon.depth);
+			GLog.i(Messages.get(GameScene.class, "welcome"), Dungeon.depth);
 		Sample.INSTANCE.play(Assets.SND_DESCEND);
 		switch (Dungeon.level.feeling) {
 			case CHASM:
-				GLog.w(TXT_CHASM);
+				GLog.w(Messages.get(GameScene.class, "chasm"));
 				break;
 			case WATER:
-				GLog.w(TXT_WATER);
+				GLog.w(Messages.get(GameScene.class, "water"));
 				break;
 			case GRASS:
-				GLog.w(TXT_GRASS);
+				GLog.w(Messages.get(GameScene.class, "grass"));
 				break;
 			case DARK:
-				GLog.w(TXT_DARK);
+				GLog.w(Messages.get(GameScene.class, "dark"));
 				break;
 			default:
 		}
 		if (Dungeon.level instanceof RegularLevel
 				&& ((RegularLevel) Dungeon.level).secretDoors > Random
 				.IntRange(3, 4)) {
-			GLog.w(TXT_SECRETS);
+			GLog.w(Messages.get(GameScene.class, "secrets"));
 		}
 
 		busy = new BusyIndicator();

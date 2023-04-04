@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.actors.mobs;
 
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfRegrowth;
@@ -31,7 +32,7 @@ public class RatBoss extends Rat {
 
 
 	{
-		name = "rat boss";
+		name = Messages.get(this, "name");
 		spriteClass = RatBossSprite.class;
 
 		HP = HT = 12+(Dungeon.depth*Random.NormalIntRange(2, 5));
@@ -64,18 +65,17 @@ public class RatBoss extends Rat {
 	@Override
 	public void notice() {
 		super.notice();
-		yell("Scritch Scratch!");
-		if (!spawnedRats){
-	    Rat.spawnAround(pos);
-	    GLog.n("Rat pack apears!");
-	    spawnedRats = true;
+		yell(Messages.get(this, "notice"));
+		if (!spawnedRats) {
+			Rat.spawnAround(pos);
+			GLog.n(Messages.get(this, "spawn"));
+			spawnedRats = true;
 		}
-	  }
+	}
 
-	
+
 	@Override
 	public String description() {
-		return "Larger and stronger than other Marsupial Rats, the "
-				+ "Rat Boss can summon a pack of rats from the shadows of the dungeon.";
+		return Messages.get(this, "desc");
 	}
 }

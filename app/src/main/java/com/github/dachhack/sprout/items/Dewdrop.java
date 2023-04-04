@@ -61,9 +61,9 @@ public class Dewdrop extends Item {
 				}
 			} else {
 				if (vial == null) {
-					GLog.i("You already have full health");
+					GLog.i(Messages.get(Dewdrop.class,"already_full"));
 				} else {
-					GLog.i("Your dew vial is already full and you already have full health.");
+					GLog.i(Messages.get(Dewdrop.class,"already_full2"));
 				}
 				return false;
 			}

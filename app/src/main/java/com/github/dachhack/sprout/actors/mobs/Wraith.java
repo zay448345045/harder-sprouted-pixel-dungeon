@@ -17,9 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
@@ -45,6 +44,8 @@ import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Wraith extends Mob {
 
 	protected static final float SPAWN_DELAY = 2f;
@@ -52,7 +53,7 @@ public class Wraith extends Mob {
 	protected int level;
 
 	{
-		name = "wraith";
+		name = Messages.get(this, "name");
 		spriteClass = WraithSprite.class;
 
 		HP = HT = 1+level;
@@ -123,7 +124,7 @@ public class Wraith extends Mob {
 	
 	@Override
 	public String defenseVerb() {
-		return "evaded";
+		return Messages.get(this, "def");
 	}
 
 	@Override
@@ -132,16 +133,15 @@ public class Wraith extends Mob {
 		return true;
 	}
 
-	@Override
-	public void notice() {
-		super.notice();
-		if (Dungeon.getMonth()==9) {yell("BOO!");}
-	}
-	
+//	@Override
+//	public void notice() {
+//		super.notice();
+//		if (Dungeon.getMonth()==9) {yell("BOO!");}
+//	}
+
 	@Override
 	public String description() {
-		return "A wraith is a vengeful spirit of a sinner, whose grave or tomb was disturbed. "
-				+ "Being an ethereal entity, it is very hard to hit with a regular weapon.";
+		return Messages.get(this, "desc");
 	}
 
 	public static void spawnAround(int pos) {

@@ -17,10 +17,9 @@
  */
 package com.github.dachhack.sprout.items;
 
-import java.util.ArrayList;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Mob;
@@ -30,6 +29,8 @@ import com.github.dachhack.sprout.items.weapon.missiles.RiceBall;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.audio.Sample;
+
+import java.util.ArrayList;
 
 public class Rice extends Item {
 
@@ -70,7 +71,7 @@ public class Rice extends Item {
 			
 			RiceBall riceball = new RiceBall();
 			if (riceball.doPickUp(Dungeon.hero)) {
-				GLog.i(Hero.TXT_YOU_NOW_HAVE, riceball.name());
+				GLog.i(Messages.get(Hero.class,"have"), riceball.name());
 				Statistics.ballsCooked++;
 			} else {
 				Dungeon.level.drop(riceball, Dungeon.hero.pos).sprite.drop();
@@ -96,7 +97,7 @@ public class Rice extends Item {
 			
 			DumplingBomb bomb = new DumplingBomb();
 			if (bomb.doPickUp(Dungeon.hero)) {
-				GLog.i(Hero.TXT_YOU_NOW_HAVE, bomb.name());
+				GLog.i(Messages.get(Hero.class,"have"), bomb.name());
 				Statistics.ballsCooked+=bombcost;
 			} else {
 				Dungeon.level.drop(bomb, Dungeon.hero.pos).sprite.drop();

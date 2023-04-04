@@ -17,9 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.items.Item;
@@ -29,10 +28,12 @@ import com.github.dachhack.sprout.items.weapon.enchantments.Leech;
 import com.github.dachhack.sprout.sprites.BatSprite;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Bat extends Mob {
 
 	{
-		name = "vampire bat";
+		name = Messages.get(this, "name");
 		spriteClass = BatSprite.class;
 
 		HP = HT = 80;
@@ -62,7 +63,7 @@ public class Bat extends Mob {
 
 	@Override
 	public String defenseVerb() {
-		return "evaded";
+		return Messages.get(this, "def");
 	}
 
 	@Override
@@ -93,8 +94,7 @@ public class Bat extends Mob {
 
 	@Override
 	public String description() {
-		return "These brisk and tenacious inhabitants of cave domes may defeat much larger opponents by "
-				+ "replenishing their health with each successful attack.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

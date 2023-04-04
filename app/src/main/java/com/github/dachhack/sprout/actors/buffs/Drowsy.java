@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.actors.buffs;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 import com.watabou.utils.Random;
@@ -49,6 +50,11 @@ public class Drowsy extends Buff {
 
 	@Override
 	public String toString() {
-		return "Drowsy";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc", dispTurns(cooldown() + 1));
 	}
 }

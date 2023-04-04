@@ -17,10 +17,9 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
@@ -35,8 +34,11 @@ import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.TenguSprite;
+import com.github.dachhack.sprout.ui.BossHealthBar;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class TenguDen extends Mob {
 
@@ -44,7 +46,7 @@ public class TenguDen extends Mob {
 	protected static final float SPAWN_DELAY = 2f;
 	
 	{
-		name = "Tengu";
+		name = Messages.get(this, "name");
 		spriteClass = TenguSprite.class;
 		baseSpeed = 2f;
 
@@ -79,8 +81,8 @@ public class TenguDen extends Mob {
 
 		
 		    GameScene.bossSlain();
-	        Dungeon.tengudenkilled=true;	
-	    	yell("Ugh...!");
+	        Dungeon.tengudenkilled=true;
+			yell(Messages.get(this, "die"));
 	   	
 	    	Dungeon.level.drop(new AdamantRing(), pos).sprite.drop();
 			Dungeon.level.drop(new Gold(Random.Int(1900, 4000)), pos).sprite.drop();
@@ -162,14 +164,15 @@ public class TenguDen extends Mob {
 	
 	@Override
 	public void notice() {
+		BossHealthBar.assignBoss(this);
+
 		super.notice();
-		yell("How did you find me!?");
+		yell(Messages.get(this, "notice"));
 	}
 
 	@Override
 	public String description() {
-		return "Tengu are members of the ancient assassins clan, which is also called Tengu. "
-				+ "These assassins are noted for extensive use of shuriken and traps.";
+		return Messages.get(Tengu.class, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

@@ -21,10 +21,10 @@ import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Challenges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
 import com.github.dachhack.sprout.items.Ankh;
 import com.github.dachhack.sprout.items.Bomb;
-import com.github.dachhack.sprout.items.CavesKey;
 import com.github.dachhack.sprout.items.OtilukesJournal;
 import com.github.dachhack.sprout.items.TomeOfMastery;
 import com.github.dachhack.sprout.items.armor.ClothArmor;
@@ -95,7 +95,7 @@ public enum HeroClass {
 			"Huntresses are proficient with missile weapons, getting bonus damage from excess strength.",
 			"Huntresses have a chance to regain multiple used missile weapons from an enemy.",
 			"Huntresses sense neighbouring monsters even if they are hidden behind obstacles.",
-			"Potions of Mind Vision are identified from the beginning." };
+			"Potions of Mind Vision are identified from the beginning.x" };
 
 	public void initHero(Hero hero) {
 
@@ -144,15 +144,16 @@ public enum HeroClass {
 		if (!Dungeon.isChallenged(Challenges.NO_FOOD))
 			new Food().identify().collect();
 		new ScrollOfIdentify().setKnown();
+
+//		new AlchemistsToolkit().identify().quantity(1).collect();
+//		new UnstableSpellbook().identify().quantity(1).collect();
+
 		if (Dungeon.testing) {
 			playtest(hero);
 		}
 
-		new ClothArmor().quantity(1).identify().collect();
-		//new Chainsaw().enchantBuzz().identify().collect();
-		//DewVial vial = new DewVial();
-		//vial.collect();
-		//vial.fill();
+//		new ClothArmor().quantity(1).identify().collect();
+
 	}
 
 	public Badges.Badge masteryBadge() {
@@ -489,7 +490,7 @@ public enum HeroClass {
 	}
 	
 	public String title() {
-		return title;
+		return Messages.get(HeroClass.class, title);
 	}
 
 	public String spritesheet() {
@@ -512,13 +513,45 @@ public enum HeroClass {
 
 		switch (this) {
 		case WARRIOR:
-			return WAR_PERKS;
+//			return WAR_PERKS;
+			return new String[]{
+					Messages.get(HeroClass.class, "warrior_perk1"),
+					Messages.get(HeroClass.class, "warrior_perk2"),
+					Messages.get(HeroClass.class, "warrior_perk3"),
+					Messages.get(HeroClass.class, "warrior_perk4"),
+					Messages.get(HeroClass.class, "warrior_perk6"),
+			};
 		case MAGE:
-			return MAG_PERKS;
+//			return MAG_PERKS;
+			return new String[]{
+					Messages.get(HeroClass.class, "mage_perk1"),
+					Messages.get(HeroClass.class, "mage_perk2"),
+					Messages.get(HeroClass.class, "mage_perk3"),
+					Messages.get(HeroClass.class, "mage_perk4"),
+					Messages.get(HeroClass.class, "mage_perk5"),
+					Messages.get(HeroClass.class, "mage_perk6"),
+			};
 		case ROGUE:
-			return ROG_PERKS;
+//			return ROG_PERKS;
+			return new String[]{
+					Messages.get(HeroClass.class, "rogue_perk1"),
+					Messages.get(HeroClass.class, "rogue_perk2"),
+					Messages.get(HeroClass.class, "rogue_perk3"),
+					Messages.get(HeroClass.class, "rogue_perk4"),
+					Messages.get(HeroClass.class, "rogue_perk5"),
+					Messages.get(HeroClass.class, "rogue_perk6"),
+			};
 		case HUNTRESS:
-			return HUN_PERKS;
+//			return HUN_PERKS;
+			return new String[]{
+					Messages.get(HeroClass.class, "huntress_perk1"),
+					Messages.get(HeroClass.class, "huntress_perk2"),
+					Messages.get(HeroClass.class, "huntress_perk3"),
+					Messages.get(HeroClass.class, "huntress_perk4"),
+					Messages.get(HeroClass.class, "huntress_perk5"),
+					Messages.get(HeroClass.class, "huntress_perk6"),
+//					Messages.get(HeroClass.class, "huntress_perk7"),
+			};
 		}
 
 		return null;

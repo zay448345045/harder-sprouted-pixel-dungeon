@@ -17,8 +17,7 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Burning;
@@ -32,10 +31,12 @@ import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.sprites.ElementalSprite;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Elemental extends Mob {
 
 	{
-		name = "fire elemental";
+		name = Messages.get(this, "name");
 		spriteClass = ElementalSprite.class;
 
 		HP = HT = 150;
@@ -90,8 +91,7 @@ public class Elemental extends Mob {
 
 	@Override
 	public String description() {
-		return "Wandering fire elementals are a byproduct of summoning greater entities. "
-				+ "They are too chaotic in their nature to be controlled by even the most powerful demonologist.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

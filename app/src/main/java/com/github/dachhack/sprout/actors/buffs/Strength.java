@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.buffs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 
 public class Strength extends Buff {
@@ -31,7 +32,12 @@ public class Strength extends Buff {
 
 	@Override
 	public String toString() {
-		return "Moon Fury";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc", LEVEL);
 	}
 	
 	@Override

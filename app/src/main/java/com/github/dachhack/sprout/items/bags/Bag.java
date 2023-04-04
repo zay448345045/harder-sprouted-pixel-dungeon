@@ -17,9 +17,6 @@
  */
 package com.github.dachhack.sprout.items.bags;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Messages.Messages;
@@ -31,12 +28,16 @@ import com.github.dachhack.sprout.windows.WndBag;
 import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class Bag extends Item implements Iterable<Item> {
 
 //	public static final String AC_OPEN = "OPEN";
 public static final String AC_OPEN = Messages.get(Bag.class, "ac_open");
 
 	{
+
 		image = 11;
 		unique = true;
 		defaultAction = AC_OPEN;

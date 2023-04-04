@@ -17,9 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
@@ -37,8 +36,6 @@ import com.github.dachhack.sprout.items.Generator;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.items.weapon.enchantments.Leech;
-import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
-import com.github.dachhack.sprout.items.weapon.missiles.JupitersWrath;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.sprites.CharSprite;
@@ -48,6 +45,8 @@ import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Otiluke extends Mob implements Callback {
 
 	private static final float TIME_TO_ZAP = 1f;
@@ -55,7 +54,7 @@ public class Otiluke extends Mob implements Callback {
 	private static final String TXT_SHADOWBOLT_KILLED = "%s's shadow bolt killed you...";
 
 	{
-		name = "stone golem Otiluke";
+		name = Messages.get(this, "name");
 		spriteClass = OtilukeSprite.class;
 
 		HP = HT = 25000;
@@ -84,7 +83,7 @@ public class Otiluke extends Mob implements Callback {
 	@Override
 	public void notice() {
 		super.notice();
-		yell("Arise my protectors!");
+		yell(Messages.get(this, "summon"));
 	}
 	
 	@Override
@@ -153,7 +152,7 @@ public class Otiluke extends Mob implements Callback {
 			if (!enemy.isAlive() && enemy == Dungeon.hero) {
 				Dungeon.fail(Utils.format(ResultDescriptions.MOB,
 						Utils.indefinite(name)));
-				GLog.n(TXT_SHADOWBOLT_KILLED, name);
+				GLog.n(Messages.get(Otiluke.class, "kill"), name);
 			}
 		} else {
 			enemy.sprite.showStatus(CharSprite.NEUTRAL, enemy.defenseVerb());
@@ -179,7 +178,7 @@ public class Otiluke extends Mob implements Callback {
 
 	@Override
 	public String description() {
-		return "powerful magic has turned Otiluke into a guardian of this level";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

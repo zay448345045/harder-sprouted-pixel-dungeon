@@ -17,21 +17,16 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
-import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.effects.particles.SparkParticle;
 import com.github.dachhack.sprout.items.Generator;
-import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.keys.GoldenSkeletonKey;
-import com.github.dachhack.sprout.items.keys.SkeletonKey;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.traps.LightningTrap;
 import com.github.dachhack.sprout.mechanics.Ballistica;
-import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.sprites.HermitCrabSprite;
 import com.github.dachhack.sprout.utils.GLog;
@@ -39,6 +34,8 @@ import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.Camera;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class HermitCrab extends Mob implements Callback {
 
@@ -49,7 +46,7 @@ public class HermitCrab extends Mob implements Callback {
 	private static final String TXT_SHELL_CHARGE = "Lightning Shell charged by %s.";
 
 	{
-		name = "hermit crab";
+		name = Messages.get(this, "name");
 		spriteClass = HermitCrabSprite.class;
 
 		HP = HT = 20;
@@ -85,8 +82,8 @@ public class HermitCrab extends Mob implements Callback {
             for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 				if (mob instanceof Shell && mob.isAlive()) {
 					Dungeon.shellCharge += dmg;
-					GLog.n(TXT_SHELL_ABSORB);
-					GLog.n(TXT_SHELL_CHARGE, dmg);
+					GLog.n(Messages.get(HermitCrab.class, "absorb"));
+					GLog.n(Messages.get(HermitCrab.class, "charge"), dmg);
 					dmg = 1;
 				}
 			}
@@ -134,7 +131,7 @@ public class HermitCrab extends Mob implements Callback {
 					if (!enemy.isAlive()) {
 						Dungeon.fail(Utils.format(ResultDescriptions.MOB,
 								Utils.indefinite(name)));
-						GLog.n(TXT_LIGHTNING_KILLED, name);
+						GLog.n(Messages.get(HermitCrab.class, "kill"), name);
 					}
 				}
 			} else {
@@ -158,12 +155,11 @@ public class HermitCrab extends Mob implements Callback {
 		Dungeon.level.drop(new GoldenSkeletonKey(0), pos).sprite.drop();	
 		}
 	}
-	
+
 
 	@Override
 	public String description() {
-		return "Minions of the crab king, these tough crabs absorb all but the weakest attacks with their shells. "
-				+"The damage they absorb is used to charge the lightning shell. ";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.buffs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.ui.BuffIndicator;
@@ -35,7 +36,12 @@ public class Ooze extends Buff {
 
 	@Override
 	public String toString() {
-		return "Caustic ooze";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc");
 	}
 
 	@Override
@@ -47,7 +53,7 @@ public class Ooze extends Buff {
 				target.damage(1, this);
 			if (!target.isAlive() && target == Dungeon.hero) {
 				Dungeon.fail(ResultDescriptions.OOZE);
-				GLog.n(TXT_HERO_KILLED, toString());
+				GLog.n(Messages.get(this, "die"), toString());
 			}
 			spend(TICK);
 		}

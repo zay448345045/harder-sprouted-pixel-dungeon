@@ -18,8 +18,8 @@
 package com.github.dachhack.sprout.actors.buffs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.ui.BuffIndicator;
 
 public class Light extends FlavourBuff {
 
@@ -48,12 +48,12 @@ public class Light extends FlavourBuff {
 	}
 
 	@Override
-	public int icon() {
-		return BuffIndicator.LIGHT;
+	public String toString() {
+		return Messages.get(this, "name");
 	}
 
 	@Override
-	public String toString() {
-		return "Illuminated";
+	public String desc() {
+		return Messages.get(this, "desc", dispTurns());
 	}
 }

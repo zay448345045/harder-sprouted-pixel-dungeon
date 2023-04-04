@@ -32,6 +32,9 @@ public class Assets {
 		public static final String WINDOWS  = "messages/windows/windows";
 	}
 
+	//New
+	public static final String BOSSHP = "boss_hp.png";
+
 	public static final String ARCS_BG = "arcs1.png";
 	public static final String ARCS_FG = "arcs2.png";
 	public static final String DASHBOARD = "dashboard.png";

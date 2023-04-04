@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.ui;
 
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.items.Item;
@@ -123,12 +124,12 @@ public class QuickSlotButton extends Button implements WndBag.Listener {
 
 	@Override
 	protected void onClick() {
-		GameScene.selectItem(this, WndBag.Mode.QUICKSLOT, TXT_SELECT_ITEM);
+		GameScene.selectItem(this, WndBag.Mode.QUICKSLOT, Messages.get(QuickSlotButton.class,"quicktips"));
 	}
 
 	@Override
 	protected boolean onLongClick() {
-		GameScene.selectItem(this, WndBag.Mode.QUICKSLOT, TXT_SELECT_ITEM);
+		GameScene.selectItem(this, WndBag.Mode.QUICKSLOT, Messages.get(QuickSlotButton.class,"quicktips"));
 		return true;
 	}
 
@@ -180,8 +181,8 @@ public class QuickSlotButton extends Button implements WndBag.Listener {
 		}
 	}
 
-	
-	
+
+
 	public static void refresh() {
 		for (int i = 0; i < instance.length; i++) {
 			if (instance[i] != null) {

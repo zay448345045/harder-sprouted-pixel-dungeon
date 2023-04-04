@@ -17,9 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
@@ -39,12 +38,14 @@ import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class OrbOfZotMob extends Mob {
 
 	private static final String TXT_DEATHGAZE_KILLED = "%s's deathray killed you...";
 
 	{
-		name = "orb of zot";
+		name = Messages.get(this, "name");
 		spriteClass = OrbOfZotSprite.class;
 		hostile = false;
 		state = HUNTING;
@@ -70,7 +71,7 @@ public class OrbOfZotMob extends Mob {
 			if (c<Level.getLength() && c>0){
 			    Char ch = Actor.findChar(c);
 				if (ch == Dungeon.hero && Dungeon.hero.isAlive() &&  enemy==null) {
-					yell("Scanning...");
+					yell(Messages.get(OrbOfZotMob.class, "scan"));
 				}
 			}
 		}
@@ -197,7 +198,7 @@ public class OrbOfZotMob extends Mob {
 				if (!ch.isAlive() && ch == Dungeon.hero) {
 					Dungeon.fail(Utils.format(ResultDescriptions.MOB,
 							Utils.indefinite(name)));
-					GLog.n(TXT_DEATHGAZE_KILLED, name);
+					GLog.n(Messages.get(OrbOfZotMob.class, "kill"), name);
 				}
 			} else {
 				ch.sprite.showStatus(CharSprite.NEUTRAL, ch.defenseVerb());
@@ -210,13 +211,11 @@ public class OrbOfZotMob extends Mob {
 	@Override
 	public void beckon(int cell) {
 	}
-	
+
 	@Override
 	public String description() {
-		return "The orb has sprung to life! "
-				+ "It is blowing away nearby mobs!";
+		return Messages.get(this, "desc");
 	}
-
 	
 	@Override
 	public void die(Object cause) {

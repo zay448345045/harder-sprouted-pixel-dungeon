@@ -18,7 +18,7 @@ import java.util.LinkedHashMap;
 public class RenderedText extends Image {
 	private int maxWidth = Integer.MAX_VALUE;
 	protected boolean multiline = false;
-	//移植破碎
+	//Moved SHPD
 	public void maxWidth(int maxWidth){
 		if (this.maxWidth != maxWidth){
 			this.maxWidth = maxWidth;

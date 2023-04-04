@@ -17,12 +17,11 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Badges.Badge;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
@@ -35,10 +34,8 @@ import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.FlameParticle;
 import com.github.dachhack.sprout.items.Egg;
-import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.OtilukesJournal;
 import com.github.dachhack.sprout.items.TomeOfMastery;
-import com.github.dachhack.sprout.items.journalpages.Sokoban1;
 import com.github.dachhack.sprout.items.journalpages.Sokoban2;
 import com.github.dachhack.sprout.items.keys.SkeletonKey;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicMapping;
@@ -49,15 +46,18 @@ import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.TenguSprite;
+import com.github.dachhack.sprout.ui.BossHealthBar;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class Tengu extends Mob {
 
 	private static final int JUMP_DELAY = 5;
 
 	{
-		name = "Tengu";
+		name = Messages.get(this, "name");
 		spriteClass = TenguSprite.class;
 		baseSpeed = 2f;
 
@@ -125,7 +125,7 @@ public class Tengu extends Mob {
 		Badges.validateBossSlain();
 		Dungeon.tengukilled=true;
 
-		yell("Time to flee");
+//		yell("Time to flee");
 		TenguEscape.spawnAt(pos);
 					
 	}
@@ -208,14 +208,15 @@ public class Tengu extends Mob {
 
 	@Override
 	public void notice() {
+		BossHealthBar.assignBoss(this);
+
 		super.notice();
-		yell("Gotcha, " + Dungeon.hero.givenName() + "!");
+		yell(Messages.get(this, "notice", Dungeon.hero.givenName()));
 	}
 
 	@Override
 	public String description() {
-		return "Tengu are members of the ancient assassins clan, which is also called Tengu. "
-				+ "These assassins are noted for extensive use of shuriken and traps.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

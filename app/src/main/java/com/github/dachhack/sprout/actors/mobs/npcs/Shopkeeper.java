@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.mobs.npcs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.particles.ElmoParticle;
@@ -33,7 +34,7 @@ public class Shopkeeper extends NPC {
 	public static final String TXT_THIEF = "Thief, Thief!";
 
 	{
-		name = "shopkeeper";
+		name = Messages.get(this, "name");
 		spriteClass = ShopkeeperSprite.class;
 	}
 

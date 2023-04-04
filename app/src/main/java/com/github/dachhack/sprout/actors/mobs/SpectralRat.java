@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.mobs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
@@ -43,7 +44,7 @@ public class SpectralRat extends Mob  implements Callback {
 	private static final float SPAWN_DELAY = 2f;
 
 	{
-		name = "spectral rat";
+		name = Messages.get(this, "name");
 		spriteClass = SpectralRatSprite.class;
 
 		HP = HT = 550;
@@ -108,7 +109,7 @@ public class SpectralRat extends Mob  implements Callback {
 			if (!enemy.isAlive() && enemy == Dungeon.hero) {
 				Dungeon.fail(Utils.format(ResultDescriptions.MOB,
 						Utils.indefinite(name)));
-				GLog.n(TXT_SHADOWBOLT_KILLED, name);
+				GLog.n(Messages.get(SpectralRat.class, "kill"), name);
 			}
 		} else {
 			enemy.sprite.showStatus(CharSprite.NEUTRAL, enemy.defenseVerb());
@@ -128,8 +129,7 @@ public class SpectralRat extends Mob  implements Callback {
 
 	@Override
 	public String description() {
-		return "This shadowy rat is phasing in and out of this plane. Though it's bolts are dangerous, they will harm the creature itself as well."
-				+ "It's eyes burn with an uncanny hatred.";
+		return Messages.get(this, "desc");
 	}
 	
 	public static void spawnAround(int pos) {

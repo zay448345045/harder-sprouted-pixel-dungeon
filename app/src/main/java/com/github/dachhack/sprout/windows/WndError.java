@@ -23,11 +23,11 @@ import com.github.dachhack.sprout.ui.Icons;
 public class WndError extends WndTitledMessage {
 
 //	private static final String TXT_TITLE = "ERROR";
-private static final String TXT_TITLE = Messages.get(WndError.class, "title");
+//private static final String TXT_TITLE =
 
 
 	public WndError(String message) {
-		super(Icons.WARNING.get(), TXT_TITLE, message);
+		super(Icons.WARNING.get(), Messages.get(WndError.class, "title"), message);
 	}
 
 }

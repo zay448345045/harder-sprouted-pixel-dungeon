@@ -189,22 +189,5 @@ public class Window extends Group implements Signal.Listener<Key> {
 
 			this.text = sb.toString();
 		}
-
-		public boolean[] inverted() {
-			boolean[] result = new boolean[mask.length];
-			for (int i = 0; i < result.length; i++) {
-				result[i] = !mask[i];
-			}
-			return result;
-		}
-
-		public boolean isHighlighted() {
-			for (int i = 0; i < mask.length; i++) {
-				if (mask[i]) {
-					return true;
-				}
-			}
-			return false;
-		}
 	}
 }

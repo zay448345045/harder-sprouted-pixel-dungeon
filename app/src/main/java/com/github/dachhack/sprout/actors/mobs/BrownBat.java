@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.mobs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Blindness;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -30,7 +31,7 @@ import com.watabou.utils.Random;
 public class BrownBat extends Mob {
 
 	{
-		name = "brown bat";
+		name = Messages.get(this, "name");
 		spriteClass = BrownBatSprite.class;
 
 		HP = HT = 4;
@@ -63,7 +64,7 @@ public class BrownBat extends Mob {
 	public int attackProc(Char enemy, int damage) {
 		if (Random.Int(10) == 0) {
 			Buff.prolong(enemy, Blindness.class, Random.Int(10, 20));
-			GLog.n("The brown bat scratches your eyes!");
+			GLog.n(Messages.get(BrownBat.class, "blind"));
 			Dungeon.observe();
 			state = FLEEING;
 		}
@@ -78,7 +79,7 @@ public class BrownBat extends Mob {
 
 	@Override
 	public String defenseVerb() {
-		return "evaded";
+		return Messages.get(this, "def");
 	}
 	
 	@Override
@@ -88,18 +89,17 @@ public class BrownBat extends Mob {
 			  for (Mob mob : Dungeon.level.mobs.toArray(new Mob[0])) {
 				  if (Random.Int(2) == 0 && enemy!=null){mob.beckon(enemy.pos);}
 			      }
-			  GLog.n("The brown bat's shrieks alert nearby enemies!");
+			GLog.n(Messages.get(BrownBat.class, "die"));
 			}
 
 		super.die(cause);
 
 	}
 
-	
+
 	@Override
 	public String description() {
-		return "Basically small, flying rats. Careful they don't get tangled in your hair.";
+		return Messages.get(this, "desc");
 	}
-
 	
 }

@@ -17,9 +17,7 @@
  */
 package com.github.dachhack.sprout.windows;
 
-import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Messages.Messages;
-import com.github.dachhack.sprout.items.DewVial;
 import com.github.dachhack.sprout.items.Palantir;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.sprites.ItemSprite;
@@ -27,7 +25,6 @@ import com.github.dachhack.sprout.ui.RedButton;
 import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.Utils;
-import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndOtilukeMessage extends Window {
 
@@ -35,7 +32,8 @@ public class WndOtilukeMessage extends Window {
 //			                                  +"I have managed to trap him inside and set guardians. "
 //			                                  +"I will now sacrifice myself to create a powerful stone golem that will protect the Palantir, Zot's prison.";
 //	private static final String TXT_REWARD = "Okay";
-private static final String TXT_MESSAGE = Messages.get(WndOtilukeMessage.class, "msg");
+
+	private static final String TXT_MESSAGE = Messages.get(WndOtilukeMessage.class, "msg");
 	private static final String TXT_REWARD = Messages.get(WndOtilukeMessage.class, "ok");
 	
 	private static final int WIDTH = 120;
@@ -55,12 +53,12 @@ private static final String TXT_MESSAGE = Messages.get(WndOtilukeMessage.class, 
 		add(titlebar);
 
 		RenderedTextMultiline message = PixelScene
-				.renderMultiline(TXT_MESSAGE, 6);
+				.renderMultiline(Messages.get(WndOtilukeMessage.class, "msg"), 6);
 		message.maxWidth = WIDTH;
 		message.setPos(0, titlebar.bottom() + GAP);
 		add(message);
 
-		RedButton btnReward = new RedButton(TXT_REWARD) {
+		RedButton btnReward = new RedButton(Messages.get(WndOtilukeMessage.class, "ok")) {
 			@Override
 			protected void onClick() {				
 				hide();

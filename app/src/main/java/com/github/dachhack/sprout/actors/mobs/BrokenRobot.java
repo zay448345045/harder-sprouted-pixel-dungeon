@@ -17,10 +17,9 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
@@ -47,13 +46,15 @@ import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class BrokenRobot extends Mob {
 
 	private static final String TXT_DEATHGAZE_KILLED = "%s's deathray killed you...";
 	private static final float SPAWN_DELAY = 2f;
 
 	{
-		name = "broken robot";
+		name = Messages.get(this, "name");
 		spriteClass = BrokenRobotSprite.class;
 
 		HP = HT = 75+(adjustForDepth(0)*Random.NormalIntRange(4, 7));
@@ -168,7 +169,7 @@ public class BrokenRobot extends Mob {
 				if (!ch.isAlive() && ch == Dungeon.hero) {
 					Dungeon.fail(Utils.format(ResultDescriptions.MOB,
 							Utils.indefinite(name)));
-					GLog.n(TXT_DEATHGAZE_KILLED, name);
+					GLog.n(Messages.get(BrokenRobot.class, "kill"), name);
 				}
 			} else {
 				ch.sprite.showStatus(CharSprite.NEUTRAL, ch.defenseVerb());
@@ -180,8 +181,7 @@ public class BrokenRobot extends Mob {
 
 	@Override
 	public String description() {
-		return "A wandering robot unfinshed and broken down. "
-				+ "You can feel its malice toward intruders.";
+		return Messages.get(this, "desc");
 	}
 
 	public static void spawnAround(int pos) {

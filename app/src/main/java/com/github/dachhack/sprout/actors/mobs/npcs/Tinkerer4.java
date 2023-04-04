@@ -18,23 +18,19 @@
 package com.github.dachhack.sprout.actors.mobs.npcs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
-import com.github.dachhack.sprout.items.DewVial;
-import com.github.dachhack.sprout.items.Item;
-import com.github.dachhack.sprout.items.Mushroom;
 import com.github.dachhack.sprout.scenes.GameScene;
-import com.github.dachhack.sprout.sprites.TinkererSprite;
 import com.github.dachhack.sprout.sprites.VillagerSprite;
 import com.github.dachhack.sprout.utils.Utils;
 import com.github.dachhack.sprout.windows.WndQuest;
-import com.github.dachhack.sprout.windows.WndTinkerer3;
 import com.watabou.utils.Bundle;
 
 public class Tinkerer4 extends NPC {
 
 	{
-		name = "villager";
+		name = Messages.get(this, "name");
 		spriteClass = VillagerSprite.class;
 	}
 

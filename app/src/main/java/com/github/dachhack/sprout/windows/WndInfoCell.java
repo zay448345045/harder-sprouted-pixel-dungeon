@@ -26,7 +26,6 @@ import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
-import com.watabou.noosa.BitmapTextMultiline;
 import com.watabou.noosa.Image;
 
 public class WndInfoCell extends Window {
@@ -75,7 +74,7 @@ private static final String TXT_NOTHING = Messages.get(WndInfoCell.class, "nothi
 			}
 		}
 
-		info.text(desc.length() > 0 ? desc.toString() : TXT_NOTHING);
+		info.text(desc.length() > 0 ? desc.toString() : Messages.get(WndInfoCell.class, "nothing"));
 		info.maxWidth(WIDTH);
 		info.setPos(titlebar.left(), titlebar.bottom() + GAP);
 

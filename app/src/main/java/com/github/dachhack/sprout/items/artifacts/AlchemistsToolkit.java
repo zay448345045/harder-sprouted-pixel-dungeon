@@ -220,10 +220,11 @@ protected String inventoryTitle = Messages.get(AlchemistsToolkit.class, "invtitl
 
 		bundle.put(SEEDSTOPOTION, seedsToPotion);
 
+		//todo String is Crashed,Used Class!
 		bundle.put(COMBINATION,
-				combination.toArray(new String[combination.size()]));
-		bundle.put(CURGUESS, curGuess.toArray(new String[curGuess.size()]));
-		bundle.put(BSTGUESS, bstGuess.toArray(new String[bstGuess.size()]));
+				combination.toArray(new Class[combination.size()]));
+		bundle.put(CURGUESS, curGuess.toArray(new Class[curGuess.size()]));
+		bundle.put(BSTGUESS, bstGuess.toArray(new Class[bstGuess.size()]));
 	}
 
 	@Override

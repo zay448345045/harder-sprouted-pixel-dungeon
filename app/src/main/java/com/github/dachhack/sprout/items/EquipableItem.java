@@ -19,19 +19,20 @@ package com.github.dachhack.sprout.items;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.particles.ShadowParticle;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.audio.Sample;
-import com.watabou.utils.Bundle;
 
 public abstract class EquipableItem extends Item {
 
-	private static final String TXT_UNEQUIP_CURSED = "You can't remove cursed %s!";
+	private static final String TXT_UNEQUIP_CURSED = Messages.get(EquipableItem.class, "unequipcursed");
 
-	public static final String AC_EQUIP = "EQUIP";
-	public static final String AC_UNEQUIP = "UNEQUIP";
+	public static final String AC_EQUIP = Messages.get(EquipableItem.class, "ac_equip");
+	public static final String AC_UNEQUIP = Messages.get(EquipableItem.class, "ac_unequip");
+
 
 	{
 		bones = true;

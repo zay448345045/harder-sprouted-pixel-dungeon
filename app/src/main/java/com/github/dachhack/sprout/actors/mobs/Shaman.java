@@ -17,9 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.effects.particles.SparkParticle;
@@ -36,6 +35,8 @@ import com.watabou.noosa.Camera;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Shaman extends Mob implements Callback {
 
 	private static final float TIME_TO_ZAP = 2f;
@@ -43,7 +44,7 @@ public class Shaman extends Mob implements Callback {
 	private static final String TXT_LIGHTNING_KILLED = "%s's lightning bolt killed you...";
 
 	{
-		name = "gnoll shaman";
+		name = Messages.get(this, "name");
 		spriteClass = ShamanSprite.class;
 
 		HP = HT = 36;
@@ -112,7 +113,7 @@ public class Shaman extends Mob implements Callback {
 					if (!enemy.isAlive()) {
 						Dungeon.fail(Utils.format(ResultDescriptions.MOB,
 								Utils.indefinite(name)));
-						GLog.n(TXT_LIGHTNING_KILLED, name);
+						GLog.n(Messages.get(Shaman.class, "kill"), name);
 					}
 				}
 			} else {
@@ -131,9 +132,7 @@ public class Shaman extends Mob implements Callback {
 
 	@Override
 	public String description() {
-		return "The most intelligent gnolls can master shamanistic magic. Gnoll shamans prefer "
-				+ "battle spells to compensate for lack of might, not hesitating to use them "
-				+ "on those who question their status in a tribe.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

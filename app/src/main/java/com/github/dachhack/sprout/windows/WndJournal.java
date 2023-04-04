@@ -17,8 +17,6 @@
  */
 package com.github.dachhack.sprout.windows;
 
-import java.util.Collections;
-
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Journal;
 import com.github.dachhack.sprout.Messages.Messages;
@@ -32,6 +30,8 @@ import com.watabou.noosa.Image;
 import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.ui.Component;
 
+import java.util.Collections;
+
 public class WndJournal extends Window {
 
 	private static final int WIDTH = 112;
@@ -40,8 +40,8 @@ public class WndJournal extends Window {
 
 	private static final int ITEM_HEIGHT = 18;
 
-//	private static final String TXT_TITLE = "Journal";
-private static final String TXT_TITLE = Messages.get(WndJournal.class, "journal");
+	//	private static final String TXT_TITLE = "Journal";
+	private static final String TXT_TITLE = Messages.get(WndJournal.class, "journal");
 
 	private RenderedText txtTitle;
 	private ScrollPane list;
@@ -51,7 +51,7 @@ private static final String TXT_TITLE = Messages.get(WndJournal.class, "journal"
 		super();
 		resize(WIDTH, ShatteredPixelDungeon.landscape() ? HEIGHT_L : HEIGHT_P);
 
-		txtTitle = PixelScene.renderText(TXT_TITLE, 9);
+		txtTitle = PixelScene.renderText(Messages.get(WndJournal.class, "journal"), 9);
 		txtTitle.hardlight(Window.TITLE_COLOR);
 		txtTitle.x = PixelScene.align(PixelScene.uiCamera,
 				(WIDTH - txtTitle.width()) / 2);

@@ -49,7 +49,7 @@ public class CavesKey extends Item {
 	
 	public static final float TIME_TO_USE = 1;
 
-	public static final String AC_PORT = "OPEN PORTAL";
+	public static final String AC_PORT = Messages.get(Bone.class,"ac");
 
 	private int specialLevel = 29;
 	private int returnDepth = -1;

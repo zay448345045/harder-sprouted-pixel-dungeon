@@ -17,18 +17,14 @@
  */
 package com.github.dachhack.sprout.windows;
 
-import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.items.Heap;
-import com.github.dachhack.sprout.items.Heap.Type;
 import com.github.dachhack.sprout.items.Item;
-import com.github.dachhack.sprout.items.artifacts.Artifact;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.ui.ItemSlot;
 import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.Utils;
-import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndInfoItem extends Window {
 

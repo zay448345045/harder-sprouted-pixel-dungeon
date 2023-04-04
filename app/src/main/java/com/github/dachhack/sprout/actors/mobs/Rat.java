@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.items.food.Meat;
 import com.github.dachhack.sprout.levels.Level;
@@ -30,7 +31,7 @@ public class Rat extends Mob {
 	private static final float SPAWN_DELAY = 2f;
 
 	{
-		name = "marsupial rat";
+		name = Messages.get(this, "name");
 		spriteClass = RatSprite.class;
 
 		HP = HT = 16;
@@ -52,9 +53,7 @@ public class Rat extends Mob {
 
 	@Override
 	public String description() {
-		return "Marsupial rats are aggressive but rather weak denizens "
-				+ "of the sewers. They have a nasty bite, but are only life threatening in large numbers. "
-				+ "Some consider their meat a staple diet item. Maybe try it cooked. ";
+		return Messages.get(this, "desc");
 	}
 	
 	public static void spawnAround(int pos) {

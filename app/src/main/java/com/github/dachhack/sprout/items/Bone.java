@@ -17,8 +17,6 @@
  */
 package com.github.dachhack.sprout.items;
 
-import java.util.ArrayList;
-
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
@@ -36,6 +34,8 @@ import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.Game;
 import com.watabou.utils.Bundle;
 
+import java.util.ArrayList;
+
 public class Bone extends Item {
 	
 	private static final String TXT_PREVENTING = Messages.get(Bone.class,"strong");
@@ -44,7 +44,7 @@ public class Bone extends Item {
 	
 	public static final float TIME_TO_USE = 1;
 
-	public static final String AC_PORT = Messages.get(Bone.class,"open");
+	public static final String AC_PORT = Messages.get(Bone.class,"ac");
 
 	private int specialLevel = 37;
 	private int returnDepth = -1;

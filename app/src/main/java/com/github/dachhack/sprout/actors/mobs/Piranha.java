@@ -17,10 +17,9 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
@@ -34,10 +33,12 @@ import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.sprites.PiranhaSprite;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Piranha extends Mob {
 
 	{
-		name = "giant piranha";
+		name = Messages.get(this, "name");
 		spriteClass = PiranhaSprite.class;
 
 		baseSpeed = 2f;
@@ -153,8 +154,7 @@ public class Piranha extends Mob {
 
 	@Override
 	public String description() {
-		return "These carnivorous fish are not natural inhabitants of underground pools. "
-				+ "They were bred specifically to protect flooded treasure vaults.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

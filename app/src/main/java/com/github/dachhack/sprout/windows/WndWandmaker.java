@@ -103,7 +103,7 @@ private static final String TXT_MESSAGE = Messages.get(WndWandmaker.class, "msg"
 
 		reward.identify();
 		if (reward.doPickUp(Dungeon.hero)) {
-			GLog.i(Hero.TXT_YOU_NOW_HAVE, reward.name());
+			GLog.i(Messages.get(Hero.class,"have"), reward.name());
 		} else {
 			Dungeon.level.drop(reward, wandmaker.pos).sprite.drop();
 		}

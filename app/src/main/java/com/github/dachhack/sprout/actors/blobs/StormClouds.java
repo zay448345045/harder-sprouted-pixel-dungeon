@@ -1,6 +1,7 @@
 package com.github.dachhack.sprout.actors.blobs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.effects.BlobEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.items.weapon.melee.relic.NeptunusTrident;
@@ -36,7 +37,7 @@ public class StormClouds extends Blob {
 
     @Override
     public String tileDesc() {
-        return "A storm cloud is swirling here";
+        return Messages.get(this, "desc");
     }
 
 }

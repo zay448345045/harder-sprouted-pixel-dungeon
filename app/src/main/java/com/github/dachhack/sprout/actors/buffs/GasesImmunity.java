@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.actors.buffs;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.blobs.ConfusionGas;
 import com.github.dachhack.sprout.actors.blobs.ParalyticGas;
 import com.github.dachhack.sprout.actors.blobs.StenchGas;
@@ -34,7 +35,7 @@ public class GasesImmunity extends FlavourBuff {
 
 	@Override
 	public String toString() {
-		return "Immune to gases";
+		return Messages.get(this, "name");
 	}
 
 	{
@@ -42,5 +43,10 @@ public class GasesImmunity extends FlavourBuff {
 		immunities.add(ToxicGas.class);
 		immunities.add(ConfusionGas.class);
 		immunities.add(StenchGas.class);
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc", dispTurns());
 	}
 }

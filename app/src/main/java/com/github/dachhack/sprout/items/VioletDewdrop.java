@@ -17,21 +17,15 @@
  */
 package com.github.dachhack.sprout.items;
 
-import com.github.dachhack.sprout.Assets;
-import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.actors.hero.Hero;
-import com.github.dachhack.sprout.actors.hero.HeroClass;
-import com.github.dachhack.sprout.effects.Speck;
-import com.github.dachhack.sprout.sprites.CharSprite;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
-import com.watabou.noosa.audio.Sample;
 
 public class VioletDewdrop extends Dewdrop {
 
 	private static final String TXT_VALUE = "%+dHP";
 
 	{
-		name = "violet dewdrop";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.VIOLETDEWDROP;
 
 		amountToFill = 50;

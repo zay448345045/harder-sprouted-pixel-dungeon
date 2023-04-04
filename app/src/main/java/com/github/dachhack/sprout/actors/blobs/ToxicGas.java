@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.actors.blobs;
 
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
@@ -56,18 +57,17 @@ public class ToxicGas extends Blob implements Hero.Doom {
 
 		emitter.pour(Speck.factory(Speck.TOXIC), 0.6f);
 	}
-
 	@Override
 	public String tileDesc() {
-		return "A greenish cloud of toxic gas is swirling here.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override
 	public void onDeath() {
+		Dungeon.fail(ResultDescriptions.GAS);
+		GLog.n(Messages.get(this, "die"));
 
 		Badges.validateDeathFromGas();
-
-		Dungeon.fail(ResultDescriptions.GAS);
-		GLog.n("You died from a toxic gas..");
 	}
+
 }

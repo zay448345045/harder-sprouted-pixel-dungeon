@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.actors.blobs;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -48,6 +49,6 @@ public class ParalyticGas extends Blob {
 
 	@Override
 	public String tileDesc() {
-		return "A cloud of paralytic gas is swirling here.";
+		return Messages.get(this, "desc");
 	}
 }

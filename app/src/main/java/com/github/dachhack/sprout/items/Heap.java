@@ -17,10 +17,6 @@
  */
 package com.github.dachhack.sprout.items;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
@@ -69,6 +65,10 @@ import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
+
 public class Heap implements Bundlable {
 
 	private static final String TXT_MIMIC = "This is a mimic!";
@@ -111,6 +111,27 @@ public class Heap implements Bundlable {
 		//	return ItemSpriteSheet.LOCKED_CHEST;
 		default:
 			return 0;
+		}
+	}
+
+	@Override
+	public String toString() {
+		switch (type) {
+			case CHEST:
+			case MIMIC:
+				return Messages.get(this, "chest");
+			case LOCKED_CHEST:
+				return Messages.get(this, "locked_chest");
+			case CRYSTAL_CHEST:
+				return Messages.get(this, "crystal_chest");
+			case TOMB:
+				return Messages.get(this, "tomb");
+			case SKELETON:
+				return Messages.get(this, "skeleton");
+			case REMAINS:
+				return Messages.get(this, "remains");
+			default:
+				return peek().toString();
 		}
 	}
 

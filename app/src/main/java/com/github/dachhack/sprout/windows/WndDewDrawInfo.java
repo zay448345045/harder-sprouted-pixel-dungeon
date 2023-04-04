@@ -26,7 +26,6 @@ import com.github.dachhack.sprout.ui.RedButton;
 import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.Utils;
-import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndDewDrawInfo extends Window {
 	
@@ -73,27 +72,27 @@ public class WndDewDrawInfo extends Window {
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 
-		RenderedTextMultiline message = PixelScene.renderMultiline(TXT_MESSAGE, 6);
+		RenderedTextMultiline message = PixelScene.renderMultiline(Messages.get(WndDewDrawInfo.class, "msg1"), 6);
 		message.maxWidth(WIDTH);
 		message.setPos(0, titlebar.bottom() + GAP);
 		add(message);
-		RenderedTextMultiline message2 = PixelScene.renderMultiline(TXT_MESSAGE2, 6);
+		RenderedTextMultiline message2 = PixelScene.renderMultiline(Messages.get(WndDewDrawInfo.class, "msg2"), 6);
 		message2.maxWidth(WIDTH);
 		message2.setPos(0, message.top() + message.height() + GAP);
 		add(message2);
 
-		RenderedTextMultiline message3 = PixelScene.renderMultiline(TXT_MESSAGE3, 6);
+		RenderedTextMultiline message3 = PixelScene.renderMultiline(Messages.get(WndDewDrawInfo.class, "msg3"), 6);
 		message3.maxWidth(WIDTH);
 		message3.setPos(0, message2.top() + message2.height() + GAP);
 		add(message3);
 
-		RenderedTextMultiline message4 = PixelScene.renderMultiline(TXT_MESSAGE4, 6);
+		RenderedTextMultiline message4 = PixelScene.renderMultiline(Messages.get(WndDewDrawInfo.class, "msg4"), 6);
 		message4.maxWidth(WIDTH);
 		message4.setPos(0, message3.top() + message3.height() + GAP);
 		add(message4);
 
 
-		RedButton btnBattle = new RedButton(TXT_WATER) {
+		RedButton btnBattle = new RedButton(Messages.get(WndDewDrawInfo.class, "ok")) {
 			@Override
 			protected void onClick() {
 				hide();

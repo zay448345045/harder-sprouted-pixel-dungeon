@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.windows;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.Rankings;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -27,7 +28,6 @@ import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.ui.RedButton;
 import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
-import com.watabou.noosa.BitmapTextMultiline;
 import com.watabou.noosa.Game;
 
 public class WndResurrect extends Window {
@@ -56,12 +56,12 @@ public class WndResurrect extends Window {
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 		RenderedTextMultiline message = PixelScene
-				.renderMultiline(TXT_MESSAGE, 6);
+				.renderMultiline(Messages.get(WndResurrect.class,"message"), 6);
 		message.maxWidth(WIDTH);
 		message.setPos(0, titlebar.bottom() + GAP);
 		add(message);
 
-		RedButton btnYes = new RedButton(TXT_YES) {
+		RedButton btnYes = new RedButton(Messages.get(WndResurrect.class,"yes")) {
 			@Override
 			protected void onClick() {
 				hide();
@@ -75,7 +75,7 @@ public class WndResurrect extends Window {
 		btnYes.setRect(0, message.top() + message.height() + GAP, WIDTH, BTN_HEIGHT);
 		add(btnYes);
 
-		RedButton btnNo = new RedButton(TXT_NO) {
+		RedButton btnNo = new RedButton(Messages.get(WndResurrect.class,"no")) {
 			@Override
 			protected void onClick() {
 				hide();

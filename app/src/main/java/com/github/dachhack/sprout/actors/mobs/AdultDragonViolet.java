@@ -17,32 +17,21 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
-import com.github.dachhack.sprout.Assets;
-import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.actors.Actor;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Poison;
-import com.github.dachhack.sprout.effects.CellEmitter;
-import com.github.dachhack.sprout.effects.Speck;
-import com.github.dachhack.sprout.items.AdamantArmor;
-import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.mechanics.Ballistica;
-import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.AdultDragonVioletSprite;
 import com.github.dachhack.sprout.sprites.CharSprite;
-import com.github.dachhack.sprout.sprites.CrabKingSprite;
-import com.github.dachhack.sprout.sprites.VioletDragonSprite;
-import com.github.dachhack.sprout.utils.GLog;
-import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class AdultDragonViolet extends Mob implements Callback{
 
@@ -51,7 +40,7 @@ public class AdultDragonViolet extends Mob implements Callback{
 
 
 	{
-		name = "Purple Dragon";
+		name = Messages.get(this, "name");
 		spriteClass = AdultDragonVioletSprite.class;
 		baseSpeed = 2f;
 
@@ -83,8 +72,8 @@ public class AdultDragonViolet extends Mob implements Callback{
 	public void die(Object cause) {	
 			
 		super.die(cause);
-		
-		yell("Roaaar...");
+
+		yell(Messages.get(AdultDragonViolet.class, "die"));
 					
 	}
 
@@ -118,8 +107,8 @@ public class AdultDragonViolet extends Mob implements Callback{
 	private void zap() {
 		spend(TIME_TO_ZAP);
 
-		
-		yell("Roaaar!");
+
+		yell(Messages.get(AdultDragonViolet.class, "atk"));
 		
 		if (hit(this, enemy, true)) {			
 
@@ -143,10 +132,10 @@ public class AdultDragonViolet extends Mob implements Callback{
 	public void call() {
 		next();
 	}
-	
-		@Override
+
+	@Override
 	public String description() {
-		return "This is a powerful adult dragon";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

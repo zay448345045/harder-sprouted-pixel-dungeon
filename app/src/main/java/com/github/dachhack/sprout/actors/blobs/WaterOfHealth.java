@@ -21,6 +21,7 @@ import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Journal;
 import com.github.dachhack.sprout.Journal.Feature;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Hunger;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.BlobEmitter;
@@ -50,7 +51,7 @@ public class WaterOfHealth extends WellWater {
 
 		Dungeon.hero.interrupt();
 
-		GLog.p(TXT_PROCCED);
+		GLog.p(Messages.get(this, "proc"));
 
 		Journal.remove(Feature.WELL_OF_HEALTH);
 
@@ -75,7 +76,6 @@ public class WaterOfHealth extends WellWater {
 
 	@Override
 	public String tileDesc() {
-		return "Power of health radiates from the water of this well. "
-				+ "Take a sip from it to heal your wounds and satisfy hunger.";
+		return Messages.get(this, "desc");
 	}
 }

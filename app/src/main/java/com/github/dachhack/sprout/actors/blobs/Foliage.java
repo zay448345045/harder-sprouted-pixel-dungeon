@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.actors.blobs;
 
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Journal;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Shadows;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -81,6 +82,6 @@ public class Foliage extends Blob {
 
 	@Override
 	public String tileDesc() {
-		return "Shafts of light pierce the gloom of the underground garden.";
+		return Messages.get(this, "desc");
 	}
 }

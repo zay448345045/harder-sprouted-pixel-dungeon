@@ -1,5 +1,6 @@
 package com.github.dachhack.sprout.actors.blobs;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -35,6 +36,6 @@ public class StenchGas extends Blob {
 
 	@Override
 	public String tileDesc() {
-		return "A cloud of fetid stench is swirling here.";
+		return Messages.get(this, "desc");
 	}
 }

@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.actors.mobs;
 
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.items.ArmorKit;
@@ -27,12 +28,13 @@ import com.github.dachhack.sprout.items.RedDewdrop;
 import com.github.dachhack.sprout.items.keys.SkeletonKey;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.DwarfKingTombSprite;
+import com.github.dachhack.sprout.ui.BossHealthBar;
 import com.watabou.utils.Random;
 
 public class DwarfKingTomb extends Mob  {
 
 	{
-		name = "dwarf king tomb";
+		name = Messages.get(this, "name");
 		spriteClass = DwarfKingTombSprite.class;
 
 		HP = HT = 800;
@@ -91,21 +93,21 @@ public class DwarfKingTomb extends Mob  {
       return false;
        }
 	}
-	
+
 	@Override
 	public void damage(int dmg, Object src) {
-		if(checkKing()){
-			yell("I am immortal!");
+		if (checkKing()) {
+			yell(Messages.get(this, "im"));
 		} else {
-		super.damage(dmg, src);
+			BossHealthBar.assignBoss(this);
+			super.damage(dmg, src);
 		}
 	}
 
-	
+
 	@Override
 	public String description() {
-		return "The tomb of the undead dwarf king "
-				+ "it radiates a sickening power ";
+		return Messages.get(this, "desc");
 	}
 	
 	

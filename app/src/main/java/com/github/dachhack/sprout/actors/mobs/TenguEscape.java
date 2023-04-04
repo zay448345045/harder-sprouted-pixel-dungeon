@@ -17,10 +17,9 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
@@ -39,6 +38,8 @@ import com.github.dachhack.sprout.sprites.TenguSprite;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class TenguEscape extends Mob {
 
 	private static final int JUMP_DELAY = 5;
@@ -46,7 +47,7 @@ public class TenguEscape extends Mob {
 	protected static final float SPAWN_DELAY = 2f;
 	
 	{
-		name = "Tengu";
+		name = Messages.get(this, "name");
 		spriteClass = TenguSprite.class;
 		baseSpeed = 1f;
 
@@ -84,9 +85,9 @@ public class TenguEscape extends Mob {
 		//super.die(cause);
 
 		if (jumps>=JUMPS_TO_ESCAPE){
-	    	yell("Escape!");
+			yell(Messages.get(TenguEscape.class, "escape"));
 	    	     } else {
-		    yell("Ugh...Too late " + Dungeon.hero.givenName() + ". Escape!");
+			yell(Messages.get(this, "e2", Dungeon.hero.givenName()));
 		    if(!Dungeon.limitedDrops.tengukey.dropped()) {
 			Dungeon.limitedDrops.tengukey.drop();
 			Dungeon.level.drop(new TenguKey(), pos).sprite.drop();
@@ -178,13 +179,12 @@ public class TenguEscape extends Mob {
 	@Override
 	public void notice() {
 		super.notice();
-		yell("Finally free!");
+		yell(Messages.get(TenguEscape.class, "notice"));
 	}
 
 	@Override
 	public String description() {
-		return "Tengu are members of the ancient assassins clan, which is also called Tengu. "
-				+ "These assassins are noted for extensive use of shuriken and traps.";
+		return Messages.get(Tengu.class, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

@@ -17,25 +17,22 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
-import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.blobs.Blob;
 import com.github.dachhack.sprout.actors.blobs.CorruptGas;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
-import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.StoneOre;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
-import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
-import com.github.dachhack.sprout.items.weapon.missiles.JupitersWrath;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.KupuaSprite;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Kupua extends Mob {
 	
 	{
-		name = "kupua";
+		name = Messages.get(this, "name");
 		spriteClass = KupuaSprite.class;
 
 		HP = HT = 1800;
@@ -70,12 +67,12 @@ public class Kupua extends Mob {
 	
 	@Override
 	public String defenseVerb() {
-		return "blocked";
+		return Messages.get(this, "def");
 	}
 
 	@Override
 	public String description() {
-		return "Kupua are minor trickster demons who like to appear enmasse. ";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

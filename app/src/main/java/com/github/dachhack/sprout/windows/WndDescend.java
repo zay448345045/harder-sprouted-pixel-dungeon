@@ -26,7 +26,6 @@ import com.github.dachhack.sprout.ui.RedButton;
 import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.Utils;
-import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndDescend extends Window {
 
@@ -55,12 +54,12 @@ private static final String TXT_MESSAGE = Messages.get(WndDescend.class, "msg");
 		add(titlebar);
 
 		RenderedTextMultiline message = PixelScene
-				.renderMultiline(TXT_MESSAGE, 6);
+				.renderMultiline( Messages.get(WndDescend.class, "msg"), 6);
 		message.maxWidth(WIDTH);
 		message.setPos(0, titlebar.bottom() + GAP);
 		add(message);
 
-		RedButton btnReward = new RedButton(TXT_REWARD) {
+		RedButton btnReward = new RedButton(Messages.get(WndDescend.class, "ok")) {
 			@Override
 			protected void onClick() {
 				Dungeon.level.forcedone=true;

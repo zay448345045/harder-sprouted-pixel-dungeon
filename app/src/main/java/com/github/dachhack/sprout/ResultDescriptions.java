@@ -17,29 +17,30 @@
  */
 package com.github.dachhack.sprout;
 
+import com.github.dachhack.sprout.Messages.Messages;
+
 public class ResultDescriptions {
 
 	// Mobs
-	public static final String MOB = "Killed by %s";
-	public static final String UNIQUE = "Killed by the %s";
-	public static final String NAMED = "Killed by %s";
+	public static final String MOB = Messages.get(ResultDescriptions.class, "mob");
+	public static final String UNIQUE = Messages.get(ResultDescriptions.class, "unique");
 
 	// Items
-	public static final String ITEM = "Killed by your own %s";
-	public static final String GLYPH = "Killed by the %s";
+	public static final String ITEM = Messages.get(ResultDescriptions.class, "item");
+	public static final String GLYPH = Messages.get(ResultDescriptions.class, "glyph");
 
 	// Dungeon features
-	public static final String TRAP = "Killed by a %s";
+	public static final String TRAP = Messages.get(ResultDescriptions.class, "trap");
 
 	// Debuffs & blobs
-	public static final String BURNING = "Burned to Ash";
-	public static final String HUNGER = "Starved to Death";
-	public static final String POISON = "Succumbed to Poison";
-	public static final String GAS = "Suffocated";
-	public static final String BLEEDING = "Bled to Death";
-	public static final String OOZE = "Melted Away";
-	public static final String FALL = "Died on Impact";
-	public static final String COUNTDOWN = "Died from countdown";
+	public static final String BURNING = Messages.get(ResultDescriptions.class, "burn");
+	public static final String HUNGER = Messages.get(ResultDescriptions.class, "hunger");
+	public static final String POISON = Messages.get(ResultDescriptions.class, "poison");
+	public static final String GAS = Messages.get(ResultDescriptions.class, "gas");
+	public static final String BLEEDING = Messages.get(ResultDescriptions.class, "bleeding");
+	public static final String OOZE = Messages.get(ResultDescriptions.class, "ooze");
+	public static final String FALL = Messages.get(ResultDescriptions.class, "fall");
+	public static final String COUNTDOWN = Messages.get(ResultDescriptions.class, "countdown");
 
-	public static final String WIN = "Obtained the Amulet of Yendor";
+	public static final String WIN = Messages.get(ResultDescriptions.class, "win");
 }

@@ -17,9 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.buffs.Terror;
@@ -31,12 +30,14 @@ import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.SeekingBombSprite;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class SeekingBomb extends Mob {
 
 	
 
 	{
-		name = "seeking bomb";
+		name = Messages.get(this, "name");
 		spriteClass = SeekingBombSprite.class;
 		hostile = false;
 		state = HUNTING;
@@ -59,8 +60,7 @@ public class SeekingBomb extends Mob {
 
 		Bomb bomb = new Bomb();
 		bomb.explode(pos);
-		yell("KA-BOOM!!!");
-		
+		yell(Messages.get(this, "atk"));
 		destroy();
 		sprite.die();
 
@@ -86,7 +86,7 @@ public class SeekingBomb extends Mob {
 
 	@Override
 	public String description() {
-		return "This bomb is hunting the dungeon for enemies. ";
+		return Messages.get(this, "desc");
 	}
 
 	

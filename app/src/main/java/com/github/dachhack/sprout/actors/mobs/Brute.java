@@ -17,9 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.items.Gold;
@@ -30,12 +29,14 @@ import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Brute extends Mob {
 
 	private static final String TXT_ENRAGED = "%s becomes enraged!";
 
 	{
-		name = "gnoll brute";
+		name = Messages.get(this, "name");
 		spriteClass = BruteSprite.class;
 
 		HP = HT = 100;
@@ -81,7 +82,7 @@ public class Brute extends Mob {
 			enraged = true;
 			spend(TICK);
 			if (Dungeon.visible[pos]) {
-				GLog.w(TXT_ENRAGED, name);
+				GLog.w(Messages.get(Brute.class, "enraged"), name);
 				sprite.showStatus(CharSprite.NEGATIVE, "enraged");
 			}
 		}
@@ -89,8 +90,7 @@ public class Brute extends Mob {
 
 	@Override
 	public String description() {
-		return "Brutes are the largest, strongest and toughest of all gnolls. When severely wounded, "
-				+ "they go berserk, inflicting even more damage to their enemies.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

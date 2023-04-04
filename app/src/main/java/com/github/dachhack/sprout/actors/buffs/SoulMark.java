@@ -1,5 +1,6 @@
 package com.github.dachhack.sprout.actors.buffs;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 
 public class SoulMark extends FlavourBuff {
@@ -19,6 +20,11 @@ public class SoulMark extends FlavourBuff {
 
     @Override
     public String toString() {
-        return "soul mark";
+        return Messages.get(this, "name");
+    }
+
+    @Override
+    public String desc() {
+        return Messages.get(this, "desc");
     }
 }

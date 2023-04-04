@@ -17,9 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -39,6 +38,8 @@ import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Warlock extends Mob implements Callback {
 
 	private static final float TIME_TO_ZAP = 1f;
@@ -46,7 +47,7 @@ public class Warlock extends Mob implements Callback {
 	private static final String TXT_SHADOWBOLT_KILLED = "%s's shadow bolt killed you...";
 
 	{
-		name = "dwarf warlock";
+		name = Messages.get(this, "name");
 		spriteClass = WarlockSprite.class;
 
 		HP = HT = 100;
@@ -114,7 +115,7 @@ public class Warlock extends Mob implements Callback {
 			if (!enemy.isAlive() && enemy == Dungeon.hero) {
 				Dungeon.fail(Utils.format(ResultDescriptions.MOB,
 						Utils.indefinite(name)));
-				GLog.n(TXT_SHADOWBOLT_KILLED, name);
+				GLog.n(Messages.get(Warlock.class, "kill"), name);
 			}
 		} else {
 			enemy.sprite.showStatus(CharSprite.NEUTRAL, enemy.defenseVerb());
@@ -150,9 +151,7 @@ public class Warlock extends Mob implements Callback {
 
 	@Override
 	public String description() {
-		return "When dwarves' interests have shifted from engineering to arcane arts, "
-				+ "warlocks have come to power in the city. They started with elemental magic, "
-				+ "but soon switched to demonology and necromancy.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

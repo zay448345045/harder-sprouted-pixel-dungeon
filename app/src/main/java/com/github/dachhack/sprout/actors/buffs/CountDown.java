@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.buffs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.mobs.BanditKing;
 import com.github.dachhack.sprout.actors.mobs.Mob;
@@ -55,37 +56,42 @@ public class CountDown extends Buff {
 
 	@Override
 	public String toString() {
-		return "Countdown";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc");
 	}
 
 	@Override
 	public boolean act() {
 		if (target.isAlive()) {
 			ticks++;
-			GLog.w("countdown: %s ",(6-ticks));
-			if (ticks>5){
-				
-				GLog.w("countdown up!");
+			GLog.w(Messages.get(CountDown.class, "cd", (6 - ticks)));
+			if (ticks > 5) {
+
+				GLog.w(Messages.get(CountDown.class, "cdup"));
 				target.sprite.emitter().burst(ShadowParticle.CURSE, 6);
 				target.damage(Math.round(target.HT / 4), this);
-				for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
+				for (Mob mob : Dungeon.level.mobs) {
 					if (mob instanceof BanditKing) {
-						mob.sprite.emitter().burst( Speck.factory( Speck.HEALING ), 1 );
-						mob.HP = Math.min(mob.HP + (Math.round(target.HT/8)),mob.HT);
+						mob.sprite.emitter().burst(Speck.factory(Speck.HEALING), 1);
+						mob.HP = Math.min(mob.HP + (Math.round(target.HT / 8)), mob.HT);
 					}
 				}
-				GLog.w("shadow bandits feed on your life force!");
+				GLog.w(Messages.get(CountDown.class, "feed"));
 				detach();
 			}
 		}
-		
+
 		if (!target.isAlive() && target == Dungeon.hero) {
-				Dungeon.fail(ResultDescriptions.COUNTDOWN);
-				GLog.n(TXT_HERO_KILLED, toString());
+			Dungeon.fail(ResultDescriptions.COUNTDOWN);
+			GLog.n(Messages.get(this, "die"), toString());
 		}
-			
-		spend(TICK);	
-		
+
+		spend(TICK);
+
 		return true;
 	}
 }

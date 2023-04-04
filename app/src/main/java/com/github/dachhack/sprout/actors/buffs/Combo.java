@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.buffs;
 
 import com.github.dachhack.sprout.Badges;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 import com.github.dachhack.sprout.utils.GLog;
@@ -35,7 +36,12 @@ public class Combo extends Buff {
 
 	@Override
 	public String toString() {
-		return "Combo";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc");
 	}
 
 	public int hit(Char enemy, int damage) {
@@ -46,7 +52,7 @@ public class Combo extends Buff {
 
 			Badges.validateMasteryCombo(count);
 
-			GLog.p(TXT_COMBO, count);
+			GLog.p(Messages.get(Combo.class, "combo"), count);
 			postpone(2f);
 			return (int) Math.min(damage, damage * (count - 2) / 5f);
 

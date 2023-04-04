@@ -17,9 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Cripple;
@@ -34,10 +33,12 @@ import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.sprites.ScorpioSprite;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Scorpio extends Mob {
 
 	{
-		name = "scorpio";
+		name = Messages.get(this, "name");
 		spriteClass = ScorpioSprite.class;
 
 		HP = HT = 250;
@@ -101,8 +102,7 @@ public class Scorpio extends Mob {
 
 	@Override
 	public String description() {
-		return "These huge arachnid-like demonic creatures avoid close combat by all means, "
-				+ "firing crippling serrated spikes from long distances.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

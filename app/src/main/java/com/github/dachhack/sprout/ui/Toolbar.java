@@ -483,8 +483,7 @@ public class Toolbar extends Component {
 			alpha(1);
 		}
 
-		private void view(Item item) {
-		}
+
 
 		@Override
 		public void update() {

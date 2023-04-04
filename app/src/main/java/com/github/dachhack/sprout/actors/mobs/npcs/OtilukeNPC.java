@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.actors.mobs.npcs;
 
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -35,7 +36,7 @@ import com.watabou.utils.Random;
 public class OtilukeNPC extends NPC {
 
 	{
-		name = "Otiluke";
+		name = Messages.get(this, "name");
 		spriteClass = OtilukeNPCSprite.class;
 	}
 	

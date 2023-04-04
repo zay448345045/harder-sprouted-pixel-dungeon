@@ -17,22 +17,16 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import com.github.dachhack.sprout.Badges;
-import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
-import com.github.dachhack.sprout.items.ArmorKit;
-import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.RedDewdrop;
-import com.github.dachhack.sprout.items.keys.SkeletonKey;
-import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.DwarfKingTombSprite;
-import com.watabou.utils.Random;
 
 public class ControlPanel extends Mob  {
 
 	{
-		name = "dwarf king tomb";
+		name = Messages.get(this, "name");
 		spriteClass = DwarfKingTombSprite.class;
 
 		HP = HT = 6000;
@@ -73,14 +67,14 @@ public class ControlPanel extends Mob  {
 		return 80;
 		
 	}
-	
-	
-	
+
+
+
 	@Override
 	public String description() {
-		return "The tomb of the undead dwarf king "
-				+ "it radiates a sickening power ";
+		return Messages.get(this, "desc");
 	}
+
 	
 		
 }

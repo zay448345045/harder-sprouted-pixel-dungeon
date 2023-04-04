@@ -17,13 +17,10 @@
  */
 package com.github.dachhack.sprout.items;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.SnipersMark;
@@ -37,16 +34,18 @@ import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.scenes.CellSelector;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.ItemSprite;
-import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.sprites.MissileSprite;
 import com.github.dachhack.sprout.ui.QuickSlotButton;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.audio.Sample;
-import com.watabou.noosa.particles.Emitter;
 import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Callback;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public abstract class Item implements Bundlable {
 
@@ -96,8 +95,8 @@ public abstract class Item implements Bundlable {
 
 	public ArrayList<String> actions(Hero hero) {
 		ArrayList<String> actions = new ArrayList<String>();
-		actions.add(AC_DROP);
-		actions.add(AC_THROW);
+		actions.add(Messages.get(Item.class, "ac_drop"));
+		actions.add(Messages.get(Item.class, "ac_throw"));
 		return actions;
 	}
 
@@ -133,11 +132,11 @@ public abstract class Item implements Bundlable {
 		curUser = hero;
 		curItem = this;
 
-		if (action.equals(AC_DROP)) {
+		if (action.equals(Messages.get(Item.class, "ac_drop"))) {
 
 			doDrop(hero);
 
-		} else if (action.equals(AC_THROW)) {
+		} else if (action.equals(Messages.get(Item.class, "ac_throw"))) {
 
 			doThrow(hero);
 
@@ -198,7 +197,7 @@ public abstract class Item implements Bundlable {
 
 		} else {
 
-			GLog.n(TXT_PACK_FULL, name());
+			GLog.n(Messages.get(Item.class, "pack_full"), name());
 			return false;
 
 		}

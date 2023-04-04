@@ -17,9 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Burning;
@@ -30,10 +29,12 @@ import com.github.dachhack.sprout.items.weapon.enchantments.Fire;
 import com.github.dachhack.sprout.sprites.SkeletonHand1Sprite;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class SkeletonHand1 extends Mob {
 
 	{
-		name = "skeleton hand";
+		name = Messages.get(this, "name");
 		spriteClass = SkeletonHand1Sprite.class;
 
 		HP = HT = 200;
@@ -86,13 +87,13 @@ public class SkeletonHand1 extends Mob {
 
 		return damage;
 	}
-	
-	
 
-	
+
+
+
 	@Override
 	public String description() {
-		return "This ancient giant hand belongs to the king of skeletons. ";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

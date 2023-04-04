@@ -17,13 +17,10 @@
  */
 package com.github.dachhack.sprout.items;
 
-import java.util.ArrayList;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
-import com.github.dachhack.sprout.actors.buffs.Buff;
-import com.github.dachhack.sprout.actors.buffs.Haste;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.actors.mobs.pets.PET;
@@ -31,8 +28,6 @@ import com.github.dachhack.sprout.effects.particles.ElmoParticle;
 import com.github.dachhack.sprout.items.journalpages.JournalPage;
 import com.github.dachhack.sprout.items.keys.IronKey;
 import com.github.dachhack.sprout.items.misc.Spectacles.MagicSight;
-import com.github.dachhack.sprout.items.rings.RingOfForce;
-import com.github.dachhack.sprout.items.scrolls.Scroll;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.scenes.InterlevelScene;
@@ -44,6 +39,8 @@ import com.watabou.noosa.Game;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 
+import java.util.ArrayList;
+
 public class OtilukesJournal extends Item {
 
 	private static final String TXT_PREVENTING = "Strong magic aura of this place prevents you from reading the journal!";
@@ -51,13 +48,13 @@ public class OtilukesJournal extends Item {
 	
 	public final float TIME_TO_USE = 1;
 	public final int fullCharge = 1000;
-	
-	
-	public static final String AC_RETURN = "RETURN";
-	public static final String AC_ADD = "ADD A PAGE";
-	public static final String AC_PORT = "READ";
-	
-	protected String inventoryTitle = "Select a journal page";
+
+
+	public static final String AC_RETURN = Messages.get(OtilukesJournal.class, "ac_return");
+	public static final String AC_ADD = Messages.get(OtilukesJournal.class, "ac_add");
+	public static final String AC_PORT = Messages.get(OtilukesJournal.class, "ac_read");
+
+	protected String inventoryTitle = Messages.get(OtilukesJournal.class, "title");
 	protected WndBag.Mode mode = WndBag.Mode.JOURNALPAGES;
 
 	
@@ -87,7 +84,7 @@ public class OtilukesJournal extends Item {
 	public boolean[] firsts = new boolean[10];	
 		
 	{
-		name = "Otiluke's journal";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.OTILUKES_JOURNAL;
 
 		unique = true;
@@ -151,7 +148,7 @@ public class OtilukesJournal extends Item {
 
 			if (Dungeon.bossLevel()) {
 				hero.spend(TIME_TO_USE);
-				GLog.w(TXT_PREVENTING);
+				GLog.w(Messages.get(OtilukesJournal.class, "prevent"));
 				return;
 			}
 						
@@ -235,7 +232,7 @@ public class OtilukesJournal extends Item {
 	private void checkPetPort(){
 		PET pet = checkpet();
 		if(pet!=null && checkpetNear()){
-		  GLog.i("I see pet");
+		  GLog.i(Messages.get(OtilukesJournal.class, "pet"));
 		  Dungeon.hero.petType=pet.type;
 		  Dungeon.hero.petLevel=pet.level;
 		  Dungeon.hero.petKills=pet.kills;	
@@ -252,22 +249,10 @@ public class OtilukesJournal extends Item {
 		
 	}
 
-		
+
 	@Override
 	public String info() {
-		
-		String strdesc = "The journal of the powerful Otiluke. It is missing pages.. ";
-		
-		if(level>1){
-		  if (charge<reqCharges()){
-			
-			strdesc = strdesc +  "It has "+charge+" out of " + reqCharges() + " charges.";
-		  } else {			
-			strdesc = strdesc +  "It is fully charged!";
-		  }
-		}
-		
-		return strdesc;
+		return Messages.get(OtilukesJournal.class, "desc1");
 	}
 	
 	protected WndBag.Listener itemSelector = new WndBag.Listener() {
@@ -284,7 +269,7 @@ public class OtilukesJournal extends Item {
 				hero.sprite.emitter().burst(ElmoParticle.FACTORY, 12);
 
 				item.detach(hero.belongings.backpack);
-				GLog.h("The journal page fits right in.");
+				GLog.h(Messages.get(OtilukesJournal.class, "add"));
 				level++;
 				
 				if(charge<(fullCharge-500)){

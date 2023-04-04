@@ -21,8 +21,6 @@ import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.ui.RedButton;
 import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
-import com.watabou.noosa.BitmapTextMultiline;
-import com.watabou.noosa.Image;
 
 public class WndOptions extends Window {
 
@@ -64,7 +62,7 @@ public class WndOptions extends Window {
 					onSelect( index );
 				}
 			};
-			btn.enable(enabled(i));
+			//btn.enable(enabled(i));
 			btn.setRect( MARGIN, pos, width - MARGIN * 2, BUTTON_HEIGHT );
 			add( btn );
 
@@ -74,12 +72,7 @@ public class WndOptions extends Window {
 		resize( width, (int)pos );
 	}
 
-	public WndOptions(Image image, String message, String desc, String update, String changes) {
-	}
 
-	protected boolean enabled( int index ){
-		return true;
+	protected void onSelect( int index ) {
 	}
-
-	protected void onSelect( int index ) {}
 }

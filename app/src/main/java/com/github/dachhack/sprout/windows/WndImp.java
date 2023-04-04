@@ -30,7 +30,6 @@ import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
-import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndImp extends Window {
 
@@ -38,7 +37,7 @@ public class WndImp extends Window {
 //			+ "Regarding your reward, I don't have cash with me right now, but I have something better for you. "
 //			+ "This is my family heirloom ring: my granddad took it off a dead paladin's finger.";
 //	private static final String TXT_REWARD = "Take the ring";
-private static final String TXT_MESSAGE = Messages.get(WndImp.class, "msg");
+	private static final String TXT_MESSAGE = Messages.get(WndImp.class, "msg");
 	private static final String TXT_REWARD = Messages.get(WndImp.class, "ok");
 
 	private static final int WIDTH = 120;
@@ -56,12 +55,12 @@ private static final String TXT_MESSAGE = Messages.get(WndImp.class, "msg");
 		add(titlebar);
 
 		RenderedTextMultiline message = PixelScene
-				.renderMultiline(TXT_MESSAGE, 6);
+				.renderMultiline(Messages.get(WndImp.class, "msg"), 6);
 		message.maxWidth = WIDTH;
 		message.setPos(0, titlebar.bottom() + GAP);
 		add(message);
 
-		RedButton btnReward = new RedButton(TXT_REWARD) {
+		RedButton btnReward = new RedButton(Messages.get(WndImp.class, "ok")) {
 			@Override
 			protected void onClick() {
 				takeReward(imp, tokens, Imp.Quest.reward);
@@ -82,7 +81,7 @@ private static final String TXT_MESSAGE = Messages.get(WndImp.class, "msg");
 
 		reward.identify();
 		if (reward.doPickUp(Dungeon.hero)) {
-			GLog.i(Hero.TXT_YOU_NOW_HAVE, reward.name());
+			GLog.i(Messages.get(Hero.class,"have"), reward.name());
 		} else {
 			Dungeon.level.drop(reward, imp.pos).sprite.drop();
 		}

@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.mobs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Blindness;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -36,7 +37,7 @@ public class BanditKing extends Thief {
 	public Item item;
 
 	{
-		name = "shadow bandit";
+		name = Messages.get(this, "name");
 		spriteClass = BanditKingSprite.class;
 		HP = HT = 400; //200
 
@@ -96,13 +97,13 @@ public class BanditKing extends Thief {
 	public void die(Object cause) {
 		super.die(cause);
 		if (Dungeon.depth<25){
-		yell("Fine! Take it back!");
-		GLog.n("Shadow Bandit dissolves away.");
+			yell(Messages.get(BanditKing.class, "die"));
+			GLog.n(Messages.get(BanditKing.class, "dis"));
 		if (!Dungeon.limitedDrops.spork.dropped()) {
 			Dungeon.level.drop(new Spork().identify(), pos).sprite.drop();
 			Dungeon.limitedDrops.spork.drop();
 			Dungeon.sporkAvail = false;
-		yell("Doh! Dropped my spork!");	
+			yell(Messages.get(BanditKing.class, "spork"));
 		}
 	  }
 	}

@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.mobs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Terror;
@@ -32,7 +33,7 @@ import com.watabou.utils.Random;
 public class BlueWraith extends Wraith  {
 	
 	{
-		name = "blue wraith";
+		name = Messages.get(this, "name");
 		spriteClass = BlueWraithSprite.class;
 
 		HP = HT = 195;
@@ -46,10 +47,10 @@ public class BlueWraith extends Wraith  {
 		lootChance = 0.5f;
 		
 	}
-	
+
 	@Override
 	public String description() {
-		return "A Blue Wraith has been dispatched to avenge the dungeon. ";
+		return Messages.get(this, "desc");
 	}
 
 	@Override
@@ -114,7 +115,7 @@ public class BlueWraith extends Wraith  {
 	/*private static final float SPAWN_DELAY = 2f;
 
 	{
-		name = "blue wraith";
+		name = Messages.get(this, "name");
 		spriteClass = BlueWraithSprite.class;
 
 		HP = HT = 70;

@@ -17,13 +17,9 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.effects.CellEmitter;
@@ -39,12 +35,17 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+
 public class Mimic extends Mob {
 
 	private int level;
 
 	{
-		name = "mimic";
+		name = Messages.get(this, "name");
 		spriteClass = MimicSprite.class;
 	}
 
@@ -122,8 +123,7 @@ public class Mimic extends Mob {
 
 	@Override
 	public String description() {
-		return "Mimics are magical creatures which can take any shape they wish. In dungeons they almost always "
-				+ "choose a shape of a treasure chest, because they know how to beckon an adventurer.";
+		return Messages.get(this, "desc");
 	}
 
 	public static Mimic spawnAt(int pos, List<Item> items) {

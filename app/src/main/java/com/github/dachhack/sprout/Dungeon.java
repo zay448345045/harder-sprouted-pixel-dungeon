@@ -17,14 +17,6 @@
  */
 package com.github.dachhack.sprout;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.HashSet;
-
 import android.content.Context;
 
 import com.github.dachhack.sprout.actors.Actor;
@@ -99,6 +91,14 @@ import com.watabou.utils.Bundle;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 import com.watabou.utils.SparseArray;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.HashSet;
 
 public class Dungeon {
 
@@ -786,7 +786,16 @@ public static Level newJournalLevel(int page, Boolean first){
 		return depth == 5 || depth == 10 || depth == 15 || depth == 20
 				|| depth == 25 ||  depth ==  36 ||  depth ==  41;
 	}
-	
+
+	public static boolean bossLevelFW() {
+		return bossLevelFW(depth);
+	}
+
+	public static boolean bossLevelFW(int depth) {
+		return depth ==  37 ||depth ==  38 ||depth ==  39  ||depth ==  40 || depth ==  99;
+	}
+
+
 
 	public static boolean notClearableLevel(int depth) {
 		return depth == 1 || depth ==2 ||depth == 5 || depth == 10 || depth == 15 || depth == 20 || depth == 21

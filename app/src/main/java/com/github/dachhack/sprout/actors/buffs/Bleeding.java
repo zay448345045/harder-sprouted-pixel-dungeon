@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.buffs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.effects.Splash;
 import com.github.dachhack.sprout.ui.BuffIndicator;
@@ -56,7 +57,7 @@ public class Bleeding extends Buff {
 
 	@Override
 	public String toString() {
-		return "Bleeding";
+		return Messages.get(this, "name");
 	}
 
 	@Override
@@ -74,7 +75,7 @@ public class Bleeding extends Buff {
 
 				if (target == Dungeon.hero && !target.isAlive()) {
 					Dungeon.fail(ResultDescriptions.BLEEDING);
-					GLog.n("You bled to death...");
+					GLog.n(Messages.get(this, "die"));
 				}
 
 				spend(TICK);
@@ -89,5 +90,10 @@ public class Bleeding extends Buff {
 		}
 
 		return true;
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc", level);
 	}
 }

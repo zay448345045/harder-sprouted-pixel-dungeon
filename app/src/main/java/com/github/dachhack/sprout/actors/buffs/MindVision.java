@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.buffs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 
 public class MindVision extends FlavourBuff {
@@ -33,7 +34,12 @@ public class MindVision extends FlavourBuff {
 
 	@Override
 	public String toString() {
-		return "Mind vision";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc", dispTurns());
 	}
 
 	@Override

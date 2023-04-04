@@ -37,9 +37,6 @@ import com.watabou.noosa.TouchArea;
 
 public class AboutScene extends PixelScene {
 
-	private static final String TTL_SmuJB = "Developer:SmuJayB";
-	private static final String TTL_Ling = "Localization Developer: JDSALing";
-
 	private static final String TTL_SHPX = "SPRPD";
 
 	private static final String TXT_SHPX = "Modified from Shattered Pixel Dungeon And Sprouted Pixel Dungeon\n\n"
@@ -70,21 +67,21 @@ public class AboutScene extends PixelScene {
 
 		new Flare( 7, 64 ).color( 0x225511, true ).show( shpx, 0 ).angularSpeed = +20;
 
-		RenderedText JDSALing = renderText( TTL_Ling, 8 );
-		JDSALing .hardlight( Window.SHPX_COLOR );
-		add( JDSALing  );
-
-		JDSALing.x = (colWidth - JDSALing.width()) / 2;
-		JDSALing.y = JDSALing.y + JDSALing.height + 32;
-		align(JDSALing);
-
-		RenderedText SmuJB = renderText( TTL_SmuJB, 8 );
-		SmuJB .hardlight( Window.SHPX_COLOR );
-		add( SmuJB  );
-
-		SmuJB.x = (colWidth - SmuJB.width()) / 2;
-		SmuJB.y = SmuJB.y + SmuJB.height + 24;
-		align(SmuJB);
+//		RenderedText JDSALing = renderText( TTL_Ling, 8 );
+//		JDSALing .hardlight( Window.SHPX_COLOR );
+//		add( JDSALing  );
+//
+//		JDSALing.x = (colWidth - JDSALing.width()) / 2;
+//		JDSALing.y = JDSALing.y + JDSALing.height + 32;
+//		align(JDSALing);
+//
+//		RenderedText SmuJB = renderText( TTL_SmuJB, 8 );
+//		SmuJB .hardlight( Window.SHPX_COLOR );
+//		add( SmuJB  );
+//
+//		SmuJB.x = (colWidth - SmuJB.width()) / 2;
+//		SmuJB.y = SmuJB.y + SmuJB.height + 24;
+//		align(SmuJB);
 
 		RenderedText shpxtitle = renderText( TTL_SHPX, 8 );
 		shpxtitle.hardlight( Window.SHPX_COLOR );

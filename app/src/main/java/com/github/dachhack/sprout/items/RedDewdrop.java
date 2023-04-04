@@ -17,13 +17,14 @@
  */
 package com.github.dachhack.sprout.items;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
 public class RedDewdrop extends Dewdrop {
 
 
 	{
-		name = "red dewdrop";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.REDDEWDROP;
 		amountToFill = 5;
 	}

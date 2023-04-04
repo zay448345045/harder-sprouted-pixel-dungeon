@@ -17,10 +17,9 @@
  */
 package com.github.dachhack.sprout.actors.hero;
 
-import java.util.Iterator;
-
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.KindOfWeapon;
 import com.github.dachhack.sprout.items.KindofMisc;
@@ -32,6 +31,8 @@ import com.github.dachhack.sprout.items.scrolls.ScrollOfRemoveCurse;
 import com.github.dachhack.sprout.items.wands.Wand;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
+
+import java.util.Iterator;
 
 public class Belongings implements Iterable<Item> {
 
@@ -53,7 +54,7 @@ public class Belongings implements Iterable<Item> {
 
 		backpack = new Bag() {
 			{
-				name = "backpack";
+				name = Messages.get(this, "name");
 				size = BACKPACK_SIZE;
 			}
 		};

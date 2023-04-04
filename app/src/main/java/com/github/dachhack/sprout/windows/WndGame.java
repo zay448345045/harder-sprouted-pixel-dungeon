@@ -59,7 +59,7 @@ private static final String TXT_SETTINGS = Messages.get(WndGame.class, "settings
 
 		super();
 
-		addButton(new RedButton(TXT_SETTINGS) {
+		addButton(new RedButton(Messages.get(WndGame.class, "settings")) {
 			@Override
 			protected void onClick() {
 				hide();
@@ -69,7 +69,7 @@ private static final String TXT_SETTINGS = Messages.get(WndGame.class, "settings
 
 		// Challenges window
 		if (Dungeon.challenges > 0) {
-			addButton(new RedButton(TXT_CHALLEGES) {
+			addButton(new RedButton(Messages.get(WndGame.class, "challenges")) {
 				@Override
 				protected void onClick() {
 					hide();
@@ -83,7 +83,7 @@ private static final String TXT_SETTINGS = Messages.get(WndGame.class, "settings
 		if (!Dungeon.hero.isAlive()) {
 
 			RedButton btnStart;
-			addButton(btnStart = new RedButton(TXT_START) {
+			addButton(btnStart = new RedButton(Messages.get(WndGame.class, "start")) {
 				@Override
 				protected void onClick() {
 					Dungeon.hero = null;
@@ -95,7 +95,7 @@ private static final String TXT_SETTINGS = Messages.get(WndGame.class, "settings
 			});
 			btnStart.icon(Icons.get(Dungeon.hero.heroClass));
 
-			addButton(new RedButton(TXT_RANKINGS) {
+			addButton(new RedButton(Messages.get(WndGame.class, "rankings")) {
 				@Override
 				protected void onClick() {
 					InterlevelScene.mode = InterlevelScene.Mode.DESCEND;
@@ -108,7 +108,7 @@ private static final String TXT_SETTINGS = Messages.get(WndGame.class, "settings
 
 		addButtons(
 		// Main menu
-				new RedButton(TXT_MENU) {
+				new RedButton(Messages.get(WndGame.class, "menu")) {
 					@Override
 					protected void onClick() {
 						GameLog.wipe();
@@ -121,7 +121,7 @@ private static final String TXT_SETTINGS = Messages.get(WndGame.class, "settings
 					}
 				},
 				// Quit
-				new RedButton(TXT_EXIT) {
+				new RedButton(Messages.get(WndGame.class, "exit")) {
 					@Override
 					protected void onClick() {
 						Game.instance.finish();
@@ -129,7 +129,7 @@ private static final String TXT_SETTINGS = Messages.get(WndGame.class, "settings
 				});
 
 		// Cancel
-		addButton(new RedButton(TXT_RETURN) {
+		addButton(new RedButton(Messages.get(WndGame.class, "return")) {
 			@Override
 			protected void onClick() {
 				hide();

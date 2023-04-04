@@ -19,9 +19,7 @@ package com.github.dachhack.sprout.ui;
 
 import com.github.dachhack.sprout.Chrome;
 import com.github.dachhack.sprout.scenes.PixelScene;
-import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.NinePatch;
-import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.ui.Component;
 
 public class Toast extends Component {

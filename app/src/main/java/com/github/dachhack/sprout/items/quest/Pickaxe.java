@@ -111,7 +111,7 @@ private static final String TXT_NO_VEIN = Messages.get(Pickaxe.class, "no_vein")
 
 							DarkGold gold = new DarkGold();
 							if (gold.doPickUp(Dungeon.hero)) {
-								GLog.i(Hero.TXT_YOU_NOW_HAVE, gold.name());
+								GLog.i(Messages.get(Hero.class,"have"), gold.name());
 							} else {
 								Dungeon.level.drop(gold, hero.pos).sprite
 										.drop();

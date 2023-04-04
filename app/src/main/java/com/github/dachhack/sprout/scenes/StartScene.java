@@ -32,13 +32,9 @@ import com.github.dachhack.sprout.ui.ExitButton;
 import com.github.dachhack.sprout.ui.Icons;
 import com.github.dachhack.sprout.ui.RedButton;
 import com.github.dachhack.sprout.ui.RenderedTextMultiline;
-import com.github.dachhack.sprout.utils.Utils;
 import com.github.dachhack.sprout.windows.WndChallenges;
 import com.github.dachhack.sprout.windows.WndClass;
-import com.github.dachhack.sprout.windows.WndMessage;
 import com.github.dachhack.sprout.windows.WndOptions;
-import com.watabou.noosa.BitmapText;
-import com.watabou.noosa.BitmapTextMultiline;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Group;
@@ -356,7 +352,7 @@ public class StartScene extends PixelScene {
 		private HeroClass cl;
 
 		private Image avatar;
-		private BitmapText name;
+		private RenderedText name;
 		private Emitter emitter;
 
 		private float brightness;
@@ -380,8 +376,7 @@ public class StartScene extends PixelScene {
 				highlighted = BASIC_HIGHLIGHTED;
 			}
 
-			name.text(cl.name());
-			name.measure();
+			name.text(cl.title().toUpperCase());
 			name.hardlight(normal);
 
 			brightness = MIN_BRIGHTNESS;
@@ -396,7 +391,7 @@ public class StartScene extends PixelScene {
 			avatar = new Image(Assets.AVATARS);
 			add(avatar);
 
-			name = PixelScene.createText(9);
+			name = PixelScene.renderText(9);
 			add(name);
 
 			emitter = new Emitter();

@@ -17,9 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.ArrayList;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -36,10 +35,12 @@ import com.github.dachhack.sprout.sprites.SwarmSprite;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class Swarm extends Mob {
 
 	{
-		name = "swarm of flies";
+		name = Messages.get(this, "name");
 		spriteClass = SwarmSprite.class;
 
 		HP = HT = 120;
@@ -114,7 +115,7 @@ public class Swarm extends Mob {
 
 	@Override
 	public String defenseVerb() {
-		return "evaded";
+		return Messages.get(this, "def");
 	}
 
 	private Swarm split() {
@@ -145,7 +146,6 @@ public class Swarm extends Mob {
 
 	@Override
 	public String description() {
-		return "The deadly swarm of flies buzzes angrily. Every non-magical attack "
-				+ "will split it into two smaller but equally dangerous swarms.";
+		return Messages.get(this, "desc");
 	}
 }

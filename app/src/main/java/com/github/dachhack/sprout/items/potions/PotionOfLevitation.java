@@ -32,13 +32,8 @@ import com.watabou.noosa.audio.Sample;
 public class PotionOfLevitation extends Potion {
 
 	{
-//		name = "Potion of Levitation";
 		name = Messages.get(this, "name");
 	}
-
-//	private static final String TXT_PREVENTING = "Strog magic on this level prevents you from levitating.";
-private static final String TXT_PREVENTING = Messages.get(PotionOfLevitation.class, "prevent");
-	private static final String TXT_PREVENTING2 = Messages.get(PotionOfLevitation.class, "prevent2");
 
 	
 	@Override
@@ -77,7 +72,7 @@ private static final String TXT_PREVENTING = Messages.get(PotionOfLevitation.cla
 		if (action.equals(AC_DRINK)) {
 			
 		  if (Dungeon.depth>50) {
-				GLog.w(TXT_PREVENTING);
+				GLog.w(Messages.get(PotionOfLevitation.class, "prevent"));
 				return;		
 		   } 
 		}

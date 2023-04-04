@@ -17,10 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
@@ -33,7 +31,6 @@ import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.buffs.Charm;
 import com.github.dachhack.sprout.actors.buffs.Ooze;
 import com.github.dachhack.sprout.actors.buffs.Poison;
-import com.github.dachhack.sprout.actors.buffs.Roots;
 import com.github.dachhack.sprout.actors.buffs.Sleep;
 import com.github.dachhack.sprout.actors.buffs.Slow;
 import com.github.dachhack.sprout.actors.buffs.Terror;
@@ -57,14 +54,18 @@ import com.github.dachhack.sprout.sprites.LarvaSprite;
 import com.github.dachhack.sprout.sprites.PinningFistSprite;
 import com.github.dachhack.sprout.sprites.RottingFistSprite;
 import com.github.dachhack.sprout.sprites.YogSprite;
+import com.github.dachhack.sprout.ui.BossHealthBar;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 public class Yog extends Mob {
 
 	{
-		name = "Yog-Dzewa";
+		name = Messages.get(this, "name");
 		spriteClass = YogSprite.class;
 
 		HP = HT = 2500;
@@ -77,9 +78,7 @@ public class Yog extends Mob {
 	
 	private static final int REGENERATION = 200;
 
-	private static final String TXT_DESC = "Yog-Dzewa is an Old God, a powerful entity from the realms of chaos. A century ago, the ancient dwarves "
-			+ "barely won the war against its army of demons, but were unable to kill the god itself. Instead, they then "
-			+ "imprisoned it in the halls below their city, believing it to be too weak to rise ever again.";
+	private static final String TXT_DESC = Messages.get(Yog.class, "desc");
 
 	private static int fistsCount = 0;
 
@@ -142,7 +141,7 @@ public class Yog extends Mob {
 				pos = newPos;
 				sprite.place(pos);
 				sprite.visible = Dungeon.visible[pos];
-				GLog.n("Yog vanishes!");
+				GLog.n(Messages.get(this, "vanish"));
 			}		
 					
 			if (Dungeon.level.mobs.size()<5){
@@ -202,13 +201,15 @@ public class Yog extends Mob {
 		Dungeon.level.drop(new Gold(Random.Int(6000, 8000)), pos).sprite.drop();
 		super.die(cause);
 
-		yell("Back to the shadow...");
+		yell(Messages.get(this, "die"));
 	}
 
 	@Override
 	public void notice() {
+		BossHealthBar.assignBoss(this);
+
 		super.notice();
-		yell("Hope is an illusion...");
+		yell(Messages.get(this, "notice"));
 	}
 
 	@Override
@@ -241,7 +242,7 @@ public class Yog extends Mob {
 		private static final int REGENERATION = 50;
 
 		{
-			name = "rotting fist";
+			name = Messages.get(this, "name1");
 			spriteClass = RottingFistSprite.class;
 
 			HP = HT = 2000;
@@ -336,7 +337,7 @@ public class Yog extends Mob {
 	public static class BurningFist extends Mob {
 
 		{
-			name = "burning fist";
+			name = Messages.get(this, "name2");
 			spriteClass = BurningFistSprite.class;
 
 			HP = HT = 1000;
@@ -395,7 +396,7 @@ public class Yog extends Mob {
 					if (!enemy.isAlive() && enemy == Dungeon.hero) {
 						Dungeon.fail(Utils.format(ResultDescriptions.UNIQUE,
 								name));
-						GLog.n(TXT_KILL, name);
+						GLog.n(Messages.get(Yog.class,"kill"), name);
 					}
 					return true;
 
@@ -461,7 +462,7 @@ public class Yog extends Mob {
 		
 
 		{
-			name = "infecting fist";
+			name = Messages.get(this, "name3");
 			spriteClass = InfectingFistSprite.class;
 
 			HP = HT = 2000;
@@ -554,7 +555,7 @@ public class Yog extends Mob {
 	public static class PinningFist extends Mob {
 
 		{
-			name = "pinning fist";
+			name = Messages.get(this, "name4");
 			spriteClass = PinningFistSprite.class;
 
 			HP = HT = 1000;
@@ -626,7 +627,7 @@ public class Yog extends Mob {
 					if (!enemy.isAlive() && enemy == Dungeon.hero) {
 						Dungeon.fail(Utils.format(ResultDescriptions.UNIQUE,
 								name));
-						GLog.n(TXT_KILL, name);
+						GLog.n(Messages.get(Yog.class,"kill"), name);
 					}
 					return true;
 
@@ -679,7 +680,7 @@ public class Yog extends Mob {
 		public static int count = 0;
 
 		{
-			name = "god's larva";
+			name = Messages.get(this, "name5");
 			spriteClass = LarvaSprite.class;
 
 			HP = HT = 100;

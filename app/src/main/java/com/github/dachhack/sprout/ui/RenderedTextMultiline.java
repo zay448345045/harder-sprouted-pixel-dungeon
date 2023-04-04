@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-;
-
 public class RenderedTextMultiline extends Component {
 
     public int maxWidth = Integer.MAX_VALUE;

@@ -19,25 +19,14 @@ package com.github.dachhack.sprout.windows;
 
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Messages.Messages;
-import com.github.dachhack.sprout.Statistics;
-import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.actors.buffs.Buff;
-import com.github.dachhack.sprout.actors.buffs.Dewcharge;
-import com.github.dachhack.sprout.actors.mobs.npcs.Tinkerer1;
 import com.github.dachhack.sprout.actors.mobs.pets.PET;
-import com.github.dachhack.sprout.items.Item;
-import com.github.dachhack.sprout.items.Mushroom;
-import com.github.dachhack.sprout.items.rings.Ring;
 import com.github.dachhack.sprout.items.rings.RingOfHaste;
-import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.scenes.PixelScene;
-import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.ui.RedButton;
 import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
-import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndPetHaste extends Window {
 	
@@ -49,11 +38,6 @@ public class WndPetHaste extends Window {
 //
 //	private static final String TXT_YES = "Haste my Pet";
 //	private static final String TXT_NO = "No Thanks";
-private static final String TXT_MESSAGE = Messages.get(WndPetHaste.class, "msg");
-
-	private static final String TXT_YES = Messages.get(WndPetHaste.class, "yes");
-	private static final String TXT_NO = Messages.get(WndPetHaste.class, "no");
-
 
 	private static final int WIDTH = 120;
 	private static final int BTN_HEIGHT = 20;
@@ -70,16 +54,16 @@ private static final String TXT_MESSAGE = Messages.get(WndPetHaste.class, "msg")
 		add(titlebar);
 
 		RenderedTextMultiline message = PixelScene
-				.renderMultiline(TXT_MESSAGE, 6);
+				.renderMultiline(Messages.get(WndPetHaste.class, "msg"), 6);
 		message.maxWidth(WIDTH);
 		message.setPos(0, titlebar.bottom() + GAP);
 		add(message);
 
-		RedButton btnBattle = new RedButton(TXT_YES) {
+		RedButton btnBattle = new RedButton(Messages.get(WndPetHaste.class, "yes")) {
 			@Override
 			protected void onClick() {
 				Dungeon.petHasteLevel=ring.level;
-//				GLog.p("Your "+pet.name+" is moving faster!");
+				//GLog.p("Your "+pet.name+" is moving faster!");
 				GLog.p(Messages.get(WndPetHaste.class, "faster", pet.name));
 				hide();
 			}
@@ -88,7 +72,7 @@ private static final String TXT_MESSAGE = Messages.get(WndPetHaste.class, "msg")
 				BTN_HEIGHT);
 		add(btnBattle);
 
-		RedButton btnNonBattle = new RedButton(TXT_NO+" "+ring.level+" "+pet.speed()) {
+		RedButton btnNonBattle = new RedButton(Messages.get(WndPetHaste.class, "no")+" "+ring.level+" "+pet.speed()) {
 			@Override
 			protected void onClick() {
 				hide();

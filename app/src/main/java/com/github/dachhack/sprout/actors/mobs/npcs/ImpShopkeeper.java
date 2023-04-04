@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.mobs.npcs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
@@ -33,7 +34,7 @@ public class ImpShopkeeper extends Shopkeeper {
 	public static final String TXT_THIEF = "I thought I could trust you!";
 
 	{
-		name = "ambitious imp";
+		name = Messages.get(this, "name");
 		spriteClass = ImpSprite.class;
 	}
 

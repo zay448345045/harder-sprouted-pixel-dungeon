@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.buffs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.Statistics;
 import com.watabou.utils.Bundle;
 
@@ -41,11 +42,16 @@ public class FullMoonStrength extends Buff {
 		super.restoreFromBundle(bundle);
 		hits = bundle.getInt(HITS);
 	}
-	
+
 	//private int hits = Math.max(2, Math.round(Statistics.deepestFloor/5)+3);
 	@Override
 	public String toString() {
-		return "Full Moon Fury";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc", hits);
 	}
 	
 	@Override

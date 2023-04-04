@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.mobs.pets;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Frost;
@@ -36,7 +37,7 @@ import com.watabou.utils.Random;
 public class BlueDragon extends PET implements Callback{
 	
 	{
-		name = "blue dragon";
+		name = Messages.get(this, "name");
 		spriteClass = BlueDragonSprite.class;       
 		flying=true;
 		state = HUNTING;
@@ -87,11 +88,9 @@ public class BlueDragon extends PET implements Callback{
 		if (cooldown>0){
 			cooldown=Math.max(cooldown-(level*level),0);
 			if (cooldown==0) {
-				
-				if (Dungeon.getMonth()==11) {
-					GLog.w("Do you want to build a snow man?");
-				} else {
-					GLog.w("The air grows chilly around your dragon!");
+				cooldown = Math.max(cooldown - (level * level) / 4, 0);
+				if (level < 50 && cooldown == 0) {
+					GLog.p(Messages.get(BlueDragon.class, "ready1"));
 				}
 			}
 		}
@@ -137,11 +136,7 @@ public class BlueDragon extends PET implements Callback{
 		spend(TIME_TO_ZAP);
 
 		cooldown=1000;
-		if (Dungeon.getMonth()==11) {
-			yell("Let it go!");
-		} else {
-			yell("Rooaaar!");
-		}
+		yell(Messages.get(BlueDragon.class, "atk1"));
 		
 		if (hit(this, enemy, true)) {			
 
@@ -197,10 +192,10 @@ public class BlueDragon extends PET implements Callback{
 	}
 
 
-@Override
-public String description() {
-	return "A feshly hatched blue dragon. Super fierce and super cute!";
-}
+	@Override
+	public String description() {
+		return Messages.get(bee.class, "desc");
+	}
 
 
 }

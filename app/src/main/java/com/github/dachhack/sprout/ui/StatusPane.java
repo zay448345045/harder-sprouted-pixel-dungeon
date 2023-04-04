@@ -65,6 +65,8 @@ public class StatusPane extends Component {
 	private BuffIndicator buffs;
 	private Compass compass;
 
+	private BossHealthBar bossHP;
+
 	private MenuButton btnMenu;
 
 	@Override
@@ -117,6 +119,9 @@ public class StatusPane extends Component {
 		exp = new Image(Assets.XP_BAR);
 		add(exp);
 
+		bossHP = new BossHealthBar();
+		add(bossHP);
+
 		level = new BitmapText(font1x);
 		level.hardlight(0xFFEBA4);
 		add(level);
@@ -155,6 +160,8 @@ public class StatusPane extends Component {
 
 		hp.x = 30;
 		hp.y = 4;
+
+		bossHP.setPos(6 + (width - bossHP.width()) / 2, 20);
 
 		hpText.scale.set(PixelScene.align(0.5f));
 		hpText.x = hp.x + 1;

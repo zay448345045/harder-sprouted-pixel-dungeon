@@ -17,8 +17,6 @@
  */
 package com.github.dachhack.sprout.windows;
 
-import java.util.ArrayList;
-
 import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
 import com.github.dachhack.sprout.items.Item;
@@ -30,9 +28,10 @@ import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.ui.ScrollPane;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.Utils;
-import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.ui.Component;
+
+import java.util.ArrayList;
 
 public class WndCatalogus extends WndTabbed {
 

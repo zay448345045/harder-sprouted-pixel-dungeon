@@ -58,12 +58,7 @@ protected String inventoryTitle = Messages.get(UnstableSpellbook.class, "prompt"
 		super();
 
 		Class<?>[] scrollClasses = Generator.Category.SCROLL.classes;
-		float[] probs = Generator.Category.SCROLL.probs.clone(); // array of
-																	// primitives,
-																	// clone
-																	// gives
-																	// deep
-																	// copy.
+		float[] probs = Generator.Category.SCROLL.probs.clone();
 		int i = Random.chances(probs);
 
 		while (i != -1) {
@@ -223,7 +218,7 @@ protected String inventoryTitle = Messages.get(UnstableSpellbook.class, "prompt"
 	@Override
 	public void storeInBundle(Bundle bundle) {
 		super.storeInBundle(bundle);
-		bundle.put(SCROLLS, scrolls.toArray(new String[scrolls.size()]));
+		bundle.put(SCROLLS, scrolls.toArray(new Class[scrolls.size()]));
 	}
 
 	@Override

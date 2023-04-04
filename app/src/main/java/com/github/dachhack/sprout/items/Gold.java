@@ -17,11 +17,10 @@
  */
 package com.github.dachhack.sprout.items;
 
-import java.util.ArrayList;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.items.artifacts.MasterThievesArmband;
@@ -33,16 +32,18 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class Gold extends Item {
 
-	private static final String TXT_COLLECT = "Collect gold coins to spend them later in a shop.";
-	private static final String TXT_INFO = "A pile of %d gold coins. "
+	private static final String TXT_COLLECT = Messages.get(Gold.class, "collect");
+	private static final String TXT_INFO = Messages.get(Gold.class, "info")
 			+ TXT_COLLECT;
-	private static final String TXT_INFO_1 = "One gold coin. " + TXT_COLLECT;
+	private static final String TXT_INFO_1 = Messages.get(Gold.class, "one") + TXT_COLLECT;
 	private static final String TXT_VALUE = "%+d";
 
 	{
-		name = "gold";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.GOLD;
 		stackable = true;
 	}

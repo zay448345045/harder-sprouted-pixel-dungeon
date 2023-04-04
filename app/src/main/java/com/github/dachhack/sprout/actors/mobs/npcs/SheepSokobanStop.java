@@ -17,12 +17,9 @@
  */
 package com.github.dachhack.sprout.actors.mobs.npcs;
 
-import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.actors.Actor;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Buff;
-import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.sprites.SheepSprite;
-import com.github.dachhack.sprout.sprites.SokobanSheepSprite;
 import com.watabou.utils.Random;
 
 public class SheepSokobanStop extends NPC {
@@ -31,7 +28,7 @@ public class SheepSokobanStop extends NPC {
 	"Baa..." };
 
 {
-name = "sheep";
+name = Messages.get(this, "name");
 spriteClass = SheepSprite.class;
 }
 

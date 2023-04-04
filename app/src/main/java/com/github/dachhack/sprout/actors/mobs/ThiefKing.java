@@ -17,9 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.items.AdamantRing;
 import com.github.dachhack.sprout.items.Generator;
@@ -28,14 +27,17 @@ import com.github.dachhack.sprout.levels.traps.LightningTrap;
 import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.ThiefKingSprite;
+import com.github.dachhack.sprout.ui.BossHealthBar;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class ThiefKing extends Mob implements Callback {
 
 	
 	{
-		name = "thief king";
+		name = Messages.get(this, "name");
 		spriteClass = ThiefKingSprite.class;
 
 		HP = HT = 500;
@@ -79,7 +81,7 @@ public class ThiefKing extends Mob implements Callback {
 		
 		Dungeon.banditkingkilled=true;
 
-		yell("Ugh...the madness ends here...");
+		yell(Messages.get(this, "die"));
 						
 	}
 	
@@ -91,13 +93,15 @@ public class ThiefKing extends Mob implements Callback {
 
 	@Override
 	public void notice() {
+		BossHealthBar.assignBoss(this);
+
 		super.notice();
-		yell("Welcome, " + Dungeon.hero.givenName() + ". Time to feed your soul to my shadow theives. ");
+		yell(Messages.get(this, "notice", Dungeon.hero.givenName()));
 	}
-	
+
 	@Override
 	public String description() {
-		return "The king of all dungeon thieves.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.mobs.pets;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -39,7 +40,7 @@ import com.watabou.utils.Random;
 public class Fairy extends PET implements Callback{
 	
 	{
-		name = "fairy";
+		name = Messages.get(this, "name");
 		spriteClass = FairySprite.class;       
 		flying=true;
 		state = HUNTING;
@@ -91,7 +92,7 @@ public class Fairy extends PET implements Callback{
 		
 		if (cooldown>0){
 			cooldown=Math.max(cooldown-(level*level),0);
-			if (cooldown==0) {GLog.w("Your fairy begins to sparkle!");}
+			if (cooldown==0) {GLog.p(Messages.get(Fairy.class, "ready"));}
 		}
 		
 		if (cooldown==0 && Level.adjacent(pos, Dungeon.hero.pos) && Random.Int(2)==0){
@@ -135,8 +136,7 @@ public class Fairy extends PET implements Callback{
 
 			spend(TIME_TO_ZAP);
 			cooldown=1000;
-			yell("Take that!");
-
+			yell(Messages.get(Fairy.class, "atk"));
 			if (hit(this, enemy, true)) {
 				int dmg = damageRoll()*2;
 				if (Level.water[enemy.pos] && !enemy.flying) {
@@ -154,7 +154,7 @@ public class Fairy extends PET implements Callback{
 					if (!enemy.isAlive()) {
 						Dungeon.fail(Utils.format(ResultDescriptions.MOB,
 								Utils.indefinite(name)));
-						GLog.n(TXT_LIGHTNING_KILLED, name);
+						GLog.n(Messages.get(Fairy.class, "kill"), name);
 					}
 				}
 			} else {
@@ -187,7 +187,7 @@ public class Fairy extends PET implements Callback{
 		}
 		if (buff(Paralysis.class) != null) {
 			Buff.detach(this, Paralysis.class);
-			GLog.i("You shake your %s out of paralysis.", name);
+			GLog.i(Messages.get(bee.class, "shake"), name);
 		}
 		
 		int curPos = pos;
@@ -203,10 +203,10 @@ public class Fairy extends PET implements Callback{
 	}
 
 
-@Override
-public String description() {
-	return "A fairy! Something tells you no one messes with fairies.";
-}
+	@Override
+	public String description() {
+		return Messages.get(bee.class, "desc");
+	}
 
 
 }

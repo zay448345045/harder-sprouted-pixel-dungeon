@@ -17,9 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
@@ -37,12 +36,14 @@ import com.github.dachhack.sprout.sprites.AlbinoPiranhaSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class AlbinoPiranha extends Piranha {
 	
 	private static final String TXT_KILLCOUNT = "Albino Piranha Kill Count: %s";
 
 	{
-		name = "albino giant piranha";
+		name = Messages.get(this, "name");
 		spriteClass = AlbinoPiranhaSprite.class;
 
 		baseSpeed = 2f;
@@ -148,7 +149,7 @@ public class AlbinoPiranha extends Piranha {
 		super.die(cause);
 
 		Statistics.albinoPiranhasKilled++;
-		GLog.w(TXT_KILLCOUNT, Statistics.albinoPiranhasKilled);
+		GLog.w(Messages.get(AlbinoPiranha.class, "count"), Statistics.albinoPiranhasKilled);
 		//Badges.validatePiranhasKilled();
 	}
 

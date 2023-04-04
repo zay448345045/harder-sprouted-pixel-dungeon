@@ -22,7 +22,6 @@ import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Mob;
-import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.OtilukesJournal;
 import com.github.dachhack.sprout.items.artifacts.DriedRose;
 import com.github.dachhack.sprout.items.artifacts.TimekeepersHourglass;
@@ -33,14 +32,11 @@ import com.github.dachhack.sprout.ui.RedButton;
 import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.Utils;
-import com.watabou.noosa.BitmapTextMultiline;
 import com.watabou.noosa.Game;
 
 public class WndOtiluke extends Window {
 
-	
-
-	private static final String TXT_FARAWELL = "Where would you like to go?";
+	//	private static final String TXT_FARAWELL = "Where would you like to go?";
 	public static final float TIME_TO_USE = 1;
 
     
@@ -54,11 +50,11 @@ public class WndOtiluke extends Window {
 		super();
 		
 		String[] roomNames = new String[PAGES];
-//		roomNames[0] = "Safe Room";
-//		roomNames[1] = "Sokoban 1";
-//		roomNames[2] = "Sokoban 2";
-//		roomNames[3] = "Sokoban 3";
-//		roomNames[4] = "Sokoban 4";
+		//		roomNames[0] = "Safe Room";
+		//		roomNames[1] = "Sokoban 1";
+		//		roomNames[2] = "Sokoban 2";
+		//		roomNames[3] = "Sokoban 3";
+		//		roomNames[4] = "Sokoban 4";
 		roomNames[0] = Messages.get(WndOtiluke.class, "s0");
 		roomNames[1] = Messages.get(WndOtiluke.class, "s1");
 		roomNames[2] = Messages.get(WndOtiluke.class, "s2");
@@ -78,10 +74,6 @@ public class WndOtiluke extends Window {
 		message.maxWidth(WIDTH);
 		message.setPos(0, 0);
 		add(message);
-		
-		//add each button
-		  //after n*BTN_HEIGHT+GAP
-		//add port function
 		
 		if (rooms[0]){
 		RedButton btn1 = new RedButton(roomNames[0]) {

@@ -25,7 +25,6 @@ import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.BitmapText;
-import com.watabou.noosa.BitmapTextMultiline;
 import com.watabou.noosa.Group;
 
 public class WndClass extends WndTabbed {

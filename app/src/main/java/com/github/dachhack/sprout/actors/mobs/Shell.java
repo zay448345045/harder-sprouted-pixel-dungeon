@@ -17,9 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
@@ -41,6 +40,8 @@ import com.watabou.noosa.Camera;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Shell extends Mob implements Callback {
 	
 	private static final float TIME_TO_ZAP = 2f;
@@ -48,7 +49,7 @@ public class Shell extends Mob implements Callback {
 	private static final String TXT_LIGHTNING_KILLED = "%s's lightning bolt killed you...";
 
 	{
-		name = "lightning shell";
+		name = Messages.get(this, "name");
 		spriteClass = ShellSprite.class;
 
 		HP = HT = 600;
@@ -145,7 +146,7 @@ public class Shell extends Mob implements Callback {
 					if (!enemy.isAlive()) {
 						Dungeon.fail(Utils.format(ResultDescriptions.MOB,
 								Utils.indefinite(name)));
-						GLog.n(TXT_LIGHTNING_KILLED, name);
+						GLog.n(Messages.get(Shell.class, "kill"), name);
 					}
 				}
 			} else {
@@ -159,8 +160,8 @@ public class Shell extends Mob implements Callback {
 
 
 	public void zapAll(int dmg){
-		
-		yell("ZZZZZAAAAAAPPPPPP!!!!!!");
+
+		yell(Messages.get(this, "zap"));
 		
 		int heroDmg=0;
 		int mobDmg=Random.Int(1, 2+Math.round(dmg/4));
@@ -222,8 +223,8 @@ public class Shell extends Mob implements Callback {
 	}
 	
 public void zapAround(int dmg){
-		
-		yell("ZZZZZAAAAAAPPPPPP!!!!!!");
+
+		yell(Messages.get(this, "zap"));
 		
 		int heroDmg=0;
 		int mobDmg=Random.Int(1, 2+Math.round(dmg/4));
@@ -284,14 +285,13 @@ public void zapAround(int dmg){
 		}		
 
 	}
-	
+
 
 	@Override
 	public String description() {
-		return "The lightning shell crackles with electric power. "
-				+ "It's powerful lightning attack is drawn to all living things in the lair. ";
+		return Messages.get(this, "desc");
 	}
-	
+
 	@Override
 	public void add(Buff buff) {
 	}

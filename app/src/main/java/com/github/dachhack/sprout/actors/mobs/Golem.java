@@ -17,9 +17,7 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
-import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Amok;
 import com.github.dachhack.sprout.actors.buffs.Sleep;
 import com.github.dachhack.sprout.actors.buffs.Terror;
@@ -27,10 +25,12 @@ import com.github.dachhack.sprout.actors.mobs.npcs.Imp;
 import com.github.dachhack.sprout.sprites.GolemSprite;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Golem extends Mob {
 
 	{
-		name = "golem";
+		name = Messages.get(this, "name");
 		spriteClass = GolemSprite.class;
 
 		HP = HT = 200;
@@ -58,7 +58,7 @@ public class Golem extends Mob {
 
 	@Override
 	public String defenseVerb() {
-		return "blocked";
+		return Messages.get(this, "def");
 	}
 
 	@Override
@@ -70,9 +70,7 @@ public class Golem extends Mob {
 
 	@Override
 	public String description() {
-		return "The Dwarves tried to combine their knowledge of mechanisms with their newfound power of elemental binding. "
-				+ "They used spirits of earth as the \"soul\" for the mechanical bodies of golems, which were believed to be "
-				+ "most controllable of all. Despite this, the tiniest mistake in the ritual could cause an outbreak.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

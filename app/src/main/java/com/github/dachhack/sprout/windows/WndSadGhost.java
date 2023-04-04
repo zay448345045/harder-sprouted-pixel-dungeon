@@ -31,7 +31,6 @@ import com.github.dachhack.sprout.ui.RedButton;
 import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.GLog;
-import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndSadGhost extends Window {
 
@@ -69,17 +68,18 @@ private static final String TXT_RAT = Messages.get(WndSadGhost.class, "rat");
 		default:
 			titlebar.icon(new FetidRatSprite());
 			titlebar.label(Messages.get(WndSadGhost.class, "dr"));
-			message = PixelScene.renderMultiline(TXT_RAT + TXT_GIVEITEM, 6);
+			message = PixelScene.renderMultiline(Messages.get(WndSadGhost.class, "rat") + Messages.get(WndSadGhost.class, "giveitem"), 6);
 			break;
 			case 2:
 				titlebar.icon(new GnollTricksterSprite());
 				titlebar.label(Messages.get(WndSadGhost.class, "dt"));
-				message = PixelScene.renderMultiline(TXT_GNOLL + TXT_GIVEITEM, 6);
+				message =
+						PixelScene.renderMultiline(Messages.get(WndSadGhost.class, "gnoll") + Messages.get(WndSadGhost.class, "giveitem"), 6);
 				break;
 			case 3:
 				titlebar.icon(new GreatCrabSprite());
 				titlebar.label(Messages.get(WndSadGhost.class, "dc"));
-				message = PixelScene.renderMultiline(TXT_CRAB + TXT_GIVEITEM, 6);
+				message = PixelScene.renderMultiline(Messages.get(WndSadGhost.class, "crab") + Messages.get(WndSadGhost.class, "giveitem"), 6);
 				break;
 
 		}
@@ -91,7 +91,7 @@ private static final String TXT_RAT = Messages.get(WndSadGhost.class, "rat");
 		message.setPos(0, titlebar.bottom() + GAP);
 		add(message);
 
-		RedButton btnWeapon = new RedButton(TXT_WEAPON) {
+		RedButton btnWeapon = new RedButton(Messages.get(WndSadGhost.class, "weapon")) {
 			@Override
 			protected void onClick() {
 				selectReward(ghost, Ghost.Quest.weapon);
@@ -102,7 +102,7 @@ private static final String TXT_RAT = Messages.get(WndSadGhost.class, "rat");
 		add(btnWeapon);
 
 		if (!Dungeon.isChallenged(Challenges.NO_ARMOR)) {
-			RedButton btnArmor = new RedButton(TXT_ARMOR) {
+			RedButton btnArmor = new RedButton(Messages.get(WndSadGhost.class, "armor")) {
 				@Override
 				protected void onClick() {
 					selectReward(ghost, Ghost.Quest.armor);
@@ -122,7 +122,7 @@ private static final String TXT_RAT = Messages.get(WndSadGhost.class, "rat");
 		hide();
 
 		if (reward.doPickUp(Dungeon.hero)) {
-			GLog.i(Hero.TXT_YOU_NOW_HAVE, reward.name());
+			GLog.i(Messages.get(Hero.class,"have"), reward.name());
 		} else {
 			Dungeon.level.drop(reward, ghost.pos).sprite.drop();
 		}

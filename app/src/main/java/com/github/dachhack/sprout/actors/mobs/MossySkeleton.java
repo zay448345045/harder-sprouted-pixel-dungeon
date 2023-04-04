@@ -17,10 +17,9 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Char;
@@ -36,13 +35,15 @@ import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class MossySkeleton extends Mob {
 
 	private static final String TXT_HERO_KILLED = "You were killed by the explosion of bones...";
 	private static final String TXT_KILLCOUNT = "Mossy Skeleton Kill Count: %s";
 
 	{
-		name = "moss covered skeleton";
+		name = Messages.get(this, "name");
 		spriteClass = MossySkeletonSprite.class;
 
 		HP = HT = 35+(10*Random.NormalIntRange(7, 10));
@@ -79,7 +80,7 @@ public class MossySkeleton extends Mob {
 		super.die(cause);
 		
 		Statistics.skeletonsKilled++;
-		GLog.w(TXT_KILLCOUNT, Statistics.skeletonsKilled);
+		GLog.w(Messages.get(MossySkeleton.class, "count"), Statistics.skeletonsKilled);
 		
 		if (!Dungeon.limitedDrops.prisonkey.dropped() && Dungeon.depth<27) {
 			Dungeon.limitedDrops.prisonkey.drop();
@@ -119,7 +120,7 @@ public class MossySkeleton extends Mob {
 		if (heroKilled) {
 			Dungeon.fail(Utils.format(ResultDescriptions.MOB,
 					Utils.indefinite(name)));
-			GLog.n(TXT_HERO_KILLED);
+			GLog.n(Messages.get(MossySkeleton.class, "kill"));
 		}
 	}
 
@@ -138,7 +139,7 @@ public class MossySkeleton extends Mob {
 
 	@Override
 	public String defenseVerb() {
-		return "blocked";
+		return Messages.get(this, "def");
 	}
 
 	@Override

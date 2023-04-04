@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.actors.mobs;
 
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Blindness;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Cripple;
@@ -33,7 +34,7 @@ public class Bandit extends Thief {
 	public Item item;
 
 	{
-		name = "crazy bandit";
+		name = Messages.get(this, "name");
 		spriteClass = BanditSprite.class;
 
 		// 1 in 30 chance to be a crazy bandit, equates to overall 1/90 chance.

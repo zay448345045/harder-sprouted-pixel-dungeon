@@ -17,11 +17,9 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.Blob;
@@ -47,7 +45,11 @@ import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.PoisonGooSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Bundle;
+import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class PoisonGoo extends Mob {
 	
@@ -61,7 +63,7 @@ private int goosAlive = 0;
 private static final String GOOGENERATION = "gooGeneration";
 
 	{
-		name = "Spawn of Goo";
+		name = Messages.get(this, "name");
 		HP = HT = 50;
 		EXP = 10;
 		spriteClass = PoisonGooSprite.class;
@@ -159,7 +161,7 @@ private static final String GOOGENERATION = "gooGeneration";
 			}
 
 			if (candidates.size() > 0) {
-				GLog.n("Mini Goo divides!");
+				GLog.n(Messages.get(this, "divide"));
 				PoisonGoo clone = split();
 				clone.HP = (HP - damage) / 2;
 				clone.pos = Random.element(candidates);
@@ -225,23 +227,19 @@ private static final String GOOGENERATION = "gooGeneration";
 
 		Dungeon.level.drop(new Gold(Random.Int(100, 200)), pos).sprite.drop();
 		}
-		
-		yell("glurp... glurp...");
+
+		yell(Messages.get(this, "die"));
 	}
 
 	@Override
 	public void notice() {
 		super.notice();
-		yell("GLURP-GLURP!");
+		yell(Messages.get(this, "notice"));
 	}
 
 	@Override
 	public String description() {
-		return "Little is known about The Goo. It's quite possible that it is not even a creature, but rather a "
-				+ "conglomerate of vile substances from the sewers that somehow gained basic intelligence. "
-				+ "Regardless, dark magic is certainly what has allowed Goo to exist.\n\n"
-				+ "Its gelatinous nature has let it absorb lots of dark energy, you feel a chill just from being near. "
-				+ "If goo is able to attack with this energy you won't live for long.";
+		return Messages.get(this, "desc");
 	}
 
 	
@@ -279,15 +277,15 @@ private static final String GOOGENERATION = "gooGeneration";
 			}
 		}
 	}
-	
-	
+
+
 	public static void spawnAround(int pos) {
-		for (int n : Level.NEIGHBOURS4) {
-			GLog.n("Goo squeezes!");
+		for (int n : PathFinder.NEIGHBOURS4) {
+			GLog.n(Messages.get(PoisonGoo.class, "squeeze"));
 			int cell = pos + n;
 			if (Level.passable[cell] && Actor.findChar(cell) == null) {
 				spawnAt(cell);
-				GLog.n("Goo creates mini goo!");
+				GLog.n(Messages.get(PoisonGoo.class, "create"));
 			}
 		}
 	}

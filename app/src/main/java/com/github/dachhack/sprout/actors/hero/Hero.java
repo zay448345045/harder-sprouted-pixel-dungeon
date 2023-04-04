@@ -24,6 +24,7 @@ import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Bones;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.GamesInProgress;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Actor;
@@ -143,7 +144,7 @@ public class Hero extends Char {
 	private static final String TXT_NEW_LEVEL = "Welcome to level %d! Now you are healthier and more focused. "
 			+ "It's easier for you to hit enemies and dodge their attacks.";
 
-	public static final String TXT_YOU_NOW_HAVE = "You now have %s";
+//	public static final String TXT_YOU_NOW_HAVE = Messages.get(Hero.class,"have");
 
 	private static final String TXT_SOMETHING_ELSE = "There is something else here";
 	private static final String TXT_LOCKED_CHEST = "This chest is locked and you don't have matching key";
@@ -222,7 +223,7 @@ public class Hero extends Char {
 
 	public Hero() {
 		super();
-		name = "you";
+		name = Messages.get(this, "name");
 
 		HP = HT = 20;
 		STR = STARTING_STR;
@@ -813,22 +814,22 @@ public class Hero extends Char {
 								|| ((item instanceof PotionOfStrength || item instanceof PotionOfMight) && ((Potion) item)
 										.isKnown());
 						if (important) {
-							GLog.p(TXT_YOU_NOW_HAVE, item.name());
+							GLog.p(Messages.get(this, "have"), item.name());
 						} else {
-							GLog.i(TXT_YOU_NOW_HAVE, item.name());
+							GLog.i(Messages.get(this, "have"), item.name());
 						}
 
 						// Alright, if anyone complains about not knowing the
 						// vial doesn't revive
 						// after this... I'm done, I'm just done.
 						if (item instanceof DewVial) {
-							GLog.w("Its revival power seems to have faded.");
+							GLog.w(Messages.get(Hero.class,"devnot"));
 							GameScene.show(new WndDewVial(item));
 						}
 					}
 
 					if (!heap.isEmpty()) {
-						GLog.i(TXT_SOMETHING_ELSE);
+						GLog.i(Messages.get(Hero.class,"sthelse"));
 					}
 					curAction = null;
 				} else {
@@ -871,7 +872,7 @@ public class Hero extends Char {
 					theSkeletonKey = belongings.getKey(GoldenSkeletonKey.class, 0);
 
 					if (theKey == null && theSkeletonKey == null) {
-						GLog.w(TXT_LOCKED_CHEST);
+						GLog.w(Messages.get(this, "chestlock"));
 						ready();
 						return false;
 					}
@@ -933,7 +934,7 @@ public class Hero extends Char {
 				Sample.INSTANCE.play(Assets.SND_UNLOCK);
 
 			} else {
-				GLog.w(TXT_LOCKED_DOOR);
+				GLog.w(Messages.get(this, "doorlock"));
 				ready();
 			}
 
@@ -1058,7 +1059,7 @@ public class Hero extends Char {
 			if (Dungeon.depth == 1) {
 
 				if (belongings.getItem(Amulet.class) == null | !Badges.checkOtilukeRescued()) {
-					GameScene.show(new WndMessage(TXT_LEAVE));
+					GameScene.show(new WndMessage(Messages.get(this, "leave")));
 					ready();
 							
 				} else if (Dungeon.level.forcedone){
@@ -1530,8 +1531,8 @@ public class Hero extends Char {
 
 		if (levelUp) {
 
-			GLog.p(TXT_NEW_LEVEL, lvl);
-			sprite.showStatus(CharSprite.POSITIVE, TXT_LEVEL_UP);
+			GLog.p(Messages.get(this, "newlevel"), lvl);
+			sprite.showStatus(CharSprite.POSITIVE, Messages.get(this, "levelup"));
 			Sample.INSTANCE.play(Assets.SND_LEVELUP);
 
 			Badges.validateLevelReached();
@@ -1549,7 +1550,7 @@ public class Hero extends Char {
 					HP = HT+value2;
 					sprite.emitter().burst(Speck.factory(Speck.HEALING), 1);
 					
-					GLog.w(TXT_OVERFILL, lvl);
+					//GLog.w(TXT_OVERFILL, lvl);
 				}
 
 				
@@ -1927,10 +1928,10 @@ public class Hero extends Char {
 		}
 
 		if (intentional) {
-			sprite.showStatus(CharSprite.DEFAULT, TXT_SEARCH);
+			sprite.showStatus(CharSprite.DEFAULT, Messages.get(this, "search"));
 			sprite.operate(pos);
 			if (foresight != null && foresight.isCursed()) {
-				GLog.n("You can't concentrate, searching takes a while.");
+				GLog.n(Messages.get(this, "nocon"));
 				spendAndNext(TIME_TO_SEARCH * 3);
 			} else {
 				spendAndNext(TIME_TO_SEARCH);
@@ -1939,7 +1940,7 @@ public class Hero extends Char {
 		}
 
 		if (smthFound) {
-			GLog.w(TXT_NOTICED_SMTH);
+			GLog.w(Messages.get(this, "notice"));
 			Sample.INSTANCE.play(Assets.SND_SECRET);
 			interrupt();
 		}

@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.mobs.pets;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -39,7 +40,7 @@ import com.watabou.utils.Random;
 public class SugarplumFairy extends PET implements Callback{
 	
 	{
-		name = "sugarplum fairy";
+		name = Messages.get(this, "name");
 		spriteClass = SugarplumFairySprite.class;       
 		flying=true;
 		state = HUNTING;
@@ -104,13 +105,13 @@ public class SugarplumFairy extends PET implements Callback{
 			
 			if (Random.Int(20)==0){
 			  Dungeon.hero.earnExp(5);
-			  Dungeon.hero.sprite.showStatus(CharSprite.POSITIVE, "+5 exp");
+				Dungeon.hero.sprite.showStatus(CharSprite.POSITIVE, Messages.get(SugarplumFairy.class, "exp"));
 			  cooldown=1000;
 			}
 						
 			if (Random.Int(100)==0){
 				Dungeon.hero.HT += 1;
-				Dungeon.hero.sprite.showStatus(CharSprite.POSITIVE, "+1 ht");
+				Dungeon.hero.sprite.showStatus(CharSprite.POSITIVE, Messages.get(SugarplumFairy.class, "ht"));
 				  cooldown=1000;
 			 }	
 		}
@@ -146,7 +147,7 @@ public class SugarplumFairy extends PET implements Callback{
 
 			spend(TIME_TO_ZAP);
 			cooldown=1000;
-			yell("Take that!");
+			yell(Messages.get(SugarplumFairy.class, "atk"));
 
 			if (hit(this, enemy, true)) {
 				int dmg = damageRoll()*2;
@@ -165,7 +166,7 @@ public class SugarplumFairy extends PET implements Callback{
 					if (!enemy.isAlive()) {
 						Dungeon.fail(Utils.format(ResultDescriptions.MOB,
 								Utils.indefinite(name)));
-						GLog.n(TXT_LIGHTNING_KILLED, name);
+						GLog.n(Messages.get(SugarplumFairy.class, "kill"), name);
 					}
 				}
 			} else {
@@ -198,7 +199,7 @@ public class SugarplumFairy extends PET implements Callback{
 		}
 		if (buff(Paralysis.class) != null) {
 			Buff.detach(this, Paralysis.class);
-			GLog.i("You shake your %s out of paralysis.", name);
+			GLog.i(Messages.get(bee.class, "shake"), name);
 		}
 		
 		int curPos = pos;
@@ -213,10 +214,10 @@ public class SugarplumFairy extends PET implements Callback{
 		Dungeon.hero.busy();
 	}
 
-@Override
-public String description() {
-	return "A sugarplum fairy! It must be the holiday season. She's probably here to give you gifts.";
-}
+	@Override
+	public String description() {
+		return Messages.get(bee.class, "desc");
+	}
 
 
 }

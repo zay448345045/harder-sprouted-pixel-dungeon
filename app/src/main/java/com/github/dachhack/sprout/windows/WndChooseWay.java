@@ -26,7 +26,6 @@ import com.github.dachhack.sprout.ui.RedButton;
 import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.Utils;
-import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndChooseWay extends Window {
 
@@ -78,7 +77,7 @@ private static final String TXT_MESSAGE = Messages.get(WndChooseWay.class, "msg"
 				BTN_HEIGHT);
 		add(btnWay2);
 
-		RedButton btnCancel = new RedButton(TXT_CANCEL) {
+		RedButton btnCancel = new RedButton(Messages.get(WndChooseWay.class, "cancel")) {
 			@Override
 			protected void onClick() {
 				hide();

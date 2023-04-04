@@ -17,10 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
@@ -42,18 +40,19 @@ import com.github.dachhack.sprout.items.weapon.Weapon.Enchantment;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.items.weapon.enchantments.Leech;
 import com.github.dachhack.sprout.items.weapon.melee.MeleeWeapon;
-import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
-import com.github.dachhack.sprout.items.weapon.missiles.JupitersWrath;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.sprites.SentinelSprite;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 public class MineSentinel extends Statue {
 	
 
 	{
-		name = "guardian";
+		name = Messages.get(this, "name");
 		spriteClass = SentinelSprite.class;
 
 		EXP = 25;
@@ -80,6 +79,12 @@ public class MineSentinel extends Statue {
 		HP = HT = 20 + Dungeon.depth * 10;
 		//HP = HT = 5;
 		//defenseSkill = 2;
+	}
+
+
+	@Override
+	public String description() {
+		return Messages.get(this, "desc", weapon.name());
 	}
 
 	private static final String WEAPON = "weapon";

@@ -18,16 +18,14 @@
 package com.github.dachhack.sprout.actors.mobs.npcs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.ShadowParticle;
-import com.github.dachhack.sprout.items.wands.WandOfBlink;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.sprites.SokobanBlackSheepSprite;
-import com.github.dachhack.sprout.sprites.SokobanSheepSwitchSprite;
-import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Random;
 
 public class SheepSokobanBlack extends NPC {
@@ -36,7 +34,7 @@ public class SheepSokobanBlack extends NPC {
 	"Baa..." };
 
 {
-name = "sheep";
+name = Messages.get(this, "name");
 spriteClass = SokobanBlackSheepSprite.class;
 }
 

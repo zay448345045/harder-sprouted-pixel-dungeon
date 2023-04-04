@@ -29,7 +29,6 @@ import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.ui.GameLog;
 import com.github.dachhack.sprout.windows.WndError;
 import com.github.dachhack.sprout.windows.WndStory;
-import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.RenderedText;

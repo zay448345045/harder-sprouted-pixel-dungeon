@@ -17,8 +17,6 @@
  */
 package com.github.dachhack.sprout.items;
 
-import java.util.ArrayList;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Messages.Messages;
@@ -42,10 +40,12 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class Bomb extends Item {
 
 	{
-		name = "bomb";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.BOMB;
 		defaultAction = AC_LIGHTTHROW;
 		stackable = true;
@@ -120,7 +120,7 @@ private static final String AC_LIGHTTHROW = Messages.get(Bomb.class, "ac_lightth
 			
 			DizzyBomb dbomb = new DizzyBomb();
 			if (dbomb.doPickUp(Dungeon.hero)) {
-				GLog.i(Hero.TXT_YOU_NOW_HAVE, dbomb.name());
+				GLog.i(Messages.get(Hero.class,"have"), dbomb.name());
 				} else {
 				Dungeon.level.drop(dbomb, Dungeon.hero.pos).sprite.drop();	
 				}
@@ -136,7 +136,7 @@ private static final String AC_LIGHTTHROW = Messages.get(Bomb.class, "ac_lightth
 			
 			SmartBomb smbomb = new SmartBomb();
 			if (smbomb.doPickUp(Dungeon.hero)) {
-				GLog.i(Hero.TXT_YOU_NOW_HAVE, smbomb.name());
+				GLog.i(Messages.get(Hero.class,"have"), smbomb.name());
 				} else {
 				Dungeon.level.drop(smbomb, Dungeon.hero.pos).sprite.drop();	
 				}
@@ -152,7 +152,7 @@ private static final String AC_LIGHTTHROW = Messages.get(Bomb.class, "ac_lightth
 			
 			SeekingBombItem sbomb = new SeekingBombItem();
 			if (sbomb.doPickUp(Dungeon.hero)) {
-				GLog.i(Hero.TXT_YOU_NOW_HAVE, sbomb.name());
+				GLog.i(Messages.get(Hero.class,"have"), sbomb.name());
 				} else {
 				Dungeon.level.drop(sbomb, Dungeon.hero.pos).sprite.drop();	
 				}
@@ -168,7 +168,7 @@ private static final String AC_LIGHTTHROW = Messages.get(Bomb.class, "ac_lightth
 			
 			ClusterBomb cbomb = new ClusterBomb();
 			if (cbomb.doPickUp(Dungeon.hero)) {
-				GLog.i(Hero.TXT_YOU_NOW_HAVE, cbomb.name());
+				GLog.i(Messages.get(Hero.class,"have"), cbomb.name());
 				} else {
 				Dungeon.level.drop(cbomb, Dungeon.hero.pos).sprite.drop();	
 				}
@@ -184,7 +184,7 @@ private static final String AC_LIGHTTHROW = Messages.get(Bomb.class, "ac_lightth
 		
 		SeekingClusterBombItem scbomb = new SeekingClusterBombItem();
 		if (scbomb.doPickUp(Dungeon.hero)) {
-			GLog.i(Hero.TXT_YOU_NOW_HAVE, scbomb.name());
+			GLog.i(Messages.get(Hero.class,"have"), scbomb.name());
 			} else {
 			Dungeon.level.drop(scbomb, Dungeon.hero.pos).sprite.drop();	
 			}

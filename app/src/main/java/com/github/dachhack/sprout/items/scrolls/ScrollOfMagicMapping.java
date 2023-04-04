@@ -39,7 +39,7 @@ public class ScrollOfMagicMapping extends Scroll {
 	private static final String TXT_LAYOUT = Messages.get(ScrollOfMagicMapping.class, "layout");
 	private static final String TXT_PREVENTING = Messages.get(ScrollOfMagicMapping.class, "prevent");
 	{
-		name = "Scroll of Magic Mapping";
+		name = Messages.get(this, "name");
 		consumedValue = 10;
 	}
 

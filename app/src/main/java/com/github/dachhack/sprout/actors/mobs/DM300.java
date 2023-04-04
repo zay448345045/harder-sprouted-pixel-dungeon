@@ -17,13 +17,12 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
-import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.Badges.Badge;
+import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
+import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.Blob;
@@ -35,10 +34,8 @@ import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.ElmoParticle;
 import com.github.dachhack.sprout.effects.particles.SparkParticle;
-import com.github.dachhack.sprout.items.Gold;
 import com.github.dachhack.sprout.items.OtilukesJournal;
 import com.github.dachhack.sprout.items.artifacts.CapeOfThorns;
-import com.github.dachhack.sprout.items.journalpages.Sokoban2;
 import com.github.dachhack.sprout.items.journalpages.Sokoban3;
 import com.github.dachhack.sprout.items.keys.SkeletonKey;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
@@ -50,12 +47,15 @@ import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.sprites.DM300Sprite;
+import com.github.dachhack.sprout.ui.BossHealthBar;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class DM300 extends Mob implements Callback {
 	
@@ -64,7 +64,7 @@ public class DM300 extends Mob implements Callback {
 	private static final String TXT_LIGHTNING_KILLED = "%s's lightning bolt killed you...";
 
 	{
-		name = "DM-300";
+		name = Messages.get(this, "name");
 		spriteClass = DM300Sprite.class;
 
 		HP = HT = 1000;
@@ -149,7 +149,7 @@ public class DM300 extends Mob implements Callback {
 					if (!enemy.isAlive()) {
 						Dungeon.fail(Utils.format(ResultDescriptions.MOB,
 								Utils.indefinite(name)));
-						GLog.n(TXT_LIGHTNING_KILLED, name);
+						GLog.n(Messages.get(DM300.class, "kill"), name);
 					}
 				}
 			} else {
@@ -172,7 +172,7 @@ public class DM300 extends Mob implements Callback {
 			sprite.emitter().burst(ElmoParticle.FACTORY, 5);
 
 			if (Dungeon.visible[step] && Dungeon.hero.isAlive()) {
-				GLog.n("DM-300 repairs itself!");
+				GLog.n(Messages.get(DM300.class, "heal"));
 			}
 		}
 
@@ -244,27 +244,27 @@ public class DM300 extends Mob implements Callback {
 				
 				
 				Dungeon.level.drop(new Sokoban3(), pos).sprite.drop();
-		       
 
-		yell("Mission failed. Shutting down.");
+
+		yell(Messages.get(DM300.class, "die"));
 	}
 
 	@Override
 	public void notice() {
+		BossHealthBar.assignBoss(this);
+
 		super.notice();
-		yell("Unauthorised personnel detected.");
+		yell(Messages.get(DM300.class, "notice"));
 	}
 	
 	@Override
 	public void call() {
 		next();
 	}
-		
+
 	@Override
 	public String description() {
-		return "This machine was created by the Dwarves several centuries ago. Later, Dwarves started to replace machines with "
-				+ "golems, elementals and even demons. Eventually it led their civilization to the decline. The DM-300 and similar "
-				+ "machines were typically used for construction and mining, and in some cases, for city defense.";
+		return Messages.get(this, "desc");
 	}
 
 	

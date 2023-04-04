@@ -17,7 +17,7 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.items.food.MysteryMeat;
 import com.github.dachhack.sprout.sprites.CrabSprite;
 import com.watabou.utils.Random;
@@ -25,7 +25,7 @@ import com.watabou.utils.Random;
 public class Crab extends Mob {
 
 	{
-		name = "sewer crab";
+		name = Messages.get(this, "name");
 		spriteClass = CrabSprite.class;
 
 		HP = HT = 25;
@@ -50,13 +50,12 @@ public class Crab extends Mob {
 
 	@Override
 	public String defenseVerb() {
-		return "parried";
+		return Messages.get(this, "def");
 	}
 
 	@Override
 	public String description() {
-		return "These huge crabs are at the top of the food chain in the sewers. "
-				+ "They are extremely fast and their thick carapace can withstand "
-				+ "heavy blows.";
+		return Messages.get(this, "desc");
 	}
+
 }

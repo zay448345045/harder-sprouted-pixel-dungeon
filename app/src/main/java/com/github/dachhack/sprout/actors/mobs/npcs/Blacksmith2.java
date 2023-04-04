@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.actors.mobs.npcs;
 
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.items.AdamantArmor;
@@ -57,7 +58,7 @@ public class Blacksmith2 extends NPC {
 	
 
 	{
-		name = "troll blacksmith named Bip";
+		name = Messages.get(this, "name");
 		spriteClass = BlacksmithSprite.class;
 	}
 	

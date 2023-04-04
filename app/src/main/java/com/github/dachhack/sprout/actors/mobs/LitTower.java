@@ -17,10 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.ResultDescriptions;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ConfusionGas;
@@ -28,10 +26,6 @@ import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.actors.hero.Hero;
-import com.github.dachhack.sprout.actors.mobs.Yog.BurningFist;
-import com.github.dachhack.sprout.actors.mobs.Yog.InfectingFist;
-import com.github.dachhack.sprout.actors.mobs.Yog.PinningFist;
-import com.github.dachhack.sprout.actors.mobs.Yog.RottingFist;
 import com.github.dachhack.sprout.effects.particles.SparkParticle;
 import com.github.dachhack.sprout.items.RedDewdrop;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
@@ -39,14 +33,12 @@ import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.traps.LightningTrap;
 import com.github.dachhack.sprout.mechanics.Ballistica;
-import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.sprites.LitTowerSprite;
-import com.github.dachhack.sprout.sprites.ShellSprite;
-import com.github.dachhack.sprout.utils.GLog;
-import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.Camera;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class LitTower extends Mob implements Callback {
 	
@@ -55,7 +47,7 @@ public class LitTower extends Mob implements Callback {
 	private static final String TXT_LIGHTNING_KILLED = "%s's lightning bolt killed you...";
 
 	{
-		name = "lightning tower";
+		name = Messages.get(this, "name");
 		spriteClass = LitTowerSprite.class;
 
 		HP = HT = 600;
@@ -148,8 +140,8 @@ public class LitTower extends Mob implements Callback {
 
 
 	public void zapAll(int loc){
-		
-		yell("ZZZZZAAAAAAPPPPPP!!!!!!");
+
+		yell(Messages.get(this, "zap"));
 		
 		Char hero=Dungeon.hero;
 				
@@ -170,13 +162,12 @@ public class LitTower extends Mob implements Callback {
 			  hero.sprite.flash();
 			
 			  Camera.main.shake(2, 1f);
-			  GLog.n("The lightning towers are too strong. Perhaps you can disable them by going to the right?");
+//			  GLog.n("The lightning towers are too strong. Perhaps you can disable them by going to the right?");
 	}
-	
+
 	@Override
 	public String description() {
-		return "The lightning shell crackles with electric power. "
-				+ "It's powerful lightning attack is drawn to all living things in the lair. ";
+		return Messages.get(this, "desc");
 	}
 	
 	@Override

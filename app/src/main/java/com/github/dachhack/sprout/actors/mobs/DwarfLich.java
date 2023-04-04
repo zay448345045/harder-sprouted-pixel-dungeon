@@ -17,8 +17,7 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Blindness;
@@ -33,12 +32,14 @@ import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.DwarfLichSprite;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class DwarfLich extends Mob {
 	
 	private static final float SPAWN_DELAY = 2f;
 
 	{
-		name = "dwarf lich";
+		name = Messages.get(this, "name");
 		spriteClass = DwarfLichSprite.class;
 
 		HP = HT = 200;
@@ -104,14 +105,13 @@ public class DwarfLich extends Mob {
 			return d;
      
      }
-	
-	
-	
+
+
+
 
 	@Override
 	public String description() {
-		return "A powerful wizard sacrificed to sustain the undead dwarf king, "
-				+ "the wizard calls on the power of death to damage opponents.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.actors.mobs;
 
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Bleeding;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -29,7 +30,7 @@ import com.watabou.utils.Random;
 public class Albino extends Rat {
 
 	{
-		name = "albino rat";
+		name = Messages.get(this, "name");
 		spriteClass = AlbinoSprite.class;
 
 		HP = HT = 20+(Dungeon.depth*Random.NormalIntRange(1, 3));
@@ -60,6 +61,6 @@ public class Albino extends Rat {
 
 	@Override
 	public String description() {
-		return "This is a rare breed of marsupial rat, with pure white fur and jagged teeth.";
+		return Messages.get(this, "desc");
 	}
 }

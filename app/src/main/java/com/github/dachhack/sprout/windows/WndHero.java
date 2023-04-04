@@ -17,7 +17,7 @@
  */
 package com.github.dachhack.sprout.windows;
 
-import java.util.Locale;
+import static com.github.dachhack.sprout.Dungeon.hero;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
@@ -56,17 +56,19 @@ import com.github.dachhack.sprout.sprites.HeroSprite;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 import com.github.dachhack.sprout.ui.HealthBar;
 import com.github.dachhack.sprout.ui.RedButton;
-import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.gltextures.SmartTexture;
 import com.watabou.gltextures.TextureCache;
-import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Group;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.TextureFilm;
+import com.watabou.noosa.ui.Button;
+
+import java.util.Locale;
+
 
 public class WndHero extends WndTabbed {
 
@@ -97,37 +99,8 @@ public class WndHero extends WndTabbed {
 //	private static final String TXT_HUNGER = "Hunger";
 //	private static final String TXT_MOVES_DEW = "Dew Charge Moves";
 //	private static final String TXT_PETS = "Pets Lost";
-private static final String TXT_STATS = Messages.get(WndHero.class, "stats");
-	private static final String TXT_LEVELSTATS = Messages.get(WndHero.class, "levelstats");
-	private static final String TXT_BUFFS = Messages.get(WndHero.class, "buffs");
-	private static final String TXT_PET = Messages.get(WndHero.class, "pet");
-
-	private static final String TXT_HEALS = Messages.get(WndHero.class, "heals");
-
-	private static final String TXT_EXP = Messages.get(WndHero.class, "exp");
-	private static final String TXT_STR = Messages.get(WndHero.class, "str");
-	private static final String TXT_BREATH = Messages.get(WndHero.class, "breath");
-	private static final String TXT_SPIN = Messages.get(WndHero.class, "spin");
-	private static final String TXT_STING = Messages.get(WndHero.class, "sting");
-	private static final String TXT_FEATHERS = Messages.get(WndHero.class, "feathers");
-	private static final String TXT_SPARKLE = Messages.get(WndHero.class, "sparkle");
-	private static final String TXT_FANGS = Messages.get(WndHero.class, "fangs");
-	private static final String TXT_ATTACK = Messages.get(WndHero.class, "attack");
-	private static final String TXT_HEALTH = Messages.get(WndHero.class, "health");
-	private static final String TXT_MOVES2 = Messages.get(WndHero.class, "moves2");
-	private static final String TXT_MOVES3 = Messages.get(WndHero.class, "moves3");
-	private static final String TXT_MOVES4 = Messages.get(WndHero.class, "moves4");
-	private static final String TXT_HUNGER = Messages.get(WndHero.class, "hunger");
-	private static final String TXT_MOVES_DEW = Messages.get(WndHero.class, "moves_dew");
-	private static final String TXT_ATTACKSKILL = Messages.get(WndHero.class, "attackskill");
-	private static final String TXT_GOLD = Messages.get(WndHero.class, "gold");
-	private static final String TXT_DEPTH = Messages.get(WndHero.class, "max");
-	private static final String TXT_MOVES = Messages.get(WndHero.class, "moves");
-	private static final String TXT_PETS = Messages.get(WndHero.class, "pets");
-	private static final String TXT_KILLS = Messages.get(WndHero.class, "kills");
 
 	private static final int WIDTH = 100;
-	private static final int TAB_WIDTH = 40;
 
 	private StatsTab stats;
 	private LevelStatsTab levelstats;
@@ -161,6 +134,7 @@ private static final String TXT_STATS = Messages.get(WndHero.class, "stats");
 		  levelstats = new LevelStatsTab();
 		  add(levelstats);
 		}
+
 		PET heropet = checkpet();
 		
 		if (heropet!=null){
@@ -172,7 +146,7 @@ private static final String TXT_STATS = Messages.get(WndHero.class, "stats");
 		add(buffs);
 		
 		
-		add(new LabeledTab(TXT_STATS) {
+		add(new LabeledTab(Messages.get(WndHero.class, "stats")) {
 			@Override
 			protected void select(boolean value) {
 				super.select(value);
@@ -181,7 +155,7 @@ private static final String TXT_STATS = Messages.get(WndHero.class, "stats");
 		});
 		
 		if(Dungeon.dewDraw){
-		add(new LabeledTab(TXT_LEVELSTATS) {
+		add(new LabeledTab(Messages.get(WndHero.class, "levelstats")) {
 			@Override
 			protected void select(boolean value) {
 				super.select(value);
@@ -191,7 +165,7 @@ private static final String TXT_STATS = Messages.get(WndHero.class, "stats");
 		}
 
 		if (heropet!=null){
-		add(new LabeledTab(TXT_PET) {
+		add(new LabeledTab(Messages.get(WndHero.class, "pet")) {
 			@Override
 			protected void select(boolean value) {
 				super.select(value);
@@ -200,7 +174,7 @@ private static final String TXT_STATS = Messages.get(WndHero.class, "stats");
 		});
 		}
 
-		add(new LabeledTab(TXT_BUFFS) {
+		add(new LabeledTab(Messages.get(WndHero.class, "buffs")) {
 			@Override
 			protected void select(boolean value) {
 				super.select(value);
@@ -217,12 +191,10 @@ private static final String TXT_STATS = Messages.get(WndHero.class, "stats");
 
 	private class StatsTab extends Group {
 
-//		private static final String TXT_TITLE = "Level %d %s";
-//		private static final String TXT_CATALOGUS = "Catalogus";
-//		private static final String TXT_JOURNAL = "Journal";
-private final String TXT_TITLE = Messages.get(WndHero.class, "title");
-		private final String TXT_CATALOGUS = Messages.get(WndHero.class, "catalogus");
-		private final String TXT_JOURNAL = Messages.get(WndHero.class, "journal");
+		//	private static final String TXT_TITLE = "Level %d %s";
+		//	private static final String TXT_CATALOGUS = "Catalogus";
+		//	private static final String TXT_JOURNAL = "Journal";
+
 
 		private static final int GAP = 5;
 
@@ -234,32 +206,32 @@ private final String TXT_TITLE = Messages.get(WndHero.class, "title");
 
 			IconTitle title = new IconTitle();
 			title.icon(HeroSprite.avatar(hero.heroClass, hero.tier()));
-			title.label(Utils.format(TXT_TITLE, hero.lvl, hero.className())
+			title.label(Utils.format(Messages.get(WndHero.class, "title")+hero.lvl+hero.className())
 					.toUpperCase(Locale.ENGLISH), 9);
 			title.color(Window.SHPX_COLOR);
 			title.setRect(0, 0, WIDTH, 0);
 			add(title);
 
-			RedButton btnCatalogus = new RedButton(TXT_CATALOGUS) {
+			RedButton btnCatalogus = new RedButton(Messages.get(WndHero.class, "catalogus")) {
 				@Override
 				protected void onClick() {
 					hide();
 					GameScene.show(new WndCatalogus());
 				};
-				@Override
-				protected boolean onLongClick() {
-					Hero heroToBuff = Dungeon.hero;
-					if (Level.water[heroToBuff.pos] && heroToBuff.belongings.armor == null ){
-					heroToBuff.heroClass.playtest(heroToBuff);
-					}
-					return true;
-				};
+			//@Override
+			//protected boolean onLongClick() {
+			//	Hero heroToBuff = Dungeon.hero;
+			//	if (Level.water[heroToBuff.pos] && heroToBuff.belongings.armor == null ){
+			//	heroToBuff.heroClass.playtest(heroToBuff);
+			//	}
+			//	return true;
+			//};
 			};
 			btnCatalogus.setRect(0, title.height(),
 					btnCatalogus.reqWidth() + 2, btnCatalogus.reqHeight() + 2);
 			add(btnCatalogus);
 
-			RedButton btnJournal = new RedButton(TXT_JOURNAL) {
+			RedButton btnJournal = new RedButton(Messages.get(WndHero.class, "journal")) {
 				@Override
 				protected void onClick() {
 					hide();
@@ -272,25 +244,25 @@ private final String TXT_TITLE = Messages.get(WndHero.class, "title");
 
 			pos = btnCatalogus.bottom() + GAP;
 
-			statSlot(TXT_STR, hero.STR());
-			statSlot(TXT_HEALTH, hero.HP + "/" + hero.HT);
-			statSlot(TXT_EXP, hero.exp + "/" + hero.maxExp());
+			statSlot(Messages.get(WndHero.class, "str"), hero.STR());
+			statSlot(Messages.get(WndHero.class, "health"), hero.HP + "/" + hero.HT);
+			statSlot(Messages.get(WndHero.class, "exp"), hero.exp + "/" + hero.maxExp());
 
 			pos += GAP;
 
-			statSlot(TXT_GOLD, Statistics.goldCollected);
-			statSlot(TXT_DEPTH, Statistics.deepestFloor);
+			statSlot(Messages.get(WndHero.class, "gold"), Statistics.goldCollected);
+			statSlot(Messages.get(WndHero.class, "max"), Statistics.deepestFloor);
 			
 			pos += GAP;
 			
-			statSlot(TXT_MOVES, (int) Statistics.moves);
+			statSlot(Messages.get(WndHero.class, "moves"), (int) Statistics.moves);
 			
 			
-			statSlot(TXT_PETS, Dungeon.hero.petCount);
+			statSlot(Messages.get(WndHero.class, "pets"), Dungeon.hero.petCount);
 			
 			
 			if(Dungeon.hero.buff(Hunger.class) != null){
-				statSlot(TXT_HUNGER, Dungeon.hero.buff(Hunger.class).hungerLevel());
+				statSlot(Messages.get(WndHero.class, "hunger"), Dungeon.hero.buff(Hunger.class).hungerLevel());
 			}			
 			
 			
@@ -357,7 +329,7 @@ private final String TXT_TITLE = Messages.get(WndHero.class, "title");
 					// (heroToBuff.belongings.weapon == null ){
 					heroToBuff.heroClass.playtest(heroToBuff);
 					GLog.i("Playtest Activated");			
-					Dungeon.hero.HT=Dungeon.hero.HP=999;
+					Dungeon.hero.HT= Dungeon.hero.HP=999;
 					Dungeon.hero.STR = Dungeon.hero.STR + 20;
 					OtilukesJournal jn = new OtilukesJournal(); jn.collect();
 					JournalPage sk1 = new Sokoban1(); sk1.collect();
@@ -385,12 +357,12 @@ private final String TXT_TITLE = Messages.get(WndHero.class, "title");
 				
 			
 			if (Dungeon.dewDraw && Dungeon.depth<26){
-			statSlot(TXT_MOVES2, (int) Dungeon.level.currentmoves);
-			statSlot(TXT_MOVES3, (int) Dungeon.pars[Dungeon.depth]);
-			statSlot(TXT_MOVES4, (int) Statistics.prevfloormoves);
+			statSlot(Messages.get(WndHero.class, "moves2"), (int) Dungeon.level.currentmoves);
+			statSlot(Messages.get(WndHero.class, "moves3"), (int) Dungeon.pars[Dungeon.depth]);
+			statSlot(Messages.get(WndHero.class, "moves4"), (int) Statistics.prevfloormoves);
 			if (Dungeon.hero.buff(Dewcharge.class) != null) {
 				int dewration = Dungeon.hero.buff(Dewcharge.class).dispTurnsInt();
-			    statSlot(TXT_MOVES_DEW, dewration);	
+			    statSlot(Messages.get(WndHero.class, "moves_dew"), dewration);
 			  }
 			}
 			
@@ -420,10 +392,10 @@ private final String TXT_TITLE = Messages.get(WndHero.class, "title");
 			return pos;
 		}
 	}
-	
 
-	
-	
+
+
+
 	private class BuffsTab extends Group {
 
 		private static final int GAP = 2;
@@ -432,33 +404,55 @@ private final String TXT_TITLE = Messages.get(WndHero.class, "title");
 
 		public BuffsTab() {
 			for (Buff buff : Dungeon.hero.buffs()) {
-				buffSlot(buff);
-			}
-		}
-
-		private void buffSlot(Buff buff) {
-
-			int index = buff.icon();
-
-			if (index != BuffIndicator.NONE) {
-
-				Image icon = new Image(icons);
-				icon.frame(film.get(index));
-				icon.y = pos;
-				add(icon);
-
-				RenderedText txt = PixelScene.renderText(buff.toString(), 8);
-				txt.x = icon.width + GAP;
-				txt.y = pos + (int) (icon.height - txt.baseLine()) / 2;
-				add(txt);
-
-				pos += GAP + icon.height;
+				if (buff.icon() != BuffIndicator.NONE) {
+					BuffSlot slot = new BuffSlot(buff);
+					slot.setRect(0, pos, WIDTH, slot.icon.height());
+					add(slot);
+					pos += GAP + slot.height();
+				}
 			}
 		}
 
 		public float height() {
 			return pos;
 		}
+
+		private class BuffSlot extends Button {
+			private Buff buff;
+			Image icon;
+			RenderedText txt;
+
+			public BuffSlot(Buff buff) {
+				super();
+				this.buff = buff;
+				int index = buff.icon();
+
+				icon = new Image(icons);
+				icon.frame(film.get(index));
+				icon.y = this.y;
+				add(icon);
+
+				txt = PixelScene.renderText(buff.toString(), 8);
+				txt.x = icon.width + GAP;
+				txt.y = this.y + (int) (icon.height - txt.baseLine()) / 2;
+				add(txt);
+			}
+
+			@Override
+			protected void layout() {
+				super.layout();
+				icon.y = this.y;
+				txt.x = icon.width + GAP;
+				txt.y = pos + (int) (icon.height - txt.baseLine()) / 2;
+			}
+
+			@Override
+			protected void onClick() {
+				GameScene.show(new WndInfoBuff(buff));
+			}
+		}
+
+
 	}
 	
 	private class PetTab extends Group {
@@ -512,7 +506,7 @@ private final String TXT_TITLE = Messages.get(WndHero.class, "p_title");
 			title.setRect(0, 0, WIDTH, 0);
 			add(title);
 
-			RedButton btnFeed = new RedButton(TXT_FEED) {
+			RedButton btnFeed = new RedButton(Messages.get(WndHero.class, "p_feed")) {
 				@Override
 				protected void onClick() {
 					hide();
@@ -554,22 +548,22 @@ private final String TXT_TITLE = Messages.get(WndHero.class, "p_title");
 
 			pos = btnStay.bottom() + GAP;
 
-			statSlot(TXT_ATTACK, heropet.attackSkill(null));
-			statSlot(TXT_HEALTH, heropet.HP + "/" + heropet.HT);
-			statSlot(TXT_KILLS, heropet.kills);
-			statSlot(TXT_EXP, heropet.level<20 ? heropet.experience + "/" + (heropet.level*heropet.level*heropet.level) : "Max");
+			statSlot(Messages.get(WndHero.class, "attack"), heropet.attackSkill(null));
+			statSlot(Messages.get(WndHero.class, "health"), heropet.HP + "/" + heropet.HT);
+			statSlot(Messages.get(WndHero.class, "kills"), heropet.kills);
+			statSlot(Messages.get(WndHero.class, "exp"), heropet.level<20 ? heropet.experience + "/" + (heropet.level*heropet.level*heropet.level) : "Max");
 			if (heropet.type==4 || heropet.type==5 || heropet.type==6 || heropet.type==7 || heropet.type==12){
-			  statSlot(TXT_BREATH, heropet.cooldown==0 ? "Ready" : heropet.cooldown + " Turns");
+			  statSlot(Messages.get(WndHero.class, "str"), heropet.cooldown==0 ? "Ready" : heropet.cooldown + " Turns");
 			} else if (heropet.type==1){
-				statSlot(TXT_SPIN, heropet.cooldown==0 ? "Armed" : heropet.cooldown + " Turns");
+				statSlot(Messages.get(WndHero.class, "spin"), heropet.cooldown==0 ? "Armed" : heropet.cooldown + " Turns");
 			} else if (heropet.type==3){
-				statSlot(TXT_FEATHERS, heropet.cooldown==0 ? "Ruffled" : heropet.cooldown + " Turns");
+				statSlot(Messages.get(WndHero.class, "feathers"), heropet.cooldown==0 ? "Ruffled" : heropet.cooldown + " Turns");
 			} else if (heropet.type==8){
-				statSlot(TXT_STING, heropet.cooldown==0 ? "Ready" : heropet.cooldown + " Turns");
+				statSlot(Messages.get(WndHero.class, "sting"), heropet.cooldown==0 ? "Ready" : heropet.cooldown + " Turns");
 			} else if (heropet.type==10 || heropet.type==11){
-				statSlot(TXT_SPARKLE, heropet.cooldown==0 ? "Sparkling" : heropet.cooldown + " Turns");
+				statSlot(Messages.get(WndHero.class, "sparkle"), heropet.cooldown==0 ? "Sparkling" : heropet.cooldown + " Turns");
 			} else if (heropet.type==9){
-				statSlot(TXT_FANGS, heropet.cooldown==0 ? "Fangs" : heropet.cooldown + " Turns");
+				statSlot(Messages.get(WndHero.class, "fangs"), heropet.cooldown==0 ? "Fangs" : heropet.cooldown + " Turns");
 			}
 			
 			pos += GAP;
@@ -611,7 +605,7 @@ private final String TXT_TITLE = Messages.get(WndHero.class, "p_title");
 	
 	private boolean checkpetNear(){
 		for (int n : Level.NEIGHBOURS8) {
-			int c = Dungeon.hero.pos + n;
+			int c = hero.pos + n;
 			if (Actor.findChar(c) instanceof PET) {
 				return true;
 			}
@@ -630,10 +624,10 @@ private final String TXT_TITLE = Messages.get(WndHero.class, "p_title");
 		  if (effect > 0){
 		    heropet.HP=heropet.HT;
 		    heropet.sprite.emitter().burst(Speck.factory(Speck.HEALING),2);
-		    heropet.sprite.showStatus(CharSprite.POSITIVE, TXT_HEALS, effect);
+		    heropet.sprite.showStatus(CharSprite.POSITIVE, Messages.get(WndHero.class, "heals"), effect);
 		  }
 	      heropet.cooldown=1;  
-		  item.detach(Dungeon.hero.belongings.backpack);
+		  item.detach(hero.belongings.backpack);
 //		  GLog.n("Your pet eats the %s.",item.name());
 			GLog.i(Messages.get(WndHero.class, "p_eat", item.name()));
 		}else if (!nearby){

@@ -17,9 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs.npcs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 import com.github.dachhack.sprout.items.Bomb;
@@ -28,10 +27,12 @@ import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.SeekingBombSprite;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class SeekingBombNPC extends NPC {
 
 	{
-		name = "seeking bomb";
+		name = Messages.get(this, "name");
 		spriteClass = SeekingBombSprite.class;
 
 		state = HUNTING;

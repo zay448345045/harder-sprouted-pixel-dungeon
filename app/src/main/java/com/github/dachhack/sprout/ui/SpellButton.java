@@ -26,6 +26,7 @@ import com.watabou.noosa.NinePatch;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.ui.Button;
 
+//NOT
 public class SpellButton extends Button {
 
 	protected NinePatch bg;

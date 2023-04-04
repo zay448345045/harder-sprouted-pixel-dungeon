@@ -25,16 +25,12 @@ import com.github.dachhack.sprout.ui.RedButton;
 import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.Utils;
-import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndDewVial extends Window {
 	
 	//if people don't get it after this, I quit. I just quit.
 
-//	private static final String TXT_MESSAGE = "The dew vial is much more powerful in this dungeon. "
-//			                                  +"Filling it all the way will allow you to bless and upgrade your gear. "
-//			                                  +"The deeper you go in the dungeon, the more the dew will upgrade your gear. "
-//			                                  +"You can bless your items to +6 or +7 by the time you get to the Goo.";
+//	private static final String TXT_MESSAGE = "";
 //
 //	private static final String TXT_WATER = "Okay! Let's go find 100 dew drops!";
 private static final String TXT_MESSAGE = Messages.get(WndDewVial.class, "msg");

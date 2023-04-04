@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.mobs.npcs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.sprites.SokobanSheepSwitchSprite;
 import com.watabou.utils.Random;
@@ -28,7 +29,7 @@ public class SheepSokobanSwitch extends NPC {
 	"Baa..." };
 
 {
-name = "sheep";
+name = Messages.get(this, "name");
 spriteClass = SokobanSheepSwitchSprite.class;
 }
 

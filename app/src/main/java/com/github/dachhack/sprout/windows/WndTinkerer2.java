@@ -160,7 +160,7 @@ private static final String TXT_MESSAGE1 = Messages.get(WndTinkerer2.class, "msg
 		
 		 ActiveMrDestructo2 mrd2 = new ActiveMrDestructo2();	
 			if (mrd2.doPickUp(Dungeon.hero)) {
-				GLog.i(Hero.TXT_YOU_NOW_HAVE, mrd2.name());
+				GLog.i(Messages.get(Hero.class,"have"), mrd2.name());
 			} else {
 				Dungeon.level.drop(mrd2, Dungeon.hero.pos).sprite.drop();
 			}
@@ -182,7 +182,7 @@ private static final String TXT_MESSAGE1 = Messages.get(WndTinkerer2.class, "msg
 		
 		 ActiveMrDestructo2 mrd2 = new ActiveMrDestructo2();	
 			if (mrd2.doPickUp(Dungeon.hero)) {
-				GLog.i(Hero.TXT_YOU_NOW_HAVE, mrd2.name());
+				GLog.i(Messages.get(Hero.class,"have"), mrd2.name());
 			} else {
 				Dungeon.level.drop(mrd2, Dungeon.hero.pos).sprite.drop();
 			}
@@ -207,14 +207,14 @@ private static final String TXT_MESSAGE1 = Messages.get(WndTinkerer2.class, "msg
 		
 		 ActiveMrDestructo mrd = new ActiveMrDestructo();	
 			if (mrd.doPickUp(Dungeon.hero)) {
-				GLog.i(Hero.TXT_YOU_NOW_HAVE, mrd.name());
+				GLog.i(Messages.get(Hero.class,"have"), mrd.name());
 			} else {
 				Dungeon.level.drop(mrd, Dungeon.hero.pos).sprite.drop();
 			}
 			
 		ActiveMrDestructo mrds = new ActiveMrDestructo();	
 				if (mrds.doPickUp(Dungeon.hero)) {
-					GLog.i(Hero.TXT_YOU_NOW_HAVE, mrds.name());
+					GLog.i(Messages.get(Hero.class,"have"), mrds.name());
 				} else {
 					Dungeon.level.drop(mrds, Dungeon.hero.pos).sprite.drop();
 				}
@@ -236,7 +236,7 @@ private static final String TXT_MESSAGE1 = Messages.get(WndTinkerer2.class, "msg
 		
 		 ActiveMrDestructo mrd = new ActiveMrDestructo();	
 			if (mrd.doPickUp(Dungeon.hero)) {
-				GLog.i(Hero.TXT_YOU_NOW_HAVE, mrd.name());
+				GLog.i(Messages.get(Hero.class,"have"), mrd.name());
 			} else {
 				Dungeon.level.drop(mrd, Dungeon.hero.pos).sprite.drop();
 			}

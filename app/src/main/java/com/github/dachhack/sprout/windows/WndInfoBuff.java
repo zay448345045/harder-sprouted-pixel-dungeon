@@ -11,7 +11,7 @@ import com.watabou.gltextures.TextureCache;
 import com.watabou.noosa.Image;
 import com.watabou.noosa.TextureFilm;
 
-public  class WndInfoBuff extends Window {
+public class WndInfoBuff extends Window {
 
     private static final float GAP = 2;
 
