@@ -17,13 +17,15 @@
  */
 package com.github.dachhack.sprout.items.weapon.enchantments;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.items.weapon.Weapon;
 import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
 
 public class Instability extends Weapon.Enchantment {
 
-	private static final String TXT_UNSTABLE = "Unstable %s";
+//	private static final String TXT_UNSTABLE = "Unstable %s";
+private static final String TXT_UNSTABLE = Messages.get(Instability.class, "name");
 
 	@Override
 	public boolean proc(RelicMeleeWeapon weapon, Char attacker, Char defender, int damage) {

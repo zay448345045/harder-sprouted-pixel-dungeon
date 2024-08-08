@@ -20,6 +20,7 @@ package com.github.dachhack.sprout.items;
 import java.util.ArrayList;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.MrDestructo;
@@ -30,7 +31,9 @@ import com.watabou.utils.Random;
 public class ActiveMrDestructo extends Item {
 
 	{
-		name = "mr destructo";
+//		name = "mr destructo";
+
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ACTIVEMRD;
 		defaultAction = AC_ACTIVATETHROW;
 		stackable = true;
@@ -39,9 +42,8 @@ public class ActiveMrDestructo extends Item {
 	
 	private static boolean activate = false;
 
-	private static final String AC_ACTIVATETHROW = "Activate & Throw";
-
-	
+//	private static final String AC_ACTIVATETHROW = "Activate & Throw";
+	private static final String AC_ACTIVATETHROW = Messages.get(Dewdrop.class, "value");
 
 	@Override
 	public ArrayList<String> actions(Hero hero) {
@@ -101,7 +103,7 @@ public class ActiveMrDestructo extends Item {
 	
 	@Override
 	public String info() {
-		return "It reads, MR DESTRUCTO. An odd contraption. What does it do?";
+		return Messages.get(this, "desc");
 	}
 
 	

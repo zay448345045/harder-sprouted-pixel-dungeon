@@ -1,19 +1,3 @@
-/*
- * Copyright (C) 2012-2015 Oleg Dolya
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>
- */
 
 package com.watabou.gltextures;
 
@@ -37,18 +21,18 @@ public class SmartTexture extends Texture {
 
 	public Atlas atlas;
 
-	protected SmartTexture( ) {
+	protected SmartTexture() {
 		//useful for subclasses which want to manage their own texture data
 		// in cases where android.graphics.bitmap isn't fast enough.
 
 		//subclasses which use this MUST also override some mix of reload/generate/bind
 	}
 
-	public SmartTexture( Bitmap bitmap ) {
-		this( bitmap, NEAREST, CLAMP, false );
+	public SmartTexture(Bitmap bitmap) {
+		this(bitmap, NEAREST, CLAMP, false);
 	}
 
-	public SmartTexture( Bitmap bitmap, int filtering, int wrapping, boolean premultiplied ) {
+	public SmartTexture(Bitmap bitmap, int filtering, int wrapping, boolean premultiplied) {
 
 		this.bitmap = bitmap;
 		width = bitmap.getWidth();
@@ -84,15 +68,15 @@ public class SmartTexture extends Texture {
 	}
 
 	@Override
-	public void bitmap( Bitmap bitmap ) {
-		bitmap( bitmap, false );
+	public void bitmap(Bitmap bitmap) {
+		bitmap(bitmap, false);
 	}
 
-	public void bitmap( Bitmap bitmap, boolean premultiplied ) {
+	public void bitmap(Bitmap bitmap, boolean premultiplied) {
 		if (premultiplied) {
-			super.bitmap( bitmap );
+			super.bitmap(bitmap);
 		} else {
-			handMade( bitmap, true );
+			handMade(bitmap, true);
 		}
 
 		this.bitmap = bitmap;
@@ -115,11 +99,11 @@ public class SmartTexture extends Texture {
 		bitmap = null;
 	}
 
-	public RectF uvRect( float left, float top, float right, float bottom ) {
+	public RectF uvRect(int left, int top, int right, int bottom) {
 		return new RectF(
-				left		/ width,
-				top		/ height,
-				right	/ width,
-				bottom	/ height );
+				(float) left / width,
+				(float) top / height,
+				(float) right / width,
+				(float) bottom / height);
 	}
 }

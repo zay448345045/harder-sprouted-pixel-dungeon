@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.buffs.Hunger;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -39,15 +40,19 @@ public class NornStone extends Item {
 	
 	{
 		stackable = true;
-		name = "norn stone";
+//		name = "norn stone";
+		name = Messages.get(NornStone.class, "name");
 		image = ItemSpriteSheet.NORNGREEN;
 		bones = false;
 	}
 
 	
 	@Override
+//	public String info() {
+//		return "A fancy gem";
+//	}
 	public String info() {
-		return "A fancy gem";
+		return Messages.get(NornStone.class, "desc");
 	}
 
 	@Override

@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.actors.blobs;
 
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
@@ -72,15 +73,16 @@ public class CorruptGas extends Blob implements Hero.Doom {
 
 	@Override
 	public String tileDesc() {
-		return "A cloud of demon blood is swirling here.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override
 	public void onDeath() {
-
-		Badges.validateDeathFromGas();
-
 		Dungeon.fail(ResultDescriptions.GAS);
-		GLog.n("You died from demon blood...");
+		Badges.validateDeathFromGas();
+		GLog.n(Messages.get(this, "die"));
 	}
 }
+
+
+

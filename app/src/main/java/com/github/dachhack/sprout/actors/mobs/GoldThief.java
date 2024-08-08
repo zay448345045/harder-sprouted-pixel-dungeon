@@ -18,7 +18,7 @@
 package com.github.dachhack.sprout.actors.mobs;
 
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.R;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Terror;
@@ -42,7 +42,7 @@ public class GoldThief extends Mob {
 	public Item item;
 
 	{
-		name = "crazy gold thief";
+		name = Messages.get(this, "name");
 		spriteClass = GoldThiefSprite.class;
 
 		HP = HT = 70+Statistics.goldThievesKilled*2;
@@ -107,7 +107,7 @@ public class GoldThief extends Mob {
 		}
 
 		Statistics.goldThievesKilled++;
-		GLog.w(TXT_KILLCOUNT, Statistics.goldThievesKilled);
+		GLog.w(Messages.get(GoldThief.class, "count"), Statistics.goldThievesKilled);
 		super.die(cause);
 
 		if (item != null) {
@@ -155,7 +155,7 @@ public class GoldThief extends Mob {
 			if (gold.quantity() > 0 & Random.Int(2) == 0) {
 				goldtodrop = Math.min((gold.quantity()+100),Dungeon.gold);
 				Dungeon.gold -= goldtodrop;
-				GLog.w(TXT_STOLE, this.name, gold.quantity());
+				GLog.w(Messages.get(GoldThief.class, "steal"), this.name, gold.quantity());
 				return true;
 			} else {
 			   return false;
@@ -164,8 +164,7 @@ public class GoldThief extends Mob {
 
 	@Override
 	public String description() {
-		String desc = "This thief has gold dust covering his robes and skin. He has a crazy glint in his eye. ";
-		return desc;
+		return Messages.get(this, "desc");
 	}
 
 	private class Fleeing extends Mob.Fleeing {

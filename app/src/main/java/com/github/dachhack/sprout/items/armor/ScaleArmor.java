@@ -17,12 +17,15 @@
  */
 package com.github.dachhack.sprout.items.armor;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
 public class ScaleArmor extends Armor {
 
 	{
-		name = "scale armor";
+//		name = "scale armor";
+//		image = ItemSpriteSheet.ARMOR_SCALE;
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ARMOR_SCALE;
 	}
 
@@ -30,8 +33,11 @@ public class ScaleArmor extends Armor {
 		super(4);
 	}
 
-	@Override
-	public String desc() {
-		return "The metal scales sewn onto a leather vest create a flexible, yet protective armor.";
-	}
+//	@Override
+//	public String desc() {
+//		return "The metal scales sewn onto a leather vest create a flexible, yet protective armor.";
+@Override
+public String desc() {
+	return Messages.get(this, "desc");
+}
 }

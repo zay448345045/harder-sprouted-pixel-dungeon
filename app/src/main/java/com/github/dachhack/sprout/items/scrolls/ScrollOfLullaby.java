@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.scrolls;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Drowsy;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
@@ -31,7 +32,8 @@ import com.watabou.noosa.audio.Sample;
 public class ScrollOfLullaby extends Scroll {
 
 	{
-		name = "Scroll of Lullaby";
+//		name = "Scroll of Lullaby";
+		name = Messages.get(this, "name");
 		consumedValue = 5;
 	}
 
@@ -53,7 +55,8 @@ public class ScrollOfLullaby extends Scroll {
 
 		Buff.affect(curUser, Drowsy.class);
 
-		GLog.i("The scroll utters a soothing melody. You feel very sleepy.");
+//		GLog.i("The scroll utters a soothing melody. You feel very sleepy.");
+		GLog.i(Messages.get(this, "sooth"));
 
 		setKnown();
 
@@ -61,8 +64,11 @@ public class ScrollOfLullaby extends Scroll {
 	}
 
 	@Override
+//	public String desc() {
+//		return "A soothing melody will lull all who hear it into a deep magical sleep ";
+//	}
 	public String desc() {
-		return "A soothing melody will lull all who hear it into a deep magical sleep ";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

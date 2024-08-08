@@ -17,10 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
@@ -44,6 +42,9 @@ import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+
 public class DemonGoo extends Mob {
 	
 protected static final float SPAWN_DELAY = 2f;
@@ -53,7 +54,7 @@ private int demonGooGeneration = 0;
 private static final String DEMONGOOGENERATION = "demonGooGeneration";
 
 	{
-		name = "demon goo";
+		name = Messages.get(this, "name");
 		HP = HT = 400;
 		EXP = 10;
 		defenseSkill = 10+ adjustForDepth(1);
@@ -173,21 +174,20 @@ private static final String DEMONGOOGENERATION = "demonGooGeneration";
 	@Override
 	public void notice() {
 		super.notice();
-		yell("GLURP-GLURP-GLUURRRRP!");
+		yell(Messages.get(DemonGoo.class, "notice"));
 	}
 
 	@Override
 	public String description() {
-		return "Demon Goo is pretty angry you killed its buddy in the sewers. ";
+		return Messages.get(this, "desc");
 	}
 
 	@Override
 	public void die(Object cause) {
 
 		super.die(cause);
-       	yell("glurp... glurp...");
+		yell(Messages.get(DemonGoo.class, "die"));
 	}
-	
 	
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

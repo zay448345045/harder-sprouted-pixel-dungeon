@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items.weapon.missiles;
 
 import com.github.dachhack.sprout.Badges;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.particles.ShadowParticle;
@@ -29,7 +30,8 @@ import com.watabou.utils.Random;
 public class Skull extends MissileWeapon {
 
 	{
-		name = "skull";
+//		name = "skull";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.SKULLWEP;
 
 		MIN = 1;
@@ -51,9 +53,13 @@ public class Skull extends MissileWeapon {
 	}
 
 	@Override
+//	public String desc() {
+//		return "A evil skull thingy";
+//	}
 	public String desc() {
-		return "A evil skull thingy";
+		return Messages.get(this, "desc");
 	}
+
 
 	@Override
 	public Item random() {

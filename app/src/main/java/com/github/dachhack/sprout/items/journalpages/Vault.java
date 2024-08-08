@@ -17,35 +17,40 @@
  */
 package com.github.dachhack.sprout.items.journalpages;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
 
 public class Vault extends JournalPage {
 
-	private static final String TXT_VALUE = "Vault";
+//	private static final String TXT_VALUE = "Vault";
 
 	{
-		name = "journal page vault";
+//		name = "journal page vault";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.JOURNAL_PAGE;
 		room=6;
 
 		stackable = false;
 	}
 
-	@Override
-	public boolean doPickUp(Hero hero) {
-         
-		GLog.p("You found a page to Otiluke's Journal!", TXT_VALUE);
-		return super.doPickUp(hero);
-	
-	}
+//	@Override
+//	public boolean doPickUp(Hero hero) {
+//
+//		GLog.p("You found a page to Otiluke's Journal!", TXT_VALUE);
+//		return super.doPickUp(hero);
+//
+//	}
 
 	@Override
+//	public String info() {
+//		return "A loose journal page labled Vault. \n\n"
+//				+"This ring of wealth really is overkill.\n\n "
+//				+"I need a place to drop my gold.\n\n "
+//				+"-Otiluke, 656 LP. ";
+//	}
 	public String info() {
-		return "A loose journal page labled Vault. \n\n"
-				+"This ring of wealth really is overkill.\n\n "
-				+"I need a place to drop my gold.\n\n "
-				+"-Otiluke, 656 LP. ";
+		return Messages.get(this, "desc");
 	}
 }

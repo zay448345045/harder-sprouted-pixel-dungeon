@@ -17,9 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
@@ -30,10 +29,12 @@ import com.github.dachhack.sprout.sprites.BeeSprite;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Bee extends Mob {
 
 	{
-		name = "golden bee";
+		name = Messages.get(this, "name");
 		spriteClass = BeeSprite.class;
 
 		viewDistance = 4;
@@ -151,8 +152,7 @@ public class Bee extends Mob {
 
 	@Override
 	public String description() {
-		return "Despite their small size, golden bees tend "
-				+ "to protect their home fiercely. This one is very mad, better keep your distance.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

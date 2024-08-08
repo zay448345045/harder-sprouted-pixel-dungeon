@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items.potions;
 
 import com.github.dachhack.sprout.Assets;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Haste;
@@ -31,21 +32,29 @@ public class PotionOfHaste extends Potion {
 	private static final float ALPHA = 0.4f;
 
 	{
-		name = "Potion of Haste";
+//		name = "Potion of Haste";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
 	public void apply(Hero hero) {
 		setKnown();
 		Buff.affect(hero, Haste.class, Haste.DURATION);
-		GLog.i("You are moving much faster!");
+//		GLog.i("You are moving much faster!");
+		GLog.i(Messages.get(this, "effect"));
 		Sample.INSTANCE.play(Assets.SND_MELD);
 	}
 
 	@Override
+//	public String desc() {
+//		return "Drinking this potion will temporarily speed up your actions.";
+//	}public String desc() {
+//		return Messages.get(this, "desc");
+//	}
 	public String desc() {
-		return "Drinking this potion will temporarily speed up your actions.";
+		return Messages.get(this, "desc");
 	}
+
 
 	@Override
 	public int price() {

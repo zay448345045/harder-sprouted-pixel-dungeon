@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.blobs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -25,14 +26,10 @@ import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.effects.BlobEmitter;
 import com.github.dachhack.sprout.effects.particles.FlameParticle;
 import com.github.dachhack.sprout.items.Heap;
-import com.github.dachhack.sprout.items.OtilukesJournal;
-import com.github.dachhack.sprout.items.bags.AnkhChain;
 import com.github.dachhack.sprout.items.journalpages.DragonCave;
 import com.github.dachhack.sprout.items.journalpages.Vault;
-import com.github.dachhack.sprout.items.misc.Spectacles;
 import com.github.dachhack.sprout.items.misc.Spectacles.MagicSight;
 import com.github.dachhack.sprout.items.weapon.melee.RoyalSpork;
-import com.github.dachhack.sprout.items.weapon.melee.Spork;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.scenes.GameScene;
@@ -151,6 +148,6 @@ public class Fire extends Blob {
 	}
 	@Override
 	public String tileDesc() {
-		return "A fire is raging here.";
+		return Messages.get(this, "desc");
 	}
 }

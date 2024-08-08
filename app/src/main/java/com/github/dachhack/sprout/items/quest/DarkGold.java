@@ -17,13 +17,16 @@
  */
 package com.github.dachhack.sprout.items.quest;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
 public class DarkGold extends Item {
 
 	{
-		name = "dark gold ore";
+//		name = "dark gold ore";
+		name = Messages.get(this, "name");
+
 		image = ItemSpriteSheet.ORE;
 
 		stackable = true;
@@ -40,11 +43,15 @@ public class DarkGold extends Item {
 		return true;
 	}
 
-	@Override
-	public String info() {
-		return "This metal is called dark not because of its color (it doesn't differ from the normal gold), "
-				+ "but because it melts under the daylight, making it useless on the surface.";
-	}
+//	@Override
+//	public String info() {
+//		return "This metal is called dark not because of its color (it doesn't differ from the normal gold), "
+//				+ "but because it melts under the daylight, making it useless on the surface.";
+//	}
+@Override
+public String info() {
+	return Messages.get(this, "desc");
+}
 
 	@Override
 	public int price() {

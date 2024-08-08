@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.actors.mobs.npcs;
 
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Journal;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -40,7 +41,7 @@ import com.watabou.utils.Random;
 public class Imp extends NPC {
 
 	{
-		name = "ambitious imp";
+		name = Messages.get(this, "name");
 		spriteClass = ImpSprite.class;
 	}
 
@@ -92,7 +93,7 @@ public class Imp extends NPC {
 
 	@Override
 	public String defenseVerb() {
-		return "evaded";
+		return Messages.get(this, "def");
 	}
 
 	@Override

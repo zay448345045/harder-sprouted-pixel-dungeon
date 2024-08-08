@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.mobs.pets;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.MagicalSleep;
@@ -31,7 +32,7 @@ import com.watabou.utils.Random;
 public class Scorpion extends PET {
 	
 	{
-		name = "scorpion";
+		name = Messages.get(this, "name");
 		spriteClass = ScorpionSprite.class;       
 		flying=false;
 		state = HUNTING;
@@ -73,7 +74,7 @@ public class Scorpion extends PET {
 		
 		if (cooldown>0){
 			cooldown=Math.max(cooldown-(level*level),0);
-			if (cooldown==0) {GLog.w("Your scorpion readies its stinger!");}
+			if (cooldown==0) {GLog.w((Messages.get(Scorpion.class, "ready")));}
 		}
 		
 		if (Random.Float()<regenChance && HP<HT){HP+=regen;}
@@ -100,18 +101,18 @@ public class Scorpion extends PET {
 			Dungeon.hero.HP = Math.min(Dungeon.hero.HT, Dungeon.hero.HP+damage);
 
 			damage+=damage;
-			
-			yell("Sting!");
+
+			yell(Messages.get(Scorpion.class, "atk"));
 			cooldown=1000;
 		}
 
 		return damage;
 	}
-	
-@Override
-public String description() {
-	return "A super sized blood thirsty scorpion. Its tail is tipped with a dangerous stinger. ";
-}
+
+	@Override
+	public String description() {
+		return Messages.get(bee.class, "desc");
+	}
 
 
 
@@ -127,7 +128,7 @@ public void interact() {
 	}
 	if (buff(Paralysis.class) != null) {
 		Buff.detach(this, Paralysis.class);
-		GLog.i("You shake your %s out of paralysis.", name);
+		GLog.i(Messages.get(bee.class, "shake"), name);
 	}
 	
 	int curPos = pos;

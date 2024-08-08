@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.mobs.npcs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.items.DewVial;
@@ -32,7 +33,7 @@ import com.github.dachhack.sprout.windows.WndTinkerer;
 public class Tinkerer1 extends NPC {
 
 	{
-		name = "tinkerer";
+		name = Messages.get(this, "name");
 		spriteClass = TinkererSprite.class;
 	}
 

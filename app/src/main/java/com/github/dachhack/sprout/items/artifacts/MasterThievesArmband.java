@@ -1,6 +1,7 @@
 package com.github.dachhack.sprout.items.artifacts;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.watabou.utils.Random;
 
@@ -10,7 +11,8 @@ import com.watabou.utils.Random;
 public class MasterThievesArmband extends Artifact {
 
 	{
-		name = "Master Thieves' Armband";
+//		name = "Master Thieves' Armband";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ARTIFACT_ARMBAND;
 
 		level = 0;
@@ -28,13 +30,15 @@ public class MasterThievesArmband extends Artifact {
 
 	@Override
 	public String desc() {
-		String desc = "This purple velvet armband bears the mark of a master thief. This doesn't belong to you, but "
-				+ "you doubt it belonged to the person you took it from either.";
+//		String desc = "This purple velvet armband bears the mark of a master thief. This doesn't belong to you, but "
+//				+ "you doubt it belonged to the person you took it from either.";
+		String desc = Messages.get(this, "desc");
 
 		if (isEquipped(Dungeon.hero))
-			desc += "\n\nWith the armband around your wrist you feel more dexterous and cunning. Every piece of gold "
-					+ "you find makes you desire others property more. "
-					+ "You wonder if Pixel Mart accepts the five finger discount...";
+//			desc += "\n\nWith the armband around your wrist you feel more dexterous and cunning. Every piece of gold "
+//					+ "you find makes you desire others property more. "
+//					+ "You wonder if Pixel Mart accepts the five finger discount...";
+			desc += Messages.get(this, "desc_worn");
 
 		return desc;
 	}

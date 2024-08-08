@@ -61,6 +61,7 @@ import com.watabou.gltextures.TextureCache;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.ColorBlock;
 import com.watabou.noosa.Image;
+import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.audio.Sample;
 
 public class WndBag extends WndTabbed {
@@ -111,10 +112,9 @@ public class WndBag extends WndTabbed {
 		int slotsWidth = SLOT_SIZE * nCols + SLOT_MARGIN * (nCols - 1);
 		int slotsHeight = SLOT_SIZE * nRows + SLOT_MARGIN * (nRows - 1);
 
-		BitmapText txtTitle = PixelScene.createText(title != null ? title
+		RenderedText txtTitle = PixelScene.renderText(title != null ? title
 				: Utils.capitalize(bag.name()), 9);
 		txtTitle.hardlight(TITLE_COLOR);
-		txtTitle.measure();
 		txtTitle.x = (int) (slotsWidth - txtTitle.width()) / 2;
 		txtTitle.y = (int) (TITLE_HEIGHT - txtTitle.height()) / 2;
 		add(txtTitle);

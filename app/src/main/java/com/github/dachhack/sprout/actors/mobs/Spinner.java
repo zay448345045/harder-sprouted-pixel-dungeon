@@ -17,8 +17,7 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.Blob;
 import com.github.dachhack.sprout.actors.blobs.Web;
@@ -31,10 +30,12 @@ import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.SpinnerSprite;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Spinner extends Mob {
 
 	{
-		name = "cave spinner";
+		name = Messages.get(this, "name");
 		spriteClass = SpinnerSprite.class;
 
 		HP = HT = 50+(adjustForDepth(0)*Random.NormalIntRange(5, 7));
@@ -90,8 +91,7 @@ public class Spinner extends Mob {
 
 	@Override
 	public String description() {
-		return "These greenish furry cave spiders try to avoid direct combat, preferring to wait in the distance "
-				+ "while their victim, entangled in the spinner's excreted cobweb, slowly dies from their poisonous bite.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

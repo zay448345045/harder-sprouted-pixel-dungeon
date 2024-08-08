@@ -17,12 +17,13 @@
  */
 package com.github.dachhack.sprout.items.armor;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
 public class MailArmor extends Armor {
 
 	{
-		name = "mail armor";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ARMOR_MAIL;
 	}
 
@@ -32,6 +33,6 @@ public class MailArmor extends Armor {
 
 	@Override
 	public String desc() {
-		return "Interlocking metal links make for a tough but flexible suit of armor.";
+		return Messages.get(this, "desc");
 	}
 }

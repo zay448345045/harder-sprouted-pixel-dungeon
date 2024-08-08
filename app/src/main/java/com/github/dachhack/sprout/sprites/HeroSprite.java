@@ -81,7 +81,7 @@ public class HeroSprite extends CharSprite {
 	@Override
 	public void place(int p) {
 		super.place(p);
-		Camera.main.target = this;
+		Camera.main.panTo(center(), 5f);
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public class HeroSprite extends CharSprite {
 
 	public static TextureFilm tiers() {
 		if (tiers == null) {
-			SmartTexture texture = TextureCache.get(Assets.ROGUE);
+			SmartTexture texture = TextureCache.get(Assets.HUNTRESS);
 			tiers = new TextureFilm(texture, texture.width, FRAME_HEIGHT);
 		}
 

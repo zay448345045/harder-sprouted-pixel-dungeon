@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.food;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Awareness;
 import com.github.dachhack.sprout.actors.buffs.BerryRegeneration;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -38,16 +39,19 @@ import com.watabou.utils.Random;
 public class Blueberry extends Food {
 
 	{
-		name = "dungeon blue berry";
+//		name = "dungeon blue berry";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.SEED_BLUEBERRY;
 		energy = (Hunger.STARVING - Hunger.HUNGRY)/10;
-		message = "Juicy!";
+//		message = "Juicy!";
+		message = Messages.get(Blackberry.class, "eat");
 		hornValue = 1;
 		bones = false;
 	}
 
 	
-	private static final String TXT_PREVENTING = "The magic of this place prevents this type of scrying! ";
+//	private static final String TXT_PREVENTING = "The magic of this place prevents this type of scrying! ";
+private static final String TXT_PREVENTING = Messages.get(Blueberry.class, "prevent");
 	
 	@Override
 	public void execute(Hero hero, String action) {
@@ -101,7 +105,8 @@ public class Blueberry extends Food {
 					Sample.INSTANCE.play(Assets.SND_SECRET);
 				}
 
-				GLog.p("The blueberry floods your mind with knowledge about the current floor.");
+//				GLog.p("The blueberry floods your mind with knowledge about the current floor.");
+				GLog.p(Messages.get(this, "eat"));
 				
 				Buff.affect(hero, Awareness.class, 10f);
 				Dungeon.observe();
@@ -109,7 +114,8 @@ public class Blueberry extends Food {
 					
 			} else {
 			
-				GLog.w("The berry releases energy into your body!");
+//				GLog.w("The berry releases energy into your body!");
+				GLog.p(Messages.get(Blackberry.class, "eat3"));
 				Buff.affect(hero, BerryRegeneration.class).level(hero.HT+hero.HT);
 				
 				int length = Level.getLength();
@@ -146,7 +152,8 @@ public class Blueberry extends Food {
 					Sample.INSTANCE.play(Assets.SND_SECRET);
 				}
 
-				GLog.p("The blueberry floods your mind with knowledge about the current floor.");
+//				GLog.p("The blueberry floods your mind with knowledge about the current floor.");
+				GLog.p(Messages.get(this, "eat"));
 				
 				Buff.affect(hero, Awareness.class, 10f);
 				Dungeon.observe();
@@ -161,9 +168,12 @@ public class Blueberry extends Food {
 	}
 	
 	@Override
+//	public String info() {
+//		return "A mysterious blue berry found in the depths of the dungeon. "
+//				+"As these berries grow slowly over several years, they soak in knowledge of the dungeon." ;
+//	}
 	public String info() {
-		return "A mysterious blue berry found in the depths of the dungeon. "
-				+"As these berries grow slowly over several years, they soak in knowledge of the dungeon." ;
+		return Messages.get(this, "desc");
 	}
 
 	@Override

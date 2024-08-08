@@ -17,9 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
@@ -36,6 +35,8 @@ import com.watabou.noosa.Camera;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class FishProtector extends Mob implements Callback {
 
 	private static final float TIME_TO_ZAP = 2f;
@@ -43,7 +44,7 @@ public class FishProtector extends Mob implements Callback {
 	private static final String TXT_LIGHTNING_KILLED = "%s's lightning bolt killed you...";
 
 	{
-		name = "flying protector";
+		name = Messages.get(this, "name");
 		spriteClass = FishProtectorSprite.class;
 
 		EXP = 15;
@@ -112,7 +113,7 @@ public class FishProtector extends Mob implements Callback {
 					if (!enemy.isAlive()) {
 						Dungeon.fail(Utils.format(ResultDescriptions.MOB,
 								Utils.indefinite(name)));
-						GLog.n(TXT_LIGHTNING_KILLED, name);
+						GLog.n(Messages.get(FishProtector.class, "kill"), name);
 					}
 				}
 			} else {
@@ -134,10 +135,10 @@ public class FishProtector extends Mob implements Callback {
 		super.notice();
 		yell("Leave this place!");
 	}
-	
+
 	@Override
 	public String description() {
-		return "This guardian protects the cave from overfishing. ";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

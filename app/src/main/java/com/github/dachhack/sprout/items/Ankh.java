@@ -20,6 +20,7 @@ package com.github.dachhack.sprout.items;
 import java.util.ArrayList;
 
 import com.github.dachhack.sprout.Assets;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
@@ -31,18 +32,26 @@ import com.watabou.utils.Bundle;
 
 public class Ankh extends Item {
 
-	public static final String AC_BLESS = "IMBUE";
+//	public static final String AC_BLESS = "IMBUE";
+//
+//	public static final String TXT_DESC_NOBLESS = "Upon resurrection all non-equipped items are lost. "
+//			+ "Using drops of dew, the ankh can be imbued with extra strength.";
+//	public static final String TXT_DESC_BLESSED = "The ankh has been imbued and is now much stronger. "
+//			+ "The Ankh will sacrifice itself to save you in a moment of deadly peril.";
+//
+//	public static final String TXT_BLESS = "You imbue the ankh with clean water.";
+//	public static final String TXT_REVIVE = "The ankh explodes with life-giving energy!";
+public static final String AC_BLESS = Messages.get(Ankh.class, "ac_bless");
 
-	public static final String TXT_DESC_NOBLESS = "Upon resurrection all non-equipped items are lost. "
-			+ "Using drops of dew, the ankh can be imbued with extra strength.";
-	public static final String TXT_DESC_BLESSED = "The ankh has been imbued and is now much stronger. "
-			+ "The Ankh will sacrifice itself to save you in a moment of deadly peril.";
+	public static final String TXT_DESC_NOBLESS = Messages.get(Ankh.class, "desc");
+	public static final String TXT_DESC_BLESSED = Messages.get(Ankh.class, "desc_blessed");
 
-	public static final String TXT_BLESS = "You imbue the ankh with clean water.";
-	public static final String TXT_REVIVE = "The ankh explodes with life-giving energy!";
+	public static final String TXT_BLESS = Messages.get(Ankh.class, "bless");
+	public static final String TXT_REVIVE = Messages.get(Ankh.class, "revive");
 
 	{
-		name = "Ankh";
+//		name = "Ankh";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ANKH;
 		bones = true;
 	}
@@ -96,11 +105,9 @@ public class Ankh extends Item {
 	@Override
 	public String info() {
 		if (blessed)
-			return "This ancient symbol of immortality grants the ability to return to life after death. "
-					+ TXT_DESC_BLESSED;
+			return TXT_DESC_BLESSED;
 		else
-			return "This ancient symbol of immortality grants the ability to return to life after death. "
-					+ TXT_DESC_NOBLESS;
+			return TXT_DESC_NOBLESS;
 	}
 
 	public Boolean isBlessed() {

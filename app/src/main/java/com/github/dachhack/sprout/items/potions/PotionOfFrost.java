@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.potions;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.blobs.Fire;
 import com.github.dachhack.sprout.actors.blobs.Freezing;
 import com.github.dachhack.sprout.levels.Level;
@@ -31,7 +32,8 @@ public class PotionOfFrost extends Potion {
 	private static final int DISTANCE = 2;
 
 	{
-		name = "Potion of Frost";
+//		name = "Potion of Frost";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -58,10 +60,13 @@ public class PotionOfFrost extends Potion {
 	}
 
 	@Override
+//	public String desc() {
+//		return "Upon exposure to open air this chemical will evaporate into a freezing cloud, causing "
+//				+ "any creature that contacts it to be frozen in place unable to act and move. "
+//				+ "The freezing effect is much stronger if the environment is wet.";
+//	}
 	public String desc() {
-		return "Upon exposure to open air this chemical will evaporate into a freezing cloud, causing "
-				+ "any creature that contacts it to be frozen in place unable to act and move. "
-				+ "The freezing effect is much stronger if the environment is wet.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

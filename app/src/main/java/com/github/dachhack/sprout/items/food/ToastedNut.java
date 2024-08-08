@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.food;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Barkskin;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Hunger;
@@ -28,10 +29,12 @@ import com.watabou.utils.Random;
 public class ToastedNut extends Nut {
 
 	{
-		name = "toasted dungeon nut";
+//		name = "toasted dungeon nut";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.SEED_TOASTEDDUNGEONNUT;
 		energy = Hunger.STARVING - Hunger.HUNGRY;
-		message = "Crunch Crunch. MMMM--Nutty";
+//		message = "Crunch Crunch. MMMM--Nutty";
+		message = Messages.get(this, "eat");
 		hornValue = 2;
 	}
 
@@ -44,12 +47,14 @@ public class ToastedNut extends Nut {
 
 			switch (Random.Int(2)) {
 			case 0:
-				GLog.w("You feel the dungeon blessing you.");
+//				GLog.w("You feel the dungeon blessing you.");
+				GLog.i(Messages.get(this, "effect"));
 				Buff.affect(hero, Barkskin.class).level(hero.HT);
 //				Buff.affect(hero, NutArmor.class).level(hero.HT);
 				break;
 			case 1:
-				GLog.w("You feel the dungeon blessing you.");
+//				GLog.w("You feel the dungeon blessing you.");
+				GLog.i(Messages.get(this, "effect"));
 				Buff.affect(hero, Barkskin.class).level(hero.HT*2);
 //				Buff.affect(hero, NutArmor.class).level(hero.HT*2);
 				break;
@@ -57,10 +62,14 @@ public class ToastedNut extends Nut {
 		}
 	}	
 	
-	@Override
-	public String info() {
-		return "Common dungeon nut toasted to perfection.";
-	}
+//	@Override
+//	public String info() {
+//		return "Common dungeon nut toasted to perfection.";
+//	}
+@Override
+public String info() {
+	return Messages.get(this, "desc");
+}
 
 	@Override
 	public int price() {

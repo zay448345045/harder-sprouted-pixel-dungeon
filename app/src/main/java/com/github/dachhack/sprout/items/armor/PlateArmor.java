@@ -17,12 +17,15 @@
  */
 package com.github.dachhack.sprout.items.armor;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
 public class PlateArmor extends Armor {
 
 	{
-		name = "plate armor";
+//		name = "plate armor";
+//		image = ItemSpriteSheet.ARMOR_PLATE;
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ARMOR_PLATE;
 	}
 
@@ -30,9 +33,13 @@ public class PlateArmor extends Armor {
 		super(5);
 	}
 
-	@Override
-	public String desc() {
-		return "Enormous plates of metal are joined together into a suit that provides "
-				+ "unmatched protection to any adventurer strong enough to bear its staggering weight.";
-	}
+//	@Override
+//	public String desc() {
+//		return "Enormous plates of metal are joined together into a suit that provides "
+//				+ "unmatched protection to any adventurer strong enough to bear its staggering weight.";
+//	}
+@Override
+public String desc() {
+	return Messages.get(this, "desc");
+}
 }

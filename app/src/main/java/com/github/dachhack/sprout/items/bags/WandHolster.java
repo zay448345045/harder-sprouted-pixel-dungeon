@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.bags;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.wands.Wand;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
@@ -24,7 +25,8 @@ import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 public class WandHolster extends Bag {
 
 	{
-		name = "wand holster";
+//		name = "wand holster";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.HOLSTER;
 
 		size = 12;
@@ -62,10 +64,13 @@ public class WandHolster extends Bag {
 	}
 
 	@Override
+//	public String info() {
+//		return "This slim holster is made from some exotic animal, and is designed to compactly carry up to "
+//				+ size
+//				+ " wands.\n\n"
+//				+ "The size seems a bit excessive, who would ever have that many wands?";
+//	}
 	public String info() {
-		return "This slim holster is made from some exotic animal, and is designed to compactly carry up to "
-				+ size
-				+ " wands.\n\n"
-				+ "The size seems a bit excessive, who would ever have that many wands?";
+		return Messages.get(this, "desc");
 	}
 }

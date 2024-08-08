@@ -1,5 +1,6 @@
 package com.github.dachhack.sprout.actors.blobs;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.effects.BlobEmitter;
 import com.github.dachhack.sprout.sprites.GooSprite;
 
@@ -47,6 +48,6 @@ public class GooWarn extends Blob {
 
 	@Override
 	public String tileDesc() {
-		return "Specs of dark energy are swarming here!";
+		return Messages.get(this, "desc");
 	}
 }

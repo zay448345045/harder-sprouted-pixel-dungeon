@@ -4,7 +4,7 @@ android {
     compileSdkVersion 29
 
     defaultConfig {
-        applicationId "com.github.smujamesb.hardersprouted"
+        applicationId "com.github.smujamesb.hardersprouted.ls"
         minSdkVersion 14
         targetSdkVersion 29
     }
@@ -18,4 +18,18 @@ android {
 }
 dependencies {
     implementation 'com.github.RohitSurwase.UCE-Handler:uce_handler:1.4'
+    implementation "com.badlogicgames.gdx:gdx-backend-android:1.9.10"
+    implementation "com.badlogicgames.gdx:gdx-freetype:1.9.10"
+    implementation "com.badlogicgames.gdx:gdx-platform:1.9.10:natives-armeabi"
+    implementation "com.badlogicgames.gdx:gdx-platform:1.9.10:natives-armeabi-v7a"
+    implementation "com.badlogicgames.gdx:gdx-platform:1.9.10:natives-x86"
+    implementation "com.badlogicgames.gdx:gdx-platform:1.9.10:natives-arm64-v8a"
+    implementation "com.badlogicgames.gdx:gdx-platform:1.9.10:natives-x86_64"
+    implementation "com.badlogicgames.gdx:gdx-controllers:1.9.10"
+    implementation "com.badlogicgames.gdx:gdx-controllers-android:1.9.10"
+    implementation "com.badlogicgames.gdx:gdx-freetype-platform:1.9.10:natives-armeabi"
+    implementation "com.badlogicgames.gdx:gdx-freetype-platform:1.9.10:natives-armeabi-v7a"
+    implementation "com.badlogicgames.gdx:gdx-freetype-platform:1.9.10:natives-arm64-v8a"
+    implementation "com.badlogicgames.gdx:gdx-freetype-platform:1.9.10:natives-x86"
+    implementation "com.badlogicgames.gdx:gdx-freetype-platform:1.9.10:natives-x86_64"
 }

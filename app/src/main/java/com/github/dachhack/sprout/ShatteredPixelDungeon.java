@@ -17,8 +17,6 @@
  */
 package com.github.dachhack.sprout;
 
-import javax.microedition.khronos.opengles.GL10;
-
 import android.annotation.SuppressLint;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -26,15 +24,64 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 
+import com.github.dachhack.sprout.Messages.Languages;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.scenes.TitleScene;
 import com.rohitss.uceh.UCEHandler;
 import com.watabou.noosa.Game;
+import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.audio.Music;
 import com.watabou.noosa.audio.Sample;
 
+import java.util.Locale;
+
+import javax.microedition.khronos.opengles.GL10;
+
 public class ShatteredPixelDungeon extends Game {
+
+	public static void toolbarMode(String value) {
+		Preferences.INSTANCE.put(Preferences.KEY_BARMODE, value);
+	}
+
+	public static String toolbarMode() {
+		return Preferences.INSTANCE.getString(Preferences.KEY_BARMODE, !landscape() ? "SPLIT" : "GROUP");
+	}
+
+	public static boolean flipToolbar() {
+		return Preferences.INSTANCE.getBoolean(Preferences.KEY_FLIPTOOLBAR, false);
+	}
+
+	public static void flipToolbar(boolean value) {
+		Preferences.INSTANCE.put(Preferences.KEY_FLIPTOOLBAR, value);
+	}
+
+	public static void classicFont(boolean classic) {
+		Preferences.INSTANCE.put(Preferences.KEY_CLASSICFONT, classic);
+		if (classic) {
+			RenderedText.setFont(Assets.FONT);
+		} else {
+			RenderedText.setFont(null);
+		}
+	}
+
+	public static boolean classicFont() {
+		return Preferences.INSTANCE.getBoolean(Preferences.KEY_CLASSICFONT,
+				(language() != Languages.CHINESE));
+	}
+
+	public static void language(Languages lang) {
+		Preferences.INSTANCE.put(Preferences.KEY_LANG, lang.code());
+	}
+
+	public static Languages language() {
+		String code = Preferences.INSTANCE.getString(Preferences.KEY_LANG, null);
+		if (code == null){
+			return Languages.matchLocale(Locale.getDefault());
+		} else {
+			return Languages.matchCode(code);
+		}
+	}
 
 	public ShatteredPixelDungeon() {
 		super(TitleScene.class);
@@ -54,6 +101,15 @@ public class ShatteredPixelDungeon extends Game {
 						com.github.dachhack.sprout.items.scrolls.ScrollOfMagicalInfusion.class,
 						"com.github.dachhack.sprout.items.scrolls.ScrollOfWeaponUpgrade");
 
+	}
+
+	public static int scale() {
+		return Preferences.INSTANCE.getInt(Preferences.KEY_SCALE, 0);
+	}
+
+	public static void scale(int value) {
+		Preferences.INSTANCE.put(Preferences.KEY_SCALE, value);
+		switchScene(TitleScene.class);
 	}
 
 	@SuppressWarnings("deprecation")

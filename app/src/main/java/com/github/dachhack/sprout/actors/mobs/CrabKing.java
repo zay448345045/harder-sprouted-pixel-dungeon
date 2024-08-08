@@ -17,10 +17,9 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
@@ -35,16 +34,19 @@ import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.CrabKingSprite;
+import com.github.dachhack.sprout.ui.BossHealthBar;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class CrabKing extends Mob {
 
 	private static final int JUMP_DELAY = 5;
 
 	{
-		name = "Crab King";
+		name = Messages.get(this, "name");
 		spriteClass = CrabKingSprite.class;
 		baseSpeed = 2f;
 
@@ -81,7 +83,7 @@ public class CrabKing extends Mob {
 			sprite.emitter().burst( Speck.factory( Speck.HEALING ), 1 );
 			HP = HP + regen;
 			Dungeon.shellCharge-=regen;
-			GLog.n("Crab King draws power from the lightning shell!");
+			GLog.n(Messages.get(CrabKing.class, "heal"));
 		}
 		return result;
 	}
@@ -89,7 +91,7 @@ public class CrabKing extends Mob {
 	@Override
 	public void die(Object cause) {
 
-		
+		BossHealthBar.assignBoss(this);
 		
 		GameScene.bossSlain();
 		
@@ -99,8 +101,8 @@ public class CrabKing extends Mob {
 	
 		
 		super.die(cause);
-		
-		yell("Ughhhh...");
+
+		yell(Messages.get(CrabKing.class, "die"));
 					
 	}
 
@@ -154,13 +156,13 @@ public class CrabKing extends Mob {
 	@Override
 	public void notice() {
 		super.notice();
-		yell("Ah! I want that " + Dungeon.hero.givenName() + "'s armor!");
+		BossHealthBar.assignBoss(this);
+		yell(Messages.get(CrabKing.class, "notice", Dungeon.hero.givenName()));
 	}
 
 	@Override
 	public String description() {
-		return "The crab king collects protective magical items to make himself stronger. "
-				+ "He is hiding himself in a powerful suit of armor.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

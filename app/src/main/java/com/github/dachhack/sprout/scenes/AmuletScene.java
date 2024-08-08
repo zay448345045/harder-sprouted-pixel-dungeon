@@ -19,10 +19,12 @@ package com.github.dachhack.sprout.scenes;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.effects.Flare;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.ui.RedButton;
+import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.watabou.noosa.BitmapTextMultiline;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
@@ -31,18 +33,13 @@ import com.watabou.utils.Random;
 
 public class AmuletScene extends PixelScene {
 
-	private static final String TXT_EXIT = "Let's call it a day";
-	private static final String TXT_STAY = "I'm not done yet";
+	private static final String TXT_EXIT = Messages.get(AmuletScene.class, "exit");
+	private static final String TXT_STAY = Messages.get(AmuletScene.class, "stay");
 
 	private static final int WIDTH = 120;
 	private static final int BTN_HEIGHT = 18;
 	private static final float SMALL_GAP = 2;
 	private static final float LARGE_GAP = 8;
-
-	private static final String TXT = "You finally hold it in your hands, the Amulet of Yendor. Using its power "
-			+ "you can take over the world or bring peace and prosperity to people or whatever. "
-			+ "Anyway, your life will change forever and this game will end here. "
-			+ "Or you can stay a mere mortal a little longer.";
 
 	public static boolean noText = false;
 
@@ -52,11 +49,10 @@ public class AmuletScene extends PixelScene {
 	public void create() {
 		super.create();
 
-		BitmapTextMultiline text = null;
+		RenderedTextMultiline text = null;
 		if (!noText) {
-			text = createMultiline(TXT, 8);
-			text.maxWidth = WIDTH;
-			text.measure();
+			text = renderMultiline(Messages.get(this, "text"), 7);
+			text.maxWidth(WIDTH);
 			add(text);
 		}
 
@@ -103,11 +99,10 @@ public class AmuletScene extends PixelScene {
 			amulet.x = align((Camera.main.width - amulet.width) / 2);
 			amulet.y = align((Camera.main.height - height) / 2);
 
-			text.x = align((Camera.main.width - text.width()) / 2);
-			text.y = amulet.y + amulet.height + LARGE_GAP;
+			text.setPos((Camera.main.width - text.width()) / 2, amulet.y + amulet.height + LARGE_GAP);
+			align(text);
 
-			btnExit.setPos((Camera.main.width - btnExit.width()) / 2, text.y
-					+ text.height() + LARGE_GAP);
+			btnExit.setPos((Camera.main.width - btnExit.width()) / 2, text.top() + text.height() + LARGE_GAP);
 			btnStay.setPos(btnExit.left(), btnExit.bottom() + SMALL_GAP);
 		}
 

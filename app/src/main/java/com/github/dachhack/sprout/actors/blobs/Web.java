@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.actors.blobs;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -64,6 +65,6 @@ public class Web extends Blob {
 
 	@Override
 	public String tileDesc() {
-		return "Everything is covered with a thick web here.";
+		return Messages.get(this, "desc");
 	}
 }

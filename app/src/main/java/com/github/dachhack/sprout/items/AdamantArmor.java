@@ -17,12 +17,14 @@
  */
 package com.github.dachhack.sprout.items;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
 public class AdamantArmor extends Item {
 
 		{
-		name = "adamantite armor";
+//		name = "adamantite armor";
+			name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ARMOR_ADAMANT;
 
 		unique = true;
@@ -42,8 +44,12 @@ public class AdamantArmor extends Item {
 
 	
 	@Override
+//	public String info() {
+//		return "Despite its state of disrepair, you can tell these armor plates contain a powerful magic.";
+//	}
 	public String info() {
-		return "Despite its state of disrepair, you can tell these armor plates contain a powerful magic.";
+		return Messages.get(this, "desc");
 	}
-	
+
+
 }

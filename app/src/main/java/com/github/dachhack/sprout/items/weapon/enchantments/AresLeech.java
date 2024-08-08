@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items.weapon.enchantments;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.mobs.Mob;
@@ -34,7 +35,8 @@ import com.watabou.utils.Random;
 
 public class AresLeech extends Weapon.Enchantment {
 
-	private static final String TXT_DRAWING = "Drawing %s";
+//	private static final String TXT_DRAWING = "Drawing %s";
+private static final String TXT_DRAWING = Messages.get(AresLeech.class, "drawing");
 
 	private static ItemSprite.Glowing PURPLE = new ItemSprite.Glowing(0x660066);
 
@@ -73,7 +75,8 @@ public class AresLeech extends Weapon.Enchantment {
 		}
 		
         if (drains>0){
-			GLog.i("Ares Sword drains %s charges from nearby enemies.", drains);
+//			GLog.i("Ares Sword drains %s charges from nearby enemies.", drains);
+			GLog.i(Messages.get(AresLeech.class, "effect", drains));
 		}
 		// lvl 0 - 33%
 		// lvl 1 - 43%

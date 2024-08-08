@@ -18,17 +18,18 @@
 package com.github.dachhack.sprout.windows;
 
 import com.github.dachhack.sprout.Badges;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.hero.HeroClass;
 import com.github.dachhack.sprout.actors.hero.HeroSubClass;
 import com.github.dachhack.sprout.scenes.PixelScene;
+import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.BitmapText;
-import com.watabou.noosa.BitmapTextMultiline;
 import com.watabou.noosa.Group;
 
 public class WndClass extends WndTabbed {
 
-	private static final String TXT_MASTERY = "Mastery";
+	private static final String TXT_MASTERY = Messages.get(WndClass.class,"txt");
 
 	private static final int WIDTH = 110;
 
@@ -112,7 +113,7 @@ public class WndClass extends WndTabbed {
 					pos += GAP;
 				}
 
-				BitmapText dot = PixelScene.createText(DOT, 6);
+				BitmapText dot = PixelScene.createText("-", 6);
 				dot.x = MARGIN;
 				dot.y = pos;
 				if (dotWidth == 0) {
@@ -121,12 +122,9 @@ public class WndClass extends WndTabbed {
 				}
 				add(dot);
 
-				BitmapTextMultiline item = PixelScene.createMultiline(items[i],
-						6);
-				item.x = dot.x + dotWidth;
-				item.y = pos;
-				item.maxWidth = (int) (WIDTH - MARGIN * 2 - dotWidth);
-				item.measure();
+				RenderedTextMultiline item = PixelScene.renderMultiline(items[i], 6);
+				item.maxWidth((int) (WIDTH - MARGIN * 2 - dotWidth));
+				item.setPos(dot.x + dotWidth, pos);
 				add(item);
 
 				pos += item.height();
@@ -145,8 +143,7 @@ public class WndClass extends WndTabbed {
 
 		private static final int MARGIN = 4;
 
-		private BitmapTextMultiline normal;
-		private BitmapTextMultiline highlighted;
+
 
 		public float height;
 		public float width;
@@ -154,51 +151,29 @@ public class WndClass extends WndTabbed {
 		public MasteryTab() {
 			super();
 
-			String text = null;
+			String message = null;
 			switch (cl) {
-			case WARRIOR:
-				text = HeroSubClass.GLADIATOR.desc() + "\n\n"
-						+ HeroSubClass.BERSERKER.desc();
-				break;
-			case MAGE:
-				text = HeroSubClass.BATTLEMAGE.desc() + "\n\n"
-						+ HeroSubClass.WARLOCK.desc();
-				break;
-			case ROGUE:
-				text = HeroSubClass.FREERUNNER.desc() + "\n\n"
-						+ HeroSubClass.ASSASSIN.desc();
-				break;
-			case HUNTRESS:
-				text = HeroSubClass.SNIPER.desc() + "\n\n"
-						+ HeroSubClass.WARDEN.desc();
-				break;
+				case WARRIOR:
+					message = HeroSubClass.GLADIATOR.desc() + "\n\n" + HeroSubClass.BERSERKER.desc();
+					break;
+				case MAGE:
+					message = HeroSubClass.BATTLEMAGE.desc() + "\n\n" + HeroSubClass.WARLOCK.desc();
+					break;
+				case ROGUE:
+					message = HeroSubClass.FREERUNNER.desc() + "\n\n" + HeroSubClass.ASSASSIN.desc();
+					break;
+				case HUNTRESS:
+					message = HeroSubClass.SNIPER.desc() + "\n\n" + HeroSubClass.WARDEN.desc();
+					break;
 			}
 
-			Highlighter hl = new Highlighter(text);
+			RenderedTextMultiline text = PixelScene.renderMultiline(6);
+			text.text(message, WIDTH - MARGIN * 2);
+			text.setPos(MARGIN, MARGIN);
+			add(text);
 
-			normal = PixelScene.createMultiline(hl.text, 6);
-			normal.maxWidth = WIDTH - MARGIN * 2;
-			normal.measure();
-			normal.x = MARGIN;
-			normal.y = MARGIN;
-			add(normal);
-
-			if (hl.isHighlighted()) {
-				normal.mask = hl.inverted();
-
-				highlighted = PixelScene.createMultiline(hl.text, 6);
-				highlighted.maxWidth = normal.maxWidth;
-				highlighted.measure();
-				highlighted.x = normal.x;
-				highlighted.y = normal.y;
-				add(highlighted);
-
-				highlighted.mask = hl.mask;
-				highlighted.hardlight(TITLE_COLOR);
-			}
-
-			height = normal.y + normal.height() + MARGIN;
-			width = normal.x + normal.width() + MARGIN;
+			height = text.bottom() + MARGIN;
+			width = text.right() + MARGIN;
 		}
 	}
 }

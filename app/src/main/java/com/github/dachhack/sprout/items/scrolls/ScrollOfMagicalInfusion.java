@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.scrolls;
 
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.armor.Armor;
@@ -28,11 +29,14 @@ import com.github.dachhack.sprout.windows.WndBag;
 
 public class ScrollOfMagicalInfusion extends InventoryScroll {
 
-	private static final String TXT_INFUSE = "your %s is infused with arcane energy!";
+//	private static final String TXT_INFUSE = "your %s is infused with arcane energy!";
+private static final String TXT_INFUSE = Messages.get(ScrollOfMagicalInfusion.class, "infuse");
 
 	{
-		name = "Scroll of Magical Infusion";
-		inventoryTitle = "Select an item to infuse";
+//		name = "Scroll of Magical Infusion";
+//		inventoryTitle = "Select an item to infuse";
+		name = Messages.get(this, "name");
+		inventoryTitle = Messages.get(this, "inv_title");
 		mode = WndBag.Mode.UPGRADEABLE;
 		consumedValue = 15;
 
@@ -58,9 +62,12 @@ public class ScrollOfMagicalInfusion extends InventoryScroll {
 	}
 
 	@Override
+//	public String desc() {
+//		return "This scroll will infuse a weapon or armor with powerful magical energy.\n\n"
+//				+ "In addition to being upgraded, A weapon will gain a magical enchantment, or armor will be imbued with a magical glyph.\n\n"
+//				+ "If the item already has an enchantment or glyph, it will be erased and replaced by the upgrade.";
+//	}
 	public String desc() {
-		return "This scroll will infuse a weapon or armor with powerful magical energy.\n\n"
-				+ "In addition to being upgraded, A weapon will gain a magical enchantment, or armor will be imbued with a magical glyph.\n\n"
-				+ "If the item already has an enchantment or glyph, it will be erased and replaced by the upgrade.";
+		return Messages.get(this, "desc");
 	}
 }

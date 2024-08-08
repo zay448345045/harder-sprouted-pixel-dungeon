@@ -19,9 +19,13 @@ package com.github.dachhack.sprout.items;
 
 import java.util.ArrayList;
 
+import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.hero.Hero;
+import com.github.dachhack.sprout.utils.BArray;
 import com.github.dachhack.sprout.utils.GLog;
+import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
 
 public class KindOfWeapon extends EquipableItem {
@@ -32,6 +36,22 @@ public class KindOfWeapon extends EquipableItem {
 
 	public int MIN = 0;
 	public int MAX = 1;
+
+	public int reachFactor( Char owner ){
+		return 1;
+	}
+
+	public boolean canReach( Char owner, int target){
+		if (Dungeon.level.distance( owner.pos, target ) > reachFactor(owner)){
+			return false;
+		} else {
+			boolean[] passable = BArray.not(Dungeon.level.solid, null);
+
+			PathFinder.buildDistanceMap(target, passable, reachFactor(owner));
+
+			return PathFinder.distance[owner.pos] <= reachFactor(owner);
+		}
+	}
 
 	@Override
 	public ArrayList<String> actions(Hero hero) {

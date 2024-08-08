@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.weapon.enchantments;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.items.weapon.Weapon;
@@ -27,7 +28,9 @@ import com.watabou.utils.Random;
 
 public class Paralysis extends Weapon.Enchantment {
 
-	private static final String TXT_STUNNING = "Stunning %s";
+//	private static final String TXT_STUNNING = "Stunning %s";
+
+	private static final String TXT_STUNNING = Messages.get(Paralysis.class, "name");
 
 	private static ItemSprite.Glowing YELLOW = new ItemSprite.Glowing(0xCCAA44);
 

@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.actors.buffs;
 
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -57,7 +58,12 @@ public class LokisPoison extends Buff implements Hero.Doom {
 
 	@Override
 	public String toString() {
-		return "Poisoned";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc", dispTurns(left));
 	}
 
 	@Override

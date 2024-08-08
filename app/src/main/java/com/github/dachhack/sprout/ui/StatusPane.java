@@ -17,8 +17,11 @@
  */
 package com.github.dachhack.sprout.ui;
 
+import static com.github.dachhack.sprout.scenes.PixelScene.font1x;
+
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.actors.buffs.Hunger;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.BloodParticle;
 import com.github.dachhack.sprout.items.keys.IronKey;
@@ -47,6 +50,7 @@ public class StatusPane extends Component {
 	private int lastTier = 0;
 
 	private Image hp;
+	private Image hg;
 	private Image exp;
 
 	private int lastLvl = -1;
@@ -55,10 +59,13 @@ public class StatusPane extends Component {
 	private BitmapText level;
 	private BitmapText depth;
 	private BitmapText keys;
-
+	private BitmapText hpText;
+	private BitmapText hgText;
 	private DangerIndicator danger;
 	private BuffIndicator buffs;
 	private Compass compass;
+
+	private BossHealthBar bossHP;
 
 	private MenuButton btnMenu;
 
@@ -98,21 +105,35 @@ public class StatusPane extends Component {
 		hp = new Image(Assets.HP_BAR);
 		add(hp);
 
+		hpText = new BitmapText(font1x);
+		hpText.hardlight(13291458);
+		add(hpText);
+
+		hg = new Image(Assets.HG_BAR);
+		add(hg);
+
+		hgText = new BitmapText(font1x);
+		hpText.hardlight(13291458);
+		add(hgText);
+
 		exp = new Image(Assets.XP_BAR);
 		add(exp);
 
-		level = new BitmapText(PixelScene.font1x);
+		bossHP = new BossHealthBar();
+		add(bossHP);
+
+		level = new BitmapText(font1x);
 		level.hardlight(0xFFEBA4);
 		add(level);
 
 		depth = new BitmapText(Integer.toString(Dungeon.depth),
-				PixelScene.font1x);
+				font1x);
 		depth.hardlight(0xCACFC2);
 		depth.measure();
 		add(depth);
 
 		Dungeon.hero.belongings.countIronKeys();
-		keys = new BitmapText(PixelScene.font1x);
+		keys = new BitmapText(font1x);
 		keys.hardlight(0xCACFC2);
 		add(keys);
 
@@ -138,7 +159,24 @@ public class StatusPane extends Component {
 		compass.y = avatar.y + avatar.height / 2 - compass.origin.y;
 
 		hp.x = 30;
-		hp.y = 3;
+		hp.y = 4;
+
+		bossHP.setPos(6 + (width - bossHP.width()) / 2, 20);
+
+		hpText.scale.set(PixelScene.align(0.5f));
+		hpText.x = hp.x + 1;
+		hpText.y = hp.y + (hp.height - (hpText.baseLine()+hpText.scale.y))/2f;
+		hpText.y -= 0.001f; //prefer to be slightly higher
+		PixelScene.align(hpText);
+
+		hg.x = 30;
+		hg.y = 10;
+
+		hgText.scale.set(PixelScene.align(0.5f));
+		hgText.x = hg.x + 1;
+		hgText.y = hg.y + (hp.height - (hgText.baseLine()+hgText.scale.y))/2f;
+		hgText.y -= 0.001f; //prefer to be slightly higher
+		PixelScene.align(hgText);
 
 		depth.x = width - 24 - depth.width() - 18;
 		depth.y = 6;
@@ -147,7 +185,7 @@ public class StatusPane extends Component {
 
 		danger.setPos(width - danger.width(), 18);
 
-		buffs.setPos(32, 11);
+		buffs.setPos(34, 15);
 
 		btnMenu.setPos(width - btnMenu.width(), 1);
 	}
@@ -155,8 +193,10 @@ public class StatusPane extends Component {
 	@Override
 	public void update() {
 		super.update();
-
+		int maxHunger = (int) Hunger.STARVING;
 		float health = (float) Dungeon.hero.HP / Dungeon.hero.HT;
+
+		hpText.text(String.format("%d/%d", Integer.valueOf(Dungeon.hero.HP), Integer.valueOf(Dungeon.hero.HT)));
 
 		if (health == 0) {
 			avatar.tint(0x000000, 0.6f);
@@ -172,6 +212,13 @@ public class StatusPane extends Component {
 		hp.scale.x = health;
 		exp.scale.x = (width / exp.width) * Dungeon.hero.exp
 				/ Dungeon.hero.maxExp();
+
+		Hunger hungerBuff = Dungeon.hero.buff(Hunger.class);
+		if (hungerBuff != null) {
+			int hunger = Math.max(0, maxHunger - hungerBuff.hunger());
+			hg.scale.x = (float) hunger / (float) maxHunger;
+			hgText.text(hunger + "/" + maxHunger);
+		}
 
 		if (Dungeon.hero.lvl != lastLvl) {
 

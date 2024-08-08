@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -38,8 +39,12 @@ public class MiscEquippable extends KindofMisc {
 
 	private static final float TIME_TO_EQUIP = 1f;
 	
-	public String cursedDesc(){
-		return "your " + this  + " is cursed";		
+//	public String cursedDesc(){
+//		return "your " + this  + " is cursed";
+//	}
+
+	public String cursedDesc() {
+		return Messages.get(this, "cursed", this);
 	}
 
 	protected Buff buff;
@@ -51,38 +56,39 @@ public class MiscEquippable extends KindofMisc {
 		return actions;
 	}
 
-	@Override
-	public boolean doEquip(Hero hero) {
-
-		if (hero.belongings.misc1 != null && hero.belongings.misc2 != null) {
-
-			GLog.w("you can only wear 2 misc items at a time");
-			return false;
-
-		} else {
-
-			if (hero.belongings.misc1 == null) {
-				hero.belongings.misc1 = this;
-			} else {
-				hero.belongings.misc2 = this;
-			}
-
-			detach(hero.belongings.backpack);
-
-			activate(hero);
-
-			cursedKnown = true;
-			if (cursed) {
-				equipCursed(hero);
-				GLog.n(cursedDesc());
-			}
-
-			hero.spendAndNext(TIME_TO_EQUIP);
-			return true;
-
-		}
-
-	}
+	//↓↓↓↓↓↓↓↓ need fix
+//	@Override
+//	public boolean doEquip(Hero hero) {
+//
+//		if (hero.belongings.misc1 != null && hero.belongings.misc2 != null) {
+//
+//			GLog.w("you can only wear 2 misc items at a time");
+//			return false;
+//
+//		} else {
+//
+//			if (hero.belongings.misc1 == null) {
+//				hero.belongings.misc1 = this;
+//			} else {
+//				hero.belongings.misc2 = this;
+//			}
+//
+//			detach(hero.belongings.backpack);
+//
+//			activate(hero);
+//
+//			cursedKnown = true;
+//			if (cursed) {
+//				equipCursed(hero);
+//				GLog.n(cursedDesc());
+//			}
+//
+//			hero.spendAndNext(TIME_TO_EQUIP);
+//			return true;
+//
+//		}
+//
+//	}
 
 	@Override
 	public void activate(Char ch) {
@@ -142,8 +148,11 @@ public class MiscEquippable extends KindofMisc {
 	}
 
 	@Override
+//	public String desc() {
+//		return "This is a misc item ";
+//	}
 	public String desc() {
-		return "This is a misc item ";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

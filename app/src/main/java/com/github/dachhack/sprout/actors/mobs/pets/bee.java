@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.mobs.pets;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.MagicalSleep;
@@ -30,7 +31,7 @@ import com.watabou.utils.Random;
 public class bee extends PET {
 	
 	{
-		name = "steel bee";
+		name = Messages.get(this, "name");
 		spriteClass = SteelBeeSprite.class;
         flying=true;
 		state = HUNTING;
@@ -93,7 +94,7 @@ public class bee extends PET {
 		}
 		if (buff(Paralysis.class) != null) {
 			Buff.detach(this, Paralysis.class);
-			GLog.i("You shake your %s out of paralysis.", name);
+			GLog.i(Messages.get(bee.class, "shake"), name);
 		}
 		
 		int curPos = pos;
@@ -131,10 +132,10 @@ public class bee extends PET {
 */
 
 
-@Override
-public String description() {
-	return "Strongly armored in steely plates, this bee is here to fight!";
-}
+	@Override
+	public String description() {
+		return Messages.get(bee.class, "desc");
+	}
 
 
 }

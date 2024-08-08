@@ -1,0 +1,26 @@
+# Built application files
+*.apk
+
+# Files for the Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Gradle build files
+.gradle/
+build/
+MainGame/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+#intellij project files
+*.iml
+*.idea
+
+# data files
+*.dat
+*.log
+app/build/intermediates/project_dex_archive/debug/out/com/github/dachhack/sprout/items/KindofMisc$1.dex
+app/build/intermediates/javac/debug/classes/com/github/dachhack/sprout/items/KindofMisc$1.class

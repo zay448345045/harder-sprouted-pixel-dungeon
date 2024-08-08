@@ -22,6 +22,7 @@ import java.util.HashSet;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
@@ -62,7 +63,8 @@ public class CromCruachAxe extends RelicMeleeWeapon {
 
 	
 	{
-		name = "Crom Cruach Axe";
+//		name = "Crom Cruach Axe";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.CROMAXE;
 
 		level = 0;
@@ -79,7 +81,9 @@ public class CromCruachAxe extends RelicMeleeWeapon {
 		
   }
 		
-	public static final String AC_DISPEL = "DISPEL";
+//	public static final String AC_DISPEL = "DISPEL";
+public static final String AC_DISPEL = Messages.get(CromCruachAxe.class, "ac_dispel");
+
 
 	@Override
 	public ArrayList<String> actions(Hero hero) {
@@ -92,7 +96,8 @@ public class CromCruachAxe extends RelicMeleeWeapon {
 	@Override
 	public void execute(Hero hero, String action) {
 		if (action.equals(AC_DISPEL)) {
-			GLog.w("Negating energy surrounds you!");
+//			GLog.w("Negating energy surrounds you!");
+			GLog.p(Messages.get(this, "ready"));
 			charge = 0;
 			Buff.prolong(hero, MagicImmunity.class, 10f + (level/5f));
 		} else
@@ -107,7 +112,8 @@ public class CromCruachAxe extends RelicMeleeWeapon {
 			if (charge < chargeCap) {
 				charge+=1;
 				if (charge >= chargeCap) {
-					GLog.w("Your axe pulsates with negating power.");					
+//					GLog.w("Your axe pulsates with negating power.");
+					GLog.p(Messages.get(CromCruachAxe.class, "buffdesc"));
 				}
 				updateQuickslot();
 			}
@@ -116,8 +122,11 @@ public class CromCruachAxe extends RelicMeleeWeapon {
 		}
 		
 		@Override
+//		public String toString() {
+//			return "Dispel";
+//		}
 		public String toString() {
-			return "Dispel";
+			return Messages.get(CromCruachAxe.class, "buffname");
 		}
 
 		@Override

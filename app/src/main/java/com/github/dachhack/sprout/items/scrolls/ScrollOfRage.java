@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.scrolls;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Amok;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
@@ -33,7 +34,8 @@ import com.watabou.noosa.audio.Sample;
 public class ScrollOfRage extends Scroll {
 
 	{
-		name = "Scroll of Rage";
+//		name = "Scroll of Rage";
+		name = Messages.get(this, "name");
 		consumedValue = 5;
 	}
 
@@ -55,7 +57,8 @@ public class ScrollOfRage extends Scroll {
 			}
 		}
 
-		GLog.w("The scroll emits an enraging roar that echoes throughout the dungeon!");
+//		GLog.w("The scroll emits an enraging roar that echoes throughout the dungeon!");
+		GLog.w(Messages.get(this, "roar"));
 		setKnown();
 
 		curUser.sprite.centerEmitter().start(Speck.factory(Speck.SCREAM), 0.3f,
@@ -73,8 +76,11 @@ public class ScrollOfRage extends Scroll {
 	}
 
 	@Override
+//	public String desc() {
+//		return "When read aloud, this scroll will unleash a great roar "
+//				+ "that draws all enemies to the reader, and enrages nearby ones.";
+//	}
 	public String desc() {
-		return "When read aloud, this scroll will unleash a great roar "
-				+ "that draws all enemies to the reader, and enrages nearby ones.";
+		return Messages.get(this, "desc");
 	}
 }

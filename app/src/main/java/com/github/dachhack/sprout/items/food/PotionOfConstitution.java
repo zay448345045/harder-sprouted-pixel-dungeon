@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.food;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Bleeding;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Cripple;
@@ -30,10 +31,12 @@ import com.watabou.utils.Random;
 public class PotionOfConstitution extends Food {
 
 	{
-		name = "Honey";
+//		name = "Honey";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.POTION_HONEY;
 		bones = true;
-		message = "You feel your life extending.";
+//		message = "You feel your life extending.";
+		message = Messages.get(this, "eat");
 		hornValue = 0;
 	}
 
@@ -55,10 +58,14 @@ public class PotionOfConstitution extends Food {
 		}
 	}	
 	
-	@Override
-	public String info() {
-		return "Life giving nectar.";
-	}
+//	@Override
+//	public String info() {
+//		return "Life giving nectar.";
+//	}
+@Override
+public String info() {
+	return Messages.get(this, "desc");
+}
 
 
 	@Override

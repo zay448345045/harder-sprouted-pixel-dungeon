@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.actors.mobs.npcs;
 
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -30,7 +31,7 @@ import com.github.dachhack.sprout.sprites.RatKingSprite;
 public class RatKing extends NPC {
 
 	{
-		name = "rat king";
+		name = Messages.get(this, "name");
 		spriteClass = RatKingSprite.class;
 
 		state = SLEEPING;

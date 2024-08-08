@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.mobs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.effects.particles.SparkParticle;
@@ -42,7 +43,7 @@ public class ZotPhase extends Mob implements Callback{
 	private static final String TXT_LIGHTNING_KILLED = "%s's lightning bolt killed you...";
 
 	{
-		name = "Zot";
+		name = Messages.get(this, "name");
 		spriteClass = ZotPhaseSprite.class;
 
 		HP = HT = 2000;
@@ -121,7 +122,7 @@ public class ZotPhase extends Mob implements Callback{
 					if (!enemy.isAlive()) {
 						Dungeon.fail(Utils.format(ResultDescriptions.MOB,
 								Utils.indefinite(name)));
-						GLog.n(TXT_LIGHTNING_KILLED, name);
+						GLog.n(Messages.get(ZotPhase.class, "kill"), name);
 					}
 				}
 			} else {
@@ -140,8 +141,8 @@ public class ZotPhase extends Mob implements Callback{
 
 	@Override
 	public String description() {
-		
-		return (Random.Int(10) > 2) ? "Zot." : "???";
+
+		return (Random.Int(10) > 2) ? Messages.get(Zot.class, "desc") : "???";
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

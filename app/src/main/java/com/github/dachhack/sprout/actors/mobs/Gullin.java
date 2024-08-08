@@ -17,27 +17,22 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.actors.blobs.Blob;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.blobs.CorruptGas;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.hero.HeroClass;
 import com.github.dachhack.sprout.items.Generator;
-import com.github.dachhack.sprout.items.StoneOre;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
-import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
-import com.github.dachhack.sprout.items.weapon.missiles.JupitersWrath;
-import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.GullinSprite;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class Gullin extends Kupua {
 	
 	{
-		name = "gullin";
+		name = Messages.get(this, "name");
 		spriteClass = GullinSprite.class;
 
 		HP = HT = 2200;
@@ -66,10 +61,10 @@ public class Gullin extends Kupua {
 			
 		super.die(cause);					
 	}
-	
+
 	@Override
 	public String description() {
-		return "A golden-maned boar demon. Its eyes and bristles glow in the dark cave. ";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

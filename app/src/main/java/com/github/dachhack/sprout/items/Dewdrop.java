@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.hero.HeroClass;
 import com.github.dachhack.sprout.effects.Speck;
@@ -29,11 +30,12 @@ import com.watabou.noosa.audio.Sample;
 
 public class Dewdrop extends Item {
 
-	private static final String TXT_VALUE = "%+dHP";
+//	private static final String TXT_VALUE = "%+dHP";
+	private static final String TXT_VALUE = Messages.get(Dewdrop.class, "value");
 	public int amountToFill = 1;
 
 	{
-		name = "dewdrop";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.DEWDROP;
 
 		stackable = true;
@@ -59,9 +61,9 @@ public class Dewdrop extends Item {
 				}
 			} else {
 				if (vial == null) {
-					GLog.i("You already have full health");
+					GLog.i(Messages.get(Dewdrop.class,"already_full"));
 				} else {
-					GLog.i("Your dew vial is already full and you already have full health.");
+					GLog.i(Messages.get(Dewdrop.class,"already_full2"));
 				}
 				return false;
 			}
@@ -77,6 +79,7 @@ public class Dewdrop extends Item {
 
 	@Override
 	public String info() {
-		return "A crystal clear dewdrop.";
+//		return "A crystal clear dewdrop.";
+			return Messages.get(this, "desc");
 	}
 }

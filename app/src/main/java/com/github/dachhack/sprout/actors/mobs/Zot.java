@@ -17,17 +17,14 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.buffs.Amok;
 import com.github.dachhack.sprout.actors.buffs.Blindness;
-import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.buffs.Charm;
 import com.github.dachhack.sprout.actors.buffs.Poison;
@@ -43,16 +40,18 @@ import com.github.dachhack.sprout.items.misc.AutoPotion.AutoHealPotion;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.items.weapon.enchantments.Leech;
-import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
-import com.github.dachhack.sprout.items.weapon.missiles.JupitersWrath;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.ZotSprite;
+import com.github.dachhack.sprout.ui.BossHealthBar;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Zot extends Mob {
 
@@ -62,7 +61,7 @@ public class Zot extends Mob {
 
 	private boolean canJump = false;
 	{
-		name = "Zot";
+		name = Messages.get(this, "name");
 		spriteClass = ZotSprite.class;
 		baseSpeed = 2f;
 		EXP = 20;
@@ -107,7 +106,7 @@ public class Zot extends Mob {
 		boolean blinded = this.buff(Blindness.class) != null;
 		
 		if (paralysed | blinded) {
-			yell("ARRRGH!");
+			yell(Messages.get(this, "p"));
 			
 			if(!checkEyes()){
 				ArrayList<Integer> spawnPoints = new ArrayList<Integer>();
@@ -191,7 +190,7 @@ public class Zot extends Mob {
 
 		checkJump();
 		if (enemy.invisible > 0) {
-			GLog.n("Zot: Fool. I can still see you!");
+			GLog.n(Messages.get(Zot.class,"fool"));
 		}
 
 		if (canJump) {
@@ -311,12 +310,13 @@ public class Zot extends Mob {
 	@Override
 	public void notice() {
 		super.notice();
+		BossHealthBar.assignBoss(this);
 		yell("...");
 	}
 
 	@Override
 	public String description() {
-		return "Zot.";
+		return Messages.get(this, "desc");
 	}
 
 	private final static String HPATLASTJUMP = "last_jump";

@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.actors.buffs;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 import com.watabou.noosa.audio.Sample;
@@ -88,9 +89,15 @@ public class Shadows extends Invisibility {
 		return BuffIndicator.SHADOWS;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Shadowmelded";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc");
 	}
 
 }

@@ -23,6 +23,7 @@ import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.ui.ItemSlot;
 import com.github.dachhack.sprout.ui.RedButton;
+import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.BitmapTextMultiline;
@@ -52,14 +53,13 @@ public class WndItem extends Window {
 			titlebar.color(ItemSlot.DEGRADED);
 		}
 
-		BitmapTextMultiline info = PixelScene.createMultiline(item.info(), 6);
-		info.maxWidth = WIDTH;
-		info.measure();
-		info.x = titlebar.left();
-		info.y = titlebar.bottom() + GAP;
+
+		RenderedTextMultiline info = PixelScene.renderMultiline(item.info(), 6);
+		info.maxWidth(WIDTH);
+		info.setPos(titlebar.left(), titlebar.bottom() + GAP);
 		add(info);
 
-		float y = info.y + info.height() + GAP;
+		float y = info.top() + info.height() + GAP;
 		float x = 0;
 
 		if (Dungeon.hero.isAlive() && owner != null) {

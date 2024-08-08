@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items.armor.glyphs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.effects.Lightning;
 import com.github.dachhack.sprout.items.armor.Armor;
@@ -31,7 +32,8 @@ import com.watabou.utils.Random;
 
 public class Potential extends Glyph {
 
-	private static final String TXT_POTENTIAL = "%s of potential";
+//	private static final String TXT_POTENTIAL = "%s of potential";
+private static final String TXT_POTENTIAL = Messages.get(Potential.class, "name");
 
 	private static ItemSprite.Glowing BLUE = new ItemSprite.Glowing(0x66CCEE);
 

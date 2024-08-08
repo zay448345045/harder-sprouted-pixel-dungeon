@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.actors.buffs;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 import com.watabou.utils.Bundle;
 
@@ -55,7 +56,12 @@ public class BerryRegeneration extends Buff {
 
 	@Override
 	public String toString() {
-		return "Regenerating";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc", regenleft);
 	}
 	@Override
 	public boolean act() {

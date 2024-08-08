@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.mobs.pets;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.Blob;
 import com.github.dachhack.sprout.actors.blobs.Fire;
@@ -36,7 +37,7 @@ import com.watabou.utils.Random;
 public class RedDragon extends PET implements Callback{
 	
 	{
-		name = "red dragon";
+		name = Messages.get(this, "name");
 		spriteClass = RedDragonSprite.class;       
 		flying=true;
 		state = HUNTING;
@@ -86,7 +87,7 @@ public class RedDragon extends PET implements Callback{
 		
 		if (cooldown>0){
 			cooldown=Math.max(cooldown-(level*level),0);
-			if (cooldown==0) {yell("Flame on!");}
+			if (cooldown==0) {yell(Messages.get(RedDragon.class, "ready"));}
 		}
 		
 		if (Random.Float()<regenChance && HP<HT){HP+=regen;}
@@ -130,7 +131,7 @@ public class RedDragon extends PET implements Callback{
 		spend(TIME_TO_ZAP);
 
 		cooldown=1000;
-		yell("Roaaar!");
+		yell(Messages.get(GreenDragon.class, "atk"));
 		
 		if (hit(this, enemy, true)) {			
 
@@ -170,7 +171,7 @@ public class RedDragon extends PET implements Callback{
 		}
 		if (buff(Paralysis.class) != null) {
 			Buff.detach(this, Paralysis.class);
-			GLog.i("You shake your %s out of paralysis.", name);
+			GLog.i(Messages.get(bee.class, "shake"), name);
 		}
 		
 		int curPos = pos;
@@ -186,10 +187,10 @@ public class RedDragon extends PET implements Callback{
 	}
 
 
-@Override
-public String description() {
-	return "A feshly hatched red dragon. Super fierce and super cute!";
-}
+	@Override
+	public String description() {
+		return Messages.get(bee.class, "desc");
+	}
 
 
 }

@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.scrolls;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.buffs.Blindness;
@@ -38,7 +39,8 @@ import com.watabou.utils.Random;
 public class ScrollOfPsionicBlast extends Scroll {
 
 	{
-		name = "Scroll of Psionic Blast";
+//		name = "Scroll of Psionic Blast";
+		name = Messages.get(this, "name");
 		consumedValue = 10;
 
 		bones = true;
@@ -74,18 +76,22 @@ public class ScrollOfPsionicBlast extends Scroll {
 				GameScene.levelCleared();		
 				if(Dungeon.depth>0){Statistics.prevfloormoves=Math.max(Dungeon.pars[Dungeon.depth]-Dungeon.level.currentmoves,0);
 				   if (Statistics.prevfloormoves>1){
-				     GLog.h("Level cleared in %s moves under goal.", Statistics.prevfloormoves);
+//				     GLog.h("Level cleared in %s moves under goal.", Statistics.prevfloormoves);
+					   GLog.h(Messages.get(Mob.class, "draw1", Statistics.prevfloormoves));
 				   } else if (Statistics.prevfloormoves==1){
-				     GLog.h("Level cleared in 1 move under goal."); 
+//				     GLog.h("Level cleared in 1 move under goal.");
+					   GLog.h(Messages.get(Mob.class, "draw2"));
 				   } else if (Statistics.prevfloormoves==0){
-					 GLog.h("Level cleared over goal moves.");
+//					 GLog.h("Level cleared over goal moves.");
+					   GLog.h(Messages.get(Mob.class, "draw3"));
 				   }
 				} 
 		}
 		
 		if (!curUser.isAlive()) {
 			Dungeon.fail(Utils.format(ResultDescriptions.ITEM, name));
-			GLog.n("The Psionic Blast tears your mind apart...");
+//			GLog.n("The Psionic Blast tears your mind apart...");
+			GLog.n(Messages.get(this, "ondeath"));
 		}
 	}
 	
@@ -97,10 +103,13 @@ public class ScrollOfPsionicBlast extends Scroll {
 	}
 
 	@Override
+//	public String desc() {
+//		return "This scroll contains destructive energy that can be psionically channeled to tear apart "
+//				+ "the minds of all visible creatures. The power unleashed by the scroll will also temporarily "
+//				+ "blind, stun, and seriously harm the reader.";
+//	}
 	public String desc() {
-		return "This scroll contains destructive energy that can be psionically channeled to tear apart "
-				+ "the minds of all visible creatures. The power unleashed by the scroll will also temporarily "
-				+ "blind, stun, and seriously harm the reader.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

@@ -17,10 +17,9 @@
  */
 package com.github.dachhack.sprout.windows;
 
-import java.util.Collections;
-
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Journal;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.ui.Icons;
@@ -28,7 +27,10 @@ import com.github.dachhack.sprout.ui.ScrollPane;
 import com.github.dachhack.sprout.ui.Window;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Image;
+import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.ui.Component;
+
+import java.util.Collections;
 
 public class WndJournal extends Window {
 
@@ -38,9 +40,10 @@ public class WndJournal extends Window {
 
 	private static final int ITEM_HEIGHT = 18;
 
-	private static final String TXT_TITLE = "Journal";
+	//	private static final String TXT_TITLE = "Journal";
+	private static final String TXT_TITLE = Messages.get(WndJournal.class, "journal");
 
-	private BitmapText txtTitle;
+	private RenderedText txtTitle;
 	private ScrollPane list;
 
 	public WndJournal() {
@@ -48,9 +51,8 @@ public class WndJournal extends Window {
 		super();
 		resize(WIDTH, ShatteredPixelDungeon.landscape() ? HEIGHT_L : HEIGHT_P);
 
-		txtTitle = PixelScene.createText(TXT_TITLE, 9);
+		txtTitle = PixelScene.renderText(Messages.get(WndJournal.class, "journal"), 9);
 		txtTitle.hardlight(Window.TITLE_COLOR);
-		txtTitle.measure();
 		txtTitle.x = PixelScene.align(PixelScene.uiCamera,
 				(WIDTH - txtTitle.width()) / 2);
 		add(txtTitle);
@@ -78,7 +80,7 @@ public class WndJournal extends Window {
 
 	private static class ListItem extends Component {
 
-		private BitmapText feature;
+		private RenderedText feature;
 		private BitmapText depth;
 
 		private Image icon;
@@ -87,7 +89,6 @@ public class WndJournal extends Window {
 			super();
 
 			feature.text(f.desc);
-			feature.measure();
 
 			depth.text(Integer.toString(d));
 			depth.measure();
@@ -100,7 +101,7 @@ public class WndJournal extends Window {
 
 		@Override
 		protected void createChildren() {
-			feature = PixelScene.createText(9);
+			feature = PixelScene.renderText(9);
 			add(feature);
 
 			depth = new BitmapText(PixelScene.font1x);

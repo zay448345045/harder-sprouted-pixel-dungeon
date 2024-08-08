@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items.food;
 
 import com.github.dachhack.sprout.Badges;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Hunger;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.sprites.CharSprite;
@@ -28,10 +29,12 @@ import com.watabou.utils.Random;
 public class GoldenNut extends Nut {
 
 	{
-		name = "golden dungeon nut";
+//		name = "golden dungeon nut";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.SEED_GOLDENDUNGEONNUT;
 		energy = Hunger.STARVING;
-		message = "Melts in your mouth. Tastes like Nutella.";
+//		message = "Melts in your mouth. Tastes like Nutella.";
+		message = Messages.get(this, "eat");
 		hornValue = 2;
 	}
 
@@ -44,22 +47,28 @@ public class GoldenNut extends Nut {
 
 			switch (Random.Int(2)) {
 			case 0:
-				GLog.w("You have recieved the dungeon's blessing.");
+//				GLog.w("You have recieved the dungeon's blessing.");
+				GLog.p(Messages.get(this, "effect1"));
 				
 				hero.HT+=20;
 				hero.STR+=2;
-				hero.sprite.showStatus(CharSprite.POSITIVE, "+2 str, +20 ht");
-				GLog.p("Newfound strength surges through your body.");
+//				hero.sprite.showStatus(CharSprite.POSITIVE, "+2 str, +20 ht");
+				hero.sprite.showStatus(CharSprite.POSITIVE, Messages.get(this, "effect2"));
+//				GLog.p("Newfound strength surges through your body.");
+				GLog.p(Messages.get(this, "effect3"));
 
 				Badges.validateStrengthAttained();
 				break;
 			case 1:
-				GLog.w("You have recieved the dungeon's highest blessing.");
+//				GLog.w("You have recieved the dungeon's highest blessing.");
+				GLog.p(Messages.get(this, "effect4"));
 				
 				hero.HT+=50;
 				hero.STR+=5;
-				hero.sprite.showStatus(CharSprite.POSITIVE, "+5 str, +50 ht");
-				GLog.p("Newfound strength surges through your body.");
+//				hero.sprite.showStatus(CharSprite.POSITIVE, "+5 str, +50 ht");
+				hero.sprite.showStatus(CharSprite.POSITIVE, Messages.get(this, "effect5"));
+//				GLog.p("Newfound strength surges through your body.");
+				GLog.p(Messages.get(this, "effect3"));
 
 				Badges.validateStrengthAttained();
 				break;
@@ -68,8 +77,11 @@ public class GoldenNut extends Nut {
 	}	
 	
 	@Override
+//	public String info() {
+//		return "Unique dungeon nut gilded with enchantment.";
+//	}
 	public String info() {
-		return "Unique dungeon nut gilded with enchantment.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

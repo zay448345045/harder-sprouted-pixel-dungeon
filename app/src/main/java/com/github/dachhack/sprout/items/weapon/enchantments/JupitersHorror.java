@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items.weapon.enchantments;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -36,7 +37,8 @@ import com.watabou.utils.Random;
 
 public class JupitersHorror extends Weapon.Enchantment {
 
-	private static final String TXT_ELDRITCH = "Horrific %s";
+//	private static final String TXT_ELDRITCH = "Horrific %s";
+private static final String TXT_ELDRITCH = Messages.get(JupitersHorror.class, "horror");
 
 	private static ItemSprite.Glowing GREY = new ItemSprite.Glowing(0x222222);
 

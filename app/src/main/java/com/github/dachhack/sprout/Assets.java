@@ -19,6 +19,22 @@ package com.github.dachhack.sprout;
 
 public class Assets {
 
+	//these points to resource bundles, not raw asset files
+	public static class Messages {
+		public static final String ACTORS   = "messages/actors/actors";
+		public static final String ITEMS    = "messages/items/items";
+		public static final String JOURNAL  = "messages/journal/journal";
+		public static final String LEVELS   = "messages/levels/levels";
+		public static final String MISC     = "messages/misc/misc";
+		public static final String PLANTS   = "messages/plants/plants";
+		public static final String SCENES   = "messages/scenes/scenes";
+		public static final String UI       = "messages/ui/ui";
+		public static final String WINDOWS  = "messages/windows/windows";
+	}
+
+	//New
+	public static final String BOSSHP = "boss_hp.png";
+
 	public static final String ARCS_BG = "arcs1.png";
 	public static final String ARCS_FG = "arcs2.png";
 	public static final String DASHBOARD = "dashboard.png";
@@ -31,6 +47,7 @@ public class Assets {
 	public static final String ICONS = "icons.png";
 	public static final String STATUS = "status_pane.png";
 	public static final String HP_BAR = "hp_bar.png";
+	public static final String HG_BAR = "hg_bar.png";
 	public static final String XP_BAR = "exp_bar.png";
 	public static final String TOOLBAR = "toolbar.png";
 	public static final String SHADOW = "shadow.png";
@@ -169,7 +186,7 @@ public class Assets {
 	public static final String FONTS2X = "font2x.png";
 	public static final String FONTS25X = "font25x.png";
 	public static final String FONTS3X = "font3x.png";
-
+	public static final String FONT = "pixelfont.ttf";
 	public static final String THEME = "theme.mp3";
 	public static final String TUNE = "game.mp3";
 	public static final String HAPPY = "surface.mp3";

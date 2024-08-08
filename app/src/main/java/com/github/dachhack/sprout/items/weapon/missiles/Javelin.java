@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.weapon.missiles;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Cripple;
@@ -27,7 +28,8 @@ import com.watabou.utils.Random;
 public class Javelin extends MissileWeapon {
 
 	{
-		name = "javelin";
+//		name = "javelin";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.JAVELIN;
 
 		STR = 15;
@@ -53,9 +55,12 @@ public class Javelin extends MissileWeapon {
 	}
 
 	@Override
+//	public String desc() {
+//		return "This length of metal is weighted to keep the spike "
+//				+ "at its tip foremost as it sails through the air.";
+//	}
 	public String desc() {
-		return "This length of metal is weighted to keep the spike "
-				+ "at its tip foremost as it sails through the air.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

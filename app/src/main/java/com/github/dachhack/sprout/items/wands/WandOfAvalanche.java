@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.wands;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
@@ -46,7 +47,8 @@ import com.watabou.utils.Random;
 public class WandOfAvalanche extends Wand {
 
 	{
-		name = "Wand of Avalanche";
+//		name = "Wand of Avalanche";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -106,7 +108,8 @@ public class WandOfAvalanche extends Wand {
 
 		if (!curUser.isAlive()) {
 			Dungeon.fail(Utils.format(ResultDescriptions.ITEM, name));
-			GLog.n("You killed yourself with your own Wand of Avalanche...");
+//			GLog.n("You killed yourself with your own Wand of Avalanche...");
+			GLog.n(Messages.get(this, "kill"));
 		}
 	}
 
@@ -130,10 +133,13 @@ public class WandOfAvalanche extends Wand {
 	}
 
 	@Override
+//	public String desc() {
+//		return "When a discharge of this wand hits a wall (or any other solid obstacle) it causes "
+//				+ "an avalanche of stones, damaging and stunning all creatures in the affected area." +
+//				"It will deal reduced damage at distance, but may harm the player when close up." +
+//				"\n\n" + statsDesc();
+//	}
 	public String desc() {
-		return "When a discharge of this wand hits a wall (or any other solid obstacle) it causes "
-				+ "an avalanche of stones, damaging and stunning all creatures in the affected area." +
-				"It will deal reduced damage at distance, but may harm the player when close up." +
-				"\n\n" + statsDesc();
+		return Messages.get(this, "desc", 2, 7 + level() / 3);
 	}
 }

@@ -23,6 +23,7 @@ import java.util.HashSet;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
 import com.github.dachhack.sprout.actors.buffs.Amok;
@@ -56,6 +57,7 @@ import com.github.dachhack.sprout.actors.mobs.Yog;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.particles.PoisonParticle;
 import com.github.dachhack.sprout.items.artifacts.CloakOfShadows;
+import com.github.dachhack.sprout.items.artifacts.RingOfDisintegration;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.levels.features.Door;
@@ -71,15 +73,6 @@ import com.watabou.utils.GameMath;
 import com.watabou.utils.Random;
 
 public abstract class Char extends Actor {
-
-	protected static final String TXT_HIT = "%s hit %s";
-	protected static final String TXT_KILL = "%s killed you...";
-	protected static final String TXT_DEFEAT = "%s defeated %s";
-
-	private static final String TXT_YOU_MISSED = "%s %s your attack";
-	private static final String TXT_SMB_MISSED = "%s %s %s's attack";
-
-	private static final String TXT_OUT_OF_PARALYSIS = "The pain snapped %s out of paralysis";
 
 	public int pos = 0;
 
@@ -146,14 +139,9 @@ public abstract class Char extends Actor {
 
 		if (hit(this, enemy, false)) {
 
-			if (visibleFight) {
-				GLog.i(TXT_HIT, name, enemy.name);
-			}
-
-			// FIXME
 			int dr = this instanceof Hero && ((Hero) this).rangedWeapon != null
 					&& ((Hero) this).subClass == HeroSubClass.SNIPER ? 0
-					: Random.IntRange(enemy.dr()/2, enemy.dr());
+					: Random.IntRange(0, enemy.dr());
 
 			int dmg = damageRoll();
 			int effectiveDamage = Math.max(dmg - dr, 0);
@@ -173,14 +161,12 @@ public abstract class Char extends Actor {
 				return true;
 			}
 
-			// TODO: consider revisiting this and shaking in more cases.
 			float shake = 0f;
 			if (enemy == Dungeon.hero)
-				shake = effectiveDamage / Math.max(1,(enemy.HP / 4));
+				shake = effectiveDamage / (enemy.HT / 4);
 
-			if (shake > 1f) {
+			if (shake > 1f)
 				Camera.main.shake(GameMath.gate(1, shake, 5), 0.3f);
-			}
 
 			enemy.damage(effectiveDamage, this);
 
@@ -189,28 +175,20 @@ public abstract class Char extends Actor {
 			if (buff(EarthImbue.class) != null)
 				buff(EarthImbue.class).proc(enemy);
 
+			if (buff(RingOfDisintegration.ringRecharge.class) != null && enemy.isAlive()) {
+				if (buff(RingOfDisintegration.ringRecharge.class).level() > 10) {
+				}
+			}
+
 			enemy.sprite.bloodBurstA(sprite.center(), effectiveDamage);
 			enemy.sprite.flash();
 
 			if (!enemy.isAlive() && visibleFight) {
 				if (enemy == Dungeon.hero) {
-
-					if (this instanceof Yog) {
-						Dungeon.fail(Utils.format(ResultDescriptions.NAMED,
-								name));
-					}
-					if (Bestiary.isUnique(this)) {
-						Dungeon.fail(Utils.format(ResultDescriptions.UNIQUE,
-								name));
-					} else {
-						Dungeon.fail(Utils.format(ResultDescriptions.MOB,
-								Utils.indefinite(name)));
-					}
-
-					GLog.n(TXT_KILL, name);
-
+					Dungeon.fail(Utils.format(ResultDescriptions.MOB, Utils.indefinite(name)));
+					GLog.n(Messages.get(this, "kill"), name);
 				} else {
-					GLog.i(TXT_DEFEAT, name, enemy.name);
+					GLog.i(Messages.get(this, "defeat"), name, enemy.name);
 				}
 			}
 
@@ -221,12 +199,6 @@ public abstract class Char extends Actor {
 			if (visibleFight) {
 				String defense = enemy.defenseVerb();
 				enemy.sprite.showStatus(CharSprite.NEUTRAL, defense);
-				if (this == Dungeon.hero) {
-					GLog.i(TXT_YOU_MISSED, enemy.name, defense);
-				} else {
-					GLog.i(TXT_SMB_MISSED, enemy.name, defense, name);
-				}
-
 				Sample.INSTANCE.play(Assets.SND_MISS);
 			}
 
@@ -314,7 +286,7 @@ public abstract class Char extends Actor {
 			if (Random.Int(dmg) >= Random.Int(HP)) {
 				Buff.detach(this, Paralysis.class);
 				if (Dungeon.visible[pos]) {
-					GLog.i(TXT_OUT_OF_PARALYSIS, name);
+					GLog.i(Messages.get(Char.class,"pasd"), name);
 				}
 			}
 		}

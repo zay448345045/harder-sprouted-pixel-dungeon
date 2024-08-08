@@ -17,12 +17,14 @@
  */
 package com.github.dachhack.sprout.items.keys;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
 public class GoldenKey extends Key {
 
 	{
-		name = "golden key";
+//		name = "golden key";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.GOLDEN_KEY;
 	}
 
@@ -36,8 +38,11 @@ public class GoldenKey extends Key {
 	}
 
 	@Override
+//	public String info() {
+//		return "The notches on this golden key are tiny and intricate. "
+//				+ "Maybe it can open some chest lock?";
+//	}
 	public String info() {
-		return "The notches on this golden key are tiny and intricate. "
-				+ "Maybe it can open some chest lock?";
+		return Messages.get(this, "desc");
 	}
 }

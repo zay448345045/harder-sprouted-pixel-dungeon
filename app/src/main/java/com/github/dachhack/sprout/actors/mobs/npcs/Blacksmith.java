@@ -17,12 +17,11 @@
  */
 package com.github.dachhack.sprout.actors.mobs.npcs;
 
-import java.util.Collection;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Journal;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -47,6 +46,8 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.Collection;
+
 public class Blacksmith extends NPC {
 
 	private static final String TXT_GOLD_1 = "Hey human! Wanna be useful, eh? Take dis pickaxe and mine me some _dark gold ore_, _15 pieces_ should be enough. "
@@ -67,10 +68,10 @@ public class Blacksmith extends NPC {
 	private static final String COLLECTED = "Finally, the SanChikarah. I will forge them for you...";
 
 	{
-		name = "troll blacksmith named Bop";
+		name = Messages.get(this, "name");
 		spriteClass = BlacksmithSprite.class;
 	}
-	
+
 
 	@Override
 	protected boolean act() {
@@ -82,13 +83,13 @@ public class Blacksmith extends NPC {
 	public void interact() {
 
 		sprite.turnTo(pos, Dungeon.hero.pos);
-		
+
 		if (checksan()){
-            tell(COLLECTED);	
+            tell(COLLECTED);
             SanChikarah san = new SanChikarah();
-               Dungeon.sanchikarah = true;	
+               Dungeon.sanchikarah = true;
 				if (san.doPickUp(Dungeon.hero)) {
-					GLog.i(Hero.TXT_YOU_NOW_HAVE, san.name());
+					GLog.i(Messages.get(Hero.class,"have"), san.name());
 				} else {
 					Dungeon.level.drop(san, Dungeon.hero.pos).sprite.drop();
 				}
@@ -96,8 +97,8 @@ public class Blacksmith extends NPC {
 
 		if (!Quest.given) {
 
-			GameScene.show(new WndQuest(this, Quest.alternative ? TXT_BLOOD_1
-					: TXT_GOLD_1) {
+			GameScene.show(new WndQuest(this, Quest.alternative ? Messages.get(Blacksmith.class, "bloodone")
+					: Messages.get(Blacksmith.class, "goldone")) {
 
 				@Override
 				public void onBackPressed() {
@@ -108,7 +109,7 @@ public class Blacksmith extends NPC {
 
 					Pickaxe pick = new Pickaxe();
 					if (pick.doPickUp(Dungeon.hero)) {
-						GLog.i(Hero.TXT_YOU_NOW_HAVE, pick.name());
+						GLog.i(Messages.get(Hero.class,"have"), pick.name());
 					} else {
 						Dungeon.level.drop(pick, Dungeon.hero.pos).sprite
 								.drop();
@@ -163,9 +164,9 @@ public class Blacksmith extends NPC {
 			GameScene.show(new WndBlacksmith(this, Dungeon.hero));
 
 		} else {
-            
+
 		   tell(TXT_GET_LOST);
-         
+
 
 		}
 	}
@@ -195,7 +196,7 @@ public class Blacksmith extends NPC {
 		if (item1.level < 0 || item2.level < 1) {
 			return "It's a junk, the quality is too poor!";
 		}
-		
+
 		if ((item1.level + item2.level > 15) && !item1.isReinforced()) {
 			return "You item needs to be reinforced to handle the upgrades. Take it to my brother!";
 		}
@@ -211,13 +212,13 @@ public class Blacksmith extends NPC {
 	public static void upgrade(Item item1, Item item2) {
 
 		Item first, second;
-		
+
 			first = item1;
 			second = item2;
 		int startingLevel = item1.level;
 		int minLevelIncrease = Math.min(100, item2.level);
 		int minLevelAfterForge = startingLevel + minLevelIncrease;
-		
+
 
 		Sample.INSTANCE.play(Assets.SND_EVOKE);
 		ScrollOfUpgrade.upgrade(Dungeon.hero);
@@ -226,7 +227,7 @@ public class Blacksmith extends NPC {
 		if (first.isEquipped(Dungeon.hero)) {
 			((EquipableItem) first).doUnequip(Dungeon.hero, true);
 		}
-		
+
 		DarkGold gold = Dungeon.hero.belongings.getItem(DarkGold.class);
 		if (gold!=null){
 		upgradeChance = (upgradeChance + (gold.quantity()*0.05f));
@@ -242,7 +243,7 @@ public class Blacksmith extends NPC {
 			    }
 			}
 		}
-		
+
 		GLog.p(TXT_LOOKS_BETTER, first.name());
 
 		if (first.level < minLevelAfterForge) {
@@ -260,21 +261,21 @@ public class Blacksmith extends NPC {
 
 		Journal.remove(Journal.Feature.TROLL);
 	}
-	
+
 	public static boolean checksan() {
 		SanChikarahDeath san1 = Dungeon.hero.belongings.getItem(SanChikarahDeath.class);
 		SanChikarahLife san2 = Dungeon.hero.belongings.getItem(SanChikarahLife.class);
 		SanChikarahTranscend san3 = Dungeon.hero.belongings.getItem(SanChikarahTranscend.class);
-		
+
 		if (san1!=null && san2!=null && san3!=null){
 			san1.detach(Dungeon.hero.belongings.backpack);
 			san2.detach(Dungeon.hero.belongings.backpack);
 			san3.detach(Dungeon.hero.belongings.backpack);
-			return true;			
+			return true;
 		} else {
 			return false;
 		}
-		
+
 	}
 
 	@Override
@@ -358,7 +359,7 @@ public class Blacksmith extends NPC {
 		public static boolean spawn(Collection<Room> rooms) {
 			//if (!spawned && Dungeon.depth > 11 && Random.Int( 15 - Dungeon.depth ) == 0) {
 			if (!spawned ) {
-				    
+
 				Room blacksmith = null;
 				for (Room r : rooms) {
 					if (r.type == Type.STANDARD && r.width() > 4
@@ -367,7 +368,7 @@ public class Blacksmith extends NPC {
 						blacksmith.type = Type.BLACKSMITH;
 
 						spawned = true;
-						
+
 						Chainsaw saw = Dungeon.hero.belongings.getItem(Chainsaw.class);
 						if (saw==null){
 						   alternative = Random.Int(2) == 0;

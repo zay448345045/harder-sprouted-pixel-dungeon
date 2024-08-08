@@ -17,19 +17,19 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.actors.Char;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Amok;
 import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.sprites.OniSprite;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Oni extends Mob {
 
 	{
-		name = "oni";
+		name = Messages.get(this, "name");
 		spriteClass = OniSprite.class;
 		state = SLEEPING;
 
@@ -62,13 +62,12 @@ public class Oni extends Mob {
 
 	@Override
 	public String defenseVerb() {
-		return "blocked";
+		return Messages.get(this, "def");
 	}
 
 	@Override
 	public String description() {
-		return "Oni are wicked trolls who dwell in places of great power. "
-				+"They are quite lazy unless there is food near by... ";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

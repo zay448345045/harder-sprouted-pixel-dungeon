@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.windows;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.npcs.Imp;
 import com.github.dachhack.sprout.items.Item;
@@ -25,17 +26,19 @@ import com.github.dachhack.sprout.items.quest.DwarfToken;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.ui.RedButton;
+import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
-import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndImp extends Window {
 
-	private static final String TXT_MESSAGE = "Oh yes! You are my hero!\n"
-			+ "Regarding your reward, I don't have cash with me right now, but I have something better for you. "
-			+ "This is my family heirloom ring: my granddad took it off a dead paladin's finger.";
-	private static final String TXT_REWARD = "Take the ring";
+//	private static final String TXT_MESSAGE = "Oh yes! You are my hero!\n"
+//			+ "Regarding your reward, I don't have cash with me right now, but I have something better for you. "
+//			+ "This is my family heirloom ring: my granddad took it off a dead paladin's finger.";
+//	private static final String TXT_REWARD = "Take the ring";
+	private static final String TXT_MESSAGE = Messages.get(WndImp.class, "msg");
+	private static final String TXT_REWARD = Messages.get(WndImp.class, "ok");
 
 	private static final int WIDTH = 120;
 	private static final int BTN_HEIGHT = 20;
@@ -51,20 +54,19 @@ public class WndImp extends Window {
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 
-		BitmapTextMultiline message = PixelScene
-				.createMultiline(TXT_MESSAGE, 6);
+		RenderedTextMultiline message = PixelScene
+				.renderMultiline(Messages.get(WndImp.class, "msg"), 6);
 		message.maxWidth = WIDTH;
-		message.measure();
-		message.y = titlebar.bottom() + GAP;
+		message.setPos(0, titlebar.bottom() + GAP);
 		add(message);
 
-		RedButton btnReward = new RedButton(TXT_REWARD) {
+		RedButton btnReward = new RedButton(Messages.get(WndImp.class, "ok")) {
 			@Override
 			protected void onClick() {
 				takeReward(imp, tokens, Imp.Quest.reward);
 			}
 		};
-		btnReward.setRect(0, message.y + message.height() + GAP, WIDTH,
+		btnReward.setRect(0, message.top() + message.height() + GAP, WIDTH,
 				BTN_HEIGHT);
 		add(btnReward);
 
@@ -79,7 +81,7 @@ public class WndImp extends Window {
 
 		reward.identify();
 		if (reward.doPickUp(Dungeon.hero)) {
-			GLog.i(Hero.TXT_YOU_NOW_HAVE, reward.name());
+			GLog.i(Messages.get(Hero.class,"have"), reward.name());
 		} else {
 			Dungeon.level.drop(reward, imp.pos).sprite.drop();
 		}

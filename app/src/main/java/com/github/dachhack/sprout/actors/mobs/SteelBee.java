@@ -17,9 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Amok;
 import com.github.dachhack.sprout.actors.buffs.Poison;
@@ -28,10 +27,12 @@ import com.github.dachhack.sprout.sprites.SteelBeeSprite;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class SteelBee extends Mob {
 
 	{
-		name = "steel bee";
+		name = Messages.get(this, "name");
 		spriteClass = SteelBeeSprite.class;
 
 		viewDistance = 8;
@@ -128,11 +129,11 @@ public class SteelBee extends Mob {
 		}
 		return super.getCloser(target);
 	}
-	
+
 
 	@Override
 	public String description() {
-		return "Strongly armored in steely plates, this bee is here to fight!";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

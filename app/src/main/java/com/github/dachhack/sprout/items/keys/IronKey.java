@@ -18,18 +18,21 @@
 package com.github.dachhack.sprout.items.keys;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.items.bags.Bag;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.Utils;
 
 public class IronKey extends Key {
 
-	private static final String TXT_FROM_DEPTH = "iron key from depth %d";
+//	private static final String TXT_FROM_DEPTH = "iron key from depth %d";
+private static final String TXT_FROM_DEPTH = Messages.get(IronKey.class, "depth");
 
 	public static int curDepthQuantity = 0;
 
 	{
-		name = "iron key";
+//		name = "iron key";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.IRON_KEY;
 	}
 
@@ -64,8 +67,11 @@ public class IronKey extends Key {
 	}
 
 	@Override
+//	public String info() {
+//		return "The notches on this ancient iron key are well worn; its leather lanyard "
+//				+ "is battered by age. What door might it open?";
+//	}
 	public String info() {
-		return "The notches on this ancient iron key are well worn; its leather lanyard "
-				+ "is battered by age. What door might it open?";
+		return Messages.get(this, "desc");
 	}
 }

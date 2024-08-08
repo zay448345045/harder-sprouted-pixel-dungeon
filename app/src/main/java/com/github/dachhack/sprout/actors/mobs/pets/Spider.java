@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.mobs.pets;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.Blob;
 import com.github.dachhack.sprout.actors.blobs.Web;
@@ -31,9 +32,9 @@ import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Random;
 
 public class Spider extends PET {
-	
+
 	{
-		name = "spider";
+		name = Messages.get(this, "name");
 		spriteClass = SpiderSprite.class;       
 		flying=false;
 		state = HUNTING;
@@ -70,7 +71,9 @@ public class Spider extends PET {
 		
 		if (cooldown>0){
 			cooldown=Math.max(cooldown-(level*level),0);
-			if (cooldown==0) {GLog.w("Your spider is ready to spin webs!");}
+			if (cooldown==0) {
+				GLog.p(Messages.get(Spider.class, "ready"));
+			}
 		}
 		
 		if (Random.Float()<regenChance && HP<HT){HP+=regen;}
@@ -93,11 +96,11 @@ public class Spider extends PET {
 
 		return damage;
 	}
-	
-@Override
-public String description() {
-	return "A rather large hairy spider. It's oddly clingy. ";
-}
+
+	@Override
+	public String description() {
+		return Messages.get(bee.class, "desc");
+	}
 
 
 
@@ -113,7 +116,7 @@ public void interact() {
 	}
 	if (buff(Paralysis.class) != null) {
 		Buff.detach(this, Paralysis.class);
-		GLog.i("You shake your %s out of paralysis.", name);
+		GLog.i(Messages.get(bee.class, "shake"), name);
 	}
 	
 	int curPos = pos;

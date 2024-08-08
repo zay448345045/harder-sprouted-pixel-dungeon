@@ -17,12 +17,14 @@
  */
 package com.github.dachhack.sprout.items;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
 public class AdamantWeapon extends Item {
 
 		{
-		name = "adamantite weapon";
+//		name = "adamantite weapon";
+			name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ADAMANT_WEAPON;
 
 		unique = true;
@@ -42,8 +44,9 @@ public class AdamantWeapon extends Item {
 
 	
 	@Override
+//	public String info() {
+//		return "A blade from an ancient weapon made of a dull grey ore.";
 	public String info() {
-		return "A blade from an ancient weapon made of a dull grey ore.";
-	}
+		return Messages.get(this, "desc"); }
 	
 }

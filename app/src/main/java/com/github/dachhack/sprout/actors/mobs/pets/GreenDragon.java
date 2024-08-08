@@ -18,11 +18,13 @@
 package com.github.dachhack.sprout.actors.mobs.pets;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.MagicalSleep;
 import com.github.dachhack.sprout.actors.buffs.Paralysis;
+import com.github.dachhack.sprout.actors.mobs.Bee;
 import com.github.dachhack.sprout.effects.particles.SparkParticle;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.traps.LightningTrap;
@@ -38,7 +40,7 @@ import com.watabou.utils.Random;
 public class GreenDragon extends PET implements Callback{
 	
 	{
-		name = "green dragon";
+		name = Messages.get(this, "name");
 		spriteClass = GreenDragonSprite.class;       
 		flying=true;
 		state = HUNTING;
@@ -93,7 +95,7 @@ public class GreenDragon extends PET implements Callback{
 		
 		if (cooldown>0){
 			cooldown=Math.max(cooldown-(level*level),0);
-			if (cooldown==0) {GLog.w("The air crackles around your green dragon!");}
+			if (cooldown==0) {GLog.p(Messages.get(GreenDragon.class, "ready"));}
 		}
 		
 		if (Random.Float()<regenChance && HP<HT){HP+=regen;}
@@ -130,7 +132,7 @@ public class GreenDragon extends PET implements Callback{
 
 			spend(TIME_TO_ZAP);
 			cooldown=1000;
-			yell("Roaaar!");
+			yell(Messages.get(GreenDragon.class, "atk"));
 
 			if (hit(this, enemy, true)) {
 				int dmg = damageRoll()*2;
@@ -149,7 +151,7 @@ public class GreenDragon extends PET implements Callback{
 					if (!enemy.isAlive()) {
 						Dungeon.fail(Utils.format(ResultDescriptions.MOB,
 								Utils.indefinite(name)));
-						GLog.n(TXT_LIGHTNING_KILLED, name);
+						GLog.n(Messages.get(GreenDragon.class, "kill"), name);
 					}
 				}
 			} else {
@@ -182,7 +184,7 @@ public class GreenDragon extends PET implements Callback{
 		}
 		if (buff(Paralysis.class) != null) {
 			Buff.detach(this, Paralysis.class);
-			GLog.i("You shake your %s out of paralysis.", name);
+			GLog.i(Messages.get(Bee.class, "shake"), name);
 		}
 		
 		int curPos = pos;
@@ -198,10 +200,10 @@ public class GreenDragon extends PET implements Callback{
 	}
 
 
-@Override
-public String description() {
-	return "A feshly hatched green dragon. Super fierce and super cute!";
-}
+	@Override
+	public String description() {
+		return Messages.get(bee.class, "desc");
+	}
 
 
 }

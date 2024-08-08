@@ -17,13 +17,15 @@
  */
 package com.github.dachhack.sprout.items.keys;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.sprites.ItemSprite.Glowing;
 
 public class GoldenSkeletonKey extends Key {
 
 	{
-		name = "golden skeleton key";
+//		name = "golden skeleton key";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.GOLDEN_KEY;
 	}
 
@@ -44,8 +46,11 @@ public class GoldenSkeletonKey extends Key {
 	}
 
 	@Override
+//	public String info() {
+//		return "The notches on this golden key are shifting and moving as if alive. "
+//				+ "Maybe it can open some chest lock?";
+//	}
 	public String info() {
-		return "The notches on this golden key are shifting and moving as if alive. "
-				+ "Maybe it can open some chest lock?";
+		return Messages.get(this, "desc");
 	}
 }

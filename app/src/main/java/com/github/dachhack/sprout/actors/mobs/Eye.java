@@ -17,9 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
@@ -42,13 +41,15 @@ import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Eye extends Mob {
 
 	private static final String TXT_DEATHGAZE_KILLED = "%s's deathgaze killed you...";
 	protected static final float SPAWN_DELAY = 2f;
 
 	{
-		name = "evil eye";
+		name = Messages.get(this, "name");
 		spriteClass = EyeSprite.class;
 
 		HP = HT = 200;
@@ -142,7 +143,7 @@ public class Eye extends Mob {
 				if (!ch.isAlive() && ch == Dungeon.hero) {
 					Dungeon.fail(Utils.format(ResultDescriptions.MOB,
 							Utils.indefinite(name)));
-					GLog.n(TXT_DEATHGAZE_KILLED, name);
+					GLog.n(Messages.get(Eye.class, "kill"), name);
 				}
 			} else {
 				ch.sprite.showStatus(CharSprite.NEUTRAL, ch.defenseVerb());
@@ -178,11 +179,10 @@ public class Eye extends Mob {
 			return null;
 		}
 	}
-	
+
 	@Override
 	public String description() {
-		return "One of this demon's other names is \"orb of hatred\", because when it sees an enemy, "
-				+ "it uses its deathgaze recklessly, often ignoring its allies and wounding them.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

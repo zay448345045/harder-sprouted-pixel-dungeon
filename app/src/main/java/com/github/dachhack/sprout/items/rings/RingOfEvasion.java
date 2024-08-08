@@ -18,13 +18,15 @@
 package com.github.dachhack.sprout.items.rings;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.mobs.Mob;
 
 public class RingOfEvasion extends Ring {
 
 	{
-		name = "Ring of Evasion";
+//		name = "Ring of Evasion";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -34,10 +36,12 @@ public class RingOfEvasion extends Ring {
 
 	@Override
 	public String desc() {
-		return isKnown() ? "This ring obfuscates the true position of the wearer, making them harder to detect and attack. "
-				+ "This ring is much stronger while the user remains undetected, and if the user is targeted the power of "
-				+ "evasion will slowly fade away, remaining undetected will restore the ring's effectiveness. "
-				+ "A degraded ring will instead make the user easier to detect and strike."
+//		return isKnown() ? "This ring obfuscates the true position of the wearer, making them harder to detect and attack. "
+//				+ "This ring is much stronger while the user remains undetected, and if the user is targeted the power of "
+//				+ "evasion will slowly fade away, remaining undetected will restore the ring's effectiveness. "
+//				+ "A degraded ring will instead make the user easier to detect and strike."
+//				: super.desc();
+		return isKnown() ? Messages.get(this, "desc")
 				: super.desc();
 	}
 

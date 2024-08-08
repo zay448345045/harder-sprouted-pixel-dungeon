@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.rings;
 
 import java.util.HashSet;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.buffs.Poison;
@@ -31,7 +32,8 @@ import com.watabou.utils.Random;
 public class RingOfElements extends Ring {
 
 	{
-		name = "Ring of Elements";
+//		name = "Ring of Elements";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -41,8 +43,10 @@ public class RingOfElements extends Ring {
 
 	@Override
 	public String desc() {
-		return isKnown() ? "This ring provides resistance to different elements, such as fire, "
-				+ "electricity, gases etc. Also it decreases duration of negative effects."
+//		return isKnown() ? "This ring provides resistance to different elements, such as fire, "
+//				+ "electricity, gases etc. Also it decreases duration of negative effects."
+//				: super.desc();
+		return isKnown() ? Messages.get(this, "desc")
 				: super.desc();
 	}
 

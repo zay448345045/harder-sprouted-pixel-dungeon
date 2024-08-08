@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.mobs;
 
 import com.github.dachhack.sprout.Badges;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.sprites.AcidicSprite;
 import com.watabou.utils.Random;
@@ -25,9 +26,11 @@ import com.watabou.utils.Random;
 public class Acidic extends Scorpio {
 
 	{
-		name = "acidic scorpio";
+		name = Messages.get(this, "name");
 		spriteClass = AcidicSprite.class;
 	}
+
+
 
 	@Override
 	public int defenseProc(Char enemy, int damage) {

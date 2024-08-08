@@ -17,11 +17,10 @@
  */
 package com.github.dachhack.sprout.actors.mobs.npcs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Journal;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
@@ -72,10 +71,12 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Ghost extends NPC {
 
 	{
-		name = "sad ghost";
+		name = Messages.get(this, "name");
 		spriteClass = GhostSprite.class;
 
 		flying = true;
@@ -123,7 +124,7 @@ public class Ghost extends NPC {
 
 	@Override
 	public String defenseVerb() {
-		return "evaded";
+		return Messages.get(this, "def");
 	}
 
 	@Override
@@ -378,7 +379,7 @@ public class Ghost extends NPC {
 	public static class FetidRat extends Rat {
 
 		{
-			name = "fetid rat";
+			name = Messages.get(this, "name");
 			spriteClass = FetidRatSprite.class;
 
 			HP = HT = 20;
@@ -445,7 +446,7 @@ public class Ghost extends NPC {
 
 	public static class GnollTrickster extends Gnoll {
 		{
-			name = "gnoll trickster";
+			name = Messages.get(this, "name");
 			spriteClass = GnollTricksterSprite.class;
 
 			HP = HT = 40;
@@ -543,7 +544,7 @@ public class Ghost extends NPC {
 
 	public static class GreatCrab extends Crab {
 		{
-			name = "great crab";
+			name = Messages.get(this, "name");
 			spriteClass = GreatCrabSprite.class;
 
 			HP = HT = 50;
@@ -612,7 +613,7 @@ public class Ghost extends NPC {
 		
 	private static final String TXT_KILLCOUNT = "Gnoll Archer Kill Count: %s";
 		{
-			name = "gnoll archer";
+			name = Messages.get(this, "name");
 			spriteClass = GnollArcherSprite.class;
 
 			HP = HT = 50;

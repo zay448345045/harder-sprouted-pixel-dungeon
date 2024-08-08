@@ -17,12 +17,11 @@
  */
 package com.github.dachhack.sprout.actors.mobs.npcs;
 
-import java.util.ArrayList;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Challenges;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Journal;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.Blob;
@@ -63,10 +62,12 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class Wandmaker extends NPC {
 
 	{
-		name = "old wandmaker";
+		name = Messages.get(this, "name");
 		spriteClass = WandmakerSprite.class;
 	}
 
@@ -330,7 +331,7 @@ public class Wandmaker extends NPC {
 
 		{
 			image = 7;
-			plantName = "Rotberry";
+			plantName = Messages.get(Wandmaker.class, "berryname");
 		}
 
 		@Override
@@ -353,9 +354,9 @@ public class Wandmaker extends NPC {
 
 		public static class Seed extends Plant.Seed {
 			{
-				plantName = "Rotberry";
+				plantName = Messages.get(Wandmaker.class, "berryname");
 
-				name = "seed of " + plantName;
+				name = Messages.get(this, "name");
 				image = ItemSpriteSheet.SEED_ROTBERRY;
 
 				plantClass = Rotberry.class;

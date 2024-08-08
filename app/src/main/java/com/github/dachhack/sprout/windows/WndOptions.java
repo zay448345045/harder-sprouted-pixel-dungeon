@@ -19,52 +19,60 @@ package com.github.dachhack.sprout.windows;
 
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.ui.RedButton;
+import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
-import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndOptions extends Window {
 
-	private static final int WIDTH = 120;
-	private static final int MARGIN = 2;
-	private static final int BUTTON_HEIGHT = 20;
+	private static final int WIDTH_P = 120;
+	private static final int WIDTH_L = 144;
 
-	public WndOptions(String title, String message, String... options) {
+	private static final int MARGIN 		= 2;
+	private static final int BUTTON_HEIGHT	= 20;
+
+	public WndOptions( String title, String message, String... options ) {
 		super();
 
-		BitmapTextMultiline tfTitle = PixelScene.createMultiline(title, 9);
-		tfTitle.hardlight(TITLE_COLOR);
-		tfTitle.x = tfTitle.y = MARGIN;
-		tfTitle.maxWidth = WIDTH - MARGIN * 2;
-		tfTitle.measure();
-		add(tfTitle);
+		int width = PixelScene.landscape() ? WIDTH_L : WIDTH_P;
 
-		BitmapTextMultiline tfMesage = PixelScene.createMultiline(message, 8);
-		tfMesage.maxWidth = WIDTH - MARGIN * 2;
-		tfMesage.measure();
-		tfMesage.x = MARGIN;
-		tfMesage.y = tfTitle.y + tfTitle.height() + MARGIN;
-		add(tfMesage);
+		float pos = MARGIN;
+		if (title != null) {
+			RenderedTextMultiline tfTitle = PixelScene.renderMultiline(title, 9);
+			tfTitle.hardlight(TITLE_COLOR);
+			tfTitle.setPos(MARGIN, pos);
+			tfTitle.maxWidth(width - MARGIN * 2);
+			add(tfTitle);
 
-		float pos = tfMesage.y + tfMesage.height() + MARGIN;
+			pos = tfTitle.bottom() + 3*MARGIN;
+		}
 
-		for (int i = 0; i < options.length; i++) {
+		RenderedTextMultiline tfMesage = PixelScene.renderMultiline( 6 );
+		tfMesage.text(message, width - MARGIN * 2);
+		tfMesage.setPos( MARGIN, pos );
+		add( tfMesage );
+
+		pos = tfMesage.bottom() + 2*MARGIN;
+
+		for (int i=0; i < options.length; i++) {
 			final int index = i;
-			RedButton btn = new RedButton(options[i]) {
+			RedButton btn = new RedButton( options[i] ) {
 				@Override
 				protected void onClick() {
 					hide();
-					onSelect(index);
+					onSelect( index );
 				}
 			};
-			btn.setRect(MARGIN, pos, WIDTH - MARGIN * 2, BUTTON_HEIGHT);
-			add(btn);
+			//btn.enable(enabled(i));
+			btn.setRect( MARGIN, pos, width - MARGIN * 2, BUTTON_HEIGHT );
+			add( btn );
 
 			pos += BUTTON_HEIGHT + MARGIN;
 		}
 
-		resize(WIDTH, (int) pos);
+		resize( width, (int)pos );
 	}
 
-	protected void onSelect(int index) {
-	};
+
+	protected void onSelect( int index ) {
+	}
 }

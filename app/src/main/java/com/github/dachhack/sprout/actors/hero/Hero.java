@@ -17,15 +17,14 @@
  */
 package com.github.dachhack.sprout.actors.hero;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
+import static com.github.dachhack.sprout.Dungeon.hero;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Bones;
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.GamesInProgress;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Actor;
@@ -99,9 +98,7 @@ import com.github.dachhack.sprout.items.rings.RingOfTenacity;
 import com.github.dachhack.sprout.items.scrolls.Scroll;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicMapping;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfMagicalInfusion;
-import com.github.dachhack.sprout.items.scrolls.ScrollOfRecharging;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfUpgrade;
-import com.github.dachhack.sprout.items.wands.Wand;
 import com.github.dachhack.sprout.items.weapon.melee.MeleeWeapon;
 import com.github.dachhack.sprout.items.weapon.missiles.Boomerang;
 import com.github.dachhack.sprout.items.weapon.missiles.JupitersWrath;
@@ -134,8 +131,12 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
-public class Hero extends Char {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 
+public class Hero extends Char {
+	public boolean resting = false;
 	private static final String TXT_LEAVE = "One does not simply leave Pixel Dungeon.";
 	private static final String TXT_OVERFILL = "HP Overfilled by %s";
 
@@ -143,7 +144,7 @@ public class Hero extends Char {
 	private static final String TXT_NEW_LEVEL = "Welcome to level %d! Now you are healthier and more focused. "
 			+ "It's easier for you to hit enemies and dodge their attacks.";
 
-	public static final String TXT_YOU_NOW_HAVE = "You now have %s";
+//	public static final String TXT_YOU_NOW_HAVE = Messages.get(Hero.class,"have");
 
 	private static final String TXT_SOMETHING_ELSE = "There is something else here";
 	private static final String TXT_LOCKED_CHEST = "This chest is locked and you don't have matching key";
@@ -201,9 +202,28 @@ public class Hero extends Char {
 
 	private ArrayList<Mob> visibleEnemies;
 
+	public boolean canAttack(Char enemy){
+		if (enemy == null || pos == enemy.pos) {
+			return false;
+		}
+
+		//can always attack adjacent enemies
+		if (Dungeon.level.adjacent(pos, enemy.pos)) {
+			return true;
+		}
+
+		KindOfWeapon wep = hero.belongings.weapon;
+
+		if (wep != null){
+			return wep.canReach(this, enemy.pos);
+		} else {
+			return false;
+		}
+	}
+
 	public Hero() {
 		super();
-		name = "you";
+		name = Messages.get(this, "name");
 
 		HP = HT = 20;
 		STR = STARTING_STR;
@@ -794,22 +814,22 @@ public class Hero extends Char {
 								|| ((item instanceof PotionOfStrength || item instanceof PotionOfMight) && ((Potion) item)
 										.isKnown());
 						if (important) {
-							GLog.p(TXT_YOU_NOW_HAVE, item.name());
+							GLog.p(Messages.get(this, "have"), item.name());
 						} else {
-							GLog.i(TXT_YOU_NOW_HAVE, item.name());
+							GLog.i(Messages.get(this, "have"), item.name());
 						}
 
 						// Alright, if anyone complains about not knowing the
 						// vial doesn't revive
 						// after this... I'm done, I'm just done.
 						if (item instanceof DewVial) {
-							GLog.w("Its revival power seems to have faded.");
+							GLog.w(Messages.get(Hero.class,"devnot"));
 							GameScene.show(new WndDewVial(item));
 						}
 					}
 
 					if (!heap.isEmpty()) {
-						GLog.i(TXT_SOMETHING_ELSE);
+						GLog.i(Messages.get(Hero.class,"sthelse"));
 					}
 					curAction = null;
 				} else {
@@ -852,7 +872,7 @@ public class Hero extends Char {
 					theSkeletonKey = belongings.getKey(GoldenSkeletonKey.class, 0);
 
 					if (theKey == null && theSkeletonKey == null) {
-						GLog.w(TXT_LOCKED_CHEST);
+						GLog.w(Messages.get(this, "chestlock"));
 						ready();
 						return false;
 					}
@@ -914,7 +934,7 @@ public class Hero extends Char {
 				Sample.INSTANCE.play(Assets.SND_UNLOCK);
 
 			} else {
-				GLog.w(TXT_LOCKED_DOOR);
+				GLog.w(Messages.get(this, "doorlock"));
 				ready();
 			}
 
@@ -955,7 +975,7 @@ public class Hero extends Char {
 		if (!Dungeon.level.forcedone && 
 			 Dungeon.dewDraw && (					 
 					 Dungeon.level.checkdew()>0 
-				     || Dungeon.hero.buff(Dewcharge.class) != null)
+				     || hero.buff(Dewcharge.class) != null)
 				    ) {
 			
 			GameScene.show(new WndDescend());
@@ -996,15 +1016,15 @@ public class Hero extends Char {
 			
 			PET pet = checkpet();
 			if(pet!=null && checkpetNear()){
-			  Dungeon.hero.petType=pet.type;
-			  Dungeon.hero.petLevel=pet.level;
-			  Dungeon.hero.petKills=pet.kills;	
-			  Dungeon.hero.petHP=pet.HP;
-			  Dungeon.hero.petExperience=pet.experience;
-			  Dungeon.hero.petCooldown=pet.cooldown;
+			  hero.petType=pet.type;
+			  hero.petLevel=pet.level;
+			  hero.petKills=pet.kills;
+			  hero.petHP=pet.HP;
+			  hero.petExperience=pet.experience;
+			  hero.petCooldown=pet.cooldown;
 			  pet.destroy();
 			  petfollow=true;
-			} else if (Dungeon.hero.haspet && Dungeon.hero.petfollow) {
+			} else if (hero.haspet && hero.petfollow) {
 				petfollow=true;
 			} else {
 				petfollow=false;
@@ -1039,12 +1059,12 @@ public class Hero extends Char {
 			if (Dungeon.depth == 1) {
 
 				if (belongings.getItem(Amulet.class) == null | !Badges.checkOtilukeRescued()) {
-					GameScene.show(new WndMessage(TXT_LEAVE));
+					GameScene.show(new WndMessage(Messages.get(this, "leave")));
 					ready();
 							
 				} else if (Dungeon.level.forcedone){
 					Dungeon.win(ResultDescriptions.WIN);
-					Dungeon.deleteGame(Dungeon.hero.heroClass, true);
+					Dungeon.deleteGame(hero.heroClass, true);
 					Game.switchScene(SurfaceScene.class);
 				} else {
 					GameScene.show(new WndAscend());
@@ -1061,15 +1081,15 @@ public class Hero extends Char {
 				
 				PET pet = checkpet();
 				if(pet!=null && checkpetNear()){
-				  Dungeon.hero.petType=pet.type;
-				  Dungeon.hero.petLevel=pet.level;
-				  Dungeon.hero.petKills=pet.kills;	
-				  Dungeon.hero.petHP=pet.HP;
-				  Dungeon.hero.petExperience=pet.experience;
-				  Dungeon.hero.petCooldown=pet.cooldown;
+				  hero.petType=pet.type;
+				  hero.petLevel=pet.level;
+				  hero.petKills=pet.kills;
+				  hero.petHP=pet.HP;
+				  hero.petExperience=pet.experience;
+				  hero.petCooldown=pet.cooldown;
 				  pet.destroy();
 				  petfollow=true;
-				} else if (Dungeon.hero.haspet && Dungeon.hero.petfollow) {
+				} else if (hero.haspet && hero.petfollow) {
 					petfollow=true;
 				} else {
 					petfollow=false;
@@ -1097,15 +1117,15 @@ public class Hero extends Char {
 
 			PET pet = checkpet();
 			if(pet!=null && checkpetNear()){
-			  Dungeon.hero.petType=pet.type;
-			  Dungeon.hero.petLevel=pet.level;
-			  Dungeon.hero.petKills=pet.kills;	
-			  Dungeon.hero.petHP=pet.HP;
-			  Dungeon.hero.petExperience=pet.experience;
-			  Dungeon.hero.petCooldown=pet.cooldown;
+			  hero.petType=pet.type;
+			  hero.petLevel=pet.level;
+			  hero.petKills=pet.kills;
+			  hero.petHP=pet.HP;
+			  hero.petExperience=pet.experience;
+			  hero.petCooldown=pet.cooldown;
 			  pet.destroy();
 			  petfollow=true;
-			} else if (Dungeon.hero.haspet && Dungeon.hero.petfollow) {
+			} else if (hero.haspet && hero.petfollow) {
 				petfollow=true;
 			} else {
 				petfollow=false;
@@ -1139,15 +1159,15 @@ public class Hero extends Char {
 
 				PET pet = checkpet();
 				if(pet!=null && checkpetNear()){
-				  Dungeon.hero.petType=pet.type;
-				  Dungeon.hero.petLevel=pet.level;
-				  Dungeon.hero.petKills=pet.kills;	
-				  Dungeon.hero.petHP=pet.HP;
-				  Dungeon.hero.petExperience=pet.experience;
-				  Dungeon.hero.petCooldown=pet.cooldown;
+				  hero.petType=pet.type;
+				  hero.petLevel=pet.level;
+				  hero.petKills=pet.kills;
+				  hero.petHP=pet.HP;
+				  hero.petExperience=pet.experience;
+				  hero.petCooldown=pet.cooldown;
 				  pet.destroy();
 				  petfollow=true;
-				} else if (Dungeon.hero.haspet && Dungeon.hero.petfollow) {
+				} else if (hero.haspet && hero.petfollow) {
 					petfollow=true;
 				} else {
 					petfollow=false;
@@ -1310,9 +1330,9 @@ public class Hero extends Char {
 		}
 		
 		if (this.buff(AutoHealPotion.class) != null && ((float) HP / HT)<.1) {
-			PotionOfHealing pot = Dungeon.hero.belongings.getItem(PotionOfHealing.class);
+			PotionOfHealing pot = hero.belongings.getItem(PotionOfHealing.class);
 			if (pot != null) {
-				pot.detach(Dungeon.hero.belongings.backpack,1);	
+				pot.detach(hero.belongings.backpack,1);
 				/*
 				if(!(Dungeon.hero.belongings.getItem(PotionOfHealing.class).quantity() > 0)){
 					pot.detachAll(Dungeon.hero.belongings.backpack);
@@ -1511,8 +1531,8 @@ public class Hero extends Char {
 
 		if (levelUp) {
 
-			GLog.p(TXT_NEW_LEVEL, lvl);
-			sprite.showStatus(CharSprite.POSITIVE, TXT_LEVEL_UP);
+			GLog.p(Messages.get(this, "newlevel"), lvl);
+			sprite.showStatus(CharSprite.POSITIVE, Messages.get(this, "levelup"));
 			Sample.INSTANCE.play(Assets.SND_LEVELUP);
 
 			Badges.validateLevelReached();
@@ -1530,7 +1550,7 @@ public class Hero extends Char {
 					HP = HT+value2;
 					sprite.emitter().burst(Speck.factory(Speck.HEALING), 1);
 					
-					GLog.w(TXT_OVERFILL, lvl);
+					//GLog.w(TXT_OVERFILL, lvl);
 				}
 
 				
@@ -1685,7 +1705,7 @@ public class Hero extends Char {
 		} else {
 			
 			ankh.detach(belongings.backpack);
-			Dungeon.deleteGame(Dungeon.hero.heroClass, false);
+			Dungeon.deleteGame(hero.heroClass, false);
 			GameScene.show(new WndResurrect(ankh, cause));
 
 		}
@@ -1716,9 +1736,9 @@ public class Hero extends Char {
 
 		Dungeon.observe();
 
-		Dungeon.hero.belongings.identify();
+		hero.belongings.identify();
 
-		int pos = Dungeon.hero.pos;
+		int pos = hero.pos;
 
 		ArrayList<Integer> passable = new ArrayList<Integer>();
 		for (Integer ofs : Level.NEIGHBOURS8) {
@@ -1731,7 +1751,7 @@ public class Hero extends Char {
 		Collections.shuffle(passable);
 
 		ArrayList<Item> items = new ArrayList<Item>(
-				Dungeon.hero.belongings.backpack.items);
+				hero.belongings.backpack.items);
 		for (Integer cell : passable) {
 			if (items.isEmpty()) {
 				break;
@@ -1748,7 +1768,7 @@ public class Hero extends Char {
 			((Hero.Doom) cause).onDeath();
 		}
 
-		Dungeon.deleteGame(Dungeon.hero.heroClass, true);
+		Dungeon.deleteGame(hero.heroClass, true);
 	}
 
 	@Override
@@ -1908,10 +1928,10 @@ public class Hero extends Char {
 		}
 
 		if (intentional) {
-			sprite.showStatus(CharSprite.DEFAULT, TXT_SEARCH);
+			sprite.showStatus(CharSprite.DEFAULT, Messages.get(this, "search"));
 			sprite.operate(pos);
 			if (foresight != null && foresight.isCursed()) {
-				GLog.n("You can't concentrate, searching takes a while.");
+				GLog.n(Messages.get(this, "nocon"));
 				spendAndNext(TIME_TO_SEARCH * 3);
 			} else {
 				spendAndNext(TIME_TO_SEARCH);
@@ -1920,7 +1940,7 @@ public class Hero extends Char {
 		}
 
 		if (smthFound) {
-			GLog.w(TXT_NOTICED_SMTH);
+			GLog.w(Messages.get(this, "notice"));
 			Sample.INSTANCE.play(Assets.SND_SECRET);
 			interrupt();
 		}

@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.mobs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Terror;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -43,7 +44,7 @@ public class BlueCat extends Mob {
 	public Item item;
 
 	{
-		name = "blue cat";
+		name = Messages.get(this, "name");
 		spriteClass = ThiefSprite.class;
 
 		HP = HT = 100+(adjustForDepth(0)*Random.NormalIntRange(31, 51));
@@ -138,7 +139,7 @@ public class BlueCat extends Mob {
 
 			item.updateQuickslot();
 			
-			GLog.w(TXT_STOLE, this.name, item.name());
+			GLog.w(Messages.get(BlueCat.class, "1"), this.name, item.name());
 					
 			this.item = item;
 			item.detachAll(hero.belongings.backpack);
@@ -152,12 +153,10 @@ public class BlueCat extends Mob {
 
 	@Override
 	public String description() {
-		String desc = "Deeper levels of the dungeon have always been a hiding place for all kinds of criminals. "
-				+ "Not all of them could keep a clear mind during their extended periods so far from daylight. Long ago, "
-				+ "these crazy thieves and bandits have forgotten who they are and why they steal.";
+		String desc = Messages.get(this, "desc");
 
 		if (item != null) {
-			desc += String.format(TXT_CARRIES, Utils.capitalize(this.name),
+			desc += String.format(Messages.get(BlueCat.class, "2"), Utils.capitalize(this.name),
 					item.name());
 		}
 

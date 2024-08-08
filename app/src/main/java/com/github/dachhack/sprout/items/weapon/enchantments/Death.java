@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items.weapon.enchantments;
 
 import com.github.dachhack.sprout.Badges;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.particles.ShadowParticle;
@@ -29,7 +30,8 @@ import com.watabou.utils.Random;
 
 public class Death extends Weapon.Enchantment {
 
-	private static final String TXT_GRIM = "Grim %s";
+//	private static final String TXT_GRIM = "Grim %s";
+private static final String TXT_GRIM = Messages.get(Death.class, "name");
 
 	private static ItemSprite.Glowing BLACK = new ItemSprite.Glowing(0x000000);
 	

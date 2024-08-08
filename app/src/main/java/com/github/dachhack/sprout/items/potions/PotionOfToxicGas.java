@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.potions;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.blobs.Blob;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.scenes.GameScene;
@@ -27,7 +28,8 @@ import com.watabou.noosa.audio.Sample;
 public class PotionOfToxicGas extends Potion {
 
 	{
-		name = "Potion of Toxic Gas";
+//		name = "Potion of Toxic Gas";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -43,13 +45,17 @@ public class PotionOfToxicGas extends Potion {
 		GameScene.add(Blob.seed(cell, 1000, ToxicGas.class));
 	}
 
-	@Override
-	public String desc() {
-		return "Uncorking or shattering this pressurized glass will cause "
-				+ "its contents to explode into a deadly cloud of toxic green gas. "
-				+ "You might choose to fling this potion at distant enemies "
-				+ "instead of uncorking it by hand.";
-	}
+//	@Override
+//	public String desc() {
+//		return "Uncorking or shattering this pressurized glass will cause "
+//				+ "its contents to explode into a deadly cloud of toxic green gas. "
+//				+ "You might choose to fling this potion at distant enemies "
+//				+ "instead of uncorking it by hand.";
+//	}
+@Override
+public String desc() {
+	return Messages.get(this, "desc");
+}
 
 	@Override
 	public int price() {

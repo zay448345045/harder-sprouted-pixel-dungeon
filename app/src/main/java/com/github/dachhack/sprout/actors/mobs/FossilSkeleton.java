@@ -17,26 +17,18 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
-import com.github.dachhack.sprout.Assets;
-import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.ResultDescriptions;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
-import com.github.dachhack.sprout.items.Generator;
-import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
-import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.sprites.FossilSkeletonSprite;
-import com.github.dachhack.sprout.utils.GLog;
-import com.github.dachhack.sprout.utils.Utils;
-import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class FossilSkeleton extends Skeleton {
 
 	{
-		name = "fossil skeleton";
+		name = Messages.get(this, "name");
 		spriteClass = FossilSkeletonSprite.class;
 
 		HP = HT = 40;
@@ -64,15 +56,12 @@ public class FossilSkeleton extends Skeleton {
 
 	@Override
 	public String defenseVerb() {
-		return "blocked";
+		return Messages.get(this, "def");
 	}
 
 	@Override
 	public String description() {
-		return "Skeletons are composed of corpses bones from unlucky adventurers and inhabitants of the dungeon, "
-				+ "animated by emanations of evil magic from the depths below. After they have been "
-				+ "damaged enough, they disintegrate in an explosion of bones. "
-				+ "This skeleton appears to be made from fossilized bone. ";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

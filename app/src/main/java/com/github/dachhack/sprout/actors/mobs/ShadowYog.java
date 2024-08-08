@@ -17,12 +17,10 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Actor;
-import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.buffs.Amok;
 import com.github.dachhack.sprout.actors.buffs.Burning;
@@ -40,13 +38,16 @@ import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.levels.Terrain;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.ShadowYogSprite;
+import com.github.dachhack.sprout.ui.BossHealthBar;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class ShadowYog extends Mob  {
 	
 	{
-		name = "Shadow Yog-Dzewa";
+		name = Messages.get(this, "name");
 		spriteClass = ShadowYogSprite.class;
 
 		HP = HT = 50*Dungeon.hero.lvl;
@@ -155,14 +156,15 @@ public class ShadowYog extends Mob  {
 
 	@Override
 	public void notice() {
+		BossHealthBar.assignBoss(this);
+
 		super.notice();
 		yell("Hope is an illusion...");
 	}
 
 	@Override
 	public String description() {
-		return TXT_DESC;
-
+		return Messages.get(ShadowYog.class, "desc");
 	}
 	
 

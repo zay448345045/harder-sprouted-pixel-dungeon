@@ -17,8 +17,7 @@
  */
 package com.github.dachhack.sprout.actors.buffs;
 
-import java.util.HashSet;
-
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.blobs.ConfusionGas;
 import com.github.dachhack.sprout.actors.blobs.CorruptGas;
 import com.github.dachhack.sprout.actors.blobs.ParalyticGas;
@@ -42,7 +41,12 @@ public class MagicImmunity extends FlavourBuff {
 
 	@Override
 	public String toString() {
-		return "Dispel Magic";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc", dispTurns());
 	}
 
 	{

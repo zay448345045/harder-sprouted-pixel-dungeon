@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items.food;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.BerryRegeneration;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Hunger;
@@ -30,10 +31,14 @@ import com.watabou.utils.Random;
 public class Blackberry extends Food {
 
 	{
-		name = "dungeon black berry";
+//		name = "dungeon black berry";
+//		image = ItemSpriteSheet.SEED_BLACKBERRY;
+//		energy = (Hunger.STARVING - Hunger.HUNGRY)/10;
+//		message = "Juicy!";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.SEED_BLACKBERRY;
-		energy = (Hunger.STARVING - Hunger.HUNGRY)/10;
-		message = "Juicy!";
+		energy = (Hunger.STARVING - Hunger.HUNGRY) / 10;
+		message = Messages.get(this, "eat");
 		hornValue = 1;
 		bones = false;
 	}
@@ -52,16 +57,22 @@ public class Blackberry extends Food {
 				Dungeon.observe();
 
 				if (Dungeon.level.mobs.size() > 0) {
-					GLog.i("You can somehow feel the presence of other creatures' minds!");
+//					GLog.i("You can somehow feel the presence of other creatures' minds!");
+//				} else {
+//					GLog.i("You can somehow tell that you are alone on this level at the moment.");
+//				}
+					GLog.i(Messages.get(this, "mv1"));
 				} else {
-					GLog.i("You can somehow tell that you are alone on this level at the moment.");
+					GLog.i(Messages.get(this, "mv2"));
 				}
 				Buff.affect(hero, BerryRegeneration.class).level(hero.HT+hero.HT);
-				GLog.w("The berry releases energy your body!");
+//				GLog.w("The berry releases energy your body!");
+				GLog.w(Messages.get(this, "eat3"));
 				break;
 			case 0: case 2: case 3: case 4: case 5: 
 			case 6: case 7: case 8: case 9: case 10:
-				GLog.w("The berry releases energy into your body!");
+//				GLog.w("The berry releases energy into your body!");
+					GLog.p(Messages.get(this, "eat3"));
 				Buff.affect(hero, BerryRegeneration.class).level(hero.HT/2);
 				break;
 			}
@@ -69,9 +80,12 @@ public class Blackberry extends Food {
 	}	
 	
 	@Override
+//	public String info() {
+//		return "A delectable berry found in the depths of the dungeon. "
+//				+"These berries harvest the magical dew around them to grow healthy ";
+//	}
 	public String info() {
-		return "A delectable berry found in the depths of the dungeon. "
-				+"These berries harvest the magical dew around them to grow healthy ";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

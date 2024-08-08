@@ -17,11 +17,10 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
@@ -50,10 +49,12 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Tower extends Mob implements Callback {
 
 	{
-		name = "robot printer";
+		name = Messages.get(this, "name");
 		spriteClass = TowerSprite.class;
 
 		HP = HT = 300+(Dungeon.depth*Random.NormalIntRange(2, 5));
@@ -88,7 +89,7 @@ public class Tower extends Mob implements Callback {
 			mob.beckon(Dungeon.hero.pos);
 		}
 
-		GLog.w("Alert!");
+		GLog.w(Messages.get(this, "alert"));
 		CellEmitter.center(pos).start(
 				Speck.factory(Speck.SCREAM), 0.3f, 3);
 		Sample.INSTANCE.play(Assets.SND_CHALLENGE);
@@ -121,7 +122,7 @@ public class Tower extends Mob implements Callback {
 		case 2:
 			if (Dungeon.level.mobs.size()<5){
 		 		BrokenRobot.spawnAt(pos+1);
-		 		GLog.n("Proc: Print.Robots; Run;");
+				GLog.n(Messages.get(this, "print"));
 			}
 		break;
 		}
@@ -136,8 +137,7 @@ public class Tower extends Mob implements Callback {
 
 	@Override
 	public String description() {
-		return "The tower is a source harnessing magical energy "
-				+ "it appears to be out of control ";
+		return Messages.get(this, "desc");
 	}
 	
 	public void explode(int cell) {

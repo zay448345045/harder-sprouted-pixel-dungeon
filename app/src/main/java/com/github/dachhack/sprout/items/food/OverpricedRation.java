@@ -17,22 +17,30 @@
  */
 package com.github.dachhack.sprout.items.food;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Hunger;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
 public class OverpricedRation extends Food {
 
 	{
-		name = "overpriced food ration";
+//		name = "overpriced food ration";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.OVERPRICED;
 		energy = Hunger.STARVING - Hunger.HUNGRY;
-		message = "That food tasted ok.";
+//		message = "That food tasted ok.";
+		message = Messages.get(this, "eat_msg");
 		hornValue = 1;
 	}
 
+//	@Override
+//	public String info() {
+//		return "It looks exactly like a standard ration of food but smaller.";
+//	}
+
 	@Override
 	public String info() {
-		return "It looks exactly like a standard ration of food but smaller.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

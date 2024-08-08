@@ -17,6 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.buffs;
 
+import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ui.BuffIndicator;
 
 public class Dewcharge extends FlavourBuff {
@@ -30,7 +32,12 @@ public class Dewcharge extends FlavourBuff {
 
 	@Override
 	public String toString() {
-		return "Dew Charge";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc", Dungeon.hero.buff(Dewcharge.class).dispTurnsInt());
 	}
 	
 }

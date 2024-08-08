@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items.weapon.enchantments;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Bleeding;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -34,7 +35,8 @@ import com.watabou.utils.Random;
 
 public class LokisPoison extends Weapon.Enchantment {
 
-	private static final String TXT_VENOMOUS = "Vicious %s";
+//	private static final String TXT_VENOMOUS = "Vicious %s";
+private static final String TXT_VENOMOUS = Messages.get(LokisPoison.class, "name");
 
 	private static ItemSprite.Glowing PURPLE = new ItemSprite.Glowing(0x4400AA);
 

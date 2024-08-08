@@ -17,34 +17,44 @@
  */
 package com.github.dachhack.sprout.windows;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.items.DewVial;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.ui.RedButton;
+import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.Utils;
-import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndDewDrawInfo extends Window {
 	
 	//if people don't get it after this, I quit. I just quit.
 
-	private static final String TXT_MESSAGE = "Drawing out dew makes it so that mobs on special levels drop dew to fill your vial. "
-            +"Additionally, your character is buffed with dew charge at the start of each normal level. "
-            +"As long as you are dew charged, enemies drop dew to fill your vial. ";
-	
-	private static final String TXT_MESSAGE2 = "Each level dew charges you for a set amount of moves. "
-            +"Each level also has a move goal for killing all regular generated enemies. (Not special enemies like statues and piranha) "
-            +"Killing all regular enemies that were generated with the level clears that level. ";
-	
-	private static final String TXT_MESSAGE3 = "If you clear a level in less moves than the goal, the additional moves are added to your dew charge for the next level. "
-            +"You will need to clear the levels as fast as you can to get dew upgrades. ";
+//	private static final String TXT_MESSAGE = "Drawing out dew makes it so that mobs on special levels drop dew to fill your vial. "
+//            +"Additionally, your character is buffed with dew charge at the start of each normal level. "
+//            +"As long as you are dew charged, enemies drop dew to fill your vial. ";
+//
+//	private static final String TXT_MESSAGE2 = "Each level dew charges you for a set amount of moves. "
+//            +"Each level also has a move goal for killing all regular generated enemies. (Not special enemies like statues and piranha) "
+//            +"Killing all regular enemies that were generated with the level clears that level. ";
+//
+//	private static final String TXT_MESSAGE3 = "If you clear a level in less moves than the goal, the additional moves are added to your dew charge for the next level. "
+//            +"You will need to clear the levels as fast as you can to get dew upgrades. ";
+//
+//	private static final String TXT_MESSAGE4 = "The dew vial will also allow you to choose which item you apply upgrades to when blessing. ";
+//
+//	private static final String TXT_WATER = "Okay! Thanks for that!";
 
-	private static final String TXT_MESSAGE4 = "The dew vial will also allow you to choose which item you apply upgrades to when blessing. ";
-	
-	private static final String TXT_WATER = "Okay! Thanks for that!";
+	private static final String TXT_MESSAGE = Messages.get(WndDewDrawInfo.class, "msg1");
 
+	private static final String TXT_MESSAGE2 = Messages.get(WndDewDrawInfo.class, "msg2");
+
+	private static final String TXT_MESSAGE3 = Messages.get(WndDewDrawInfo.class, "msg3");
+
+	private static final String TXT_MESSAGE4 = Messages.get(WndDewDrawInfo.class, "msg4");
+
+	private static final String TXT_WATER = Messages.get(WndDewDrawInfo.class, "ok");
 
 	private static final int WIDTH = 120;
 	private static final int BTN_HEIGHT = 20;
@@ -53,7 +63,7 @@ public class WndDewDrawInfo extends Window {
 	public WndDewDrawInfo(final Item item) {
 
 		super();
-		
+
 		Item dewvial = new DewVial();
 
 		IconTitle titlebar = new IconTitle();
@@ -62,42 +72,36 @@ public class WndDewDrawInfo extends Window {
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 
-		BitmapTextMultiline message = PixelScene.createMultiline(TXT_MESSAGE, 6);
-		message.maxWidth = WIDTH;
-		message.measure();
-		message.y = titlebar.bottom() + GAP;
+		RenderedTextMultiline message = PixelScene.renderMultiline(Messages.get(WndDewDrawInfo.class, "msg1"), 6);
+		message.maxWidth(WIDTH);
+		message.setPos(0, titlebar.bottom() + GAP);
 		add(message);
-
-		BitmapTextMultiline message2 = PixelScene.createMultiline(TXT_MESSAGE2, 6);
-		message2.maxWidth = WIDTH;
-		message2.measure();
-		message2.y = message.y + message.height() + GAP;
+		RenderedTextMultiline message2 = PixelScene.renderMultiline(Messages.get(WndDewDrawInfo.class, "msg2"), 6);
+		message2.maxWidth(WIDTH);
+		message2.setPos(0, message.top() + message.height() + GAP);
 		add(message2);
 
-		BitmapTextMultiline message3 = PixelScene.createMultiline(TXT_MESSAGE3, 6);
-		message3.maxWidth = WIDTH;
-		message3.measure();
-		message3.y = message2.y + message2.height() + GAP;
+		RenderedTextMultiline message3 = PixelScene.renderMultiline(Messages.get(WndDewDrawInfo.class, "msg3"), 6);
+		message3.maxWidth(WIDTH);
+		message3.setPos(0, message2.top() + message2.height() + GAP);
 		add(message3);
-		
-		BitmapTextMultiline message4 = PixelScene.createMultiline(TXT_MESSAGE4, 6);
-		message4.maxWidth = WIDTH;
-		message4.measure();
-		message4.y = message3.y + message3.height() + GAP;
+
+		RenderedTextMultiline message4 = PixelScene.renderMultiline(Messages.get(WndDewDrawInfo.class, "msg4"), 6);
+		message4.maxWidth(WIDTH);
+		message4.setPos(0, message3.top() + message3.height() + GAP);
 		add(message4);
-		
-		
-		RedButton btnBattle = new RedButton(TXT_WATER) {
+
+
+		RedButton btnBattle = new RedButton(Messages.get(WndDewDrawInfo.class, "ok")) {
 			@Override
 			protected void onClick() {
 				hide();
 			}
 		};
-		btnBattle.setRect(0, message4.y + message4.height() + GAP, WIDTH,
+		btnBattle.setRect(0, message4.top() + message4.height() + GAP, WIDTH,
 				BTN_HEIGHT);
 		add(btnBattle);
 
-		
 
 		resize(WIDTH, (int) btnBattle.bottom());
 	}

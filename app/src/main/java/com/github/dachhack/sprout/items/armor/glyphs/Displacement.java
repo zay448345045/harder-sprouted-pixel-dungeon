@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items.armor.glyphs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -32,7 +33,8 @@ import com.watabou.utils.Random;
 
 public class Displacement extends Glyph {
 
-	private static final String TXT_DISPLACEMENT = "%s of displacement";
+//	private static final String TXT_DISPLACEMENT = "%s of displacement";
+private static final String TXT_DISPLACEMENT = Messages.get(Displacement.class, "name");
 
 	private static ItemSprite.Glowing BLUE = new ItemSprite.Glowing(0x66AAFF);
 

@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.armor;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.buffs.Blindness;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -37,13 +38,19 @@ import com.watabou.noosa.audio.Sample;
 
 public class RogueArmor extends ClassArmor {
 
-	private static final String TXT_FOV = "You can only jump to an empty location in your field of view";
-	private static final String TXT_NOT_ROGUE = "Only rogues can use this armor!";
+//	private static final String TXT_FOV = "You can only jump to an empty location in your field of view";
+//	private static final String TXT_NOT_ROGUE = "Only rogues can use this armor!";
+//
+//	private static final String AC_SPECIAL = "SMOKE BOMB";
+private static final String TXT_FOV = Messages.get(RogueArmor.class, "fov");
+	private static final String TXT_NOT_ROGUE = Messages.get(RogueArmor.class, "not_rogue");
 
-	private static final String AC_SPECIAL = "SMOKE BOMB";
+	private static final String AC_SPECIAL = Messages.get(RogueArmor.class, "ac_special");
 
 	{
-		name = "rogue garb";
+//		name = "rogue garb";
+//		image = ItemSpriteSheet.ARMOR_ROGUE;
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ARMOR_ROGUE;
 	}
 
@@ -67,11 +74,15 @@ public class RogueArmor extends ClassArmor {
 		}
 	}
 
-	@Override
-	public String desc() {
-		return "Wearing this dark garb, a rogue can perform a trick, that is called \"smoke bomb\" "
-				+ "(though no real explosives are used): he blinds enemies who could see him and jumps aside.";
-	}
+//	@Override
+//	public String desc() {
+//		return "Wearing this dark garb, a rogue can perform a trick, that is called \"smoke bomb\" "
+//				+ "(though no real explosives are used): he blinds enemies who could see him and jumps aside.";
+//	}
+@Override
+public String desc() {
+	return Messages.get(this, "desc");
+}
 
 	protected static CellSelector.Listener teleporter = new CellSelector.Listener() {
 
@@ -108,9 +119,13 @@ public class RogueArmor extends ClassArmor {
 			}
 		}
 
-		@Override
-		public String prompt() {
-			return "Choose a location to jump to";
-		}
+//		@Override
+//		public String prompt() {
+//			return "Choose a location to jump to";
+//		}
+@Override
+public String prompt() {
+	return Messages.get(RogueArmor.class, "prompt");
+}
 	};
 }

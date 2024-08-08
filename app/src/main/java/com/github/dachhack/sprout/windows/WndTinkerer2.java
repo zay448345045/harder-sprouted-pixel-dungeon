@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.windows;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.npcs.Tinkerer2;
 import com.github.dachhack.sprout.items.ActiveMrDestructo;
@@ -28,6 +29,7 @@ import com.github.dachhack.sprout.items.Mushroom;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.ui.RedButton;
+import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
@@ -35,22 +37,33 @@ import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndTinkerer2 extends Window {
 
-	private static final String TXT_MESSAGE1 = "Thanks for the Toadstool Mushroom! "
-			                                  +"In return, I can upgrade your mr destructo for you, "
-			                                  +"or I can recharge your old one and give you another. ";
-	
-	private static final String TXT_MESSAGE2 = "Thanks for the Toadstool Mushroom! "
-                                               +"In return, I can upgrade your mr destructo for you. "
-                                               +"You can also have this other one I've managed to fix up. ";
-	
-	private static final String TXT_MESSAGE3 = "Thanks for the Toadstool Mushroom! "
-                                               +"In return, you can have this Mr Destructo if you like. ";
+//	private static final String TXT_MESSAGE1 = "Thanks for the Toadstool Mushroom! "
+//			                                  +"In return, I can upgrade your mr destructo for you, "
+//			                                  +"or I can recharge your old one and give you another. ";
+//
+//	private static final String TXT_MESSAGE2 = "Thanks for the Toadstool Mushroom! "
+//                                               +"In return, I can upgrade your mr destructo for you. "
+//                                               +"You can also have this other one I've managed to fix up. ";
+//
+//	private static final String TXT_MESSAGE3 = "Thanks for the Toadstool Mushroom! "
+//                                               +"In return, you can have this Mr Destructo if you like. ";
+//
+//	private static final String TXT_UPGRADE = "Upgrade my Mr Destructo";
+//	private static final String TXT_RECHARGE = "Recharge my Mr Desructo";
+//	private static final String TXT_NEW = "I'll take the new Mr Desructo";
+//
+//	private static final String TXT_FARAWELL = "Good luck in your quest, %s!";
+private static final String TXT_MESSAGE1 = Messages.get(WndTinkerer2.class, "msg1");
 
-	private static final String TXT_UPGRADE = "Upgrade my Mr Destructo";
-	private static final String TXT_RECHARGE = "Recharge my Mr Desructo";
-	private static final String TXT_NEW = "I'll take the new Mr Desructo";
+	private static final String TXT_MESSAGE2 = Messages.get(WndTinkerer2.class, "msg2");
 
-	private static final String TXT_FARAWELL = "Good luck in your quest, %s!";
+	private static final String TXT_MESSAGE3 = Messages.get(WndTinkerer2.class, "msg3");
+
+	private static final String TXT_UPGRADE = Messages.get(WndTinkerer2.class, "upgrade");
+	private static final String TXT_RECHARGE = Messages.get(WndTinkerer2.class, "recharge");
+	private static final String TXT_NEW = Messages.get(WndTinkerer2.class, "new");
+
+	private static final String TXT_FARAWELL = Messages.get(WndTinkerer2.class, "farewell");
 
 	private static final int WIDTH = 120;
 	private static final int BTN_HEIGHT = 20;
@@ -69,11 +82,9 @@ public class WndTinkerer2 extends Window {
 
 		if (mrd instanceof InactiveMrDestructo) {
 
-
-			BitmapTextMultiline message = PixelScene.createMultiline(TXT_MESSAGE1, 6);
+			RenderedTextMultiline message = PixelScene.renderMultiline(TXT_MESSAGE1, 6);
 			message.maxWidth = WIDTH;
-			message.measure();
-			message.y = titlebar.bottom() + GAP;
+			message.setPos(0, titlebar.bottom() + GAP);
 			add(message);
 
 			RedButton btnUpgrade = new RedButton(TXT_UPGRADE) {
@@ -82,7 +93,7 @@ public class WndTinkerer2 extends Window {
 					selectUpgrade(tinkerer);
 				}
 			};
-			btnUpgrade.setRect(0, message.y + message.height() + GAP, WIDTH, BTN_HEIGHT);
+			btnUpgrade.setRect(0, message.top() + message.height() + GAP, WIDTH, BTN_HEIGHT);
 			add(btnUpgrade);
 
 			RedButton btnRecharge = new RedButton(TXT_RECHARGE) {
@@ -98,10 +109,9 @@ public class WndTinkerer2 extends Window {
 			
 
 		} else if (mrd instanceof ActiveMrDestructo) {
-			BitmapTextMultiline message = PixelScene.createMultiline(TXT_MESSAGE2, 6);
-			message.maxWidth = WIDTH;
-			message.measure();
-			message.y = titlebar.bottom() + GAP;
+			RenderedTextMultiline message = PixelScene.renderMultiline(TXT_MESSAGE2, 6);
+			message.maxWidth(WIDTH);
+			message.setPos(0, titlebar.bottom() + GAP);
 			add(message);
 
 			RedButton btnUpgrade = new RedButton(TXT_UPGRADE) {
@@ -110,16 +120,15 @@ public class WndTinkerer2 extends Window {
 					selectUpgradePlus(tinkerer);
 				}
 			};
-			btnUpgrade.setRect(0, message.y + message.height() + GAP, WIDTH, BTN_HEIGHT);
+			btnUpgrade.setRect(0, message.top() + message.height() + GAP, WIDTH, BTN_HEIGHT);
 			add(btnUpgrade);
 
 			resize(WIDTH, (int) btnUpgrade.bottom());
 			
 		} else {
-			BitmapTextMultiline message = PixelScene.createMultiline(TXT_MESSAGE3, 6);
-			message.maxWidth = WIDTH;
-			message.measure();
-			message.y = titlebar.bottom() + GAP;
+			RenderedTextMultiline message = PixelScene.renderMultiline(TXT_MESSAGE3, 6);
+			message.maxWidth(WIDTH);
+			message.setPos(0, titlebar.bottom() + GAP);
 			add(message);
 
 			RedButton btnNew = new RedButton(TXT_NEW) {
@@ -128,7 +137,7 @@ public class WndTinkerer2 extends Window {
 					selectNew(tinkerer);
 				}
 			};
-			btnNew.setRect(0, message.y + message.height() + GAP, WIDTH, BTN_HEIGHT);
+			btnNew.setRect(0, message.top() + message.height() + GAP, WIDTH, BTN_HEIGHT);
 			add(btnNew);
 			
 			resize(WIDTH, (int) btnNew.bottom());
@@ -151,7 +160,7 @@ public class WndTinkerer2 extends Window {
 		
 		 ActiveMrDestructo2 mrd2 = new ActiveMrDestructo2();	
 			if (mrd2.doPickUp(Dungeon.hero)) {
-				GLog.i(Hero.TXT_YOU_NOW_HAVE, mrd2.name());
+				GLog.i(Messages.get(Hero.class,"have"), mrd2.name());
 			} else {
 				Dungeon.level.drop(mrd2, Dungeon.hero.pos).sprite.drop();
 			}
@@ -173,7 +182,7 @@ public class WndTinkerer2 extends Window {
 		
 		 ActiveMrDestructo2 mrd2 = new ActiveMrDestructo2();	
 			if (mrd2.doPickUp(Dungeon.hero)) {
-				GLog.i(Hero.TXT_YOU_NOW_HAVE, mrd2.name());
+				GLog.i(Messages.get(Hero.class,"have"), mrd2.name());
 			} else {
 				Dungeon.level.drop(mrd2, Dungeon.hero.pos).sprite.drop();
 			}
@@ -198,14 +207,14 @@ public class WndTinkerer2 extends Window {
 		
 		 ActiveMrDestructo mrd = new ActiveMrDestructo();	
 			if (mrd.doPickUp(Dungeon.hero)) {
-				GLog.i(Hero.TXT_YOU_NOW_HAVE, mrd.name());
+				GLog.i(Messages.get(Hero.class,"have"), mrd.name());
 			} else {
 				Dungeon.level.drop(mrd, Dungeon.hero.pos).sprite.drop();
 			}
 			
 		ActiveMrDestructo mrds = new ActiveMrDestructo();	
 				if (mrds.doPickUp(Dungeon.hero)) {
-					GLog.i(Hero.TXT_YOU_NOW_HAVE, mrds.name());
+					GLog.i(Messages.get(Hero.class,"have"), mrds.name());
 				} else {
 					Dungeon.level.drop(mrds, Dungeon.hero.pos).sprite.drop();
 				}
@@ -227,7 +236,7 @@ public class WndTinkerer2 extends Window {
 		
 		 ActiveMrDestructo mrd = new ActiveMrDestructo();	
 			if (mrd.doPickUp(Dungeon.hero)) {
-				GLog.i(Hero.TXT_YOU_NOW_HAVE, mrd.name());
+				GLog.i(Messages.get(Hero.class,"have"), mrd.name());
 			} else {
 				Dungeon.level.drop(mrd, Dungeon.hero.pos).sprite.drop();
 			}

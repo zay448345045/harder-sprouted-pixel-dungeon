@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.weapon.missiles;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Paralysis;
@@ -29,7 +30,8 @@ public class CurareShuriken extends MissileWeapon {
 	public static final float DURATION = 3f;
 
 	{
-		name = "curare shuriken";
+//		name = "curare shuriken";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.SHURIKEN;
 
 		STR = 13;
@@ -57,10 +59,14 @@ public class CurareShuriken extends MissileWeapon {
 	}
 
 	@Override
+//	public String desc() {
+//		return "Star-shaped pieces of metal with razor-sharp blades do significant damage "
+//				+ "when they hit a target. They can be thrown at very high rate.";
+//	}
 	public String desc() {
-		return "Star-shaped pieces of metal with razor-sharp blades do significant damage "
-				+ "when they hit a target. They can be thrown at very high rate.";
+		return Messages.get(Shuriken.class, "desc");
 	}
+
 
 	@Override
 	public Item random() {

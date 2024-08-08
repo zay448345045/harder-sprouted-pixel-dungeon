@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.actors.buffs;
 
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.hero.HeroClass;
@@ -56,6 +57,10 @@ public class Hunger extends Buff implements Hero.Doom {
 		level = bundle.getFloat(LEVEL);
 	}
 
+	public int hunger() {
+		return (int)Math.ceil(level);
+	}
+
 	@Override
 	public boolean act() {
 		if (target.isAlive()) {
@@ -67,7 +72,7 @@ public class Hunger extends Buff implements Hero.Doom {
 				if (Random.Float() < 0.3f
 						&& (target.HP > 1 || !target.paralysed)) {
 
-					hero.damage(1, this);
+					hero.damage(Math.round(0.05f * hero.HP), this);
 
 				}
 			} else {
@@ -76,7 +81,7 @@ public class Hunger extends Buff implements Hero.Doom {
 				boolean statusUpdated = false;
 				if (newLevel >= STARVING) {
 
-					GLog.n(TXT_STARVING);
+					GLog.n(Messages.get(this, "starve"));
 					hero.damage(1, this);
 					statusUpdated = true;
 
@@ -84,7 +89,7 @@ public class Hunger extends Buff implements Hero.Doom {
 
 				} else if (newLevel >= HUNGRY && level < HUNGRY) {
 
-					GLog.w(TXT_HUNGRY);
+					GLog.w(Messages.get(this, "hunger"));
 					statusUpdated = true;
 
 				}
@@ -114,7 +119,7 @@ public class Hunger extends Buff implements Hero.Doom {
 				.buff(HornOfPlenty.hornRecharge.class);
 		if (buff != null && buff.isCursed()) {
 			energy = Math.round(energy * 0.67f);
-			GLog.n("The cursed horn steals some of the food energy as you eat.");
+			GLog.n(Messages.get(this, "horn"));
 		}
 		level -= energy;
 		if (level < 0) {
@@ -129,7 +134,7 @@ public class Hunger extends Buff implements Hero.Doom {
 	public boolean isStarving() {
 		return level >= STARVING;
 	}
-	
+
 	public int hungerLevel() {
 		return (int) level;
 	}
@@ -148,18 +153,30 @@ public class Hunger extends Buff implements Hero.Doom {
 	@Override
 	public String toString() {
 		if (level < STARVING) {
-			return "Hungry";
+			return Messages.get(this, "hungerst");
 		} else {
-			return "Starving";
+			return Messages.get(this, "starvest");
 		}
 	}
 
 	@Override
+	public String desc() {
+		String result;
+		if (level < STARVING) {
+			result = Messages.get(this, "desc_intro_hungry");
+		} else {
+			result = Messages.get(this, "desc_intro_starving");
+		}
+
+		result += Messages.get(this, "desc");
+
+		return result;
+	}
+
+	@Override
 	public void onDeath() {
-
-		Badges.validateDeathFromHunger();
-
 		Dungeon.fail(ResultDescriptions.HUNGER);
-		GLog.n(TXT_DEATH);
+		GLog.n(Messages.get(this, "die"));
+		Badges.validateDeathFromHunger();
 	}
 }

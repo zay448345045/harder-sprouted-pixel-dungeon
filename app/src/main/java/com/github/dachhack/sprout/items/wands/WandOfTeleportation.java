@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.wands;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -32,7 +33,8 @@ import com.watabou.utils.Callback;
 public class WandOfTeleportation extends Wand {
 
 	{
-		name = "Wand of Teleportation";
+//		name = "Wand of Teleportation";
+		name = Messages.get(this, "name");
 	}
 
 
@@ -55,8 +57,9 @@ public class WandOfTeleportation extends Wand {
 			ch.pos = pos;
 			ch.sprite.place(ch.pos);
 			ch.sprite.visible = Dungeon.visible[pos];
-			GLog.i(curUser.name + " teleported " + ch.name
-					+ " to somewhere");
+//			GLog.i(curUser.name + " teleported " + ch.name
+//					+ " to somewhere");
+			GLog.i(Messages.get(WandOfTeleportation.class, "tele", curUser.name, ch.name));
 
 		}
 	}

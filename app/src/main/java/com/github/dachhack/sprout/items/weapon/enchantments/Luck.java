@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.weapon.enchantments;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.items.weapon.Weapon;
 import com.github.dachhack.sprout.items.weapon.melee.relic.RelicMeleeWeapon;
@@ -25,7 +26,9 @@ import com.github.dachhack.sprout.sprites.ItemSprite.Glowing;
 
 public class Luck extends Weapon.Enchantment {
 
-	private static final String TXT_LUCKY = "Lucky %s";
+//	private static final String TXT_LUCKY = "Lucky %s";
+private static final String TXT_LUCKY = Messages.get(Luck.class, "name");
+
 
 	private static ItemSprite.Glowing GREEN = new ItemSprite.Glowing(0x00FF00);
 

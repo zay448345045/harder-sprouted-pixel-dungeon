@@ -18,17 +18,15 @@
 package com.github.dachhack.sprout.actors.mobs.pets;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
-import com.github.dachhack.sprout.actors.buffs.Frost;
 import com.github.dachhack.sprout.actors.buffs.MagicalSleep;
 import com.github.dachhack.sprout.actors.buffs.Paralysis;
-import com.github.dachhack.sprout.effects.CellEmitter;
-import com.github.dachhack.sprout.effects.particles.SnowParticle;
 import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.mechanics.Ballistica;
-import com.github.dachhack.sprout.sprites.ShadowDragonSprite;
 import com.github.dachhack.sprout.sprites.CharSprite;
+import com.github.dachhack.sprout.sprites.ShadowDragonSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
@@ -36,7 +34,7 @@ import com.watabou.utils.Random;
 public class ShadowDragon extends PET implements Callback{
 	
 	{
-		name = "shadow dragon";
+		name = Messages.get(this, "name");
 		spriteClass = ShadowDragonSprite.class;       
 		flying=true;
 		state = HUNTING;
@@ -87,8 +85,8 @@ public class ShadowDragon extends PET implements Callback{
 		if (cooldown>0){
 			cooldown=Math.max(cooldown-(level*level),0);
 			if (cooldown==0) {
-								
-					GLog.w("Your dragon gathers power!");
+
+				GLog.w(Messages.get(Scorpion.class, "ready"));
 				
 			}
 		}
@@ -134,8 +132,8 @@ public class ShadowDragon extends PET implements Callback{
 		spend(TIME_TO_ZAP);
 
 		cooldown=1000;
-		
-			yell("Rooaaar!");
+
+			yell(Messages.get(ShadowDragon.class, "ready"));
 		
 		
 		if (hit(this, enemy, true)) {			
@@ -173,7 +171,7 @@ public class ShadowDragon extends PET implements Callback{
 		}
 		if (buff(Paralysis.class) != null) {
 			Buff.detach(this, Paralysis.class);
-			GLog.i("You shake your %s out of paralysis.", name);
+			GLog.i(Messages.get(bee.class, "shake"), name);
 		}
 		
 		int curPos = pos;
@@ -189,10 +187,9 @@ public class ShadowDragon extends PET implements Callback{
 	}
 
 
-@Override
-public String description() {
-	return "A feshly hatched shadow dragon. Super fierce and super cute!";
-}
-
+	@Override
+	public String description() {
+		return Messages.get(bee.class, "desc");
+	}
 
 }

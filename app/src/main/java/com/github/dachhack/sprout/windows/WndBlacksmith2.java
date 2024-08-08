@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.windows;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Chrome;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.npcs.Blacksmith2;
 import com.github.dachhack.sprout.items.Item;
@@ -26,9 +27,9 @@ import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.ui.ItemSlot;
 import com.github.dachhack.sprout.ui.RedButton;
+import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.Utils;
-import com.watabou.noosa.BitmapTextMultiline;
 import com.watabou.noosa.NinePatch;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.ui.Component;
@@ -46,15 +47,21 @@ public class WndBlacksmith2 extends Window {
 	private ItemButton btnItem2;
 	private RedButton btnReforge;
 
-	private static final String TXT_PROMPT = "Listen up, here's what I can do. "
-			                                 +"I can reinforce an item with adamantite. "
-			                                 +"Reinforced items can be upgraded to extreme levels. " 
-			                                 +"You have to have the right kind of adamantite and it'll cost you some dark gold. ";
-	
-	private static final String TXT_SELECT1 = "Select an item to reinforce.";
-	private static final String TXT_SELECT2 = "Select your adamantite.";
-	private static final String TXT_REFORGE = "Reforge them";
-	private static final String TXT_WORK = "Great! Let's reinforce it!";
+//	private static final String TXT_PROMPT = "Listen up, here's what I can do. "
+//			                                 +"I can reinforce an item with adamantite. "
+//			                                 +"Reinforced items can be upgraded to extreme levels. "
+//			                                 +"You have to have the right kind of adamantite and it'll cost you some dark gold. ";
+//
+//	private static final String TXT_SELECT1 = "Select an item to reinforce.";
+//	private static final String TXT_SELECT2 = "Select your adamantite.";
+//	private static final String TXT_REFORGE = "Reforge them";
+//	private static final String TXT_WORK = "Great! Let's reinforce it!";
+private static final String TXT_PROMPT = Messages.get(WndBlacksmith2.class, "prompt");
+
+	private static final String TXT_SELECT1 = Messages.get(WndBlacksmith2.class, "select1");
+	private static final String TXT_SELECT2 = Messages.get(WndBlacksmith2.class, "select2");
+	private static final String TXT_REFORGE = Messages.get(WndBlacksmith2.class, "reforge");
+	private static final String TXT_WORK = Messages.get(WndBlacksmith2.class, "great");
 
 	public WndBlacksmith2(Blacksmith2 troll, Hero hero) {
 
@@ -66,10 +73,9 @@ public class WndBlacksmith2 extends Window {
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 
-		BitmapTextMultiline message = PixelScene.createMultiline(TXT_PROMPT, 6);
-		message.maxWidth = WIDTH;
-		message.measure();
-		message.y = titlebar.bottom() + GAP;
+		RenderedTextMultiline message = PixelScene.renderMultiline(TXT_PROMPT, 6);
+		message.maxWidth(WIDTH);
+		message.setPos(0, titlebar.bottom() + GAP);
 		add(message);
 
 		btnItem1 = new ItemButton() {
@@ -81,7 +87,7 @@ public class WndBlacksmith2 extends Window {
 			}
 		};
 		btnItem1.setRect((WIDTH - BTN_GAP) / 2 - BTN_SIZE,
-				message.y + message.height() + BTN_GAP, BTN_SIZE, BTN_SIZE);
+				message.top() + message.height() + BTN_GAP, BTN_SIZE, BTN_SIZE);
 		add(btnItem1);
 
 		btnItem2 = new ItemButton() {

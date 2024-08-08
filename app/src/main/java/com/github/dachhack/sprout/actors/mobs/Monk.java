@@ -17,9 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Amok;
 import com.github.dachhack.sprout.actors.buffs.Terror;
@@ -33,12 +32,14 @@ import com.github.dachhack.sprout.sprites.MonkSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Monk extends Mob {
 
 	public static final String TXT_DISARM = "%s has knocked the %s from your hands!";
 
 	{
-		name = "dwarf monk";
+		name = Messages.get(this, "name");
 		spriteClass = MonkSprite.class;
 
 		HP = HT = 150;
@@ -70,8 +71,8 @@ public class Monk extends Mob {
 	}
 
 	@Override
-	public String defenseVerb() {
-		return "parried";
+                          public String defenseVerb() {
+		return Messages.get(this, "def");
 	}
 
 	@Override
@@ -93,7 +94,7 @@ public class Monk extends Mob {
 					&& !weapon.cursed) {
 				hero.belongings.weapon = null;
 				Dungeon.level.drop(weapon, hero.pos).sprite.drop();
-				GLog.w(TXT_DISARM, name, weapon.name());
+				GLog.w( Messages.get(Monk.class, "arm"), name, weapon.name());
 				weapon.updateQuickslot();
 			}
 		}
@@ -103,8 +104,7 @@ public class Monk extends Mob {
 
 	@Override
 	public String description() {
-		return "These monks are fanatics, who devoted themselves to protecting their city's secrets from all aliens. "
-				+ "They don't use any armor or weapons, relying solely on the art of hand-to-hand combat.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

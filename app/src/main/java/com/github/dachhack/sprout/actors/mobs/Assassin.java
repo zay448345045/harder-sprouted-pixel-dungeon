@@ -17,8 +17,7 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
@@ -33,12 +32,14 @@ import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.AssassinSprite;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Assassin extends Mob {
 	
 	protected static final float SPAWN_DELAY = 2f;
 	
 	{
-		name = "Shinobi";
+		name = Messages.get(this, "name");
 		spriteClass = AssassinSprite.class;
 		baseSpeed = 2f;
 
@@ -101,11 +102,10 @@ public class Assassin extends Mob {
 		}
 	}
 
-	
+
 	@Override
 	public String description() {
-		return "Shinobi are members of the Tengu assassin clan. "
-				+ "They fight with ranged attacks at high speed. ";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

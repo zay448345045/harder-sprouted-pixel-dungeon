@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.bags;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.items.CavesKey;
 import com.github.dachhack.sprout.items.CityKey;
 import com.github.dachhack.sprout.items.HallsKey;
@@ -30,7 +31,8 @@ import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 public class KeyRing extends Bag {
 
 	{
-		name = "key ring";
+//		name = "key ring";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.KEYRING;
 
 		size = 20;
@@ -58,8 +60,11 @@ public class KeyRing extends Bag {
 	}
 
 	@Override
+//	public String info() {
+//		return "This keyring can hold your keys. Very handy!";
+//	}
 	public String info() {
-		return "This keyring can hold your keys. Very handy!";
+		return Messages.get(this, "desc");
 	}
 }
 

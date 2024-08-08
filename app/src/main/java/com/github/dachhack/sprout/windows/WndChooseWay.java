@@ -17,19 +17,22 @@
  */
 package com.github.dachhack.sprout.windows;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.hero.HeroSubClass;
 import com.github.dachhack.sprout.items.TomeOfMastery;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.ui.RedButton;
+import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.Utils;
-import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndChooseWay extends Window {
 
-	private static final String TXT_MESSAGE = "Which way will you follow?";
-	private static final String TXT_CANCEL = "I'll decide later";
+//	private static final String TXT_MESSAGE = "Which way will you follow?";
+//	private static final String TXT_CANCEL = "I'll decide later";
+private static final String TXT_MESSAGE = Messages.get(WndChooseWay.class, "msg");
+	private static final String TXT_CANCEL = Messages.get(WndChooseWay.class, "cancel");
 
 	private static final int WIDTH = 120;
 	private static final int BTN_HEIGHT = 18;
@@ -46,30 +49,12 @@ public class WndChooseWay extends Window {
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 
-		Highlighter hl = new Highlighter(way1.desc() + "\n\n" + way2.desc()
-				+ "\n\n" + TXT_MESSAGE);
+		RenderedTextMultiline hl = PixelScene.renderMultiline(6);
+		hl.text(way1.desc() + "\n\n" + way2.desc() + "\n\n" + Messages.get(this, "message"), WIDTH);
+		hl.setPos(titlebar.left(), titlebar.bottom() + GAP);
+		add(hl);
 
-		BitmapTextMultiline normal = PixelScene.createMultiline(hl.text, 6);
-		normal.maxWidth = WIDTH;
-		normal.measure();
-		normal.x = titlebar.left();
-		normal.y = titlebar.bottom() + GAP;
-		add(normal);
 
-		if (hl.isHighlighted()) {
-			normal.mask = hl.inverted();
-
-			BitmapTextMultiline highlighted = PixelScene.createMultiline(
-					hl.text, 6);
-			highlighted.maxWidth = normal.maxWidth;
-			highlighted.measure();
-			highlighted.x = normal.x;
-			highlighted.y = normal.y;
-			add(highlighted);
-
-			highlighted.mask = hl.mask;
-			highlighted.hardlight(TITLE_COLOR);
-		}
 
 		RedButton btnWay1 = new RedButton(Utils.capitalize(way1.title())) {
 			@Override
@@ -78,8 +63,7 @@ public class WndChooseWay extends Window {
 				tome.choose(way1);
 			}
 		};
-		btnWay1.setRect(0, normal.y + normal.height() + GAP, (WIDTH - GAP) / 2,
-				BTN_HEIGHT);
+		btnWay1.setRect(0, hl.bottom() + GAP, (WIDTH - GAP) / 2, BTN_HEIGHT);
 		add(btnWay1);
 
 		RedButton btnWay2 = new RedButton(Utils.capitalize(way2.title())) {
@@ -93,7 +77,7 @@ public class WndChooseWay extends Window {
 				BTN_HEIGHT);
 		add(btnWay2);
 
-		RedButton btnCancel = new RedButton(TXT_CANCEL) {
+		RedButton btnCancel = new RedButton(Messages.get(WndChooseWay.class, "cancel")) {
 			@Override
 			protected void onClick() {
 				hide();

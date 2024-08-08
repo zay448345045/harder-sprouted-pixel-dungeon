@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -53,18 +54,30 @@ public abstract class Wand extends KindOfWeapon {
 
 	private static final int USAGES_TO_KNOW = 20;
 
-	public static final String AC_ZAP = "ZAP";
+//	public static final String AC_ZAP = "ZAP";
+//
+//	private static final String TXT_WOOD = "This thin %s wand is warm to the touch. Who knows what it will do when used?";
+//	private static final String TXT_DAMAGE = "When this wand is used as a melee weapon, it will deal  %1$d-%2$d damage.";
+//	private static final String TXT_WEAPON = "You can use this wand as a melee weapon.";
+//
+//	private static final String TXT_FIZZLES = "your wand fizzles; it must be out of charges for now";
+//	private static final String TXT_SELF_TARGET = "You can't target yourself";
+//
+//	private static final String TXT_IDENTIFY = "You are now familiar enough with your %s.";
+//
+//	private static final String TXT_REINFORCED = "\n\nIt is reinforced. ";
+public static final String AC_ZAP = Messages.get(Wand.class, "ac_zap");
 
-	private static final String TXT_WOOD = "This thin %s wand is warm to the touch. Who knows what it will do when used?";
-	private static final String TXT_DAMAGE = "When this wand is used as a melee weapon, it will deal  %1$d-%2$d damage.";
-	private static final String TXT_WEAPON = "You can use this wand as a melee weapon.";
+	private static final String TXT_WOOD = Messages.get(Wand.class, "wood");
+	private static final String TXT_DAMAGE = Messages.get(Wand.class, "damage");
+	private static final String TXT_WEAPON = Messages.get(Wand.class, "weapon");
 
-	private static final String TXT_FIZZLES = "your wand fizzles; it must be out of charges for now";
-	private static final String TXT_SELF_TARGET = "You can't target yourself";
+	private static final String TXT_FIZZLES = Messages.get(Wand.class, "fizzles");
+	private static final String TXT_SELF_TARGET = Messages.get(Wand.class, "self_target");
 
-	private static final String TXT_IDENTIFY = "You are now familiar enough with your %s.";
-	
-	private static final String TXT_REINFORCED = "\n\nIt is reinforced. ";
+	private static final String TXT_IDENTIFY = Messages.get(Wand.class, "identify");
+
+	private static final String TXT_REINFORCED = Messages.get(Wand.class, "re");
 
 	private static final float TIME_TO_ZAP = 1f;
 
@@ -370,9 +383,9 @@ public abstract class Wand extends KindOfWeapon {
 
 	public String statsDesc() {
 		if (!levelKnown) {
-			return "This wand will typically deal " + magicMin(0) + "-" + magicMax(0) + " damage.";
+			return Messages.get(this,"this_1") + magicMin(0) + "-" + magicMax(0) + Messages.get(this,"dam");
 		} else {
-			return "This wand deals  " + magicMin() + "-" + magicMax() + " damage.";
+			return Messages.get(this,"this_2") + magicMin() + "-" + magicMax() + Messages.get(this,"dam");
 		}
 	}
 
@@ -541,7 +554,8 @@ public abstract class Wand extends KindOfWeapon {
 
 		@Override
 		public String prompt() {
-			return "Choose direction to zap";
+//			return "Choose direction to zap";
+			return Messages.get(Wand.class, "prompt");
 		}
 	};
 

@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.weapon.melee;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.mobs.Gullin;
 import com.github.dachhack.sprout.actors.mobs.Kupua;
@@ -30,7 +31,8 @@ import com.watabou.utils.Random;
 public class Spork extends MeleeWeapon {
 
 	{
-		name = "spork";
+//		name = "spork";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.SPORK;
 		reinforced=true;
 	}
@@ -50,8 +52,11 @@ public class Spork extends MeleeWeapon {
 	}
 	
 	@Override
+//	public String desc() {
+//		return "Is it a spoon? Is it a fork? It is neither and it is both. "
+//				+"Mobs better respect!";
+//	}
 	public String desc() {
-		return "Is it a spoon? Is it a fork? It is neither and it is both. "
-				+"Mobs better respect!";
+		return Messages.get(this, "desc");
 	}
 }

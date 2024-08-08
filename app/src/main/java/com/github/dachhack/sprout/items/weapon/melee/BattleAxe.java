@@ -17,12 +17,14 @@
  */
 package com.github.dachhack.sprout.items.weapon.melee;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
 public class BattleAxe extends MeleeWeapon {
 
 	{
-		name = "battle axe";
+//		name = "battle axe";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.BATTLE_AXE;
 	}
 
@@ -31,7 +33,10 @@ public class BattleAxe extends MeleeWeapon {
 	}
 
 	@Override
+//	public String desc() {
+//		return "The enormous steel head of this battle axe puts considerable heft behind each stroke.";
+//	}
 	public String desc() {
-		return "The enormous steel head of this battle axe puts considerable heft behind each stroke.";
+		return Messages.get(this, "desc");
 	}
 }

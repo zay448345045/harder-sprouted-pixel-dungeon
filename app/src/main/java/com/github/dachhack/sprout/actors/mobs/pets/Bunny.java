@@ -18,29 +18,19 @@
 package com.github.dachhack.sprout.actors.mobs.pets;
 
 import com.github.dachhack.sprout.Dungeon;
-import com.github.dachhack.sprout.ResultDescriptions;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.MagicalSleep;
 import com.github.dachhack.sprout.actors.buffs.Paralysis;
-import com.github.dachhack.sprout.effects.Speck;
-import com.github.dachhack.sprout.effects.particles.SparkParticle;
-import com.github.dachhack.sprout.levels.Level;
-import com.github.dachhack.sprout.levels.traps.LightningTrap;
-import com.github.dachhack.sprout.mechanics.Ballistica;
 import com.github.dachhack.sprout.sprites.BunnySprite;
-import com.github.dachhack.sprout.sprites.CharSprite;
-import com.github.dachhack.sprout.sprites.FairySprite;
 import com.github.dachhack.sprout.utils.GLog;
-import com.github.dachhack.sprout.utils.Utils;
-import com.watabou.noosa.Camera;
-import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
 public class Bunny extends PET{
 	
 	{
-		name = "bunny";
+		name = Messages.get(this, "name");
 		spriteClass = BunnySprite.class;       
 		state = HUNTING;
 		level = 1;
@@ -75,8 +65,8 @@ public class Bunny extends PET{
 		
 		int dmg=0;
 		if (cooldown==0){
-			dmg=Random.NormalIntRange(HT, HT*2); 
-			yell("Bite!");
+			dmg=Random.NormalIntRange(HT, HT*2);
+			GLog.p(Messages.get(Bunny.class, "ready"));
 			cooldown=1000;
 		} else {
 			dmg=Random.NormalIntRange(HT/5, HT/2) ;
@@ -87,22 +77,24 @@ public class Bunny extends PET{
 
 	@Override
 	protected boolean act() {
-		
-		if (cooldown>0){
-			cooldown=Math.max(cooldown-(level*level),0);
-			if (cooldown==0) {yell("ROAR!");}
+
+		if (cooldown > 0) {
+			cooldown = Math.max(cooldown - (level * level), 0);
+			if (level < 50 && cooldown == 0) {
+				yell(Messages.get(Bunny.class, "atk"));
+			}
 		}
 		
 		if (Random.Float()<regenChance && HP<HT){HP+=regen;}
 
 		return super.act();
-	}			
-	
+	}
 
-@Override
-public String description() {
-	return "Death by sharp pointy fangs!";
-}
+
+	@Override
+	public String description() {
+		return Messages.get(bee.class, "desc");
+	}
 
 
 
@@ -118,7 +110,7 @@ public void interact() {
 	}
 	if (buff(Paralysis.class) != null) {
 		Buff.detach(this, Paralysis.class);
-		GLog.i("You shake your %s out of paralysis.", name);
+		GLog.i(Messages.get(bee.class, "shake"), name);
 	}
 	
 	int curPos = pos;

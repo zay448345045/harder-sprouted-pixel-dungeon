@@ -17,9 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Char;
@@ -36,6 +35,8 @@ import com.watabou.noosa.Camera;
 import com.watabou.utils.Callback;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class GraveProtector extends Mob implements Callback {
 
 	private static final float TIME_TO_ZAP = 2f;
@@ -43,7 +44,7 @@ public class GraveProtector extends Mob implements Callback {
 	private static final String TXT_LIGHTNING_KILLED = "%s's lightning bolt killed you...";
 
 	{
-		name = "flying protector";
+		name = Messages.get(this, "name");
 		spriteClass = GraveProtectorSprite.class;
 
 		EXP = 10;
@@ -113,7 +114,7 @@ public class GraveProtector extends Mob implements Callback {
 					if (!enemy.isAlive()) {
 						Dungeon.fail(Utils.format(ResultDescriptions.MOB,
 								Utils.indefinite(name)));
-						GLog.n(TXT_LIGHTNING_KILLED, name);
+						GLog.n(Messages.get(GraveProtector.class, "kill"), name);
 					}
 				}
 			} else {
@@ -133,12 +134,12 @@ public class GraveProtector extends Mob implements Callback {
 	@Override
 	public void notice() {
 		super.notice();
-		yell("Leave this place!");
+		yell(Messages.get(this, "notice"));
 	}
 	
 	@Override
 	public String description() {
-		return "This guardian protects the battlefield from disturbances. ";
+		return Messages.get(this, "desc");
 	}
 	
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

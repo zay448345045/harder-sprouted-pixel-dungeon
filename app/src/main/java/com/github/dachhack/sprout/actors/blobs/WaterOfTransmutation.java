@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.actors.blobs;
 
 import com.github.dachhack.sprout.Journal;
 import com.github.dachhack.sprout.Journal.Feature;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.effects.BlobEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.items.ActiveMrDestructo;
@@ -329,12 +330,11 @@ public class WaterOfTransmutation extends WellWater {
 	private Item rechargeDestructo2(InactiveMrDestructo2 d) {
 		return new ActiveMrDestructo2();
 	}
-	
-	
-	
+
+
+
 	@Override
 	public String tileDesc() {
-		return "Power of change radiates from the water of this well. "
-				+ "Throw an item into the well to turn it into something else.";
+		return Messages.get(this, "desc");
 	}
 }

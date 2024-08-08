@@ -17,9 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Burning;
@@ -32,12 +31,15 @@ import com.github.dachhack.sprout.items.wands.WandOfFirebolt;
 import com.github.dachhack.sprout.items.weapon.enchantments.Fire;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.SkeletonKingSprite;
+import com.github.dachhack.sprout.ui.BossHealthBar;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class SkeletonKing extends Mob {
 
 	{
-		name = "skeleton king";
+		name = Messages.get(this, "name");
 		spriteClass = SkeletonKingSprite.class;
 
 		HP = HT = 550;
@@ -100,22 +102,24 @@ public class SkeletonKing extends Mob {
 		Dungeon.skeletonkingkilled=true;
 			
 		super.die(cause);
-		
-		yell("Ughhhh...");
+
+		yell(Messages.get(this, "die"));
 					
 	}
 	
 
 	@Override
 	public void notice() {
+		BossHealthBar.assignBoss(this);
+
 		super.notice();
-		yell("You will die screaming in flames, " + Dungeon.hero.givenName() + "!");
+		yell(Messages.get(this, "notice", Dungeon.hero.givenName()));
 	}
 
-	
+
 	@Override
 	public String description() {
-		return "This ancient giant skull belongs to the king of skeletons. ";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

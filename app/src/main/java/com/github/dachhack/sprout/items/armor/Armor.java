@@ -17,10 +17,9 @@
  */
 package com.github.dachhack.sprout.items.armor;
 
-import java.util.ArrayList;
-
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -44,19 +43,23 @@ import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.ArrayList;
+
 public class Armor extends EquipableItem {
 
 	private static final int HITS_TO_KNOW = 10;
 	
 	private static final float TIME_TO_EQUIP = 1f;
-
-	private static final String TXT_EQUIP_CURSED = "your %s constricts around you painfully";
-
-	private static final String TXT_IDENTIFY = "you are now familiar enough with your %s to identify it. It is %s.";
+//"your %s constricts around you painfully
+	private static final String TXT_EQUIP_CURSED = Messages.get(Armor.class,"equip_cursed");
+//
+//	private static final String TXT_IDENTIFY = "you are now familiar enough with your %s to identify it. It is %s.";
+private static final String TXT_IDENTIFY = Messages.get(Armor.class, "identify");
 
 	private static final String TXT_TO_STRING = "%s :%d";
 
-	private static final String TXT_INCOMPATIBLE = "Interaction of different types of magic has erased the glyph on this armor!";
+//	private static final String TXT_INCOMPATIBLE = "Interaction of different types of magic has erased the glyph on this armor!";
+private static final String TXT_INCOMPATIBLE = Messages.get(Armor.class, "incompatible");
 
 	public int tier;
 
@@ -216,9 +219,7 @@ public class Armor extends EquipableItem {
 		StringBuilder info = new StringBuilder(desc());
 
 		if (levelKnown) {
-			info.append("\n\nThis " + name
-					+ " provides damage absorption up to " + ""
-					+ Math.max(DR, 0) + " points per attack. ");
+			info.append(Messages.get(this, "curr_absorb", Math.max(DR, 0)));
 
 			if (STR > Dungeon.hero.STR()) {
 
@@ -232,34 +233,44 @@ public class Armor extends EquipableItem {
 
 			}
 		} else {
-			info.append("\n\nTypical " + name
-					+ " provides damage absorption up to " + typicalDR()
-					+ " points per attack " + " and requires " + typicalSTR()
-					+ " points of strength. ");
+			info.append(Messages.get(this, "avg_absorb", typicalDR()));
 			if (typicalSTR() > Dungeon.hero.STR()) {
-				info.append("Probably this armor is too heavy for you. ");
+				info.append(Messages.get(this, "probably_too_heavy"));
 			}
 		}
 
 		if (glyph != null) {
-			info.append("It is inscribed.");
+//			info.append("It is inscribed.");
+			info.append(Messages.get(this, "inscribed", glyph.name()));
+//			info.append(glyph.desc());
 		}
 		
 		if (reinforced) {
-			info.append("\n\nIt is reinforced.");
+//			info.append("\n\nIt is reinforced.");
+			info.append(Messages.get(this, "reinforced"));
 		}
 
-		if (isEquipped(Dungeon.hero)) {
-			info.append("\n\nYou are wearing the "
-					+ name
-					+ (cursed ? ", and because it is cursed, you are powerless to remove it."
-							: "."));
-		} else {
-			if (cursedKnown && cursed) {
-				info.append("\n\nYou can feel a malevolent magic lurking within the "
-						+ name + ".");
+//		if (isEquipped(Dungeon.hero)) {
+//			info.append("\n\nYou are wearing the "
+//					+ name
+//					+ (cursed ? ", and because it is cursed, you are powerless to remove it."
+//							: "."));
+//		} else {
+//			if (cursedKnown && cursed) {
+//				info.append("\n\nYou can feel a malevolent magic lurking within the "
+//						+ name + ".");
+//			}
+//		}
+		{
+			if (cursed) {
+				info.append(Messages.get(this, "wearing", name) + Messages.get(this, "cursed_worn"));
+			} else {
+				info.append(Messages.get(this, "wearing", name));
 			}
 		}
+			if (cursedKnown && cursed) {
+				info.append(Messages.get(this, "cursed"));
+			}
 
 		return info.toString();
 	}
@@ -370,12 +381,13 @@ public class Armor extends EquipableItem {
 				int damage);
 
 		public String name() {
-			return name("glyph");
+			return name(Messages.get(Armor.class, "gname"));
 		}
 
 		public String name(String armorName) {
 			return armorName;
 		}
+
 
 		@Override
 		public void restoreFromBundle(Bundle bundle) {
@@ -393,7 +405,7 @@ public class Armor extends EquipableItem {
 			if (!owner.isAlive() && owner instanceof Hero) {
 
 				Dungeon.fail(Utils.format(ResultDescriptions.GLYPH, name()));
-				GLog.n("%s killed you...", name());
+				GLog.n(Messages.get(Armor.class, "gkilled"), name());
 
 				Badges.validateDeathFromGlyph();
 				return true;

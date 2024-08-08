@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -51,7 +52,8 @@ public class NeptunusTrident extends RelicMeleeWeapon {
 
 	
 	{
-		name = "Neptune's Trident";
+//		name = "Neptune's Trident";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.TRIDENT;
 
 		level = 0;
@@ -145,7 +147,8 @@ public class NeptunusTrident extends RelicMeleeWeapon {
 	}
 	
 	
-	public static final String AC_FLOOD = "FLOOD";
+//	public static final String AC_FLOOD = "FLOOD";
+public static final String AC_FLOOD = Messages.get(NeptunusTrident.class, "ac_flood");
 
 	@Override
 	public ArrayList<String> actions(Hero hero) {
@@ -159,7 +162,8 @@ public class NeptunusTrident extends RelicMeleeWeapon {
 	public void execute(Hero hero, String action) {
 		if (action.equals(AC_FLOOD)) {
 			int distance=distance();
-			GLog.w("Unleash the waters!");
+//			GLog.w("Unleash the waters!");
+			GLog.p(Messages.get(this, "ready"));
 			flood(distance, hero);		
 		} else
 			super.execute(hero, action);
@@ -173,7 +177,8 @@ public class NeptunusTrident extends RelicMeleeWeapon {
 			if (charge < chargeCap) {
 				charge+=1;
 				if (charge >= chargeCap) {
-					GLog.w("Your trident draws in the tides.");
+//					GLog.w("Your trident draws in the tides.");
+					GLog.p(Messages.get(NeptunusTrident.class, "buffdesc"));
 				}
 				updateQuickslot();
 			}
@@ -183,8 +188,11 @@ public class NeptunusTrident extends RelicMeleeWeapon {
 
 
 		@Override
+//		public String toString() {
+//			return "Flooding";
+//		}
 		public String toString() {
-			return "Flooding";
+			return Messages.get(NeptunusTrident.class, "buffname");
 		}
 
 		@Override

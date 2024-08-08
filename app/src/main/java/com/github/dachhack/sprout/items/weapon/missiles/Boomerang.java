@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items.weapon.missiles;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.items.Item;
@@ -27,7 +28,8 @@ import com.github.dachhack.sprout.sprites.MissileSprite;
 public class Boomerang extends MissileWeapon {
 
 	{
-		name = "boomerang";
+//		name = "boomerang";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.BOOMERANG;
 
 		STR = 10;
@@ -115,18 +117,22 @@ public class Boomerang extends MissileWeapon {
 
 	@Override
 	public String desc() {
-		String info = "Thrown to the enemy this flat curved wooden missile will return to the hands of its thrower.";
+//		String info = "Thrown to the enemy this flat curved wooden missile will return to the hands of its thrower.";
+		String info = Messages.get(this, "desc");
 		switch (imbue) {
 		case LIGHT:
-			info += "\n\nIt was balanced to be lighter. ";
+//			info += "\n\nIt was balanced to be lighter. ";
+			info += Messages.get(this, "lighter");
 			break;
 		case HEAVY:
-			info += "\n\nIt was balanced to be heavier. ";
+//			info += "\n\nIt was balanced to be heavier. ";
+			info += Messages.get(this, "heavier");
 			break;
 		case NONE:
 		}
 		if(reinforced){
-			info += "\n\nIt is reinforced. ";
+//			info += "\n\nIt is reinforced. ";
+			info += Messages.get(this, "reinforced");
 		}
 		return info;
 	}

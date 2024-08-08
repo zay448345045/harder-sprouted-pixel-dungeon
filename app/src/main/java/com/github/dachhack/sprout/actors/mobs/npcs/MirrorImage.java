@@ -17,9 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs.npcs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -35,10 +34,12 @@ import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class MirrorImage extends NPC {
 
 	{
-		name = "mirror image";
+		name = Messages.get(this, "name");
 		spriteClass = MirrorSprite.class;
 
 		state = HUNTING;

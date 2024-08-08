@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items.rings;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -32,7 +33,8 @@ import com.github.dachhack.sprout.windows.WndPetHaste;
 public class RingOfHaste extends Ring {
 
 	{
-		name = "Ring of Haste";
+//		name = "Ring of Haste";
+		name = Messages.get(this, "name");
 	}
 
 	@Override
@@ -52,9 +54,12 @@ public class RingOfHaste extends Ring {
 
 	@Override
 	public String desc() {
-		return isKnown() ? "This ring reduces the stress of movement on the wearer, allowing them to run "
-				+ "at superhuman speeds. A degraded ring will instead weigh the wearer down. "
-				+ "Upgrade benefit on this ring maxes out at 10 upgrades. "
+//		return isKnown() ? "This ring reduces the stress of movement on the wearer, allowing them to run "
+//				+ "at superhuman speeds. A degraded ring will instead weigh the wearer down. "
+//				+ "Upgrade benefit on this ring maxes out at 10 upgrades. "
+//				: super.desc();
+		return isKnown() ? Messages.get(this, "desc")
+				+ Messages.get(this, "desc2")
 				: super.desc();
 	}
 
@@ -82,7 +87,8 @@ public class RingOfHaste extends Ring {
 		
 		if (Dungeon.hero.haspet && heropet!=null&&Dungeon.petHasteLevel>0){
 			Dungeon.petHasteLevel=0;
-			GLog.w("Your "+heropet.name+" is moving slower." );	  				    		
+//			GLog.w("Your "+heropet.name+" is moving slower." );
+			GLog.w(Messages.get(this, "pet", heropet.name));
 		}
 		
 		return super.doUnequip(hero, collect, single);
@@ -93,7 +99,8 @@ public class RingOfHaste extends Ring {
 	@Override
 	public Item upgrade() {
 		
-		if (level>7){GLog.w("Warning! High level Rings of Haste tend to cause ...complications!");} 
+//		if (level>7){GLog.w("Warning! High level Rings of Haste tend to cause ...complications!");}
+		GLog.w(Messages.get(this, "warning"));
 		
 		return super.upgrade();		
 

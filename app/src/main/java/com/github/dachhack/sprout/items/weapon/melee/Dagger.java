@@ -17,12 +17,14 @@
  */
 package com.github.dachhack.sprout.items.weapon.melee;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
 public class Dagger extends MeleeWeapon {
 
 	{
-		name = "dagger";
+//		name = "dagger";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.DAGGER;
 	}
 
@@ -31,7 +33,10 @@ public class Dagger extends MeleeWeapon {
 	}
 
 	@Override
+//	public String desc() {
+//		return "A simple iron dagger with a well worn wooden handle.";
+//	}
 	public String desc() {
-		return "A simple iron dagger with a well worn wooden handle.";
+		return Messages.get(this, "desc");
 	}
 }

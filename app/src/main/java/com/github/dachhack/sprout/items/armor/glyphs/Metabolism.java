@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.armor.glyphs;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Hunger;
 import com.github.dachhack.sprout.effects.Speck;
@@ -30,7 +31,8 @@ import com.watabou.utils.Random;
 
 public class Metabolism extends Glyph {
 
-	private static final String TXT_METABOLISM = "%s of metabolism";
+//	private static final String TXT_METABOLISM = "%s of metabolism";
+private static final String TXT_METABOLISM = Messages.get(Metabolism.class, "name");
 
 	private static ItemSprite.Glowing RED = new ItemSprite.Glowing(0xCC0000);
 

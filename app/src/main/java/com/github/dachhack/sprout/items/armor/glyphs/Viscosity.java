@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.armor.glyphs;
 
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -35,7 +36,8 @@ import com.watabou.utils.Random;
 
 public class Viscosity extends Glyph {
 
-	private static final String TXT_VISCOSITY = "%s of viscosity";
+//	private static final String TXT_VISCOSITY = "%s of viscosity";
+private static final String TXT_VISCOSITY = Messages.get(Viscosity.class, "name");
 
 	private static ItemSprite.Glowing PURPLE = new ItemSprite.Glowing(0x8844CC);
 
@@ -57,7 +59,7 @@ public class Viscosity extends Glyph {
 			}
 			debuff.prolong(damage);
 
-			defender.sprite.showStatus(CharSprite.WARNING, "deferred %d",
+			defender.sprite.showStatus(CharSprite.WARNING, Messages.get(this, "deferred"),
 					damage);
 
 			return 0;
@@ -117,7 +119,7 @@ public class Viscosity extends Glyph {
 
 		@Override
 		public String toString() {
-			return Utils.format("Defered damage (%d)", damage);
+			return Utils.format(Messages.get(Viscosity.class, "bname"), damage);
 		}
 
 		@Override
@@ -130,7 +132,8 @@ public class Viscosity extends Glyph {
 					Glyph glyph = new Viscosity();
 					Dungeon.fail(Utils.format(ResultDescriptions.GLYPH,
 							glyph.name()));
-					GLog.n("%s killed you...", glyph.name());
+//					GLog.n("%s killed you...", glyph.name());
+					GLog.n(Messages.get(Viscosity.class, "bkill"), glyph.name());
 
 					Badges.validateDeathFromGlyph();
 				}

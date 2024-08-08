@@ -17,13 +17,10 @@
  */
 package com.github.dachhack.sprout.items;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Burning;
@@ -39,6 +36,7 @@ import com.github.dachhack.sprout.effects.particles.ElmoParticle;
 import com.github.dachhack.sprout.effects.particles.FlameParticle;
 import com.github.dachhack.sprout.effects.particles.ShadowParticle;
 import com.github.dachhack.sprout.items.artifacts.AlchemistsToolkit;
+import com.github.dachhack.sprout.items.artifacts.Artifact;
 import com.github.dachhack.sprout.items.food.Blandfruit;
 import com.github.dachhack.sprout.items.food.ChargrilledMeat;
 import com.github.dachhack.sprout.items.food.FrozenCarpaccio;
@@ -51,6 +49,7 @@ import com.github.dachhack.sprout.items.potions.Potion;
 import com.github.dachhack.sprout.items.potions.PotionOfExperience;
 import com.github.dachhack.sprout.items.potions.PotionOfHealing;
 import com.github.dachhack.sprout.items.scrolls.Scroll;
+import com.github.dachhack.sprout.items.wands.Wand;
 import com.github.dachhack.sprout.items.weapon.Weapon;
 import com.github.dachhack.sprout.items.weapon.melee.relic.AresSword;
 import com.github.dachhack.sprout.items.weapon.melee.relic.CromCruachAxe;
@@ -65,6 +64,10 @@ import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
 
 public class Heap implements Bundlable {
 
@@ -110,7 +113,53 @@ public class Heap implements Bundlable {
 			return 0;
 		}
 	}
-	
+
+	@Override
+	public String toString() {
+		switch (type) {
+			case CHEST:
+			case MIMIC:
+				return Messages.get(this, "chest");
+			case LOCKED_CHEST:
+				return Messages.get(this, "locked_chest");
+			case CRYSTAL_CHEST:
+				return Messages.get(this, "crystal_chest");
+			case TOMB:
+				return Messages.get(this, "tomb");
+			case SKELETON:
+				return Messages.get(this, "skeleton");
+			case REMAINS:
+				return Messages.get(this, "remains");
+			default:
+				return peek().toString();
+		}
+	}
+
+	public String info() {
+		switch (type) {
+			case CHEST:
+				return Messages.get(this, "chest_desc");
+			case MIMIC:
+				return Messages.get(this, "mimmc_desc");
+			case LOCKED_CHEST:
+				return Messages.get(this, "locked_chest_desc");
+			case CRYSTAL_CHEST:
+				if (peek() instanceof Artifact)
+					return Messages.get(this, "crystal_chest_desc", Messages.get(this, "artifact"));
+				else if (peek() instanceof Wand)
+					return Messages.get(this, "crystal_chest_desc", Messages.get(this, "wand"));
+				else
+					return Messages.get(this, "crystal_chest_desc", Messages.get(this, "ring"));
+			case TOMB:
+				return Messages.get(this, "tomb_desc");
+			case SKELETON:
+				return Messages.get(this, "skeleton_desc");
+			case REMAINS:
+				return Messages.get(this, "remains_desc");
+			default:
+				return peek().info();
+		}
+	}
 
 	public boolean chestCheck() {
 		switch (type) {
@@ -147,7 +196,7 @@ public class Heap implements Bundlable {
 		//	}
 		case MIMIC:
 			if (Mimic.spawnAt(pos, items) != null) {
-				GLog.n(TXT_MIMIC);
+				GLog.n(Messages.get(Heap.class,"mimic"));
 				destroy();
 			} else {
 				type = Type.CHEST;

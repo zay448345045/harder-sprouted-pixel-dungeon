@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.scrolls;
 
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.items.Item;
@@ -27,11 +28,14 @@ import com.github.dachhack.sprout.windows.WndBag;
 
 public class ScrollOfUpgrade extends InventoryScroll {
 
+	//need fix
 	private static final String TXT_LOOKS_BETTER = "your %s certainly looks better now";
 
 	{
-		name = "Scroll of Upgrade";
-		inventoryTitle = "Select an item to upgrade";
+//		name = "Scroll of Upgrade";
+//		inventoryTitle = "Select an item to upgrade";
+		name = Messages.get(this, "name");
+		inventoryTitle = Messages.get(this, "inv_title");
 		mode = WndBag.Mode.UPGRADEABLE;
 		consumedValue = 15;
 
@@ -55,12 +59,15 @@ public class ScrollOfUpgrade extends InventoryScroll {
 	}
 
 	@Override
+//	public String desc() {
+//		return "This scroll will upgrade a single item, improving its quality. A wand will "
+//				+ "increase in power and in number of charges; a weapon will inflict more damage "
+//				+ "or find its mark more frequently; a suit of armor will deflect additional blows; "
+//				+ "the effect of a ring on its wearer will intensify. Weapons and armor will also "
+//				+ "require less strength to use, and any curses on the item will be lifted.";
+//	}
 	public String desc() {
-		return "This scroll will upgrade a single item, improving its quality. A wand will "
-				+ "increase in power and in number of charges; a weapon will inflict more damage "
-				+ "or find its mark more frequently; a suit of armor will deflect additional blows; "
-				+ "the effect of a ring on its wearer will intensify. Weapons and armor will also "
-				+ "require less strength to use, and any curses on the item will be lifted.";
+		return Messages.get(this, "desc");
 	}
 	
 

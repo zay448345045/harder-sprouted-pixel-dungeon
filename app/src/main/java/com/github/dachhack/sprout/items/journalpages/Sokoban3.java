@@ -17,38 +17,44 @@
  */
 package com.github.dachhack.sprout.items.journalpages;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
 
 public class Sokoban3 extends JournalPage {
 
-	private static final String TXT_VALUE = "Sokoban Portals";
+//	private static final String TXT_VALUE = "Sokoban Portals";
 
 	{
-		name = "journal page sokoban portals";
+//		name = "journal page sokoban portals";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.JOURNAL_PAGE;
 		room=3;
 
 		stackable = false;
 	}
 
-	@Override
-	public boolean doPickUp(Hero hero) {
-         
-		GLog.p("You found a page to Otiluke's Journal!", TXT_VALUE);
-		return super.doPickUp(hero);
-	
-	}
+//	@Override
+//	public boolean doPickUp(Hero hero) {
+//
+//		GLog.p("You found a page to Otiluke's Journal!", TXT_VALUE);
+//		return super.doPickUp(hero);
+//
+//	}
 
 	@Override
+//	public String info() {
+//		return "A loose journal page labled Sokoban Portals.\n\n "
+//				+"My powers have grown stronger since I created my first space. \n\n"
+//				+"I find myself able to alter time and position in ways I have never thought possible. \n\n"
+//				+"My activities have created ripples in the magical ethosphere. "
+//				+"On clear days I am able to capture echoes of some disturbance focused on my presence. \n\n"
+//				+"-Otiluke, 1355 LP. ";
+//
+//	}
 	public String info() {
-		return "A loose journal page labled Sokoban Portals.\n\n "
-				+"My powers have grown stronger since I created my first space. \n\n"
-				+"I find myself able to alter time and position in ways I have never thought possible. \n\n"
-				+"My activities have created ripples in the magical ethosphere. "
-				+"On clear days I am able to capture echoes of some disturbance focused on my presence. \n\n"
-				+"-Otiluke, 1355 LP. ";
-		   
+		return Messages.get(this, "desc");
+
 	}
 }

@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.actors.blobs;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.effects.BlobEmitter;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.items.Generator;
@@ -94,9 +95,9 @@ public class WaterOfUpgradeEating extends WellWater {
 		
 		return n;
 	}
-	
+
 	@Override
 	public String tileDesc() {
-		return "A highly caustic liquid shimmers in a pool. Toss in an item to harvest its power. ";
+		return Messages.get(this, "desc");
 	}
 }

@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.food;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Burning;
 import com.github.dachhack.sprout.actors.buffs.Hunger;
@@ -32,10 +33,12 @@ import com.watabou.utils.Random;
 public class MysteryMeat extends Food {
 
 	{
-		name = "mystery meat";
+//		name = "mystery meat";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.MYSTERYMEAT;
 		energy = Hunger.STARVING - Hunger.HUNGRY;
-		message = "That food tasted... strange.";
+//		message = "That food tasted... strange.";
+		message = Messages.get(this, "eat_msg");
 		hornValue = 1;
 	}
 
@@ -48,20 +51,25 @@ public class MysteryMeat extends Food {
 
 			switch (Random.Int(5)) {
 			case 0:
-				GLog.w("Oh it's hot!");
+//				GLog.w("Oh it's hot!");
+				GLog.w(Messages.get(this, "hot"));
+
 				Buff.affect(hero, Burning.class).reignite(hero);
 				break;
 			case 1:
-				GLog.w("You can't feel your legs!");
+//				GLog.w("You can't feel your legs!");
+				GLog.w(Messages.get(this, "legs"));
 				Buff.prolong(hero, Roots.class, Paralysis.duration(hero));
 				break;
 			case 2:
-				GLog.w("You are not feeling well.");
+//				GLog.w("You are not feeling well.");
+				GLog.w(Messages.get(this, "not_well"));
 				Buff.affect(hero, Poison.class).set(
 						Poison.durationFactor(hero) * hero.HT / 5);
 				break;
 			case 3:
-				GLog.w("You are stuffed.");
+//				GLog.w("You are stuffed.");
+				GLog.w(Messages.get(this, "stuffed"));
 				Buff.prolong(hero, Slow.class, Slow.duration(hero));
 				break;
 			}
@@ -69,8 +77,11 @@ public class MysteryMeat extends Food {
 	}
 
 	@Override
+//	public String info() {
+//		return "Eat at your own risk!";
+//	}
 	public String info() {
-		return "Eat at your own risk!";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

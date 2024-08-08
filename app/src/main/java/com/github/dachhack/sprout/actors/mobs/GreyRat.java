@@ -17,11 +17,9 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
-import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.StenchGas;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.buffs.Amok;
@@ -39,13 +37,15 @@ import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.GreyRatSprite;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class GreyRat extends Mob {
 	
 
 	private static final float SPAWN_DELAY = 2f;
 
 	{
-		name = "grey rat";
+		name = Messages.get(this, "name");
 		spriteClass = GreyRatSprite.class;
 
 		HP = HT = 20;
@@ -72,9 +72,7 @@ public class GreyRat extends Mob {
 
 	@Override
 	public String description() {
-		return "Heartier cousins to Marsupial rats, Grey Rats have built up tolerances that allow "
-				+ "them to live in the most polluted parts of the sewers. "
-				+ "Probably still good to eat once cooked. ";
+		return Messages.get(this, "desc");
 	}
 	
 	public static void spawnAround(int pos) {

@@ -1,6 +1,7 @@
 package com.github.dachhack.sprout.items.artifacts;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.ui.BuffIndicator;
@@ -13,7 +14,8 @@ import com.watabou.utils.Random;
 public class CapeOfThorns extends Artifact {
 
 	{
-		name = "Cape of Thorns";
+//		name = "Cape of Thorns";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ARTIFACT_CAPE;
 
 		level = 0;
@@ -32,18 +34,30 @@ public class CapeOfThorns extends Artifact {
 	}
 
 	@Override
+//	public String desc() {
+//		String desc = "These collapsed sheets of metal from the DM-300 have formed together into a rigid wearable "
+//				+ "cape. The metal is old and coated in thick flakes of rust. It seems to store a deep energy, "
+//				+ "perhaps it has some of the DM-300's power?";
+//		if (isEquipped(Dungeon.hero)) {
+//			desc += "\n\n";
+//			if (cooldown == 0)
+//				desc += "The cape feels reassuringly heavy on your shoulders. You're not sure if it will directly "
+//						+ "help you in a fight, but it seems to be gaining energy from the physical damage you take.";
+//			else
+//				desc += "The cape seems to be releasing some stored energy, it is radiating power at all angles. "
+//						+ "You feel very confident that the cape can protect you from nearby enemies right now.";
+//		}
+//
+//		return desc;
+//	}
 	public String desc() {
-		String desc = "These collapsed sheets of metal from the DM-300 have formed together into a rigid wearable "
-				+ "cape. The metal is old and coated in thick flakes of rust. It seems to store a deep energy, "
-				+ "perhaps it has some of the DM-300's power?";
+		String desc = Messages.get(this, "desc");
 		if (isEquipped(Dungeon.hero)) {
 			desc += "\n\n";
 			if (cooldown == 0)
-				desc += "The cape feels reassuringly heavy on your shoulders. You're not sure if it will directly "
-						+ "help you in a fight, but it seems to be gaining energy from the physical damage you take.";
+				desc += Messages.get(this, "desc_inactive");
 			else
-				desc += "The cape seems to be releasing some stored energy, it is radiating power at all angles. "
-						+ "You feel very confident that the cape can protect you from nearby enemies right now.";
+				desc += Messages.get(this, "desc_active");
 		}
 
 		return desc;
@@ -57,7 +71,8 @@ public class CapeOfThorns extends Artifact {
 				cooldown--;
 				if (cooldown == 0) {
 					BuffIndicator.refreshHero();
-					GLog.w("Your Cape becomes inert again.");
+//					GLog.w("Your Cape becomes inert again.");
+					GLog.w(Messages.get(this, "inert"));
 				}
 				updateQuickslot();
 			}
@@ -71,7 +86,8 @@ public class CapeOfThorns extends Artifact {
 				if (charge >= chargeCap) {
 					charge = 0;
 					cooldown = 10 + level;
-					GLog.p("Your Cape begins radiating energy, you feel protected!");
+//					GLog.p("Your Cape begins radiating energy, you feel protected!");
+					GLog.p(Messages.get(this, "radiating"));
 					BuffIndicator.refreshHero();
 				}
 			}
@@ -87,7 +103,8 @@ public class CapeOfThorns extends Artifact {
 				if (exp >= (level + 1) * 5 && level < levelCap) {
 					exp -= (level + 1) * 5;
 					upgrade();
-					GLog.p("Your Cape grows stronger!");
+//					GLog.p("Your Cape grows stronger!");
+					GLog.p(Messages.get(this, "levelup"));
 				}
 
 			}
@@ -96,8 +113,12 @@ public class CapeOfThorns extends Artifact {
 		}
 
 		@Override
+//		public String toString() {
+//			return "Thorns";
+//		}
+
 		public String toString() {
-			return "Thorns";
+			return Messages.get(this, "name");
 		}
 
 		@Override
@@ -114,7 +135,10 @@ public class CapeOfThorns extends Artifact {
 			charge = 0;
 			super.detach();
 		}
-
+		@Override
+		public String desc() {
+			return Messages.get(CapeOfThorns.class, "buffdesc", dispTurns(cooldown));
+		}
 	}
 
 }

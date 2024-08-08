@@ -23,6 +23,7 @@ import java.util.HashSet;
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.Fire;
@@ -45,14 +46,21 @@ import com.watabou.utils.Bundle;
 
 public class Potion extends Item {
 
-	public static final String AC_DRINK = "DRINK";
+//	public static final String AC_DRINK = "DRINK";
+public static final String AC_DRINK = Messages.get(Potion.class, "ac_drink");
 
-	private static final String TXT_HARMFUL = "Harmful potion!";
-	private static final String TXT_BENEFICIAL = "Beneficial potion";
-	private static final String TXT_YES = "Yes, I know what I'm doing";
-	private static final String TXT_NO = "No, I changed my mind";
-	private static final String TXT_R_U_SURE_DRINK = "Are you sure you want to drink it? In most cases you should throw such potions at your enemies.";
-	private static final String TXT_R_U_SURE_THROW = "Are you sure you want to throw it? In most cases it makes sense to drink it.";
+//	private static final String TXT_HARMFUL = "Harmful potion!";
+//	private static final String TXT_BENEFICIAL = "Beneficial potion";
+//	private static final String TXT_YES = "Yes, I know what I'm doing";
+//	private static final String TXT_NO = "No, I changed my mind";
+//	private static final String TXT_R_U_SURE_DRINK = "Are you sure you want to drink it? In most cases you should throw such potions at your enemies.";
+//	private static final String TXT_R_U_SURE_THROW = "Are you sure you want to throw it? In most cases it makes sense to drink it.";
+private static final String TXT_HARMFUL = Messages.get(Potion.class, "harmful");
+	private static final String TXT_BENEFICIAL = Messages.get(Potion.class, "beneficial");
+	private static final String TXT_YES = Messages.get(Potion.class, "yes");
+	private static final String TXT_NO = Messages.get(Potion.class, "no");
+	private static final String TXT_R_U_SURE_DRINK = Messages.get(Potion.class, "sure_drink");
+	private static final String TXT_R_U_SURE_THROW = Messages.get(Potion.class, "sure_throw");
 
 	private static final float TIME_TO_DRINK = 1f;
 
@@ -65,9 +73,25 @@ public class Potion extends Item {
 			PotionOfFrost.class, PotionOfMending.class,
 			PotionOfOverHealing.class};
 	
-	private static final String[] colors = { "turquoise", "crimson", "azure",
-			"jade", "golden", "magenta", "charcoal", "ivory", "amber",
-			"bistre", "indigo", "silver", "aqua", "violet"};
+//	private static final String[] colors = { "turquoise", "crimson", "azure",
+//			"jade", "golden", "magenta", "charcoal", "ivory", "amber",
+//			"bistre", "indigo", "silver", "aqua", "violet"};
+private static final String[] colors = {
+		Messages.get(Potion.class, "turquoise"),
+		Messages.get(Potion.class, "crimson"),
+		Messages.get(Potion.class, "azure"),
+		Messages.get(Potion.class, "jade"),
+		Messages.get(Potion.class, "golden"),
+		Messages.get(Potion.class, "magenta"),
+		Messages.get(Potion.class, "charcoal"),
+		Messages.get(Potion.class, "ivory"),
+		Messages.get(Potion.class, "amber"),
+		Messages.get(Potion.class, "bistre"),
+		Messages.get(Potion.class, "indigo"),
+		Messages.get(Potion.class, "silver"),
+		Messages.get(Potion.class, "aqua"),
+		Messages.get(Potion.class, "violet")};
+
 	private static final Integer[] images = { ItemSpriteSheet.POTION_TURQUOISE,
 			ItemSpriteSheet.POTION_CRIMSON, ItemSpriteSheet.POTION_AZURE,
 			ItemSpriteSheet.POTION_JADE, ItemSpriteSheet.POTION_GOLDEN,
@@ -211,8 +235,9 @@ public class Potion extends Item {
 
 	public void shatter(int cell) {
 		if (Dungeon.visible[cell]) {
-			GLog.i("The flask shatters and " + color()
-					+ " liquid splashes harmlessly");
+//			GLog.i("The flask shatters and " + color()
+//					+ " liquid splashes harmlessly");
+			GLog.i(Messages.get(this, "shatter", color()));
 			Sample.INSTANCE.play(Assets.SND_SHATTER);
 			splash(cell);
 		}
@@ -248,16 +273,25 @@ public class Potion extends Item {
 		return color;
 	}
 
-	@Override
-	public String name() {
-		return isKnown() ? name : color + " potion";
-	}
+//	@Override
+//	public String name() {
+//		return isKnown() ? name : color + " potion";
+//	}
+//
+//	@Override
+//	public String info() {
+//		return isKnown() ? desc() : "This flask contains a swirling " + color
+//				+ " liquid. "
+//				+ "Who knows what it will do when drunk or thrown?";
+//	}
+@Override
+public String name() {
+	return isKnown() ? name : Messages.get(this, "unknown_name", color);
+}
 
 	@Override
 	public String info() {
-		return isKnown() ? desc() : "This flask contains a swirling " + color
-				+ " liquid. "
-				+ "Who knows what it will do when drunk or thrown?";
+		return isKnown() ? desc() : Messages.get(this, "unknown_desc", color);
 	}
 
 	@Override

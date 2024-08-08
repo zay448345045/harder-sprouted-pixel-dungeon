@@ -18,19 +18,19 @@
 package com.github.dachhack.sprout.windows;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.items.DewVial;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.ui.RedButton;
+import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.Utils;
-import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndAscend extends Window {
 
-	private static final String TXT_MESSAGE = "Are you sure you want to ascend? "
-                                             +"Ascending here will end your game. ";
-	private static final String TXT_REWARD = "Ascend";
+	private static final String TXT_MESSAGE = Messages.get(WndAscend.class, "message");
+	private static final String TXT_REWARD = Messages.get(WndAscend.class, "ok");
 
 	private static final int WIDTH = 120;
 	private static final int BTN_HEIGHT = 20;
@@ -48,21 +48,22 @@ public class WndAscend extends Window {
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 
-		BitmapTextMultiline message = PixelScene
-				.createMultiline(TXT_MESSAGE, 6);
+		RenderedTextMultiline message = PixelScene
+				.renderMultiline(Messages.get(WndAscend.class, "message"), 6);
 		message.maxWidth = WIDTH;
-		message.measure();
-		message.y = titlebar.bottom() + GAP;
+		//message.measure();
+		//message.y = titlebar.bottom() + GAP;
+		message.setPos(0, titlebar.bottom()+GAP);
 		add(message);
 
-		RedButton btnReward = new RedButton(TXT_REWARD) {
+		RedButton btnReward = new RedButton(Messages.get(WndAscend.class, "ok")) {
 			@Override
 			protected void onClick() {
 				Dungeon.level.forcedone=true;
 				hide();
 			}
 		};
-		btnReward.setRect(0, message.y + message.height() + GAP, WIDTH,
+		btnReward.setRect(0, message.top() + message.height() + GAP, WIDTH,
 				BTN_HEIGHT);
 		add(btnReward);
 

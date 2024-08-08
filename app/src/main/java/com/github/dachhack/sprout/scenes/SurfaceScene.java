@@ -17,9 +17,6 @@
  */
 package com.github.dachhack.sprout.scenes;
 
-import java.nio.FloatBuffer;
-import java.util.Calendar;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Dungeon;
@@ -27,8 +24,8 @@ import com.github.dachhack.sprout.actors.hero.HeroClass;
 import com.github.dachhack.sprout.sprites.RatSprite;
 import com.github.dachhack.sprout.ui.Archs;
 import com.github.dachhack.sprout.ui.RedButton;
-import com.watabou.gltextures.Gradient;
 import com.watabou.gltextures.SmartTexture;
+import com.watabou.gltextures.TextureCache;
 import com.watabou.glwrap.Matrix;
 import com.watabou.glwrap.Quad;
 import com.watabou.input.Touchscreen.Touch;
@@ -45,8 +42,11 @@ import com.watabou.noosa.audio.Music;
 import com.watabou.utils.Point;
 import com.watabou.utils.Random;
 
-public class SurfaceScene extends PixelScene {
+import java.nio.FloatBuffer;
+import java.util.Calendar;
 
+public class SurfaceScene extends PixelScene {
+//
 	private static final int FRAME_WIDTH = 88;
 	private static final int FRAME_HEIGHT = 125;
 
@@ -207,7 +207,7 @@ public class SurfaceScene extends PixelScene {
 		public Sky(boolean dayTime) {
 			super(0, 0, 1, 1);
 
-			texture = new Gradient(dayTime ? day : night);
+			texture = TextureCache.createGradient(dayTime ? day : night);
 
 			float[] vertices = new float[16];
 			verticesBuffer = Quad.create();

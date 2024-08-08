@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items.food;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Blindness;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Hunger;
@@ -30,17 +31,21 @@ import com.watabou.utils.Random;
 public class DeathCap extends Food {
 
 	{
-		name = "death cap mushroom";
+//		name = "death cap mushroom";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.MUSHROOM_DEATHCAP;
 		energy = (Hunger.STARVING - Hunger.HUNGRY)/10;
-		message = "Munch munch";
+//		message = "Munch munch";
+		message = Messages.get(BlueMilk.class, "eat");
 		hornValue = 1;
 		bones = false;
 	}
 	
-	private static final String TXT_PREVENTING = "Something tells you that wouldn't be a good idea here! ";
-	private static final String TXT_EFFECT = "Dark energy fills your veins. All you can see is your bones glowing! ";
+//	private static final String TXT_PREVENTING = "Something tells you that wouldn't be a good idea here! ";
+//	private static final String TXT_EFFECT = "Dark energy fills your veins. All you can see is your bones glowing! ";
 
+	private static final String TXT_PREVENTING = Messages.get(BlueMilk.class, "prevent");
+	private static final String TXT_EFFECT = Messages.get(DeathCap.class, "effect");
 	@Override
 	public void execute(Hero hero, String action) {
 		
@@ -82,9 +87,12 @@ public class DeathCap extends Food {
 	}	
 	
 	@Override
+//	public String info() {
+//		return "A deadly-looking fungus found growing in the dungeon. "
+//				+"Eat at your own risk. ";
+//	}
 	public String info() {
-		return "A deadly-looking fungus found growing in the dungeon. "
-				+"Eat at your own risk. ";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

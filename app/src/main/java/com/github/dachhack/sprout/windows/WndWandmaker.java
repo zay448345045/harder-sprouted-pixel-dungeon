@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.windows;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.hero.HeroClass;
@@ -28,6 +29,7 @@ import com.github.dachhack.sprout.items.wands.Wand;
 import com.github.dachhack.sprout.scenes.PixelScene;
 import com.github.dachhack.sprout.sprites.ItemSprite;
 import com.github.dachhack.sprout.ui.RedButton;
+import com.github.dachhack.sprout.ui.RenderedTextMultiline;
 import com.github.dachhack.sprout.ui.Window;
 import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
@@ -35,14 +37,21 @@ import com.watabou.noosa.BitmapTextMultiline;
 
 public class WndWandmaker extends Window {
 
-	private static final String TXT_MESSAGE = "Oh, I see you have succeeded! I do hope it hasn't troubled you too much. "
-			+ "As I promised, you can choose one of my high quality wands.";
-	private static final String TXT_BATTLE = "Battle wand";
-	private static final String TXT_NON_BATTLE = "Non-battle wand";
+//	private static final String TXT_MESSAGE = "Oh, I see you have succeeded! I do hope it hasn't troubled you too much. "
+//			+ "As I promised, you can choose one of my high quality wands.";
+//	private static final String TXT_BATTLE = "Battle wand";
+//	private static final String TXT_NON_BATTLE = "Non-battle wand";
+//
+//	private static final String TXT_ADAMANT = "You might find this raw material useful later on. I'm not powerful enough to work with it.";
+//	private static final String TXT_WOW = "How did you make it all this way!? I have another reward for you. ";
+//	private static final String TXT_FARAWELL = "Good luck in your quest, %s!";
+private static final String TXT_MESSAGE = Messages.get(WndWandmaker.class, "msg");
+	private static final String TXT_BATTLE = Messages.get(WndWandmaker.class, "battle");
+	private static final String TXT_NON_BATTLE = Messages.get(WndWandmaker.class, "nonbattle");
 
-	private static final String TXT_ADAMANT = "You might find this raw material useful later on. I'm not powerful enough to work with it.";
-	private static final String TXT_WOW = "How did you make it all this way!? I have another reward for you. ";
-	private static final String TXT_FARAWELL = "Good luck in your quest, %s!";
+	private static final String TXT_ADAMANT = Messages.get(WndWandmaker.class, "adamant");
+	private static final String TXT_WOW = Messages.get(WndWandmaker.class, "wow");
+	private static final String TXT_FARAWELL = Messages.get(WndWandmaker.class, "farewell");
 
 	private static final int WIDTH = 120;
 	private static final int BTN_HEIGHT = 20;
@@ -58,11 +67,10 @@ public class WndWandmaker extends Window {
 		titlebar.setRect(0, 0, WIDTH, 0);
 		add(titlebar);
 
-		BitmapTextMultiline message = PixelScene
-				.createMultiline(TXT_MESSAGE, 6);
-		message.maxWidth = WIDTH;
-		message.measure();
-		message.y = titlebar.bottom() + GAP;
+		RenderedTextMultiline message = PixelScene
+				.renderMultiline(TXT_MESSAGE, 6);
+		message.maxWidth(WIDTH);
+		message.setPos(0, titlebar.bottom() + GAP);
 		add(message);
 
 		RedButton btnBattle = new RedButton(TXT_BATTLE) {
@@ -71,7 +79,7 @@ public class WndWandmaker extends Window {
 				selectReward(wandmaker, item, Wandmaker.Quest.wand1);
 			}
 		};
-		btnBattle.setRect(0, message.y + message.height() + GAP, WIDTH,
+		btnBattle.setRect(0, message.top() + message.height() + GAP, WIDTH,
 				BTN_HEIGHT);
 		add(btnBattle);
 
@@ -95,7 +103,7 @@ public class WndWandmaker extends Window {
 
 		reward.identify();
 		if (reward.doPickUp(Dungeon.hero)) {
-			GLog.i(Hero.TXT_YOU_NOW_HAVE, reward.name());
+			GLog.i(Messages.get(Hero.class,"have"), reward.name());
 		} else {
 			Dungeon.level.drop(reward, wandmaker.pos).sprite.drop();
 		}

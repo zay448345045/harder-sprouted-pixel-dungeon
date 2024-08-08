@@ -17,27 +17,28 @@
  */
 package com.github.dachhack.sprout;
 
-import java.util.ArrayList;
-
+import com.github.dachhack.sprout.Messages.Messages;
 import com.watabou.utils.Bundlable;
 import com.watabou.utils.Bundle;
 
+import java.util.ArrayList;
+
 public class Journal {
 
-	public static enum Feature {
-		WELL_OF_HEALTH("Well of Health"), WELL_OF_AWARENESS("Well of Awareness"), WELL_OF_TRANSMUTATION(
-				"Well of Transmutation"), ALCHEMY("Alchemy pot"), GARDEN(
-				"Garden"), STATUE("Animated statue"),
+	public enum Feature {
+		WELL_OF_HEALTH(Messages.get(Journal.class, "well_of_health")), WELL_OF_AWARENESS(Messages.get(Journal.class, "well_of_awareness")), WELL_OF_TRANSMUTATION(
+				Messages.get(Journal.class, "well_of_transmutation")), ALCHEMY(Messages.get(Journal.class, "alchemy")), GARDEN(
+				Messages.get(Journal.class, "garden")), STATUE(Messages.get(Journal.class, "statue")),
 
-		GHOST("Sad ghost"), WANDMAKER("Old wandmaker"), TROLL(
-				"Troll blacksmith"), IMP("Ambitious imp");
+		GHOST(Messages.get(Journal.class, "ghost")), WANDMAKER(Messages.get(Journal.class, "wandmaker")), TROLL(
+				Messages.get(Journal.class, "troll")), IMP(Messages.get(Journal.class, "imp"));
 
 		public String desc;
 
-		private Feature(String desc) {
+		Feature(String desc) {
 			this.desc = desc;
 		}
-	};
+	}
 
 	public static class Record implements Comparable<Record>, Bundlable {
 

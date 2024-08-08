@@ -17,10 +17,9 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
@@ -33,7 +32,6 @@ import com.github.dachhack.sprout.effects.Flare;
 import com.github.dachhack.sprout.effects.Speck;
 import com.github.dachhack.sprout.effects.particles.ElmoParticle;
 import com.github.dachhack.sprout.items.OtilukesJournal;
-import com.github.dachhack.sprout.items.journalpages.Sokoban3;
 import com.github.dachhack.sprout.items.journalpages.Sokoban4;
 import com.github.dachhack.sprout.items.scrolls.ScrollOfPsionicBlast;
 import com.github.dachhack.sprout.items.wands.WandOfBlink;
@@ -44,11 +42,14 @@ import com.github.dachhack.sprout.levels.Level;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.KingSprite;
 import com.github.dachhack.sprout.sprites.UndeadSprite;
+import com.github.dachhack.sprout.ui.BossHealthBar;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.PathFinder;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public class King extends Mob {
 
@@ -57,7 +58,7 @@ public class King extends Mob {
 
 
 	{
-		name = "King of Dwarves";
+		name = Messages.get(this, "name");
 		spriteClass = KingSprite.class;
 
 		HP = HT = 500;
@@ -99,7 +100,7 @@ public class King extends Mob {
 
 	@Override
 	public String defenseVerb() {
-		return "parried";
+		return Messages.get(this, "def");
 	}
 
 	@Override
@@ -157,8 +158,7 @@ public class King extends Mob {
 	public void die(Object cause) {
 		            
 		int findTomb=Dungeon.hero.pos;
-		yell("You cannot kill me, " + Dungeon.hero.givenName()
-				+ "... I am... immortal...");
+		yell(Messages.get(this, "die", Dungeon.hero.givenName()));
 		 for (Mob mob : Dungeon.level.mobs.toArray( new Mob[0] )) {
 				if (mob instanceof DwarfKingTomb){findTomb=mob.pos;}
 		 }
@@ -171,7 +171,7 @@ public class King extends Mob {
 			}
 		 
 		 summonLiches(findTomb);
-		 GLog.n("Release the Liches!");
+		GLog.n(Messages.get(this, "release"));
 		 super.die(cause);
 							
 	}
@@ -229,8 +229,10 @@ public class King extends Mob {
 
 	@Override
 	public void notice() {
+		BossHealthBar.assignBoss(this);
+
 		super.notice();
-		yell("How dare you!");
+		yell(Messages.get(this, "notice"));
 	}
 
 	@Override
@@ -241,10 +243,7 @@ public class King extends Mob {
 
 	@Override
 	public String description() {
-		return "The last king of dwarves was known for his deep understanding of processes of life and death. "
-				+ "He has persuaded members of his court to participate in a ritual, that should have granted them "
-				+ "eternal youthfulness. In the end he was the only one, who got it - and an army of undead "
-				+ "as a bonus.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();
@@ -276,7 +275,7 @@ public class King extends Mob {
 		public static int count = 0;
 
 		{
-			name = "undead dwarf";
+			name = Messages.get(this, "name");
 			spriteClass = UndeadSprite.class;
 
 			HP = HT = 50;
@@ -336,13 +335,12 @@ public class King extends Mob {
 
 		@Override
 		public String defenseVerb() {
-			return "blocked";
+			return Messages.get(King.class, "ddef");
 		}
 
 		@Override
 		public String description() {
-			return "These undead dwarves, risen by the will of the King of Dwarves, were members of his court. "
-					+ "They appear as skeletons with a stunning amount of facial hair.";
+			return Messages.get(King.class, "ddesc");
 		}
 
 		private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

@@ -17,10 +17,9 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.Journal;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
 import com.github.dachhack.sprout.actors.buffs.Poison;
@@ -35,11 +34,13 @@ import com.github.dachhack.sprout.sprites.SentinelSprite;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Sentinel extends Mob {
 	
 
 	{
-		name = "animated statue";
+		name = Messages.get(this, "name");
 		spriteClass = SentinelSprite.class;
 
 		EXP = 18;
@@ -154,9 +155,7 @@ public class Sentinel extends Mob {
 
 	@Override
 	public String description() {
-		return "You would think that it's just another one of this dungeon's ugly statues, but its red glowing eyes give it away."
-				+ "\n\nWhile the statue itself is made of stone, the _"
-				+ weapon.name() + "_, it's wielding, looks real.";
+		return Messages.get(this, "desc", weapon.name());
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();

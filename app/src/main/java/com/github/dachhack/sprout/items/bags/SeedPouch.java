@@ -17,6 +17,7 @@
  */
 package com.github.dachhack.sprout.items.bags;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.items.Rice;
 import com.github.dachhack.sprout.items.food.Blackberry;
@@ -33,7 +34,8 @@ import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 public class SeedPouch extends Bag {
 
 	{
-		name = "seed pouch";
+//		name = "seed pouch";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.POUCH;
 
 		size = 24;
@@ -62,7 +64,10 @@ public class SeedPouch extends Bag {
 	}
 
 	@Override
+//	public String info() {
+//		return "This small velvet pouch allows you to store any number of seeds in it. Very convenient.";
+//	}
 	public String info() {
-		return "This small velvet pouch allows you to store any number of seeds in it. Very convenient.";
+		return Messages.get(this, "desc");
 	}
 }

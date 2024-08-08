@@ -1,5 +1,6 @@
 package com.github.dachhack.sprout.items.potions;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
@@ -8,8 +9,8 @@ import java.util.ArrayList;
 
 public class MegaExperiencePotion extends Item {
     {
-        name = "Mega Potion of Experience";
-
+//        name = "Mega Potion of Experience";
+        name = Messages.get(this, "name");
         bones = false;
 
         image = ItemSpriteSheet.POTION_AQUA;
@@ -25,7 +26,8 @@ public class MegaExperiencePotion extends Item {
         return false;
     }
 
-    public static final String AC_DRINK = "DRINK";
+    public static final String AC_DRINK = Messages.get(Potion.class, "ac_drink");
+
     public void apply(Hero hero) {
         for (int i = 0; i < 52; i++) {
             hero.earnExp(hero.maxExp() - hero.exp);
@@ -34,7 +36,7 @@ public class MegaExperiencePotion extends Item {
 
     @Override
     public String desc() {
-        return "Drink this for cool stuff like much experience. If you want a realistic look at balance only drink it once.";
+        return Messages.get(this, "desc");
     }
 
     @Override

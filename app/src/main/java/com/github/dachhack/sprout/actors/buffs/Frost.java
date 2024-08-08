@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.buffs;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.actors.mobs.Thief;
@@ -49,7 +50,7 @@ public class Frost extends FlavourBuff {
 				if (item instanceof Potion) {
 
 					item = item.detach(hero.belongings.backpack);
-					GLog.w(TXT_FREEZES, item.toString());
+					GLog.w(Messages.get(this, "item"), item.toString());
 					((Potion) item).shatter(hero.pos);
 
 				} else if (item instanceof MysteryMeat) {
@@ -59,7 +60,7 @@ public class Frost extends FlavourBuff {
 					if (!carpaccio.collect(hero.belongings.backpack)) {
 						Dungeon.level.drop(carpaccio, target.pos).sprite.drop();
 					}
-					GLog.w(TXT_FREEZES, item.toString());
+					GLog.w(Messages.get(this, "item"), item.toString());
 
 				}
 			} else if (target instanceof Thief
@@ -89,7 +90,12 @@ public class Frost extends FlavourBuff {
 
 	@Override
 	public String toString() {
-		return "Frozen";
+		return Messages.get(this, "name");
+	}
+
+	@Override
+	public String desc() {
+		return Messages.get(this, "desc", dispTurns());
 	}
 
 	public static float duration(Char ch) {

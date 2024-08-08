@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items.weapon.missiles;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Drowsy;
@@ -46,7 +47,9 @@ public class RiceBall extends MissileWeapon {
 	public static final float DURATION = 10f;
 
 	{
-		name = "rice dumpling";
+//		name = "rice dumpling";
+		name = Messages.get(this, "name");
+
 		image = ItemSpriteSheet.RICEBALL;
 
 		MIN = 1;
@@ -69,9 +72,12 @@ public class RiceBall extends MissileWeapon {
 	}
 
 	@Override
+//	public String desc() {
+//		return "A satisfying dumpling lovingly crafted from magic rice. "
+//		       +"Anything that eats would gladly take a dumpling. ";
+//	}
 	public String desc() {
-		return "A satisfying dumpling lovingly crafted from magic rice. "
-		       +"Anything that eats would gladly take a dumpling. ";
+		return Messages.get(this, "desc");
 	}
 	
 	@Override
@@ -117,14 +123,16 @@ public class RiceBall extends MissileWeapon {
 				defender.pos = pos;
 				defender.sprite.place(defender.pos);
 				defender.sprite.visible = Dungeon.visible[pos];
-				GLog.i(curUser.name + " teleported " + defender.name
-						+ " to somewhere");
+//				GLog.i(curUser.name + " teleported " + defender.name
+//						+ " to somewhere");
+				GLog.i(Messages.get(this, "tele", curUser.name, defender.name));
 
 			}
 
 		   } else {
 
-			GLog.i("nothing happened");
+//			GLog.i("nothing happened");
+				GLog.i(Messages.get(this, "nothing"));
 
 		  }
 	    }

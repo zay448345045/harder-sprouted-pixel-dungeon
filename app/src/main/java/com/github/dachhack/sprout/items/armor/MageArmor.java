@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.armor;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Burning;
@@ -34,12 +35,12 @@ import com.watabou.noosa.audio.Sample;
 
 public class MageArmor extends ClassArmor {
 
-	private static final String AC_SPECIAL = "MOLTEN EARTH";
+	private static final String AC_SPECIAL = Messages.get(MageArmor.class, "ac_special");
 
-	private static final String TXT_NOT_MAGE = "Only mages can use this armor!";
+	private static final String TXT_NOT_MAGE = Messages.get(MageArmor.class, "not_mage");
 
 	{
-		name = "mage robe";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ARMOR_MAGE;
 	}
 
@@ -50,8 +51,7 @@ public class MageArmor extends ClassArmor {
 
 	@Override
 	public String desc() {
-		return "Wearing this gorgeous robe, a mage can cast a spell of molten earth: all the enemies "
-				+ "in his field of view will be set on fire and unable to move at the same time.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

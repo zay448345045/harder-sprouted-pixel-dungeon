@@ -17,12 +17,11 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Badges;
 import com.github.dachhack.sprout.Challenges;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.Statistics;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
@@ -51,18 +50,19 @@ import com.github.dachhack.sprout.levels.Level.Feeling;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.utils.GLog;
-import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Bundle;
 import com.watabou.utils.Random;
+
+import java.util.HashSet;
 
 public abstract class Mob extends Char {
 
 	private static final String TXT_DIED = "You hear something died in the distance";
 
 	protected static final String TXT_NOTICE1 = "?!";
-	protected static final String TXT_RAGE = "#$%^";
-	protected static final String TXT_EXP = "%+dEXP";
+	protected static final String TXT_RAGE = Messages.get(Mob.class, "rage");
+	protected static final String TXT_EXP = Messages.get(Mob.class, "exp");
 
 	public AiState SLEEPING = new Sleeping();
 	public AiState HUNTING = new Hunting();
@@ -567,7 +567,7 @@ public abstract class Mob extends Char {
 		}
 
 		if (Dungeon.hero.isAlive() && !Dungeon.visible[pos]) {
-			GLog.i(TXT_DIED);
+			GLog.i(Messages.get(Mob.class, "died"));
 		}
 	}
 
@@ -742,7 +742,7 @@ public void explodeDewHigh(int cell) {
 
 		@Override
 		public String status() {
-			return Utils.format("This %s is sleeping", name);
+			return Messages.get(this, "status", name);
 		}
 	}
 
@@ -781,7 +781,7 @@ public void explodeDewHigh(int cell) {
 
 		@Override
 		public String status() {
-			return Utils.format("This %s is wandering", name);
+			return Messages.get(this, "status", name);
 		}
 	}
 
@@ -820,7 +820,7 @@ public void explodeDewHigh(int cell) {
 
 		@Override
 		public String status() {
-			return Utils.format("This %s is hunting", name);
+			return Messages.get(this, "status", name);
 		}
 	}
 
@@ -855,7 +855,7 @@ public void explodeDewHigh(int cell) {
 
 		@Override
 		public String status() {
-			return Utils.format("This %s is fleeing", name);
+			return Messages.get(this, "status", name);
 		}
 	}
 
@@ -872,7 +872,7 @@ public void explodeDewHigh(int cell) {
 
 		@Override
 		public String status() {
-			return Utils.format("This %s is passive", name);
+			return Messages.get(this, "status", name);
 		}
 	}
 	

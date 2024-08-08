@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -39,7 +40,8 @@ import com.watabou.utils.Random;
 
 public class NeptuneShock extends Weapon.Enchantment {
 
-	private static final String TXT_SHOCKING = "%s of Voltage";
+//	private static final String TXT_SHOCKING = "%s of Voltage";
+private static final String TXT_SHOCKING = Messages.get(NeptuneShock.class, "name");
 	private int[] points = new int[10];
 	private int cost = 10;
 

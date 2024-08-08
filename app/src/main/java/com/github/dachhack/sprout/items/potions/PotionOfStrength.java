@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items.potions;
 
 import com.github.dachhack.sprout.Badges;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.sprites.CharSprite;
 import com.github.dachhack.sprout.utils.GLog;
@@ -25,7 +26,9 @@ import com.github.dachhack.sprout.utils.GLog;
 public class PotionOfStrength extends Potion {
 
 	{
-		name = "Potion of Strength";
+//		name = "Potion of Strength";
+		name = Messages.get(this, "name");
+
 
 		bones = true;
 	}
@@ -35,16 +38,22 @@ public class PotionOfStrength extends Potion {
 		setKnown();
 
 		hero.STR++;
-		hero.sprite.showStatus(CharSprite.POSITIVE, "+1 str");
-		GLog.p("Newfound strength surges through your body.");
+//		hero.sprite.showStatus(CharSprite.POSITIVE, "+1 str");
+//		GLog.p("Newfound strength surges through your body.");
+		hero.sprite.showStatus(CharSprite.POSITIVE, Messages.get(this, "msg_1"));
+		GLog.p(Messages.get(this, "msg_2"));
 
 		Badges.validateStrengthAttained();
 	}
 
+//	@Override
+//	public String desc() {
+//		return "This powerful liquid will course through your muscles, "
+//				+ "permanently increasing your strength by one point.";
+//	}
 	@Override
 	public String desc() {
-		return "This powerful liquid will course through your muscles, "
-				+ "permanently increasing your strength by one point.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

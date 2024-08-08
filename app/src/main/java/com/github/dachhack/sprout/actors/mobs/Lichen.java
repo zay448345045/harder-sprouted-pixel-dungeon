@@ -17,9 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
@@ -30,11 +29,13 @@ import com.github.dachhack.sprout.sprites.MrDestructoSprite;
 import com.github.dachhack.sprout.utils.GLog;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Lichen extends Mob {
 	
 
 	{
-		name = "lichen";
+		name = Messages.get(this, "name");
 		spriteClass = MrDestructoSprite.class;
 		hostile = false;
 		state = HUNTING;
@@ -91,7 +92,7 @@ public class Lichen extends Mob {
 			int cell = pos + n;
 			if (Level.passable[cell] && Actor.findChar(cell) == null && Random.Float()<0.25f) {
 				spawnAt(cell);
-				GLog.i("You shed a lichen from you body. ");
+				GLog.i(Messages.get(Lichen.class, "spawn"));
 			}
 		}
 	}
@@ -122,11 +123,10 @@ public class Lichen extends Mob {
 	@Override
 	public void beckon(int cell) {
 	}
-	
+
 	@Override
 	public String description() {
-		return "The contraption has sprung to life! "
-				+ "It is blowing away nearby mobs!";
+		return Messages.get(this, "desc");
 	}
 
 	

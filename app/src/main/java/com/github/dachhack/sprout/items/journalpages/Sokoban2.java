@@ -17,35 +17,40 @@
  */
 package com.github.dachhack.sprout.items.journalpages;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.hero.Hero;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 import com.github.dachhack.sprout.utils.GLog;
 
 public class Sokoban2 extends JournalPage {
 
-	private static final String TXT_VALUE = "Sokoban Castle";
+//	private static final String TXT_VALUE = "Sokoban Castle";
 
 	{
-		name = "journal page sokoban castle";
+//		name = "journal page sokoban castle";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.JOURNAL_PAGE;
 		room=2;
 
 		stackable = false;
 	}
 
-	@Override
-	public boolean doPickUp(Hero hero) {
-         
-		GLog.p("You found a page to Otiluke's Journal!", TXT_VALUE);
-		return super.doPickUp(hero);
-	
-	}
+//	@Override
+//	public boolean doPickUp(Hero hero) {
+//
+//		GLog.p("You found a page to Otiluke's Journal!", TXT_VALUE);
+//		return super.doPickUp(hero);
+//
+//	}
 
 	@Override
+//	public String info() {
+//		return "A loose journal page labled Sokoban Castle.\n\n "
+//				+"Having mastered the elements required for creating my spaces, "
+//				+"I am now set out to build a grand fortress in which to hide my valuables. \n\n"
+//				+"-Otiluke, 1348 LP. ";
+//	}
 	public String info() {
-		return "A loose journal page labled Sokoban Castle.\n\n "
-				+"Having mastered the elements required for creating my spaces, "
-				+"I am now set out to build a grand fortress in which to hide my valuables. \n\n"
-				+"-Otiluke, 1348 LP. ";
+		return Messages.get(this, "desc");
 	}
 }

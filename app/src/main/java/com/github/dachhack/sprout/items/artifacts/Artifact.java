@@ -3,6 +3,7 @@ package com.github.dachhack.sprout.items.artifacts;
 import java.util.ArrayList;
 
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -24,6 +25,9 @@ public class Artifact extends KindofMisc {
 	private static final String TXT_TO_STRING_CHARGE = "%s (%d/%d)";
 	private static final String TXT_TO_STRING_LVL = "%s%+d";
 	private static final String TXT_TO_STRING_LVL_CHARGE = "%s%+d (%d/%d)";
+
+	private static final String TXT_UNEQUIP_TITLE = Messages.get(Artifact.class, "unequip_title");
+	private static final String TXT_UNEQUIP_MESSAGE = Messages.get(Artifact.class, "unequip_msg");
 
 	protected Buff passiveBuff;
 	protected Buff activeBuff;
@@ -60,41 +64,23 @@ public class Artifact extends KindofMisc {
 	}
 
 	@Override
-	public boolean doEquip(Hero hero) {
+	public boolean doEquip(final Hero hero) {
 
-		if (hero.belongings.misc1 != null && hero.belongings.misc2 != null) {
+		if ((hero.belongings.misc1 != null && hero.belongings.misc1.getClass() == this.getClass())
+				|| (hero.belongings.misc2 != null && hero.belongings.misc2.getClass() == this.getClass())
+				|| (hero.belongings.misc3 != null && hero.belongings.misc3.getClass() == this.getClass())
+				|| (hero.belongings.misc4 != null && hero.belongings.misc4.getClass() == this.getClass())) {
 
-			GLog.w("you can only wear 2 misc items at a time");
-			return false;
-
-		} else if ((hero.belongings.misc1 != null && hero.belongings.misc1.getClass() == this.getClass())
-				|| (hero.belongings.misc2 != null && hero.belongings.misc2.getClass() == this.getClass())) {
-
-			GLog.w("you cannot wear two of the same artifact");
+			GLog.w(Messages.get(Artifact.class, "2a"));
 			return false;
 
 		} else {
-
-			if (hero.belongings.misc1 == null) {
-				hero.belongings.misc1 = this;
+			if (super.doEquip(hero)) {
+				identify();
+				return true;
 			} else {
-				hero.belongings.misc2 = this;
+				return false;
 			}
-
-			detach(hero.belongings.backpack);
-
-			activate(hero);
-
-			cursedKnown = true;
-			identify();
-			if (cursed) {
-				equipCursed(hero);
-				GLog.n("the " + this.name + " painfully binds itself to you");
-			}
-
-			hero.spendAndNext(TIME_TO_EQUIP);
-			return true;
-
 		}
 
 	}
@@ -155,11 +141,17 @@ public class Artifact extends KindofMisc {
 
 	@Override
 	public String info() {
+//		if (cursed && cursedKnown && !isEquipped(Dungeon.hero)) {
+//
+//			return desc()
+//					+ "\n\nYou can feel a malevolent magic lurking within the "
+//					+ name() + ".";
+//
+//		} else {
 		if (cursed && cursedKnown && !isEquipped(Dungeon.hero)) {
 
 			return desc()
-					+ "\n\nYou can feel a malevolent magic lurking within the "
-					+ name() + ".";
+					+ Messages.get(this, "curse_known");
 
 		} else {
 

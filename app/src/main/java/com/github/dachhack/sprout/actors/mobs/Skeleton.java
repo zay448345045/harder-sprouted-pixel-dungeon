@@ -17,10 +17,9 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.items.Generator;
@@ -33,12 +32,14 @@ import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class Skeleton extends Mob {
 
 	private static final String TXT_HERO_KILLED = "You were killed by the explosion of bones...";
 
 	{
-		name = "skeleton";
+		name = Messages.get(this, "name");
 		spriteClass = SkeletonSprite.class;
 
 		HP = HT = 50;
@@ -81,7 +82,7 @@ public class Skeleton extends Mob {
 		if (heroKilled) {
 			Dungeon.fail(Utils.format(ResultDescriptions.MOB,
 					Utils.indefinite(name)));
-			GLog.n(TXT_HERO_KILLED);
+			GLog.n(Messages.get(Skeleton.class, "kill"));
 		}
 	}
 
@@ -109,14 +110,12 @@ public class Skeleton extends Mob {
 
 	@Override
 	public String defenseVerb() {
-		return "blocked";
+		return Messages.get(this, "def");
 	}
 
 	@Override
 	public String description() {
-		return "Skeletons are composed of corpses bones from unlucky adventurers and inhabitants of the dungeon, "
-				+ "animated by emanations of evil magic from the depths below. After they have been "
-				+ "damaged enough, they disintegrate in an explosion of bones.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> IMMUNITIES = new HashSet<Class<?>>();

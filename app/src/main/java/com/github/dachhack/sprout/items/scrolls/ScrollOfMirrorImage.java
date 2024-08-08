@@ -21,6 +21,7 @@ import java.util.ArrayList;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.actors.mobs.npcs.MirrorImage;
@@ -37,11 +38,13 @@ public class ScrollOfMirrorImage extends Scroll {
 	private static final int NIMAGES = 3;
 
 	{
-		name = "Scroll of Mirror Image";
+//		name = "Scroll of Mirror Image";
+		name = Messages.get(this, "name");
 		consumedValue = 5;
 	}
 	
-	private static final String TXT_PREVENTING = "Something scrambles the illusion magic! ";
+//	private static final String TXT_PREVENTING = "Something scrambles the illusion magic! ";
+private static final String TXT_PREVENTING = Messages.get(ScrollOfMirrorImage.class, "prevent");
 
 	@Override
 	protected void doRead() {
@@ -91,7 +94,10 @@ public class ScrollOfMirrorImage extends Scroll {
 	}
 
 	@Override
+//	public String desc() {
+//		return "The incantation on this scroll will create illusionary twins of the reader, which will chase his enemies.";
+//	}
 	public String desc() {
-		return "The incantation on this scroll will create illusionary twins of the reader, which will chase his enemies.";
+		return Messages.get(this, "desc");
 	}
 }

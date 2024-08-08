@@ -17,31 +17,30 @@
  */
 package com.github.dachhack.sprout.scenes;
 
-import javax.microedition.khronos.opengles.GL10;
-
 import android.opengl.GLES20;
 
 import com.github.dachhack.sprout.Assets;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
 import com.github.dachhack.sprout.effects.BannerSprites;
 import com.github.dachhack.sprout.effects.Fireball;
 import com.github.dachhack.sprout.ui.Archs;
+import com.github.dachhack.sprout.ui.ChangesButton;
 import com.github.dachhack.sprout.ui.ExitButton;
+import com.github.dachhack.sprout.ui.LanguageButton;
 import com.github.dachhack.sprout.ui.PrefsButton;
 import com.watabou.noosa.BitmapText;
 import com.watabou.noosa.Camera;
 import com.watabou.noosa.Game;
 import com.watabou.noosa.Image;
+import com.watabou.noosa.RenderedText;
 import com.watabou.noosa.audio.Music;
 import com.watabou.noosa.audio.Sample;
 import com.watabou.noosa.ui.Button;
 
-public class TitleScene extends PixelScene {
+import javax.microedition.khronos.opengles.GL10;
 
-	private static final String TXT_PLAY = "Play";
-	private static final String TXT_HIGHSCORES = "Rankings";
-	private static final String TXT_BADGES = "Badges";
-	private static final String TXT_ABOUT = "About";
+public class TitleScene extends PixelScene {
 
 	@Override
 	public void create() {
@@ -74,7 +73,7 @@ public class TitleScene extends PixelScene {
 
 		float height = title.height
 				+ (ShatteredPixelDungeon.landscape() ? DashboardItem.SIZE
-						: DashboardItem.SIZE * 2);
+				: DashboardItem.SIZE * 2);
 
 		title.x = (w - title.width()) / 2;
 		title.y = (h - height) / 2;
@@ -104,7 +103,7 @@ public class TitleScene extends PixelScene {
 		signs.y = title.y;
 		add(signs);
 
-		DashboardItem btnBadges = new DashboardItem(TXT_BADGES, 3) {
+		DashboardItem btnBadges = new DashboardItem(Messages.get(this, "badges"), 3) {
 			@Override
 			protected void onClick() {
 				ShatteredPixelDungeon.switchNoFade(BadgesScene.class);
@@ -112,7 +111,7 @@ public class TitleScene extends PixelScene {
 		};
 		add(btnBadges);
 
-		DashboardItem btnAbout = new DashboardItem(TXT_ABOUT, 1) {
+		DashboardItem btnAbout = new DashboardItem(Messages.get(this, "about"), 1) {
 			@Override
 			protected void onClick() {
 				ShatteredPixelDungeon.switchNoFade(AboutScene.class);
@@ -120,7 +119,7 @@ public class TitleScene extends PixelScene {
 		};
 		add(btnAbout);
 
-		DashboardItem btnPlay = new DashboardItem(TXT_PLAY, 0) {
+		DashboardItem btnPlay = new DashboardItem(Messages.get(this, "play"), 0) {
 			@Override
 			protected void onClick() {
 				ShatteredPixelDungeon.switchNoFade(StartScene.class);
@@ -128,7 +127,7 @@ public class TitleScene extends PixelScene {
 		};
 		add(btnPlay);
 
-		DashboardItem btnHighscores = new DashboardItem(TXT_HIGHSCORES, 2) {
+		DashboardItem btnHighscores = new DashboardItem(Messages.get(this, "rankings"), 2) {
 			@Override
 			protected void onClick() {
 				ShatteredPixelDungeon.switchNoFade(RankingsScene.class);
@@ -170,6 +169,14 @@ public class TitleScene extends PixelScene {
 		btnPrefs.setPos(0, 0);
 		add(btnPrefs);
 
+		Button changes = new ChangesButton();
+		changes.setPos( w-changes.width(), h - source.height()-7 - changes.height());
+		add( changes );
+
+		LanguageButton btnLang = new LanguageButton();
+		btnLang.setPos(16, 1);
+		add(btnLang);
+
 		ExitButton btnExit = new ExitButton();
 		btnExit.setPos(w - btnExit.width(), 0);
 		add(btnExit);
@@ -190,15 +197,13 @@ public class TitleScene extends PixelScene {
 		private static final int IMAGE_SIZE = 32;
 
 		private Image image;
-		private BitmapText label;
+		private RenderedText label;
 
-		public DashboardItem(String text, int index) {
+		DashboardItem(String text, int index) {
 			super();
 
-			image.frame(image.texture.uvRect(index * IMAGE_SIZE, 0, (index + 1)
-					* IMAGE_SIZE, IMAGE_SIZE));
+			image.frame(image.texture.uvRect(index * IMAGE_SIZE, 0, (index + 1) * IMAGE_SIZE, IMAGE_SIZE));
 			this.label.text(text);
-			this.label.measure();
 
 			setSize(SIZE, SIZE);
 		}
@@ -210,7 +215,7 @@ public class TitleScene extends PixelScene {
 			image = new Image(Assets.DASHBOARD);
 			add(image);
 
-			label = createText(9);
+			label = renderText(9);
 			add(label);
 		}
 
@@ -218,11 +223,13 @@ public class TitleScene extends PixelScene {
 		protected void layout() {
 			super.layout();
 
-			image.x = align(x + (width - image.width()) / 2);
-			image.y = align(y);
+			image.x = x + (width - image.width()) / 2;
+			image.y = y;
+			align(image);
 
-			label.x = align(x + (width - label.width()) / 2);
-			label.y = align(image.y + image.height() + 2);
+			label.x = x + (width - label.width()) / 2;
+			label.y = image.y + image.height() + 2;
+			align(label);
 		}
 
 		@Override

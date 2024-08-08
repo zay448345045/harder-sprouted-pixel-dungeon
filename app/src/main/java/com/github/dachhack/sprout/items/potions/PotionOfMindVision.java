@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.potions;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.actors.buffs.MindVision;
@@ -32,10 +33,12 @@ import com.watabou.utils.Random;
 public class PotionOfMindVision extends Potion {
 
 	{
-		name = "Potion of Mind Vision";
+//		name = "Potion of Mind Vision";
+		name = Messages.get(this, "name");
 	}
 
-	private static final String TXT_PREVENTING = "Something scrambles the scrying magic! ";
+//	private static final String TXT_PREVENTING = "Something scrambles the scrying magic! ";
+private static final String TXT_PREVENTING = Messages.get(PotionOfMindVision.class, "prevent");
 	
 	@Override
 	public void apply(Hero hero) {
@@ -49,19 +52,28 @@ public class PotionOfMindVision extends Potion {
 		Buff.affect(hero, MindVision.class, Dungeon.hero.buff(MagicSight.class) != null ? MindVision.DURATION*4 : MindVision.DURATION);
 		Dungeon.observe();
 
+//		if (Dungeon.level.mobs.size() > 0) {
+//			GLog.i("You can somehow feel the presence of other creatures' minds!");
+//		} else {
+//			GLog.i("You can somehow tell that you are alone on this level at the moment.");
+//		}
 		if (Dungeon.level.mobs.size() > 0) {
-			GLog.i("You can somehow feel the presence of other creatures' minds!");
+			GLog.i(Messages.get(this, "see_mobs"));
 		} else {
-			GLog.i("You can somehow tell that you are alone on this level at the moment.");
+			GLog.i(Messages.get(this, "see_none"));
 		}
 	}
 
-	@Override
-	public String desc() {
-		return "After drinking this, your mind will become attuned to the psychic signature "
-				+ "of distant creatures, enabling you to sense biological presences through walls. "
-				+ "Also this potion will permit you to see through nearby walls and doors.";
-	}
+//	@Override
+//	public String desc() {
+//		return "After drinking this, your mind will become attuned to the psychic signature "
+//				+ "of distant creatures, enabling you to sense biological presences through walls. "
+//				+ "Also this potion will permit you to see through nearby walls and doors.";
+//	}
+@Override
+public String desc() {
+	return Messages.get(this, "desc");
+}
 
 	@Override
 	public int price() {

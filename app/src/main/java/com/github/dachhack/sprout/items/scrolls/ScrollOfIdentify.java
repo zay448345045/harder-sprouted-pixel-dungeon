@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.items.scrolls;
 
 import com.github.dachhack.sprout.Badges;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.effects.Identification;
 import com.github.dachhack.sprout.items.Item;
 import com.github.dachhack.sprout.utils.GLog;
@@ -26,8 +27,10 @@ import com.github.dachhack.sprout.windows.WndBag;
 public class ScrollOfIdentify extends InventoryScroll {
 
 	{
-		name = "Scroll of Identify";
-		inventoryTitle = "Select an item to identify";
+//		name = "Scroll of Identify";
+//		inventoryTitle = "Select an item to identify";
+		name = Messages.get(this, "name");
+		inventoryTitle = Messages.get(this, "inv_title");
 		mode = WndBag.Mode.UNIDENTIFED;
 		consumedValue = 10;
 
@@ -41,14 +44,18 @@ public class ScrollOfIdentify extends InventoryScroll {
 				.offset(0, -16)));
 
 		item.identify();
-		GLog.i("It is " + item);
+//		GLog.i("It is " + item);
+		GLog.i(Messages.get(this, "it_is", item));
 
 		Badges.validateItemLevelAquired(item);
 	}
 
 	@Override
+//	public String desc() {
+//		return "Permanently reveals all of the secrets of a single item.";
+//	}
 	public String desc() {
-		return "Permanently reveals all of the secrets of a single item.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

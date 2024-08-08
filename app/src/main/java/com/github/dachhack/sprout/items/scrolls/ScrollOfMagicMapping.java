@@ -19,6 +19,7 @@ package com.github.dachhack.sprout.items.scrolls;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Invisibility;
 import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.Speck;
@@ -32,11 +33,13 @@ import com.watabou.noosa.audio.Sample;
 
 public class ScrollOfMagicMapping extends Scroll {
 
-	private static final String TXT_LAYOUT = "You are now aware of the level layout.";
-	private static final String TXT_PREVENTING = "Something scrambles the scrying magic! ";
+//	private static final String TXT_LAYOUT = "You are now aware of the level layout.";
+//	private static final String TXT_PREVENTING = "Something scrambles the scrying magic! ";
 
+	private static final String TXT_LAYOUT = Messages.get(ScrollOfMagicMapping.class, "layout");
+	private static final String TXT_PREVENTING = Messages.get(ScrollOfMagicMapping.class, "prevent");
 	{
-		name = "Scroll of Magic Mapping";
+		name = Messages.get(this, "name");
 		consumedValue = 10;
 	}
 
@@ -100,10 +103,13 @@ public class ScrollOfMagicMapping extends Scroll {
 	}
 
 	@Override
+//	public String desc() {
+//		return "When this scroll is read, an image of crystal clarity will be etched into your memory, "
+//				+ "alerting you to the precise layout of the level and revealing all hidden secrets. "
+//				+ "The locations of items and creatures will remain unknown.";
+//	}
 	public String desc() {
-		return "When this scroll is read, an image of crystal clarity will be etched into your memory, "
-				+ "alerting you to the precise layout of the level and revealing all hidden secrets. "
-				+ "The locations of items and creatures will remain unknown.";
+		return Messages.get(this, "desc");
 	}
 
 	@Override

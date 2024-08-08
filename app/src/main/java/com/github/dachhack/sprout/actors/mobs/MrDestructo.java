@@ -17,9 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
@@ -39,12 +38,14 @@ import com.github.dachhack.sprout.utils.GLog;
 import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class MrDestructo extends Mob {
 
 	private static final String TXT_DEATHGAZE_KILLED = "%s's deathray killed you...";
 
 	{
-		name = "mr destructo";
+		name = Messages.get(this, "name");
 		spriteClass = MrDestructoSprite.class;
 		hostile = false;
 		state = HUNTING;
@@ -175,7 +176,7 @@ public class MrDestructo extends Mob {
 
 			if (hit(this, ch, true)) {
 				ch.damage(Random.NormalIntRange(Dungeon.depth, Dungeon.depth+12), this);
-				yell("MR DESTRUCTO!");
+				yell(Messages.get(this, "atk"));
 				damage(Random.NormalIntRange(5, 10), this);
 
 				if (Dungeon.visible[pos]) {
@@ -187,7 +188,7 @@ public class MrDestructo extends Mob {
 				if (!ch.isAlive() && ch == Dungeon.hero) {
 					Dungeon.fail(Utils.format(ResultDescriptions.MOB,
 							Utils.indefinite(name)));
-					GLog.n(TXT_DEATHGAZE_KILLED, name);
+					GLog.n(Messages.get(MrDestructo.class, "kill"), name);
 				}
 			} else {
 				ch.sprite.showStatus(CharSprite.NEUTRAL, ch.defenseVerb());
@@ -200,18 +201,17 @@ public class MrDestructo extends Mob {
 	@Override
 	public void beckon(int cell) {
 	}
-	
+
 	@Override
 	public String description() {
-		return "The contraption has sprung to life! "
-				+ "It is blowing away nearby mobs!";
+		return Messages.get(this, "desc");
 	}
 
 	
 	@Override
 	public void die(Object cause) {
 
-		yell("Shutting down...");
+		yell(Messages.get(this, "die"));
 		Dungeon.level.drop(new InactiveMrDestructo(), pos);
 		super.die(cause);
 

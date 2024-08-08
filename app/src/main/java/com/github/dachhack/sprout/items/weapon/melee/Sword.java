@@ -17,12 +17,15 @@
  */
 package com.github.dachhack.sprout.items.weapon.melee;
 
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.sprites.ItemSpriteSheet;
 
 public class Sword extends MeleeWeapon {
 
 	{
-		name = "sword";
+//		name = "sword";
+		name = Messages.get(this, "name");
+
 		image = ItemSpriteSheet.SWORD;
 	}
 
@@ -31,7 +34,10 @@ public class Sword extends MeleeWeapon {
 	}
 
 	@Override
+//	public String desc() {
+//		return "The razor-sharp length of steel blade shines reassuringly.";
+//	}
 	public String desc() {
-		return "The razor-sharp length of steel blade shines reassuringly.";
+		return Messages.get(this, "desc");
 	}
 }

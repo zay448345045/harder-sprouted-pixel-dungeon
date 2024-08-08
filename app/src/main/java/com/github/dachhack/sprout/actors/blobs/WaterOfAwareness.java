@@ -23,6 +23,7 @@ import com.github.dachhack.sprout.Dungeon;
 import com.github.dachhack.sprout.DungeonTilemap;
 import com.github.dachhack.sprout.Journal;
 import com.github.dachhack.sprout.Journal.Feature;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.buffs.Awareness;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.hero.Hero;
@@ -70,7 +71,7 @@ public class WaterOfAwareness extends WellWater {
 
 		Dungeon.hero.interrupt();
 
-		GLog.p(TXT_PROCCED);
+		GLog.p(Messages.get(this, "proc"));
 
 		Journal.remove(Feature.WELL_OF_AWARENESS);
 
@@ -102,7 +103,6 @@ public class WaterOfAwareness extends WellWater {
 
 	@Override
 	public String tileDesc() {
-		return "Power of knowledge radiates from the water of this well. "
-				+ "Take a sip from it to reveal all secrets of equipped items.";
+		return Messages.get(this, "desc");
 	}
 }

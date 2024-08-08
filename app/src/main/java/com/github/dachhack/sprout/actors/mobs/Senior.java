@@ -18,6 +18,7 @@
 package com.github.dachhack.sprout.actors.mobs;
 
 import com.github.dachhack.sprout.Badges;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.buffs.Buff;
 import com.github.dachhack.sprout.actors.buffs.Paralysis;
@@ -27,7 +28,7 @@ import com.watabou.utils.Random;
 public class Senior extends Monk {
 
 	{
-		name = "senior monk";
+		name = Messages.get(this, "name");
 		spriteClass = SeniorSprite.class;
 	}
 

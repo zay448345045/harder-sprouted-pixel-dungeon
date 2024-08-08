@@ -17,28 +17,37 @@
  */
 package com.github.dachhack.sprout.windows;
 
-import java.io.IOException;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ShatteredPixelDungeon;
 import com.github.dachhack.sprout.scenes.GameScene;
 import com.github.dachhack.sprout.scenes.InterlevelScene;
 import com.github.dachhack.sprout.scenes.RankingsScene;
 import com.github.dachhack.sprout.scenes.TitleScene;
+import com.github.dachhack.sprout.ui.GameLog;
 import com.github.dachhack.sprout.ui.Icons;
 import com.github.dachhack.sprout.ui.RedButton;
 import com.github.dachhack.sprout.ui.Window;
 import com.watabou.noosa.Game;
 
+import java.io.IOException;
+
 public class WndGame extends Window {
 
-	private static final String TXT_SETTINGS = "Settings";
-	private static final String TXT_CHALLEGES = "Challenges";
-	private static final String TXT_RANKINGS = "Rankings";
-	private static final String TXT_START = "Start New Game";
-	private static final String TXT_MENU = "Main Menu";
-	private static final String TXT_EXIT = "Exit Game";
-	private static final String TXT_RETURN = "Return to Game";
+//	private static final String TXT_SETTINGS = "Settings";
+//	private static final String TXT_CHALLEGES = "Challenges";
+//	private static final String TXT_RANKINGS = "Rankings";
+//	private static final String TXT_START = "Start New Game";
+//	private static final String TXT_MENU = "Main Menu";
+//	private static final String TXT_EXIT = "Exit Game";
+//	private static final String TXT_RETURN = "Return to Game";
+private static final String TXT_SETTINGS = Messages.get(WndGame.class, "settings");
+	private static final String TXT_CHALLEGES = Messages.get(WndGame.class, "challenges");
+	private static final String TXT_RANKINGS = Messages.get(WndGame.class, "rankings");
+	private static final String TXT_START = Messages.get(WndGame.class, "start");
+	private static final String TXT_MENU = Messages.get(WndGame.class, "menu");
+	private static final String TXT_EXIT = Messages.get(WndGame.class, "exit");
+	private static final String TXT_RETURN = Messages.get(WndGame.class, "return");
 
 	private static final int WIDTH = 120;
 	private static final int BTN_HEIGHT = 20;
@@ -50,17 +59,17 @@ public class WndGame extends Window {
 
 		super();
 
-		addButton(new RedButton(TXT_SETTINGS) {
+		addButton(new RedButton(Messages.get(WndGame.class, "settings")) {
 			@Override
 			protected void onClick() {
 				hide();
-				GameScene.show(new WndSettings(true));
+				GameScene.show(new WndSettings());
 			}
 		});
 
 		// Challenges window
 		if (Dungeon.challenges > 0) {
-			addButton(new RedButton(TXT_CHALLEGES) {
+			addButton(new RedButton(Messages.get(WndGame.class, "challenges")) {
 				@Override
 				protected void onClick() {
 					hide();
@@ -74,7 +83,7 @@ public class WndGame extends Window {
 		if (!Dungeon.hero.isAlive()) {
 
 			RedButton btnStart;
-			addButton(btnStart = new RedButton(TXT_START) {
+			addButton(btnStart = new RedButton(Messages.get(WndGame.class, "start")) {
 				@Override
 				protected void onClick() {
 					Dungeon.hero = null;
@@ -86,7 +95,7 @@ public class WndGame extends Window {
 			});
 			btnStart.icon(Icons.get(Dungeon.hero.heroClass));
 
-			addButton(new RedButton(TXT_RANKINGS) {
+			addButton(new RedButton(Messages.get(WndGame.class, "rankings")) {
 				@Override
 				protected void onClick() {
 					InterlevelScene.mode = InterlevelScene.Mode.DESCEND;
@@ -95,11 +104,14 @@ public class WndGame extends Window {
 			});
 		}
 
+
+
 		addButtons(
 		// Main menu
-				new RedButton(TXT_MENU) {
+				new RedButton(Messages.get(WndGame.class, "menu")) {
 					@Override
 					protected void onClick() {
+						GameLog.wipe();
 						try {
 							Dungeon.saveAll();
 						} catch (IOException e) {
@@ -109,7 +121,7 @@ public class WndGame extends Window {
 					}
 				},
 				// Quit
-				new RedButton(TXT_EXIT) {
+				new RedButton(Messages.get(WndGame.class, "exit")) {
 					@Override
 					protected void onClick() {
 						Game.instance.finish();
@@ -117,7 +129,7 @@ public class WndGame extends Window {
 				});
 
 		// Cancel
-		addButton(new RedButton(TXT_RETURN) {
+		addButton(new RedButton(Messages.get(WndGame.class, "return")) {
 			@Override
 			protected void onClick() {
 				hide();

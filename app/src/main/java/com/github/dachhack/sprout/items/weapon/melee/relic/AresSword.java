@@ -22,6 +22,7 @@ import java.util.HashSet;
 
 import com.github.dachhack.sprout.Assets;
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
 import com.github.dachhack.sprout.actors.blobs.ToxicGas;
@@ -63,7 +64,8 @@ public class AresSword extends RelicMeleeWeapon {
 
 	
 	{
-		name = "Ares Sword";
+//		name = "Ares Sword";
+		name = Messages.get(this, "name");
 		image = ItemSpriteSheet.ARESSWORD;
 
 		level = 0;
@@ -80,7 +82,8 @@ public class AresSword extends RelicMeleeWeapon {
 		
   }
 		
-	public static final String AC_REGEN = "REGEN";
+//	public static final String AC_REGEN = "REGEN";
+public static final String AC_REGEN = Messages.get(AresSword.class, "ac_regen");
 
 	@Override
 	public ArrayList<String> actions(Hero hero) {
@@ -93,7 +96,8 @@ public class AresSword extends RelicMeleeWeapon {
 	@Override
 	public void execute(Hero hero, String action) {
 		if (action.equals(AC_REGEN)) {
-			GLog.w("Your sword fills you with restoring energy!");
+//			GLog.w("Your sword fills you with restoring energy!");
+			GLog.p(Messages.get(this, "ready"));
 			charge = 0;
 			Buff.affect(hero, BerryRegeneration.class).level(level*2);
 		} else
@@ -108,7 +112,8 @@ public class AresSword extends RelicMeleeWeapon {
 			if (charge < chargeCap) {
 				charge+=1;
 				if (charge >= chargeCap) {
-					GLog.w("Your sword glows with life-giving power.");
+//					GLog.w("Your sword glows with life-giving power.");
+					GLog.p(Messages.get(AresSword.class, "buffdesc"));
 				}
 				updateQuickslot();
 			}
@@ -117,8 +122,11 @@ public class AresSword extends RelicMeleeWeapon {
 		}
 		
 		@Override
+//		public String toString() {
+//			return "Regen";
+//		}
 		public String toString() {
-			return "Regen";
+			return Messages.get(AresSword.class, "buffname");
 		}
 
 		@Override

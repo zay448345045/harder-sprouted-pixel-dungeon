@@ -17,9 +17,8 @@
  */
 package com.github.dachhack.sprout.actors.mobs;
 
-import java.util.HashSet;
-
 import com.github.dachhack.sprout.Dungeon;
+import com.github.dachhack.sprout.Messages.Messages;
 import com.github.dachhack.sprout.ResultDescriptions;
 import com.github.dachhack.sprout.actors.Actor;
 import com.github.dachhack.sprout.actors.Char;
@@ -29,7 +28,6 @@ import com.github.dachhack.sprout.effects.CellEmitter;
 import com.github.dachhack.sprout.effects.particles.PurpleParticle;
 import com.github.dachhack.sprout.items.potions.PotionOfMending;
 import com.github.dachhack.sprout.items.wands.Wand;
-import com.github.dachhack.sprout.items.wands.WandOfDisintegration;
 import com.github.dachhack.sprout.items.weapon.enchantments.Death;
 import com.github.dachhack.sprout.items.weapon.enchantments.Leech;
 import com.github.dachhack.sprout.levels.Level;
@@ -42,6 +40,8 @@ import com.github.dachhack.sprout.utils.Utils;
 import com.watabou.noosa.tweeners.AlphaTweener;
 import com.watabou.utils.Random;
 
+import java.util.HashSet;
+
 public class MagicEye extends Mob {
 
 	private static final String TXT_DEATHGAZE_KILLED = "%s's deathgaze killed you...";
@@ -50,7 +50,7 @@ public class MagicEye extends Mob {
 	public static final int RANGE = 4;
 
 	{
-		name = "enchanted evil eye";
+		name = Messages.get(this, "name");
 		spriteClass = MagicEyeSprite.class;
 
 		HP = HT = 1500;
@@ -137,7 +137,7 @@ public class MagicEye extends Mob {
 				if (!ch.isAlive() && ch == Dungeon.hero) {
 					Dungeon.fail(Utils.format(ResultDescriptions.MOB,
 							Utils.indefinite(name)));
-					GLog.n(TXT_DEATHGAZE_KILLED, name);
+					GLog.n(Messages.get(MagicEye.class, "kill"), name);
 				}
 			} else {
 				ch.sprite.showStatus(CharSprite.NEUTRAL, ch.defenseVerb());
@@ -186,8 +186,7 @@ public class MagicEye extends Mob {
 
 	@Override
 	public String description() {
-		return "One of this demon's other names is \"orb of hatred\", because when it sees an enemy, "
-				+ "it uses its deathgaze recklessly, often ignoring its allies and wounding them.";
+		return Messages.get(this, "desc");
 	}
 
 	private static final HashSet<Class<?>> RESISTANCES = new HashSet<Class<?>>();
