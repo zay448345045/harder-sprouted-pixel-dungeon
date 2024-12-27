@@ -4,14 +4,14 @@
 	android:versionCode="190"
 	android:versionName="0.4.2"
 	android:installLocation="auto">
-<--- package="com.github.dachhack.sprout"
+<!-- package="com.github.dachhack.sprout" -->
     <uses-permission android:name="android.permission.VIBRATE"/>
 
 	<uses-feature
 	    android:glEsVersion="0x00020000"/>
 	
 	<supports-screens 
-	    android:smallScreens="false"
+	    android:smallScreens="true" <!-- orgis false -->
 	    android:normalScreens="true"
 	    android:largeScreens="true"/>
 	    <!--android:xlargeScreens="true"-->
