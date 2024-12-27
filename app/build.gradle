@@ -4,7 +4,9 @@ android {
     namespace 'com.shatteredpixel.shatteredpixeldungeon.android'
  //   compileSdk appAndroidCompileSDK
 //    compileOptions.sourceCompatibility = compileOptions.targetCompatibility = appJavaCompatibility
+
     compileSdkVersion 35
+
 //29
     defaultConfig {
         applicationId "com.github.smujamesb.hardersprouted.lsml"
