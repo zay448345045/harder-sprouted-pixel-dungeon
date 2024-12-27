@@ -10,6 +10,7 @@ android {
         applicationId "com.github.smujamesb.hardersprouted.lsml"
         minSdkVersion 14
         targetSdkVersion 35 //29
+        multiDexEnabled true
     }
 //namespace "com.github.smujamesb.hardersprouted.lsml"
     buildTypes {
