@@ -10,10 +10,9 @@
 	<uses-feature
 	    android:glEsVersion="0x00020000"/>
 	
+ <!--  android:smallScreens="true" orgis false -->
 	<supports-screens 
 	    android:smallScreens="true"
- <!--  android:smallScreens="true" orgis false -->
-
 	    android:normalScreens="true"
 	    android:largeScreens="true"/>
 	    <!--android:xlargeScreens="true"-->
