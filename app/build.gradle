@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 
 android {
+    namespace 'com.shatteredpixel.shatteredpixeldungeon.android'
+    compileSdk appAndroidCompileSDK
+    compileOptions.sourceCompatibility = compileOptions.targetCompatibility = appJavaCompatibility
     compileSdkVersion 35
 //29
     defaultConfig {
@@ -8,7 +11,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 35 //29
     }
-namespace "com.github.smujamesb.hardersprouted.lsml"
+//namespace "com.github.smujamesb.hardersprouted.lsml"
     buildTypes {
         release {
             minifyEnabled false
