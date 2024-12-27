@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     namespace 'com.shatteredpixel.shatteredpixeldungeon.android'
  //   compileSdk appAndroidCompileSDK
-    compileOptions.sourceCompatibility = compileOptions.targetCompatibility = appJavaCompatibility
+//    compileOptions.sourceCompatibility = compileOptions.targetCompatibility = appJavaCompatibility
     compileSdkVersion 35
 //29
     defaultConfig {
