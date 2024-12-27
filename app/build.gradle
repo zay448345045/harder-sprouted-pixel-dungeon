@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
-
+    compileSdkVersion 35
+//29
     defaultConfig {
-        applicationId "com.github.smujamesb.hardersprouted.ls"
+        applicationId "com.github.smujamesb.hardersprouted.lsml"
         minSdkVersion 14
-        targetSdkVersion 29
+        targetSdkVersion 35 //29
     }
 
     buildTypes {
