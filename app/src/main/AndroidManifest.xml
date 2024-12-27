@@ -11,7 +11,8 @@
 	    android:glEsVersion="0x00020000"/>
 	
 	<supports-screens 
-	    android:smallScreens="true" <!-- orgis false -->
+	    android:smallScreens="true"
+ <!--  android:smallScreens="true" orgis false -->
 
 	    android:normalScreens="true"
 	    android:largeScreens="true"/>
