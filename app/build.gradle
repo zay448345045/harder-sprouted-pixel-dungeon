@@ -15,6 +15,11 @@ android {
         multiDexEnabled true
     }
 //namespace "com.github.smujamesb.hardersprouted.lsml"
+
+compileOptions {
+        sourceCompatibility JavaVersion.VERSION_23 // 或 JavaVersion.VERSION_17 等
+        targetCompatibility JavaVersion.VERSION_23 // 或 JavaVersion.VERSION_17 等
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -24,6 +29,9 @@ android {
 }
 //   implementation "cat.ereza:customactivityoncrash:2.3.0"
 dependencies {
+implementation 'androidx.appcompat:appcompat:1.6.1' // 使用最新的版本
+    implementation 'androidx.vectordrawable:vectordrawable-animated:1.1.0'
+
     implementation "com.github.RohitSurwase.UCE-Handler:uce_handler:1.4"
     implementation "com.badlogicgames.gdx:gdx-backend-android:1.9.10"
     implementation "com.badlogicgames.gdx:gdx-freetype:1.9.10"
