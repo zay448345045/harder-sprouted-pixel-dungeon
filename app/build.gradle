@@ -1,7 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace 'com.shatteredpixel.shatteredpixeldungeon.android'
+    namespace 'com.github.dachhack.sprout'
+// 'com.shatteredpixel.shatteredpixeldungeon.android
  //   compileSdk appAndroidCompileSDK
 //    compileOptions.sourceCompatibility = compileOptions.targetCompatibility = appJavaCompatibility
 
